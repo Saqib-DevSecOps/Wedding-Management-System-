@@ -20,11 +20,10 @@ Then do next ...
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=200)
-    profile_image = ResizedImageField(
-        upload_to='accounts/images/profiles/', null=True, blank=True, size=[250, 250], quality=75, force_format='PNG',
-        help_text='size of logo must be 250*250 and format must be png image file', crop=['middle', 'center']
-    )
-    phone_number = models.CharField(max_length=30, null=True, blank=True)
+
+    is_bride = models.BooleanField(default=False)
+    is_provider = models.BooleanField(default=False)
+    is_fiance = models.BooleanField(default=False)
     REQUIRED_FIELDS = ["username"]
     USERNAME_FIELD = "email"
 
@@ -39,6 +38,24 @@ class User(AbstractUser):
     def delete(self, *args, **kwargs):
         self.profile_image.delete(save=True)
         super(User, self).delete(*args, **kwargs)
+
+
+class Profile(models.Model):
+    profile_image = ResizedImageField(
+        upload_to='accounts/images/profiles/', null=True, blank=True, size=[250, 250], quality=75, force_format='PNG',
+        help_text='size of logo must be 250*250 and format must be png image file', crop=['middle', 'center']
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    country = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    street_address = models.CharField(max_length=200)
+    postal_code = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = 'Profiles'
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL, dispatch_uid="user_registered")

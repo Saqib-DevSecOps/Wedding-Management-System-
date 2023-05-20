@@ -40,19 +40,6 @@ handler404 = handler404
 handler500 = handler500
 
 
-""" TO LEARN SWAGGER - https://drf-yasg.readthedocs.io/en/stable/readme.html """
-schema_view = get_schema_view(
-    openapi.Info(
-        title=APP_NAME,
-        default_version=APP_VERSION,
-        description=APP_DESC,
-        terms_of_service=APP_TERMS,
-        contact=openapi.Contact(email=APP_CONTACT),
-        license=openapi.License(name=APP_LICENSE),
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-)
 
 # EXTERNAL APPS URLS
 urlpatterns = [
@@ -63,14 +50,7 @@ urlpatterns = [
     # API URLS
     path('accounts/', include('allauth.urls')),
 
-    # SWAGGER
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    # REST-AUTH URLS
-    re_path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    re_path('rest-auth/', include('dj_rest_auth.urls')),
 ]
 
 # universal urls
