@@ -14,15 +14,7 @@
                         <ul class="menuzord-menu">
                             <li onclick=""><a href="{% url 'website:home' %}">Home</a>
                             </li>
-                            <li><a href="#">Events </a>
-                                <ul class="dropdown">
-                                    <li><a href="#">All</a></li>
-                                    {% for object in events %}
-                                    <li><a href="features-preloader.html">{{object.name}}</a>
-                                    </li>
-                                    {% endfor %}
-
-                                </ul>
+                            <li><a href="{% url 'website:events' %}">Events </a>
                             </li>
 
                             <li><a href="{% url 'website:services' %}">Services </a>

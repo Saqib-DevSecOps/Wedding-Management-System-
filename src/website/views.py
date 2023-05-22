@@ -3,8 +3,8 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
-from src.website.filters import BlogFilter
-from src.website.models import Slider, Blog, Gallery, BlogCategory, Service
+from src.website.filters import BlogFilter, EventFilter
+from src.website.models import Slider, Blog, Gallery, BlogCategory, Service, Event
 
 
 # Create your views here.
@@ -18,6 +18,7 @@ class Home(TemplateView):
         context['slider'] = Slider.objects.all()
         context['images'] = Gallery.objects.all()[:8]
         context['services'] = Service.objects.all()[:6]
+        context['events'] = Event.objects.all()[:3]
         context['blogs'] = Blog.objects.all()[:3]
 
         return context
@@ -44,6 +45,30 @@ class BlogList(ListView):
         context['blog_category'] = BlogCategory.objects.all()
         context['blogs'] = page_obj
         context['filter_form'] = filter_posts
+        context['category'] = category
+        return context
+
+
+class EventList(ListView):
+    model = Event
+    template_name = 'website/event_list.html'
+    paginate_by = 1
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(EventList, self).get_context_data(**kwargs)
+        category = self.request.GET.get('category')
+        if category and self.request is not None:
+            post = Event.objects.filter(category__id=category)
+        else:
+            post = Event.objects.all().order_by('-created_at')
+        context['old_events'] = Event.objects.order_by('created_at')[:5]
+        filter_event = EventFilter(self.request.GET, queryset=post)
+        pagination = Paginator(filter_event.qs, 1)
+        page_number = self.request.GET.get('page')
+        page_obj = pagination.get_page(page_number)
+        context['event_category'] = BlogCategory.objects.all()
+        context['events'] = page_obj
+        context['filter_form'] = filter_event
         context['category'] = category
         return context
 

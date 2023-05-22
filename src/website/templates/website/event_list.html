@@ -1,0 +1,159 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="{% static 'website/images/bg/bg11.jpg' %}">
+      <div class="container pt-120 pb-50">
+        <!-- Section Content -->
+        <div class="section-content pt-100">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="title text-white">Events</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: event calendar -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-9">
+            {% for object in events %}
+
+            <div class="upcoming-events media maxwidth400 bg-light mb-20">
+              <div class="row equal-height">
+                <div class="col-sm-4 pr-0 pr-sm-15">
+                  <div class="thumb p-15">
+                    <img class="img-fullwidth" width="250" height="180" src="{{object.thumbnail_image.url}}" alt="...">
+                  </div>
+                </div>
+                <div class="col-sm-4 border-right pl-0 pl-sm-15">
+                  <div class="event-details p-15 mt-20">
+                    <h3 class="media-heading font-weight-500">{{object.title}}</h3>
+                    <p>{{object.content|safe}}</p>
+                    <a href="#" class="btn btn-flat btn-dark btn-theme-colored btn-sm">Details <i class="fa fa-angle-double-right"></i></a>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="event-count p-15 mt-15">
+                    <ul class="event-date list-inline font-16 text-uppercase mt-10 mb-20">
+                      <li class="p-15 mr-5 bg-lightest">{{object.start_date.month}}</li>
+                      <li class="p-15 pl-20 pr-20 mr-5 bg-lightest"> {{object.start_date.day}}</li>
+                      <li class="p-15 bg-lightest">{{object.start_date.year}}</li>
+                    </ul>
+                    <ul>
+                      <li class="mb-10 text-theme-colored"><i class="fa fa-clock-o mr-5"></i> at {{object.start_date.time}}</li>
+                      <li class="text-theme-colored"><i class="fa fa-map-marker mr-5"></i> {{object.country}} -- {{object.city}}</li>
+                      <li class="text-theme-colored"><i class="fa fa-map-marker mr-5"></i> {{object.exact_destination}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+
+            <div class="row">
+              <div class="col-sm-12">
+                <nav>
+                                <ul class="pagination theme-colored">
+                                    {% if events.has_previous %}
+                                    {% if category is not None%}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{events.previous_page_number}}&&category={{category}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% else %}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{events.previous_page_number}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% endif %}
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% for i in paginator.page_range %}
+                                    {% if events.number == i %}
+                                    <li class="active"><a href="#">{{i}}</a></li>
+                                    {% else %}
+                                    <li><a href="?page={{ i }}">{{i}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if events.has_next %}
+                                    {% if category is not None%}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{events.next_page_number}}&&category={{category}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% else %}
+                                    <li><a aria-label="Next"
+                                           href="?page={{events.next_page_number}}">
+                                        <span aria-hidden="true">»</span>
+                                    </a></li>
+                                    {% endif %}
+                                    {% else %}
+
+                                    {% endif %}
+                                </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <div class="sidebar sidebar-right mt-sm-30">
+              <div class="widget">
+                <h5 class="widget-title line-bottom">Search box</h5>
+                <div class="search-form">
+                  <form>
+                    <div class="input-group">
+                                        {{filter_form.form}}
+                      <span class="input-group-btn">
+                      <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="widget">
+                <h5 class="widget-title line-bottom">Categories</h5>
+                <div class="categories">
+                  <ul class="list list-border angle-double-right">
+                   {% for object in event_category %}
+                                    <li><a href="?category={{object.id}}">{{object.name}}<span>({{object.event_category.all.count}})</span></a>
+                                    </li>
+                                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              <div class="widget">
+                <h5 class="widget-title line-bottom">Latest News</h5>
+                <div class="latest-posts">
+{% for object in old_events %}
+                                <article class="post media-post clearfix pb-0 mb-10">
+                                    <a class="post-thumb" href="#"><img alt=""
+                                                                        src="{{object.thumbnail_image.url}}"
+                                                                        style="height:px;width:75px"></a>
+                                    <div class="post-right">
+                                        <h5 class="post-title mt-0"><a href="#">{{object.title}}</a></h5>
+                                        <p>{{object.content|safe}}</p>
+                                    </div>
+                                </article>
+                                {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+{% endblock content %}
+
+

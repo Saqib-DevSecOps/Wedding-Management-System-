@@ -152,7 +152,7 @@ class Event(models.Model):
     title = models.CharField(max_length=255, unique=True)
     thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
     slug = models.SlugField(unique=True, null=False)
-    category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True)
+    category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True,related_name='event_category')
     content = HTMLField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
