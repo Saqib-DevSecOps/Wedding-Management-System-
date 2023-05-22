@@ -1,0 +1,95 @@
+{% load static %}
+    <footer class="footer pb-0 bg-black-111" id="footer">
+        <div class="container pb-20">
+            <div class="row multi-row-clearfix">
+                <div class="col-sm-6 col-md-3 wow fadeInUp animation-delay1">
+                    <div class="widget dark">
+                        <a class="text-white font-great-vibes font-32" href="#">Perfect &nbsp;<i
+                                class="fa fa-heart font-25"></i> Wedding</a>
+                        <p class="mt-20 mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas
+                            possimus aut distinctio autem nisi, eaque, quis reprehenderit perspiciatis molestiae iste
+                            minus modi sint maiores earum..</p>
+                        <ul class="social-icons icon-dark icon-circled">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 wow fadeInUp animation-delay2">
+                    <div class="widget dark">
+                        <h5 class="widget-title line-bottom">Pages</h5>
+                        <ul class="list-border list theme-colored angle-double-right">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Donor Privacy Policy</a></li>
+                            <li><a href="#">Disclaimer</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#">Copyright Notice</a></li>
+                            <li><a href="#">Media Center</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 wow fadeInUp animation-delay3">
+                    <div class="widget dark">
+                        <h5 class="widget-title line-bottom">Twitter</h5>
+                        <div class="twitter-feed list-border clearfix" data-username="Envato"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 wow fadeInUp animation-delay4">
+                    <div class="widget dark">
+                        <h5 class="widget-title line-bottom">Quick Contact</h5>
+                        <ul class="list list-border">
+                            <li><a href="#">+(012) 345 6789</a></li>
+                            <li><a href="#">hello@yourdomain.com</a></li>
+                            <li><a class="lineheight-20" href="#">121 King Street, Melbourne Victoria 3000,
+                                Australia</a></li>
+                        </ul>
+                        <p class="text-white mb-5 mt-15">Subscribe to our newsletter</p>
+                        <form class="newsletter-form mt-10" id="footer-mailchimp-subscription-form">
+                            <label class="display-block" for="mce-EMAIL"></label>
+                            <div class="input-group">
+                                <input class="form-control" data-height="37px" id="mce-EMAIL" name="EMAIL"
+                                       placeholder="Your Email"
+                                       type="email" value="">
+                                <span class="input-group-btn">
+                    <button class="btn btn-colored btn-theme-colored m-0" type="submit"><i
+                            class="fa fa-paper-plane-o text-white"></i></button>
+                </span>
+                            </div>
+                        </form>
+                        <!-- Mailchimp Subscription Form Validation-->
+                        <script type="text/javascript">
+              $('#footer-mailchimp-subscription-form').ajaxChimp({
+                  callback: mailChimpCallBack,
+                  url: '//thememascot.us9.list-manage.com/subscribe/post?u=a01f440178e35febc8cf4e51f&amp;id=49d6d30e1e'
+              });
+
+              function mailChimpCallBack(resp) {
+                  // Hide any previous response text
+                  var $mailchimpform = $('#footer-mailchimp-subscription-form'),
+                      $response = '';
+                  $mailchimpform.children(".alert").remove();
+                  console.log(resp);
+                  if (resp.result === 'success') {
+                      $response = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+                  } else if (resp.result === 'error') {
+                      $response = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + resp.msg + '</div>';
+                  }
+                  $mailchimpform.prepend($response);
+              }
+
+
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-nav bg-black-222 p-20">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <p class="text-white font-11 m-0">Copyright &copy;2015 ThemeMascot. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>

@@ -1,0 +1,68 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="{% static 'website/images/bg/bg11.jpg' %}">
+        <div class="container pt-200 pb-50">
+            <!-- Section Content -->
+            <div class="section-content pt-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="title text-white">Gallery</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Gallery  -->
+    <section class="bg-lighter" id="gallery">
+        <div class="container-fluid p-0">
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Portfolio Gallery Grid -->
+                        <div class="portfolio-gallery masonry grid-4 clearfix" data-lightbox="gallery" id="grid">
+                            {% for object in gallery_images %}
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <a data-lightbox="gallery-item" href="{{object.image.url}}" title="{{object.category}}">
+                                    <div class="thumb">
+                                        <img alt="project" class="img-fullwidth photo" src="{{object.image.url}}">
+                                        <div class="overlay-shade"></div>
+                                        <div class="text-holder">
+                                            <div class="title text-center">{{object.category}}</div>
+                                        </div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <i class="fa fa-plus text-white"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Portfolio Item End -->
+                            {% endfor %}
+                        </div>
+                        <!-- End Portfolio Gallery Grid -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- end main-content -->
+
+{% endblock content %}
+
+
+
+
+

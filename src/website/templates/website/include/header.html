@@ -1,0 +1,62 @@
+{% load static %}
+
+<!-- Header -->
+<header class="header" id="header">
+    <div class="header-nav navbar-fixed-top header-dark navbar-white navbar-transparent transparent-dark navbar-sticky-animated animated-active">
+        <div class="header-nav-wrapper">
+            <div class="container">
+                <nav>
+                    <div class="menuzord red" id="menuzord-right"><a
+                            class="menuzord-brand pull-left flip font-great-vibes text-theme-colored font-32"
+                            href="javascript:void(0)">Perfect &nbsp;<i class="fa fa-heart font-25"></i> Wedding</a>
+                        <div class="side-panel-trigger" id="side-panel-trigger"><a href="#"><i
+                                class="fa fa-bars font-24 text-gray-silver"></i></a></div>
+                        <ul class="menuzord-menu">
+                            <li onclick=""><a href="{% url 'website:home' %}">Home</a>
+                            </li>
+                            <li><a href="#">Events </a>
+                                <ul class="dropdown">
+                                    <li><a href="#">All</a></li>
+                                    {% for object in events %}
+                                    <li><a href="features-preloader.html">{{object.name}}</a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+
+                            <li><a href="#">Services </a>
+                                <ul class="dropdown">
+                                    <li><a href="features-preloader.html">All</a></li>
+                                    {% for object in services %}
+                                    <li><a href="features-preloader.html">{{object.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a href="#">Gallery </a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'website:gallery' %}">All</a></li>
+                                    {% for object in gallery %}
+                                    <li><a href="?category={{object.id}}">{{object.name}}</a>
+                                        <ul class="dropdown">
+                                            {% for subcategory in object.gallerycategory_set.all %}
+                                            <li><a href="{% url 'website:gallery' %}?category={{object.id}}&&subcategory={{subcategory.id}}">{{subcategory.name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'website:blog' %}">Blogs </a>
+                            </li>
+                            <li><a href="{% url 'website:about' %}">About </a>
+                            </li>
+                            <li><a href="{% url 'website:contact-us' %}">Contact Us </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,1307 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <!-- Section: home -->
+    <section class="divider" id="home">
+        <div class="container-fluid p-0">
+
+            <!-- Slider Revolution Start -->
+            <div class="rev_slider_wrapper">
+                <div class="rev_slider" data-version="5.0">
+
+                    <ul>
+                        {% if slider %}
+                        <!-- SLIDE  -->
+                        {% for slider in slider %}
+                        <li data-description="" data-easein="default" data-easeout="default"
+                            data-fsmasterspeed="1500"
+                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
+                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+                            data-thumb="{slider.image.url}}" data-title="Intro"
+                            data-transition="random">
+                            <!-- MAIN IMAGE -->
+                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                 src="{{slider.image.url}}">
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['65']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-120']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-{{forloop.counter}}-layer-1"
+                                 style="z-index: 7; white-space: nowrap;">{{slider.tag_1}}
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
+                                 data-fontsize="['64']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['90']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-45']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-{{forloop.counter}}-layer-2"
+                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">{{slider.tag_2}}
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['60']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1400"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['50']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-{{forloop.counter}}-layer-3"
+                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                              {{slider.tag_3}}
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                        {% else %}
+
+                        <!-- SLIDE 1 -->
+                        <li data-description="" data-easein="default" data-easeout="default"
+                            data-fsmasterspeed="1500"
+                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
+                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+                            data-thumb="{% static 'website/images/bg/bg12.jpg' %}" data-title="Intro"
+                            data-transition="random">
+                            <!-- MAIN IMAGE -->
+                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                 src="{% static 'website/images/bg/bg12.jpg' %}">
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['65']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-120']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-1-layer-1"
+                                 style="z-index: 7; white-space: nowrap;">We Are Celebrating
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
+                                 data-fontsize="['64']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['90']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-45']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-1-layer-2"
+                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">Jeeny
+                                & John Doe's
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['60']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1400"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['50']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-1-layer-3"
+                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                                Wedding Party
+                            </div>
+                        </li>
+
+                        <!-- SLIDE 2 -->
+                        <li data-description="" data-easein="default" data-easeout="default"
+                            data-fsmasterspeed="1500"
+                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-2"
+                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+                            data-thumb="{% static 'website/images/bg/bg3.jpg' %}" data-title="Intro"
+                            data-transition="random">
+                            <!-- MAIN IMAGE -->
+                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                 src="{% static 'website/images/bg/bg3.jpg' %}">
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption tp-resizeme text-uppercase text-theme-colored font-Playfair pl-40 pr-40 rs-parallaxlevel-8"
+                                 data-fontsize="['64']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['70']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['0']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-2-layer-1"
+                                 style="z-index: 7; white-space: nowrap; font-weight:800;">
+                                <i class="fa fa-heart"></i>
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-2"
+                                 data-fontsize="['54']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['70']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-80']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-2-layer-2"
+                                 style="z-index: 7; white-space: nowrap; font-weight:600;">Jeeny & John Doe
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-1"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['60']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1400"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['60']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-2-layer-3"
+                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">Are
+                                Getting Married
+                            </div>
+                        </li>
+
+                        <!-- SLIDE 3 -->
+                        <li data-description="" data-easein="default" data-easeout="default"
+                            data-fsmasterspeed="1500"
+                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-3"
+                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+                            data-thumb="{% static 'website/images/bg/bg13.jpg' %}" data-title="Intro"
+                            data-transition="random">
+                            <!-- MAIN IMAGE -->
+                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                 data-bgposition="center top" data-bgrepeat="no-repeat" data-no-retina
+                                 src="{% static 'website/images/bg/bg13.jpg' %}">
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-8"
+                                 data-height="none"
+
+                                 data-hoffset="['0']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-120']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-3-layer-1"
+                                 style="z-index: 7; white-space: nowrap;">
+                                <img alt="" src="{% static 'website/images/icon.png'  %}">
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-3"
+                                 data-fontsize="['54']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['70']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1000"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['-45']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-3-layer-2"
+                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">Jeeny
+                                & John Doe's
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                 data-fontsize="['48']"
+
+                                 data-height="none"
+                                 data-hoffset="['0']"
+                                 data-lineheight="['60']"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-responsive_offset="on"
+
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-start="1400"
+                                 data-transform_idle="o:1;s:500"
+                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                 data-voffset="['50']"
+                                 data-whitespace="nowrap"
+                                 data-width="none"
+                                 data-x="['center']"
+                                 data-y="['middle']"
+                                 id="rs-3-layer-3"
+                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">Are
+                                Getting Married
+                            </div>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+
+
+                </div><!-- end .rev_slider -->
+            </div>
+            <!-- end .rev_slider_wrapper -->
+            <script>
+          $(document).ready(function(e) {
+            var revapi = $(".rev_slider").revolution({
+              sliderType:"standard",
+              sliderLayout: "fullscreen",
+              dottedOverlay: "none",
+              delay: 5000,
+              navigation: {
+                  keyboardNavigation: "off",
+                  keyboard_direction: "horizontal",
+                  mouseScrollNavigation: "off",
+                  onHoverStop: "off",
+                  touch: {
+                      touchenabled: "on",
+                      swipe_threshold: 75,
+                      swipe_min_touches: 1,
+                      swipe_direction: "horizontal",
+                      drag_block_vertical: false
+                  },
+                  arrows: {
+                      style: "gyges",
+                      enable: true,
+                      hide_onmobile: false,
+                      hide_onleave: true,
+                      hide_delay: 200,
+                      hide_delay_mobile: 1200,
+                      tmp: '',
+                      left: {
+                          h_align: "left",
+                          v_align: "center",
+                          h_offset: 0,
+                          v_offset: 0
+                      },
+                      right: {
+                          h_align: "right",
+                          v_align: "center",
+                          h_offset: 0,
+                          v_offset: 0
+                      }
+                  },
+                    bullets: {
+                    enable: true,
+                    hide_onmobile: true,
+                    hide_under: 800,
+                    style: "hebe",
+                    hide_onleave: false,
+                    direction: "horizontal",
+                    h_align: "center",
+                    v_align: "bottom",
+                    h_offset: 0,
+                    v_offset: 30,
+                    space: 5,
+                    tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
+                }
+              },
+              responsiveLevels: [1240, 1024, 778],
+              visibilityLevels: [1240, 1024, 778],
+              gridwidth: [1170, 1024, 778, 480],
+              gridheight: [700, 768, 960, 720],
+              lazyType: "none",
+              parallax:"mouse",
+              parallaxBgFreeze:"off",
+              parallaxLevels:[2,3,4,5,6,7,8,9,10,1],
+              shadow: 0,
+              spinner: "off",
+              stopLoop: "on",
+              stopAfterLoops: 0,
+              stopAtSlide: -1,
+              shuffle: "off",
+              autoHeight: "off",
+              fullScreenAutoWidth: "off",
+              fullScreenAlignForce: "off",
+              fullScreenOffsetContainer: "",
+              fullScreenOffset: "0",
+              hideThumbsOnMobile: "off",
+              hideSliderAtLimit: 0,
+              hideCaptionAtLimit: 0,
+              hideAllCaptionAtLilmit: 0,
+              debugMode: false,
+              fallbacks: {
+                  simplifyAll: "off",
+                  nextSlideOnWindowFocus: "off",
+                  disableFocusListener: false,
+              }
+            });
+          });
+
+
+
+
+
+            </script>
+            <!-- Slider Revolution Ends -->
+        </div>
+    </section>
+
+    <!-- Section: About -->
+    <section id="about">
+        <div class="container pb-70">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                        <h2>About us</h2>
+                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="image-carousel owl-carousel">
+                            <div class="item"><img alt="slide1"
+                                                   src="{% static 'website/images/photos/slide1.jpg' %}"></div>
+                            <div class="item"><img alt="slide2"
+                                                   src="{% static 'website/images/photos/slide2.jpg' %}"></div>
+                            <div class="item"><img alt="slide3"
+                                                   src="{% static 'website/images/photos/slide3.jpg' %}"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <h3 class="mt-0">Luxury Wedding Planners</h3>
+                        <p>We plan elegant, stylish, glamorous and fun celebrations and are the Luxury Wedding
+                            Planners for savvy, sophisticated couples who demand first class service and a
+                            world-class event. Our discerning, international client base includes aristocrats,
+                            high-spend public figures and couples seeking unique and surprising celebrations.</p>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <ul class="mt-10">
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Family</li>
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Community</li>
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Shopping Local</li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6">
+                                <ul class="mt-10">
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Great customer service
+                                    </li>
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Teamwork</li>
+                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Creativity</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="btn btn-dark btn-theme-colored mt-30" href="#" role="button">Know more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Service -->
+    <section class="bg-lighter" id="service">
+        <div class="container pt-50 pb-20">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                        <h2>Services</h2>
+                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content text-center">
+                <div class="row">
+                    {% for object in '123456' %}
+                    <div class="col-md-4 col-sm-6 wow fadeInUp animation-delay1">
+                        <div class="services-box mb-50"><img alt=""
+                                                             src="{% static 'website/images/gallery/full/6.jpg' %}">
+                            <h4 class="mt-30">Wedding Consulting</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                                dolores qui.</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider: Divider -->
+    <section class="divider parallax layer-overlay overlay-dark-7"
+             data-bg-img="{% static 'website/images/bg/bg8.jpg' %}"
+             data-stellar-background-ratio="0.5">
+        <div class="container">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay1">
+                        <div class="features text-center mb-md-60 mb-md-60"><i
+                                class="pe-7s-culture font-48 text-white"></i>
+                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-venues.html">Venues</a>
+                            </h4>
+                            <p class="text-white">Search by location, type &amp; capacity to find your perfect
+                                wedding venue</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay2">
+                        <div class="features text-center mb-md-60"><i class="pe-7s-note2 font-48 text-white"></i>
+                            <h4 class="mt-20 mb-20"><a class="text-theme-colored"
+                                                       href="page-checklist.html">Checklist</a>
+                            </h4>
+                            <p class="text-white">Personalise your wedding checklist so that you don’t miss a
+                                thing!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay3">
+                        <div class="features text-center mb-md-60"><i class="pe-7s-cash font-48 text-white"></i>
+                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-budget.html">Budget</a>
+                            </h4>
+                            <p class="text-white">Plan and track your busget with our free wedding budget
+                                tracker</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay4">
+                        <div class="features text-center mb-md-60"><i class="pe-7s-shopbag font-48 text-white"></i>
+                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="shop-category.html">Shop</a>
+                            </h4>
+                            <p class="text-white">Find everything you need to create the perfect wedding</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Event  -->
+    <section id="event">
+        <div class="container pb-80">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                        <h2>Events</h2>
+                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="carousel event-carousel slide" data-ride="carousel"
+                             id="carousel-example-generic">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>
+                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>
+                            </ol>
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active"><img alt="..." class="img-responsive"
+                                                              src="{% static 'website/images/event/1.jpg' %}">
+                                    <div class="carousel-caption wedding-area pb-sm-50">
+                                        <h2 class="text-white">The Greeting</h2>
+                                        <h4 class="text-theme-colored">July 1th, 2014</h4>
+                                        <div class="details hidden-xs">
+                                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit. Praesent sit amet pharetra <br> nunc, non scelerisque ligula.
+                                                Cras vel justo nulla.Praesent sit amet pharetra nunc,<br> non
+                                                scelerisque ligula. Cras vel justo nulla. </p>
+                                        </div>
+                                        <a class="btn btn-dark btn-theme-colored text-white" href="#" role="button">Read
+                                            More</a></div>
+                                </div>
+                                <div class="item"><img alt="..." src="{% static 'website/images/event/2.jpg' %}">
+                                    <div class="carousel-caption wedding-area pb-sm-50">
+                                        <h2 class="text-white">The Celebration</h2>
+                                        <h4 class="text-theme-colored">June 1th, 2014</h4>
+                                        <div class="details hidden-xs">
+                                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit. Praesent sit amet pharetra <br>nunc, non scelerisque ligula.
+                                                Cras vel justo nulla.Praesent sit amet pharetra nunc,<br> non
+                                                scelerisque ligula. Cras vel justo nulla. </p>
+                                        </div>
+                                        <a class="btn btn-dark btn-theme-colored text-white" href="" role="button">Read
+                                            More</a></div>
+                                </div>
+                                <div class="item"><img alt="..." src="{% static 'website/images/event/3.jpg' %}">
+                                    <div class="carousel-caption wedding-area pb-sm-50">
+                                        <h2 class="text-white">Resturent</h2>
+                                        <h4 class="text-theme-colored">July 15th, 2014</h4>
+                                        <div class="details hidden-xs">
+                                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit. Praesent sit amet pharetra<br> nunc, non scelerisque ligula.
+                                                Cras vel justo nulla.Praesent sit amet pharetra nunc,<br> non
+                                                scelerisque ligula. Cras vel justo nulla. </p>
+                                        </div>
+                                        <a class="btn btn-dark btn-theme-colored text-white" href="" role="button">Read
+                                            More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Controls -->
+                            <a class="left carousel-control" data-slide="prev" href="#carousel-example-generic"> <i
+                                    class="fa fa-chevron-left"></i> </a>
+                            <a class="right carousel-control" data-slide="next" href="#carousel-example-generic"> <i
+                                    class="fa fa-chevron-right"></i> </a>
+                            <!-- Controls -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Gallery  -->
+    <section class="bg-lighter" id="gallery">
+        <div class="container-fluid pl-0 pr-0 pb-0">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <h2>Wedding Gallery</h2>
+                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Portfolio Gallery Grid -->
+                        <div class="portfolio-gallery grid-4 clearfix" id="grid">
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Joshep & Diana</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="true">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Abraham & Sujana</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/5.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/5.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Leonard & Kate</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="true" data-slideshow="true">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/4.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/4.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/6.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/6.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Jim & Jolly</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/5.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/5.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Stive & Anjelina</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/6.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/6.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">John & Merry</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">Jacob & Jelly</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                            <!-- Portfolio Item Start -->
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 1"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 2"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
+                                                </li>
+                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
+                                                       title="Portfolio Gallery - Photo 3"><img
+                                                        alt=""
+                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="overlay-shade"></div>
+                                    <div class="text-holder">
+                                        <div class="title text-center">David & Lora</div>
+                                    </div>
+                                    <div class="icons-holder">
+                                        <div class="icons-holder-inner">
+                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                <a href="#"><i class="fa fa-picture-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item End -->
+
+                        </div>
+                        <!-- End Portfolio Gallery Grid -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider: Testimonials  -->
+    <section class="divider parallax layer-overlay overlay-dark-7"
+             data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
+             data-stellar-background-ratio="0.5">
+        <div class="container pt-70 pb-30">
+            <!-- Section title -->
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 testimonial text-center">
+                        <h2 class="title text-white">Testimonials</h2>
+                        <div class="quote"><i class="fa fa-quote-left icon text-white"></i></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 mb-30">
+                        <div class="testimonial-carousel">
+                            <div class="item xs-text-center">
+                                <div class="content pt-10">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas possimus
+                                        aut distinctio autem nisi, eaque, quis reprehenderit perspiciatis molestiae
+                                        iste minus modi sint maiores earum ab quibusdam corporis quaerat rerum.</p>
+                                    <div class="thumb"><img alt="" class="img-circle"
+                                                            src="{% static 'website/images/ourlove/1.jpg' %}"
+                                                            width="75"></div>
+                                    <h5 class="text-theme-colored mt-20 mb-0">Jhone & Marry</h5>
+                                </div>
+                            </div>
+                            <div class="item xs-text-center">
+                                <div class="content pt-10">
+                                    <p>Voluptas possimus aut distinctio autem nisi, eaque, quis reprehenderit
+                                        perspiciatis molestiae iste minus modi sint maiores earum ab quibusdam
+                                        corporis quaerat rerum.</p>
+                                    <div class="thumb"><img alt="" class="img-circle"
+                                                            src="{% static 'website/images/ourlove/2.jpg' %}"
+                                                            width="75"></div>
+                                    <h5 class="text-theme-colored mt-20 mb-0">Catherine Grace</h5>
+                                </div>
+                            </div>
+                            <div class="item xs-text-center">
+                                <div class="content pt-10">
+                                    <p>Voluptas possimus aut distinctio autem nisi, eaque, quis reprehenderit
+                                        perspiciatis molestiae iste minus modi sint maiores earum ab quibusdam
+                                        corporis quaerat rerum.</p>
+                                    <div class="thumb"><img alt="" class="img-circle"
+                                                            src="{% static 'website/images/ourlove/1.jpg' %}"
+                                                            width="75"></div>
+                                    <h5 class="text-theme-colored mt-20 mb-0">Jesmin Shelly</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Blog  -->
+    <section id="blog">
+        <div class="container pb-80">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                        <h2>Blog</h2>
+                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    {% for object in '123' %}
+                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">
+                        <article class="post clearfix maxwidth600 mb-30">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb"><img alt="" class="img-responsive img-fullwidth"
+                                                                   src="{% static 'website/images/blog/1.jpg' %}">
+                                </div>
+                            </div>
+                            <div class="entry-content border-1px p-20">
+                                <h5 class="entry-title mt-0 pt-0"><a href="#">Wedding ceremony party</a></h5>
+                                <p class="text-left mb-20 mt-15 font-13">Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read
+                                    more</a>
+                                <ul class="list-inline entry-date pull-right font-12 mt-5">
+                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>
+                                    <li><span class="text-theme-colored">Nov 13, 2015</span></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Divider: Clients -->
+    <section class="divider parallax layer-overlay overlay-lighter"
+             data-bg-img="{% static 'website/images/bg/bg3.jpg' %}"
+             data-stellar-background-ratio="0.5">
+        <div class="container pb-140 pt-90">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-black text-center">Partners</h2>
+                </div>
+            </div>
+            <div class="row mt-60 text-center">
+                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay1">
+                    <div class="client-img style2">
+                        <a href="#" target="_blank"><img alt="" class="img-responsive"
+                                                         src="{% static 'website/images/gift/logo1.jpg' %}"/></a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay2">
+                    <div class="client-img style2">
+                        <a href="#" target="_blank"><img alt="" class="img-responsive"
+                                                         src="{% static 'website/images/gift/logo2.jpg' %}"/></a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay3">
+                    <div class="client-img style2">
+                        <a href="#" target="_blank"><img alt="" class="img-responsive"
+                                                         src="{% static 'website/images/gift/logo3.jpg' %}"/></a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay4">
+                    <div class="client-img style2">
+                        <a href="#" target="_blank"><img alt="" class="img-responsive"
+                                                         src="{% static 'website/images/gift/logo4.jpg' %}"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section: Contact -->
+    <section class="divider bg-lighter" id="contact">
+        <div class="container">
+            <div class="row pt-30">
+                <div class="col-md-5">
+
+                    <!-- Google Map HTML Codes -->
+                    <div
+                            class="map-canvas autoload-map"
+                            data-address="121 King Street, Melbourne Victoria 3000 Australia"
+                            data-height="500"
+                            data-latlng="-37.817314,144.955431"
+                            data-mapstyle="style2"
+                            data-marker="{% static 'website/images/map-marker.png' %}"
+                            data-popupstring-id="#popupstring1"
+                            data-title="sample title"
+                            data-zoom="12">
+                    </div>
+                    <div class="map-popupstring hidden" id="popupstring1">
+                        <div class="text-center">
+                            <h3>Perfect Wedding</h3>
+                            <p>121 King Street, Melbourne Victoria 3000 Australia</p>
+                        </div>
+                    </div>
+                    <!-- Google Map Javascript Codes -->
+                    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAYWE4mHmR9GyPsHSOVZrSCOOljk8DU9B4"></script>
+                    <script src="js/google-map-init.js"></script>
+
+                </div>
+
+                <div class="col-md-7">
+                    <h3 class="mt-0 mb-30">Interested in discussing?</h3>
+
+                    <!-- Contact Form -->
+                    <form action="includes/sendmail.php" class="" id="contact_form" method="post"
+                          name="contact_form">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_name">Name <small>*</small></label>
+                                    <input class="form-control" id="form_name" name="form_name"
+                                           placeholder="Enter Name"
+                                           required="" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_email">Email <small>*</small></label>
+                                    <input class="form-control required email" id="form_email" name="form_email"
+                                           placeholder="Enter Email" type="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_name">Subject <small>*</small></label>
+                                    <input class="form-control required" id="form_subject" name="form_subject"
+                                           placeholder="Enter Subject" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_phone">Phone</label>
+                                    <input class="form-control" id="form_phone" name="form_phone"
+                                           placeholder="Enter Phone"
+                                           type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form_name">Message</label>
+                            <textarea class="form-control required" id="form_message" name="form_message"
+                                      placeholder="Enter Message"
+                                      rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="form_botcheck" name="form_botcheck" type="hidden"
+                                   value=""/>
+                            <button class="btn btn-dark btn-theme-colored btn-flat"
+                                    data-loading-text="Please wait..."
+                                    type="submit">Send your message
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Contact Form Validation-->
+                    <script type="text/javascript">
+              $("#contact_form").validate({
+                submitHandler: function(form) {
+                  var form_btn = $(form).find('button[type="submit"]');
+                  var form_result_div = '#form-result';
+                  $(form_result_div).remove();
+                  form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                  var form_btn_old_msg = form_btn.html();
+                  form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                  $(form).ajaxSubmit({
+                    dataType:  'json',
+                    success: function(data) {
+                      if( data.status == 'true' ) {
+                        $(form).find('.form-control').val('');
+                      }
+                      form_btn.prop('disabled', false).html(form_btn_old_msg);
+                      $(form_result_div).html(data.message).fadeIn('slow');
+                      setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+                    }
+                  });
+                }
+              });
+
+
+
+
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

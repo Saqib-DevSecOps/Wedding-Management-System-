@@ -1,0 +1,158 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+             data-bg-img="{% static 'website/images/bg/bg11.jpg' %}">
+        <div class="container pt-120 pb-50">
+            <!-- Section Content -->
+            <div class="section-content pt-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="title text-white">Blog</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container mt-30 mb-30 pt-30 pb-30">
+            <div class="row multi-row-clearfix">
+                <div class="col-md-9 col-lg-9">
+                    <div class="blog-posts">
+                        <div class="col-lg-12">
+                            <div class="row list-dashed">
+                                {% for object in blogs %}
+
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <article class="post clearfix maxwidth600 mb-30">
+                                        <div class="entry-header">
+                                            <div class="post-thumb thumb"><img alt=""
+                                                                               class="img-responsive img-fullwidth"
+                                                                               src="{{object.thumbnail_image.url}}">
+                                            </div>
+                                        </div>
+                                        <div class="entry-content border-1px p-20">
+                                            <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>
+                                            <div class="entry-meta">
+                                                <ul class="list-inline entry-date font-12 mt-5">
+                                                    <li><span
+                                                            class="text-theme-colored">{{object.created_at.date}}</span>
+                                                    </li>
+                                                    <li><a class="text-theme-colored" href="#">| Admin</a></li>
+                                                </ul>
+                                            </div>
+                                            <p class="text-left mb-20 mt-15 font-13">{{object.content|safe }}</p>
+                                            <a class="btn btn-dark btn-theme-colored btn-sm btn-flat pull-left mt-0"
+                                               href="#">Read more</a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </article>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <nav>
+                                <ul class="pagination theme-colored">
+                                    {% if blogs.has_previous %}
+                                    {% if category is not None%}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{blogs.previous_page_number}}&&category={{category}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% else %}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{blogs.previous_page_number}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% endif %}
+                                    {% else %}
+
+                                    {% endif %}
+                                    {% for i in paginator.page_range %}
+                                    {% if blogs.number == i %}
+                                    <li class="active"><a href="#">{{i}}</a></li>
+                                    {% else %}
+                                    <li><a href="?page={{ i }}">{{i}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if blogs.has_next %}
+                                    {% if category is not None%}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{blogs.next_page_number}}&&category={{category}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% else %}
+                                    <li><a aria-label="Previous"
+                                           href="?page={{blogs.next_page_number}}">
+                                        <span aria-hidden="true">«</span>
+                                    </a></li>
+                                    {% endif %}
+                                    {% else %}
+
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="sidebar sidebar-right mt-sm-30">
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom">Search box</h5>
+                            <div class="search-form">
+                                <form method="get">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        {{filter_form.form}}
+                                        <span class="input-group-btn">
+                      <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
+                      </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom">Categories</h5>
+                            <div class="categories">
+                                <ul class="list list-border angle-double-right">
+                                    {% for object in blog_category %}
+                                    <li><a href="?category={{object.id}}">{{object.name}}<span>({{object.blog_category.all.count}})</span></a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom">Latest Blogs</h5>
+                            <div class="latest-posts">
+                                {% for object in recent_blogs %}
+                                <article class="post media-post clearfix pb-0 mb-10">
+                                    <a class="post-thumb" href="#"><img alt=""
+                                                                        src="{{object.thumbnail_image.url}}"
+                                                                        style="height:px;width:75px"></a>
+                                    <div class="post-right">
+                                        <h5 class="post-title mt-0"><a href="#">{{object.title}}</a></h5>
+                                        <p>{{object.content|safe}}</p>
+                                    </div>
+                                </article>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}
+
+
