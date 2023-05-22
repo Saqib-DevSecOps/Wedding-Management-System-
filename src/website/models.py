@@ -34,9 +34,9 @@ class Gallery(models.Model):
 
 
 class Slider(models.Model):
-    tag_1 = models.CharField(max_length=30,null=True,blank=True)
-    tag_2 = models.CharField(max_length=30,null=True,blank=True)
-    tag_3 = models.CharField(max_length=30,null=True,blank=True)
+    tag_1 = models.CharField(max_length=30, null=True, blank=True)
+    tag_2 = models.CharField(max_length=30, null=True, blank=True)
+    tag_3 = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(upload_to='slider')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -101,7 +101,8 @@ class Blog(models.Model):
     thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
     slug = models.SlugField(unique=True, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
-    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, blank=False, null=True,related_name='blog_category')
+    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, blank=False, null=True,
+                                 related_name='blog_category')
     content = HTMLField()
 
     read_time = models.PositiveIntegerField(default=0, help_text='read time in minutes')
@@ -130,7 +131,6 @@ class Blog(models.Model):
 class EventCategory(models.Model):
     name = models.CharField(max_length=255)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
-
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -152,9 +152,15 @@ class Event(models.Model):
     title = models.CharField(max_length=255, unique=True)
     thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
     slug = models.SlugField(unique=True, null=False)
-    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, blank=False, null=True)
+    category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True)
     content = HTMLField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    country = models.CharField(max_length=122)
+    city = models.CharField(max_length=100)
+    exact_destination = models.CharField(max_length=100)
     status = models.CharField(max_length=15, choices=STATUS, default='publish')
+    is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

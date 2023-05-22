@@ -74,7 +74,8 @@
                                  data-x="['center']"
                                  data-y="['middle']"
                                  id="rs-{{forloop.counter}}-layer-2"
-                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">{{slider.tag_2}}
+                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
+                                {{slider.tag_2}}
                             </div>
 
                             <!-- LAYER NR. 3 -->
@@ -101,7 +102,7 @@
                                  data-y="['middle']"
                                  id="rs-{{forloop.counter}}-layer-3"
                                  style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
-                              {{slider.tag_3}}
+                                {{slider.tag_3}}
                             </div>
                         </li>
                         {% endfor %}
@@ -485,6 +486,7 @@
 
 
 
+
             </script>
             <!-- Slider Revolution Ends -->
         </div>
@@ -538,7 +540,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <a class="btn btn-dark btn-theme-colored mt-30" href="#" role="button">Know more</a>
+                        <a class="btn btn-dark btn-theme-colored mt-30" href="{% url 'website:about' %}" role="button">Know
+                            more</a>
                     </div>
                 </div>
             </div>
@@ -560,17 +563,17 @@
             </div>
             <div class="section-content text-center">
                 <div class="row">
-                    {% for object in '123456' %}
+                    {% for object in services %}
                     <div class="col-md-4 col-sm-6 wow fadeInUp animation-delay1">
                         <div class="services-box mb-50"><img alt=""
-                                                             src="{% static 'website/images/gallery/full/6.jpg' %}">
-                            <h4 class="mt-30">Wedding Consulting</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                                dolores qui.</p>
+                                                             src="{{object.image.url}}">
+                            <h4 class="mt-30">{{object.name}}</h4>
+                            <p>{{object.description}}</p>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
+                <a class="btn btn-dark btn-theme-colored text-white" href="{% url 'website:services' %}">See More</a>
             </div>
         </div>
     </section>
@@ -689,6 +692,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Controls -->
                             <a class="left carousel-control" data-slide="prev" href="#carousel-example-generic"> <i
                                     class="fa fa-chevron-left"></i> </a>
@@ -696,8 +700,15 @@
                                     class="fa fa-chevron-right"></i> </a>
                             <!-- Controls -->
                         </div>
+
                     </div>
+
                 </div>
+
+            </div>
+            <div class="text-center mt-5  ">
+                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:services' %}">See
+                    More</a>
             </div>
         </div>
     </section>
@@ -708,7 +719,7 @@
             <div class="section-title">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <h2>Wedding Gallery</h2>
+                        <h2> Gallery</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua.</em></p>
@@ -722,33 +733,26 @@
                         <!-- Portfolio Gallery Grid -->
                         <div class="portfolio-gallery grid-4 clearfix" id="grid">
 
+                            {% for object in images %}
                             <!-- Portfolio Item Start -->
                             <div class="portfolio-item">
                                 <div class="thumb">
                                     <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
                                         <div class="flexslider">
                                             <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
+                                                {% for images in images %}
+                                                <li><a href="{{images.image.url}}"
+                                                       title="{{images.category}}"><img
                                                         alt=""
-                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
+                                                        src="{{object.image.url}}"></a>
                                                 </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
+                                                {% endfor %}
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="overlay-shade"></div>
                                     <div class="text-holder">
-                                        <div class="title text-center">Joshep & Diana</div>
+                                        <div class="title text-center">{{object.category}}</div>
                                     </div>
                                     <div class="icons-holder">
                                         <div class="icons-holder-inner">
@@ -760,279 +764,12 @@
                                 </div>
                             </div>
                             <!-- Portfolio Item End -->
+                            {% endfor %}
 
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="true">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">Abraham & Sujana</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/5.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/5.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">Leonard & Kate</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="true" data-slideshow="true">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/4.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/4.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/6.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/6.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">Jim & Jolly</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/5.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/5.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">Stive & Anjelina</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/6.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/6.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">John & Merry</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/1.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/1.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">Jacob & Jelly</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
-
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 1"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/2.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 2"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/2.jpg' %}"></a>
-                                                </li>
-                                                <li><a href="{% static 'website/images/gallery/full/3.jpg' %}"
-                                                       title="Portfolio Gallery - Photo 3"><img
-                                                        alt=""
-                                                        src="{% static 'website/images/gallery/full/3.jpg' %}"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">David & Lora</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Portfolio Item End -->
+                        </div>
+                        <div class="mb-5 mt-5 text-center">
+                            <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5"
+                               href="{% url 'website:gallery' %}">See More</a>
 
                         </div>
                         <!-- End Portfolio Gallery Grid -->
@@ -1067,7 +804,7 @@
                                         aut distinctio autem nisi, eaque, quis reprehenderit perspiciatis molestiae
                                         iste minus modi sint maiores earum ab quibusdam corporis quaerat rerum.</p>
                                     <div class="thumb"><img alt="" class="img-circle"
-                                                            src="{% static 'website/images/ourlove/1.jpg' %}"
+                                                            src="{% static 'website/images/ourlove/5.jpg' %}"
                                                             width="75"></div>
                                     <h5 class="text-theme-colored mt-20 mb-0">Jhone & Marry</h5>
                                 </div>
@@ -1078,20 +815,9 @@
                                         perspiciatis molestiae iste minus modi sint maiores earum ab quibusdam
                                         corporis quaerat rerum.</p>
                                     <div class="thumb"><img alt="" class="img-circle"
-                                                            src="{% static 'website/images/ourlove/2.jpg' %}"
+                                                            src="{% static 'website/images/ourlove/3.jpg' %}"
                                                             width="75"></div>
                                     <h5 class="text-theme-colored mt-20 mb-0">Catherine Grace</h5>
-                                </div>
-                            </div>
-                            <div class="item xs-text-center">
-                                <div class="content pt-10">
-                                    <p>Voluptas possimus aut distinctio autem nisi, eaque, quis reprehenderit
-                                        perspiciatis molestiae iste minus modi sint maiores earum ab quibusdam
-                                        corporis quaerat rerum.</p>
-                                    <div class="thumb"><img alt="" class="img-circle"
-                                                            src="{% static 'website/images/ourlove/1.jpg' %}"
-                                                            width="75"></div>
-                                    <h5 class="text-theme-colored mt-20 mb-0">Jesmin Shelly</h5>
                                 </div>
                             </div>
                         </div>
@@ -1107,7 +833,7 @@
             <div class="section-title">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Blog</h2>
+                        <h2>Latest Blogs</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
                             dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
@@ -1116,23 +842,22 @@
             </div>
             <div class="section-content">
                 <div class="row">
-                    {% for object in '123' %}
+                    {% for object in blogs %}
                     <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">
                         <article class="post clearfix maxwidth600 mb-30">
                             <div class="entry-header">
                                 <div class="post-thumb thumb"><img alt="" class="img-responsive img-fullwidth"
-                                                                   src="{% static 'website/images/blog/1.jpg' %}">
+                                                                   src="{{object.thumbnail_image.url}}">
                                 </div>
                             </div>
                             <div class="entry-content border-1px p-20">
-                                <h5 class="entry-title mt-0 pt-0"><a href="#">Wedding ceremony party</a></h5>
-                                <p class="text-left mb-20 mt-15 font-13">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>
+                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>
                                 <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read
                                     more</a>
                                 <ul class="list-inline entry-date pull-right font-12 mt-5">
                                     <li><a class="text-theme-colored" href="#">Admin |</a></li>
-                                    <li><span class="text-theme-colored">Nov 13, 2015</span></li>
+                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -1141,13 +866,18 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="mt-5 mb-5 text-center">
+                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See
+                    More</a>
+            </div>
+
 
         </div>
     </section>
 
     <!-- Divider: Clients -->
     <section class="divider parallax layer-overlay overlay-lighter"
-             data-bg-img="{% static 'website/images/bg/bg3.jpg' %}"
+             data-bg-img="{% static 'website/images/bg/bg6.jpg' %}"
              data-stellar-background-ratio="0.5">
         <div class="container pb-140 pt-90">
             <div class="row">
@@ -1292,6 +1022,7 @@
                   });
                 }
               });
+
 
 
 

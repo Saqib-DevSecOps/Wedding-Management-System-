@@ -1,0 +1,94 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-content" style="">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="{% static 'website/images/bg/bg11.jpg' %}" style="background-image: url(&quot;images/bg/bg11.jpg&quot;);">
+      <div class="container pt-120 pb-50">
+        <!-- Section Content -->
+        <div class="section-content pt-100">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="title text-white">Services</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: -->
+    <section>
+      <div class="container pb-0">
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="mt-0">Our Services</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum? Natus asperiores, minima, eius iure totam molestias, magnam eaque atque minus nostrum quia odio. Deserunt laborum sint cupiditate, voluptates, similique quas, ipsam et iusto reprehenderit, eius tempore nisi quidem consequatur nostrum hic.</p>
+            </div>
+            <div class="col-md-5">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum?</p>
+            </div>
+          </div>
+          <div class="row text-center mt-30">
+            {% for object in object_list %}
+            <div class="col-md-4 col-sm-6">
+              <div class="services-box mb-50"> <img class="" alt="" src="{{ object.image.url }}">
+                <h4 class="mt-30">{{object.name}}</h4>
+                <p>{{object.description}}</p>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+      </div>
+    </div></section>
+
+    <!-- Divider: Funfact -->
+    <section class="divider parallax layer-overlay overlay-light" data-stellar-background-ratio="0.5" data-bg-img="images/bg/bg2.jpg" style="background-image: url(&quot;images/bg/bg2.jpg&quot;); background-position: 50% 0px;">
+      <div class="container pt-90 pb-90">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+            <div class="funfact style-1 pb-15 pt-15 p-20 bg-lightest">
+              <i class="pe-7s-smile text-black-light mt-5 font-48 pull-right" data-text-color="#ccc" style="color: rgb(204, 204, 204);"></i>
+              <h2 class="animate-number text-theme-colored mt-0 font-48 appeared" data-value="754" data-animation-duration="2000">754</h2>
+              <div class="clearfix"></div>
+              <h4>Happy Clients</h4>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+            <div class="funfact style-1 pb-15 pt-15 p-20 bg-lightest">
+              <i class="pe-7s-hammer text-black-light mt-5 font-48 pull-right" data-text-color="#ccc" style="color: rgb(204, 204, 204);"></i>
+              <h2 class="animate-number text-theme-colored mt-0 font-48 appeared" data-value="125" data-animation-duration="2500">125</h2>
+              <div class="clearfix"></div>
+              <h4>Success Projects</h4>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+            <div class="funfact style-1 pb-15 pt-15 p-20 bg-lightest">
+              <i class="pe-7s-magic-wand text-black-light mt-5 font-48 pull-right"></i>
+              <h2 class="animate-number text-theme-colored mt-0 font-48 appeared" data-value="225" data-animation-duration="3000">225</h2>
+              <div class="clearfix"></div>
+              <h4>Team Members</h4>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 mb-md-50">
+            <div class="funfact style-1 pb-15 pt-15 p-20 bg-lightest">
+              <i class="pe-7s-portfolio text-black-light mt-5 font-48 pull-right" data-text-color="#ccc" style="color: rgb(204, 204, 204);"></i>
+              <h2 class="animate-number text-theme-colored mt-0 font-48 appeared" data-value="45" data-animation-duration="2500">45</h2>
+              <div class="clearfix"></div>
+              <h4>Brunches World Wide</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+

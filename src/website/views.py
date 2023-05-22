@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
 from src.website.filters import BlogFilter
-from src.website.models import Slider, Blog, Gallery, BlogCategory
+from src.website.models import Slider, Blog, Gallery, BlogCategory, Service
 
 
 # Create your views here.
@@ -16,6 +16,10 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context['slider'] = Slider.objects.all()
+        context['images'] = Gallery.objects.all()[:8]
+        context['services'] = Service.objects.all()[:6]
+        context['blogs'] = Blog.objects.all()[:3]
+
         return context
 
 
@@ -71,3 +75,9 @@ class AboutUs(TemplateView):
 
 class ContactUs(TemplateView):
     template_name = 'website/contact_us.html'
+
+
+class Services(ListView):
+    model = Service
+    context_object_name = 'objects'
+    template_name = 'website/services.html'
