@@ -18,3 +18,4 @@ dj-rest-auth
 drf-yasg
 django-jazzmin
 django-tinymce
+django-phonenumber_field

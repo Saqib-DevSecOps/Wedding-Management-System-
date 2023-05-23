@@ -38,7 +38,7 @@
                             <div class="col-sm-4 border-right pl-0 pl-sm-15">
                                 <div class="event-details p-15 mt-20">
                                     <h3 class="media-heading font-weight-500">{{object.title}}</h3>
-                                    <p>{{object.content|safe |truncatechars:70 }}</p>
+                                    <p>{{object.content|lower|safe|truncatechars_html:80 }}</p>
                                     <a class="btn btn-flat btn-dark btn-theme-colored btn-sm" href="{% url 'website:event_detail' object.pk %}">Details <i
                                             class="fa fa-angle-double-right"></i></a>
                                 </div>

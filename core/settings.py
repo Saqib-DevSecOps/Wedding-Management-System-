@@ -201,13 +201,13 @@ if ENVIRONMENT != 'server':
 """___________________________ Django Jazzmin Integration _______________________________________________"""
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Monogatari Admin",
+    "site_title": "Wedding Admin",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Monogatari",
+    "site_header": "Wedding",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Monogatari",
+    "site_brand": "Wedding",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -222,7 +222,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the Monogatari",
+    "welcome_sign": "Welcome to the Wedding",
 
     # Copyright on the footer
     "copyright": "Exarth",
