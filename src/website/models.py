@@ -149,7 +149,8 @@ class Event(models.Model):
         ('publish', "Publish")
     )
 
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
+    host = models.CharField(max_length=255,verbose_name="host name")
     thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
     slug = models.SlugField(unique=True, null=False)
     category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True,related_name='event_category')

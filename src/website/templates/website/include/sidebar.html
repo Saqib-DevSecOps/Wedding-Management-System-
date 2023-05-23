@@ -9,36 +9,30 @@
             <div class="widget no-border">
                 <nav>
                     <ul class="nav nav-list">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="{% url 'website:home' %}">Home</a></li>
+                        <li><a href="{% url 'website:services' %}">Services</a></li>
                         <li><a class="tree-toggler nav-header">Pages <i class="fa fa-angle-down"></i></a>
                             <ul class="nav nav-list tree">
-                                <li><a href="#">About</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Terms</a></li>
                                 <li><a href="#">FAQ</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{% url 'website:contact-us' %}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="side-panel-widget mt-30">
-            <div class="widget no-border">
-                <ul>
-                    <li class="font-14 mb-5"> Phone: <a class="text-gray" href="#">123-456-789</a></li>
-                    <li class="font-14 mb-5"> Email: <a class="text-gray" href="#">contact@yourdomain.com</a></li>
-                </ul>
-            </div>
+                <div class="side-panel-widget mt-30">
+
             <div class="widget">
-                <ul class="social-icons sm-text-center">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <ul class=" sm-text-center">
+                    <li><a href="{% url 'account_login' %}"><i class="fa fa-login">Login</i></a></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-login">Register</i></a></li>
                 </ul>
             </div>
-            <p>Copyright &copy;2016 ThemeMascot</p>
         </div>
+
     </div>
 </div>

@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView, ListView, DetailView
 
 from src.website.filters import BlogFilter, EventFilter
 from src.website.models import Slider, Blog, Gallery, BlogCategory, Service, Event
@@ -18,7 +18,8 @@ class Home(TemplateView):
         context['slider'] = Slider.objects.all()
         context['images'] = Gallery.objects.all()[:8]
         context['services'] = Service.objects.all()[:6]
-        context['events'] = Event.objects.all()[:3]
+        events = Event.objects.all()
+        context['events'] = events.order_by('-created_at').first()
         context['blogs'] = Blog.objects.all()[:3]
 
         return context
@@ -49,6 +50,17 @@ class BlogList(ListView):
         return context
 
 
+class BlogDetail(DetailView):
+    model = Blog
+    template_name = 'website/blog_detail.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BlogDetail, self).get_context_data(**kwargs)
+        context['recent_blogs'] = Blog.objects.order_by('-created_at')[:5]
+        context['blog_category'] = BlogCategory.objects.all()
+        return context
+
+
 class EventList(ListView):
     model = Event
     template_name = 'website/event_list.html'
@@ -71,6 +83,11 @@ class EventList(ListView):
         context['filter_form'] = filter_event
         context['category'] = category
         return context
+
+
+class EventDetail(DetailView):
+    model = Event
+    template_name = 'website/event_detail.html'
 
 
 class GalleryList(ListView):

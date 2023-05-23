@@ -1,0 +1,204 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start main-content -->
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5"
+             data-bg-img="{{object.thumbnail_image.url}}">
+        <div class="container pt-120 pb-50">
+            <!-- Section Content -->
+            <div class="section-content pt-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="title text-white">Blog Detail</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Blog -->
+    <section>
+        <div class="container mt-30 mb-30 pt-30 pb-30">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="blog-posts single-post">
+                        <article class="post clearfix mb-0">
+                            <div class="entry-header">
+                                <div class="post-thumb thumb"><img alt="" class="img-responsive img-fullwidth"
+                                                                   src="images/photos/single-img.jpg"></div>
+                            </div>
+                            <div class="entry-title pt-0">
+                                <h4 class="font-Playfair"><a href="#">{{object.title}}</a></h4>
+                            </div>
+                            <div class="entry-meta">
+                                <ul class="list-inline">
+                                    <li>Posted: <span class="text-theme-colored">{{object.created_at.date}}</span></li>
+                                    <li>By: <span class="text-theme-colored">Admin</span></li>
+                                </ul>
+                            </div>
+                            <div class="entry-content mt-10">
+                                <p class="mb-15">{{object.content|safe}}</p>
+                            </div>
+                        </article>
+                        <div class="comments-area">
+                            <h5 class="comments-title">Comments</h5>
+                            <ul class="comment-list">
+                                <li>
+                                    <div class="media comment-author"><a class="media-left" href="#"><img
+                                            alt="" class="img-thumbnail" src="images/blog/comment1.jpg"></a>
+                                        <div class="media-body">
+                                            <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                            <div class="comment-date">23/06/2014</div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea
+                                                commodo consequat...</p>
+                                            <a class="replay-icon pull-right text-theme-colored" href="#"> <i
+                                                    class="fa fa-commenting-o text-theme-colored"></i> Replay</a></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media comment-author"><a class="media-left" href="#"><img
+                                            alt="" class="img-thumbnail" src="images/blog/comment2.jpg"></a>
+                                        <div class="media-body">
+                                            <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                            <div class="comment-date">23/06/2014</div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea
+                                                commodo consequat...</p>
+                                            <a class="replay-icon pull-right text-theme-colored" href="#"> <i
+                                                    class="fa fa-commenting-o text-theme-colored"></i> Replay</a>
+                                            <div class="clearfix"></div>
+                                            <div class="media comment-author nested-comment"><a class="media-left pt-20"
+                                                                                                href="#"><img
+                                                    alt="" class="img-thumbnail" src="images/blog/comment3.jpg"></a>
+                                                <div class="media-body p-20 bg-lighter">
+                                                    <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                                    <div class="comment-date">23/06/2014</div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna et sed
+                                                        aliqua. Ut enim ea commodo consequat...</p>
+                                                    <a class="replay-icon pull-right text-theme-colored" href="#"> <i
+                                                            class="fa fa-commenting-o text-theme-colored"></i>
+                                                        Replay</a>
+                                                </div>
+                                            </div>
+                                            <div class="media comment-author nested-comment"><a class="media-left pt-20"
+                                                                                                href="#"><img
+                                                    alt="" class="img-thumbnail" src="images/blog/comment4.jpg"></a>
+                                                <div class="media-body p-20 bg-lighter">
+                                                    <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                                    <div class="comment-date">23/06/2014</div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna et sed
+                                                        aliqua. Ut enim ea commodo consequat...</p>
+                                                    <a class="replay-icon pull-right text-theme-colored" href="#"> <i
+                                                            class="fa fa-commenting-o text-theme-colored"></i>
+                                                        Replay</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media comment-author"><a class="media-left" href="#"><img
+                                            alt="" class="img-thumbnail" src="images/blog/comment2.jpg"></a>
+                                        <div class="media-body">
+                                            <h5 class="media-heading comment-heading">John Doe says:</h5>
+                                            <div class="comment-date">23/06/2014</div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ea
+                                                commodo consequat...</p>
+                                            <a class="replay-icon pull-right text-theme-colored" href="#"> <i
+                                                    class="fa fa-commenting-o text-theme-colored"></i> Replay</a></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comment-box">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5>Leave a Comment</h5>
+                                    <div class="row">
+                                        <form id="comment-form" role="form">
+                                            <div class="col-sm-6 pt-0 pb-0">
+                                                <div class="form-group">
+                                                    <input class="form-control" id="contact_name" name="contact_name"
+                                                           placeholder="Enter Name"
+                                                           required type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="form-control" id="contact_email2"
+                                                           name="contact_email2"
+                                                           placeholder="Enter Email" required
+                                                           type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="form-control" name="subject"
+                                                           placeholder="Enter Website"
+                                                           required type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" id="contact_message2"
+                                                              name="contact_message2"
+                                                              placeholder="Enter Message" required
+                                                              rows="7"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-dark btn-flat pull-right m-0"
+                                                            data-loading-text="Please wait..."
+                                                            type="submit">Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="sidebar sidebar-right mt-sm-30">
+                          <div class="widget">
+                            <h5 class="widget-title line-bottom">Categories</h5>
+                            <div class="categories">
+                                <ul class="list list-border angle-double-right">
+                                    {% for object in blog_category %}
+                                    <li><a href="{% url 'website:blog' %}?category={{object.id}}">{{object.name}}<span>({{object.blog_category.all.count}})</span></a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title line-bottom">Latest Blogs</h5>
+                            <div class="latest-posts">
+                                {% for object in recent_blogs %}
+                                <article class="post media-post clearfix pb-0 mb-10">
+                                    <a class="post-thumb" href="#"><img alt=""
+                                                                        src="{{object.thumbnail_image.url}}"
+                                                                        style="height:px;width:75px"></a>
+                                    <div class="post-right">
+                                        <h5 class="post-title mt-0"><a href="{% url 'website:blog_detail' object.pk %}">{{object.title |truncatechars:20 }}</a></h5>
+                                        <p>{{object.content|safe|truncatechars:20 }}</p>
+                                    </div>
+                                </article>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- end main-content -->
+{% endblock content %}
+
+

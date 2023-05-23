@@ -17,6 +17,7 @@
             </div>
         </div>
     </section>
+    {% if blogs %}
 
     <section>
         <div class="container mt-30 mb-30 pt-30 pb-30">
@@ -36,18 +37,20 @@
                                             </div>
                                         </div>
                                         <div class="entry-content border-1px p-20">
-                                            <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>
+                                            <h5 class="entry-title mt-0 pt-0"><a
+                                                    href="{% url 'website:blog_detail' object.id %}">{{object.title}}</a>
+                                            </h5>
                                             <div class="entry-meta">
                                                 <ul class="list-inline entry-date font-12 mt-5">
                                                     <li><span
                                                             class="text-theme-colored">{{object.created_at.date}}</span>
                                                     </li>
-                                                    <li><a class="text-theme-colored" href="#">| Admin</a></li>
+                                                    <li><a class="text-theme-colored" href="{% url 'website:blog_detail' object.id %}">| Admin</a></li>
                                                 </ul>
                                             </div>
-                                            <p class="text-left mb-20 mt-15 font-13">{{object.content|safe }}</p>
+                                            <p class="text-left mb-20 mt-15 font-13">{{object.content|safe |truncatechars:70 }}</p>
                                             <a class="btn btn-dark btn-theme-colored btn-sm btn-flat pull-left mt-0"
-                                               href="#">Read more</a>
+                                               href="{% url 'website:blog_detail' object.id %}">Read more</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </article>
@@ -133,12 +136,12 @@
                             <div class="latest-posts">
                                 {% for object in recent_blogs %}
                                 <article class="post media-post clearfix pb-0 mb-10">
-                                    <a class="post-thumb" href="#"><img alt=""
+                                    <a class="post-thumb" href="{% url 'website:blog_detail' object.id %}"><img alt=""
                                                                         src="{{object.thumbnail_image.url}}"
                                                                         style="height:px;width:75px"></a>
                                     <div class="post-right">
-                                        <h5 class="post-title mt-0"><a href="#">{{object.title}}</a></h5>
-                                        <p>{{object.content|safe}}</p>
+                                        <h5 class="post-title mt-0"><a href="{% url 'website:blog_detail' object.id %}">{{object.title |truncatechars:20}}</a></h5>
+                                        <p>{{object.content|safe|truncatechars:20 }}</p>
                                     </div>
                                 </article>
                                 {% endfor %}
@@ -151,6 +154,11 @@
             </div>
         </div>
     </section>
+    {% else %}
+    <div class="text-danger text-center">
+        <h3 class="text-danger">Blogs Not Found</h3>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock content %}

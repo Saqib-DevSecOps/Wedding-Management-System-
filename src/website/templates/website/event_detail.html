@@ -1,0 +1,86 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="{% static 'website/images/bg/bg11.jpg' %}">
+      <div class="container pt-120 pb-50">
+        <!-- Section Content -->
+        <div class="section-content pt-100">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="title text-white">Event Detail </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <ul>
+              <br><br>
+              <li>
+                <h5>Topics:</h5>
+                <p>{{object.title}}</p>
+              </li>
+              <li>
+                <h5>Host:</h5>
+                <p>{{object.host}}.</p>
+              </li>
+              <li>
+                <h5>Location:</h5>
+                <p>#{{object.country}} - {{object.city}} - {{object.exact_destination}} </p>
+              </li>
+              <li>
+                <h5>Start Date:</h5>
+                <p>{{object.start_date.date}}</p>
+              </li>
+              <li>
+                <h5>End Date:</h5>
+                <p>{{object.end_date.date}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <img src="{{object.thumbnail_image.url}}" style="height:480px;width:755" alt="">
+          </div>
+        </div>
+        <div class="row mt-60">
+          <div class="col-md-12">
+            <h4 class="mt-0">Event Description</h4>
+            <p>{{object.content|safe}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Appointment Form -->
+
+    <section>
+      <div class="container">
+        <div class="row mt-30">
+          <div class="col-md-12">
+            <h4 class="mb-20">Event Gallery</h4>
+            <div class="recent-project">
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+              <div class="item"><img src="https://placehold.it/285x215" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+
+{% endblock content %}
+
+
