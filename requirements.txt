@@ -16,3 +16,5 @@ crispy-bootstrap5
 django-browser-reload
 dj-rest-auth
 drf-yasg
+django-jazzmin
+django-tinymce
