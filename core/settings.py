@@ -1,5 +1,6 @@
 
 import datetime
+import os
 from pathlib import Path
 import environ
 
@@ -9,8 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, True)
 )
-environ.Env.read_env(BASE_DIR / '.env')
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = True
 ROOT_URLCONF = 'core.urls'
 AUTH_USER_MODEL = 'accounts.User'

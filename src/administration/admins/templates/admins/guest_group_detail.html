@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block subtitle %} {{ request.user }} {% endblock %}
+
+{% block page_heading %}
+<style>
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sortable-list {
+  padding: 25px;
+  background: #fff;
+  border-radius: 7px;
+  padding: 30px 25px 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.sortable-list .item {
+  list-style: none;
+  display: flex;
+  cursor: move;
+  background: #fff;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px 13px;
+  margin-bottom: 11px;
+  border: 1px solid #ccc;
+  justify-content: space-between;
+}
+
+.item .details {
+  display: flex;
+  align-items: center;
+}
+
+.item .details img {
+  height: 43px;
+  width: 43px;
+  pointer-events: none;
+  margin-right: 12px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.item .details span {
+  font-size: 1.13rem;
+  position : center;
+}
+
+.item i {
+  color: #474747;
+  font-size: 1.13rem;
+}
+
+.item.dragging {
+  opacity: 0.6;
+}
+
+.item.dragging :where(.details, i) {
+  opacity: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .sortable-list {
+    width: 100%;
+  }
+}
+</style>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box d-flex align-items-center justify-content-between">
+      <h4 class="mb-0 font-size-18">Guest Groups </h4>
+
+      <div class="page-title-right">
+        <button class="btn btn-outline-success" data-target="#GuestGroupModal" data-toggle="modal"
+          data-whatever="@getbootstrap" type="button">Add Guest Group
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-12 col-md-6">
+
+    <ul class="sortable-list">
+        <div class="text-center mb-4">
+          <h3>Group Name : {{object.group_name}}</h3>
+      </div>
+          {% for guest in object.guest_set.all %}
+
+      <li class="item" draggable="true">
+        <div class="details">
+          <img src="images/img-1.jpg">
+          <span>Kristina Zasiadko</span>
+        </div>
+        <i class="uil uil-draggabledots"></i>
+      </li>
+          {% endfor %}
+
+      <!-- Rest of the list items -->
+    </ul>
+
+  </div>
+  <div class="col-12 col-md-6">
+    <ul class="sortable-list">
+        <div class="text-center">
+          <h5>{{object.group_name}}</h5>
+      </div>
+      <li class="item" draggable="true">
+
+        <div class="details">
+          <img src="images/img-1.jpg">
+          <span>Kristina Zasiadko</span>
+        </div>
+        <i class="uil uil-draggabledots"></i>
+      </li>
+      <!-- Rest of the list items -->
+    </ul>
+  </div>
+</div>
+
+<script>
+  const sortableList = document.querySelector(".sortable-list");
+  const items = sortableList.querySelectorAll(".item");
+
+  items.forEach(item => {
+    item.addEventListener("dragstart", () => {
+      // Adding dragging class to item after a delay
+      setTimeout(() => item.classList.add("dragging"), 0);
+    });
+    // Removing dragging class from item on dragend event
+    item.addEventListener("dragend", () => item.classList.remove("dragging"));
+  });
+
+  const initSortableList = (e) => {
+    e.preventDefault();
+    const draggingItem = document.querySelector(".dragging");
+    // Getting all items except currently dragging and making array of them
+    let siblings = [...sortableList.querySelectorAll(".item:not(.dragging)")];
+
+    // Finding the sibling after which the dragging item should be placed
+    let nextSibling = siblings.find(sibling => {
+      return e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+    });
+
+    // Inserting the dragging item before the found sibling
+    sortableList.insertBefore(draggingItem, nextSibling);
+  }
+
+  sortableList.addEventListener("dragover", initSortableList);
+  sortableList.addEventListener("dragenter", e => e.preventDefault());
+</script>
+
+{% endblock content %}

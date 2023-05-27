@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block subtitle %} {{ request.user }} {% endblock %}
+
+{% block page_heading %}
+
+<div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="GuestGroupModelLabel">Add Guest Group </h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="modal-body">
+
+                    {{ form.as_p }}
+                    <h6 class="mb-2">Guest Name</h6>
+                    <div id="guest-names-container">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control guest-name-input" name="guest_names[]"
+                                           placeholder="Enter Guest Name" required
+                                           type="text">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-danger btn-rounded  delete-guest" type="button">Delete
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success btn-rounded btn-sm" id="add-guest-name" type="button">Add More
+                        </button>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+                    <button class="btn btn-danger " data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-outline-success " type="submit">Save</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Guest Groups List</h4>
+
+            <div class="page-title-right">
+                <button class="btn btn-outline-success" data-target="#GuestGroupModal" data-toggle="modal"
+                        data-whatever="@getbootstrap"
+                        type="button">Add Guest Group
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+    <div class="table-responsive">
+        <table class="table project-list-table table-nowrap align-middle table-borderless">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 100px">#</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Total Guest</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                    {% for object in object_list %}
+            <tr>
+                <td>{{object.id}}</td>
+                <td>{{object.group_name}}</td>
+                <td>---------</td>
+                <td>{{object.created_at}}</td>
+                <td>
+                    <a href="" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></a>
+                    <a href="" class="btn btn-outline-success btn-sm"><i class="fa fa-eye"></i></a>
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- end row -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#add-guest-name').click(function() {
+      var guestNameInput = $('<input>').attr({
+        type: 'text',
+        name: 'guest_names[]',
+        class: 'form-control guest-name-input',
+        required : 'required',
+        placeholder: 'Enter Guest Name'
+      });
+
+      var deleteButton = $('<button>').attr({
+        type: 'button',
+        class: 'btn btn-danger btn-rounded delete-guest'
+      }).text('Delete');
+
+      var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+      var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+
+      var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+      $('#guest-names-container').append(formGroup);
+    });
+
+    $(document).on('click', '.delete-guest', function() {
+      $(this).closest('.form-group').remove();
+    });
+  });
+
+
+</script>
+
+
+{% endblock content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center my-3">
+            <a class="text-success" href="javascript:void(0);"><i
+                    class="bx bx-loader bx-spin font-size-18 align-middle me-2"></i> Load more </a>
+        </div>
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+

@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+
+{% block title %}Update Guest Group{% endblock %}
+
+{% block content %}
+  <form id="updateGuestGroupForm" method="post" action="{% url 'admins:guest-group-update' object.pk %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+{% endblock %}

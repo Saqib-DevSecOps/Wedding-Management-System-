@@ -6,17 +6,11 @@ from src.accounts.models import User
 # Create your models here.
 
 
-class GuestList(models.Model):
-    group_name = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.group_name
-
-
 class GuestGroup(models.Model):
     group_name = models.CharField(max_length=100)
-    guest_list = models.ForeignKey(GuestList, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.group_name
@@ -25,6 +19,8 @@ class GuestGroup(models.Model):
 class Guest(models.Model):
     guest_name = models.CharField(max_length=100)
     group = models.ForeignKey(GuestGroup, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.group.group_name
@@ -32,21 +28,17 @@ class Guest(models.Model):
 
 class InvitationLetter(models.Model):
     group = models.ForeignKey(GuestGroup, on_delete=models.CASCADE)
-    letter_count = models.IntegerField()
-
-    def __str__(self):
-        return self.group.group_name
-
-
-class Invitation(models.Model):
-    group = models.ForeignKey(GuestGroup, on_delete=models.CASCADE)
-    invitation_count = models.IntegerField()
+    invitation_number = models.IntegerField(default=1)
+    invitation_date = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.group.group_name
 
 
 class Provider(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     provider_name = models.CharField(max_length=100)
     service = models.CharField(max_length=100)
     email = models.EmailField()
@@ -55,18 +47,21 @@ class Provider(models.Model):
     paid = models.DecimalField(max_digits=10, decimal_places=2)
     attachment = models.FileField(upload_to='attachments/')
     comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
 
 
 class Table(models.Model):
+    TABLE_TYPE = (
+        ('1', 'Rounded Table'),
+        ('2', 'Rectangle Table'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     table_name = models.CharField(max_length=100)
-    table_type = models.CharField(max_length=100)
+    table_type = models.CharField(max_length=100, choices=TABLE_TYPE)
     seat_count = models.IntegerField()
     seats_left = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
