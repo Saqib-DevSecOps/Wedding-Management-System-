@@ -45,12 +45,17 @@ class Provider(models.Model):
     phone_number = models.CharField(max_length=100)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
     paid = models.DecimalField(max_digits=10, decimal_places=2)
-    attachment = models.FileField(upload_to='attachments/')
+    attachment = models.FileField(upload_to='attachments/', help_text='File Should be less than 5mb')
     comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
 
+    def pending_amount(self):
+        pending = float(self.total_cost) - float(self.paid)
+        return pending
 
 class Table(models.Model):
     TABLE_TYPE = (

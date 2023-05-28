@@ -1,21 +1,20 @@
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AdminPasswordChangeForm
-from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.generic import (
-    TemplateView, ListView, DeleteView, DetailView, UpdateView, CreateView
+    TemplateView, ListView, DetailView, UpdateView, CreateView
 )
-
-# from faker_data import initialization
+from django.views import View
+from django.http import JsonResponse
 from src.accounts.models import User
 from src.administration.admins.filters import UserFilter
-from src.administration.admins.forms import GuestGroupMetaForm
-from src.administration.admins.models import GuestGroup, Guest
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm
+from src.administration.admins.models import GuestGroup, Guest, Provider
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
@@ -137,8 +136,79 @@ class GuestGroupUpdateView(UpdateView):
         return JsonResponse({'success': True})
 
 
-class ProviderListCreateView(CreateView, ListView):
-    model = GuestGroup
-    form_class = GuestGroupMetaForm
-    template_name = 'admins/guest_group_list.html'
+class ProviderListCreateView(ListView):
+    model = Provider
+    template_name = 'admins/provider_list.html'
     success_url = reverse_lazy("admins:guest-group-list")
+
+    def get_context_data(self, **kwargs):
+        context = super(ProviderListCreateView, self).get_context_data(**kwargs)
+        context['form'] = ProviderMetaForm
+        return context
+
+
+class ProviderDetailView(DetailView):
+    model = Provider
+    template_name = 'admins/provider_detail.html'
+
+
+class ProviderCreateView(View):
+    def post(self, request):
+        form = ProviderMetaForm(request.POST, request.FILES)
+        print(request.FILES)
+        if form.is_valid():
+            provider = form.save(commit=False)
+            provider.user = request.user
+            provider.save()
+            messages.success(request, "Successfully Created")
+            return JsonResponse({'success': True, 'provider_id': provider.id})
+
+        errors = {}
+        for field, error_messages in form.errors.items():
+            errors[field] = [str(message) for message in error_messages]
+
+        return JsonResponse({'errors': errors}, status=400)
+
+
+class ProviderUpdateView(View):
+
+    def get(self, request, pk):
+        provider = get_object_or_404(Provider, id=pk)
+        print()
+        provider_data = {
+            'provider_name': provider.provider_name,
+            'service': provider.service,
+            'email': provider.email,
+            'phone_number': provider.phone_number,
+            'total_cost': provider.total_cost,
+            'paid': provider.paid,
+            'comment': provider.comment,
+            'attachment': str(provider.attachment.url),
+        }
+        return JsonResponse({'provider': provider_data})
+
+    def post(self, request, pk):
+        provider = get_object_or_404(Provider, id=pk)
+        form = ProviderMetaForm(request.POST, request.FILES, instance=provider)
+        if form.is_valid():
+            print("valid")
+            provider = form.save()
+            messages.success(request, "Successfully updated")
+            return JsonResponse({'success': True, 'provider_id': provider.id})
+
+        errors = {}
+        for field, error_messages in form.errors.items():
+            print("invalid")
+
+            errors[field] = [str(message) for message in error_messages]
+
+        return JsonResponse({'errors': errors}, status=400)
+
+
+class ProviderDeleteView(View):
+    def get(self, request, pk):
+        print("hello")
+        provider = get_object_or_404(Provider, id=pk)
+        provider.delete()
+        messages.success(self.request,"Provider Successfully Deleted")
+        return redirect('admins:provider-list')

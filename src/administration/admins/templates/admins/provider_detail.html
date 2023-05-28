@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block subtitle %}
+    {{ user.username }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p><a href="{% url 'admins:user-list' %}"><i class="fa fa-arrow-left"></i> Go Back</a></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+
+
+                    {# NAME AND OTHER #}
+                    <div class="text-center mt-2">
+                        <h5 class="mb-0">
+                            {{ object.provider_name }}
+                                <i class="fa fa-check-circle text-primary"></i>
+                        </h5><br>
+                        <p class="fw-light text-muted mb-0">registered on > {{ object.created_at.date }}</p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <p class="mb-0 text-center h3"><i class="mdi mdi-email text-secondary"></i></p>
+                            <p class="mb-0 text-center h5">Email</p>
+                            <p class="mb-0 text-center">{{ object.email }}</p>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0 text-center h3"><i class="mdi mdi-phone text-primary"></i></p>
+                            <p class="mb-0 text-center h5">Phone</p>
+                            <p class="mb-0 text-center">{{ object.phone_number }}</p>
+                        </div>
+                        <div class="col text-center">
+                            <p class="mb-0 text-center h3"><i class="mdi mdi-shield-account text-secondary"></i></p>
+                            <p class="mb-0 text-center h5">Service</p>
+                            <p class="mb-0 text-center">
+                                {{object.service}}
+                            </p>
+                        </div>
+                        <div class="col text-center">
+                            <p class="mb-0 text-center h3"><i class="mdi mdi-book text-success"></i></p>
+                            <p class="mb-0 text-center h5">Document</p>
+                            <p class="mb-0 text-center "><a href="#"> Download</a></p>
+                        </div>
+
+
+
+                        <div class="col">
+                            <p class="mb-0 text-center h3"><i class="fa fa-user-lock"></i></p>
+                            <p class="mb-0 text-center h5">Updated at</p>
+                            <p class="mb-0 text-center ">
+                                {{object.updated_at}}
+                            </p>
+                        </div>
+                    </div><hr>
+                     <div class="row">
+                        <div class="col">
+                            <h6 class="ml-4">Comment: {{object.comment}}</h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# STATISTICS #}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body border-bottom">
+                    <p class="card-title mb-0">Statistics</p>
+                </div>
+                <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col border-right">
+                                <p class="mb-0 text-center h3 text-success"><i class="mdi mdi-arrow-up"></i></p>
+                                <p class="mb-0 text-center small">Total Amount </p>
+                                <p class="mb-0 text-center h4">{{ object.total_cost }}</p>
+                            </div>
+
+                            <div class="col">
+                                <p class="mb-0 text-center h3 text-danger"><i class="mdi mdi-arrow-down"></i>
+                                </p>
+                                <p class="mb-0 text-center small">Paid Amount</p>
+                                <p class="mb-0 text-center h4">{{ object.paid}}</p>
+                            </div>
+
+                            <div class="col">
+                                <p class="mb-0 text-center h3"><i class="fa fa-coins text-warning"></i></p>
+                                <p class="mb-0 text-center small">Pending Amount</p>
+                                <p class="mb-0 text-center h4">{{ object.pending_amount }}</p>
+                            </div>
+                        </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
