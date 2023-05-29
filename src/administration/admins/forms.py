@@ -25,14 +25,18 @@ class GuestGroupMetaForm(forms.ModelForm):
 class GuestMetaForm(forms.ModelForm):
     class Meta:
         model = Guest
-        fields = ('guest_name',)
+        fields = ('group', 'guest_name')
         widgets = {
             'guest_name': forms.TextInput(
                 attrs={
                     'class': 'form-control'
                 }
-            ),
+            )
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['group'].widget.attrs.update({"class": "form-control"})
 
 
 class ProviderMetaForm(forms.ModelForm):

@@ -9,7 +9,7 @@ class GuestInline(admin.TabularInline):
 
 @admin.register(GuestGroup)
 class GuestGroupAdmin(admin.ModelAdmin):
-    list_display = ('group_name', 'user', 'created_at', 'updated_at')
+    list_display = ('group_name','sequence', 'user', 'created_at', 'updated_at')
     inlines = [GuestInline]
     list_filter = ('user',)
     search_fields = ('group_name', 'user__username')
@@ -24,7 +24,7 @@ class GuestAdmin(admin.ModelAdmin):
 
 @admin.register(InvitationLetter)
 class InvitationLetterAdmin(admin.ModelAdmin):
-    list_display = ('group', 'invitation_number', 'invitation_date', 'created_at', 'updated_at')
+    list_display = ('group', 'total_invitation', 'created_at', 'updated_at')
     list_filter = ('group__group_name',)
     search_fields = ('group__group_name',)
 

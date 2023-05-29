@@ -3,19 +3,24 @@ from .views import (
     DashboardView,
     UserListView, UserPasswordResetView, UserDetailView, UserUpdateView, GuestGroupListView, GuestGroupUpdateView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
-    ProviderDeleteView
+    ProviderDeleteView, GuestListView, GuestDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
 )
 
 app_name = 'admins'
 urlpatterns = [
 
     path('', DashboardView.as_view(), name='dashboard'),
+]
+
+urlpatterns += [
 
     path('guest/group/list/', GuestGroupListView.as_view(), name='guest-group-list'),
     path('guest-group/<int:pk>/detail/', GuestGroupDetailView.as_view(), name='guest-group-detail'),
     path('guest-group/<int:pk>/update/', GuestGroupUpdateView.as_view(), name='guest-group-update'),
+    path('guest-group/<int:pk>/delete/', GuestGroupDeleteView.as_view(), name='guest-group-delete'),
+    path('update_row_order/', update_row_order, name='update_row_order'),
 ]
-urlpatterns +=[
+urlpatterns += [
 
     path('provider/list/', ProviderListCreateView.as_view(), name='provider-list'),
     path('provider/create/', ProviderCreateView.as_view(), name='provider-create'),
@@ -23,11 +28,21 @@ urlpatterns +=[
     path('provider/update/<str:pk>', ProviderUpdateView.as_view(), name='provider-update'),
     path('provider/delete/<str:pk>', ProviderDeleteView.as_view(), name='provider-delete'),
 
+]
+urlpatterns += [
+
     path('user/', UserListView.as_view(), name='user-list'),
     path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('user/<int:pk>/change/', UserUpdateView.as_view(), name='user-update'),
     path('user/<int:pk>/password/reset/', UserPasswordResetView.as_view(), name='user-password-reset-view'),
 
+]
+
+urlpatterns += [
+
+    path('group/list/', GuestListView.as_view(), name='guest-list'),
+    path('guest/<int:pk>/delete/', GuestDeleteView.as_view(), name='guest-delete'),
+    path('get_guests/', get_guests, name='get_guests'),
 ]
 
 urlpatterns += [

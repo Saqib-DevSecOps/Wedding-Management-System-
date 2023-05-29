@@ -1,11 +1,15 @@
+import json
+
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.template.loader import render_to_string
+from django.db import models
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET
 from django.views.generic import (
     TemplateView, ListView, DetailView, UpdateView, CreateView
 )
@@ -13,8 +17,8 @@ from django.views import View
 from django.http import JsonResponse
 from src.accounts.models import User
 from src.administration.admins.filters import UserFilter
-from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm
-from src.administration.admins.models import GuestGroup, Guest, Provider
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm
+from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
@@ -104,11 +108,16 @@ class GuestGroupListView(CreateView, ListView):
     template_name = 'admins/guest_group_list.html'
     success_url = reverse_lazy("admins:guest-group-list")
 
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)
+
     def form_valid(self, form):
         guest_names = self.request.POST.getlist('guest_names[]')
         guest_group = form.save(commit=False)  # Get the saved GuestGroup instance
         guest_group.user = self.request.user
         guest_group.save()
+        invitation_letter, created = InvitationLetter.objects.get_or_create(group=guest_group)
+        invitation_letter.save()
         # Save guest names to the guest group
         for name in guest_names:
             Guest.objects.create(guest_name=name, group=guest_group)
@@ -121,7 +130,7 @@ class GuestGroupDetailView(DetailView):
     template_name = 'admins/guest_group_detail.html'
 
     def get_object(self, queryset=None):
-        return get_object_or_404(GuestGroup, pk=self.kwargs['pk'])
+        return get_object_or_404(GuestGroup, pk=self.kwargs['pk'], user=self.request.user)
 
 
 class GuestGroupUpdateView(UpdateView):
@@ -134,6 +143,40 @@ class GuestGroupUpdateView(UpdateView):
         guest_group = form.save()
         # Handle saving the updated guest list if necessary
         return JsonResponse({'success': True})
+
+
+class GuestGroupDeleteView(View):
+    def get(self, request, pk):
+        print("hello")
+        guest = get_object_or_404(GuestGroup, pk=pk)
+        guest.delete()
+        messages.success(self.request, "Provider Successfully Deleted")
+        return redirect('admins:guest-group-list')
+
+
+class GuestListView(CreateView, ListView):
+    model = Guest
+    form_class = GuestMetaForm
+    template_name = 'admins/guest_list.html'
+    success_url = reverse_lazy("admins:guest-list")
+
+
+class GuestDeleteView(View):
+    def get(self, request, pk):
+        print("hello")
+        guest = get_object_or_404(Guest, id=pk)
+        guest.delete()
+        messages.success(self.request, "Guest Successfully Deleted")
+        return redirect('admins:guest-list')
+
+
+@require_GET
+def get_guests(request):
+    group_id = request.GET.get('group_id')
+    group = get_object_or_404(GuestGroup, id=group_id)
+    guests = Guest.objects.filter(group=group)
+    guest_list = [{'name': guest.guest_name} for guest in guests]
+    return JsonResponse(guest_list, safe=False)
 
 
 class ProviderListCreateView(ListView):
@@ -210,5 +253,19 @@ class ProviderDeleteView(View):
         print("hello")
         provider = get_object_or_404(Provider, id=pk)
         provider.delete()
-        messages.success(self.request,"Provider Successfully Deleted")
+        messages.success(self.request, "Provider Successfully Deleted")
         return redirect('admins:provider-list')
+
+
+def update_row_order(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        row_id_list = body.get('row_id_list', [])
+        sequence_list = body.get('sequence_list', [])
+        for index in range(len(row_id_list)):
+            group = GuestGroup.objects.get(pk=int(row_id_list[index]))
+            group.sequence = index
+            group.save()
+        return JsonResponse({'success': True})
+
+    return JsonResponse({'error': 'Invalid request method'})

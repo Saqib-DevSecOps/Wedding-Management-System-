@@ -59,6 +59,22 @@
         </div>
     </div>
 </div>
+<div aria-hidden="true" aria-labelledby="GuestModalLabel" class="modal fade" id="GuestModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Guests</h5>
+
+            </div>
+            <div class="modal-body">
+                <ul class="list-group"  id="guest-list">
+                </ul>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
@@ -81,35 +97,83 @@
 
 <div class="">
     <div class="table-responsive">
-        <table class="table project-list-table table-nowrap align-middle table-borderless">
+        <table class="table project-list-table table-nowrap align-middle table-borderless" id="sortable-table">
             <thead>
             <tr>
-                <th scope="col" style="width: 100px">#</th>
                 <th scope="col">Group Name</th>
-                <th scope="col">Total Guest</th>
+                <th scope="col">Total Guests</th>
+                <th scope="col">View Guests</th>
+                <th scope="col">Invitation Letters</th>
+                <th scope="col">Edit Invitations</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Action</th>
 
             </tr>
             </thead>
             <tbody>
-                    {% for object in object_list %}
-            <tr>
-                <td>{{object.id}}</td>
+            {% for object in object_list %}
+            <tr data-id="{{ object.id }}" data-requence="{{object.sequence}}">
                 <td>{{object.group_name}}</td>
-                <td>---------</td>
+                <td>
+                    <b>{{object.guest_set.all.count }}</b>
+                </td>
+                <td>
+                    <button class="btn btn-outline-success btn-rounded btn-sm view-guest" data-record-id="{{ object.id }}"><i
+                            class="fa fa-eye"></i>&nbsp;&nbsp;View
+                    </button>
+                </td>
+                <td>{{object.invitation_set.total_invitation}}</td>
+                <td>
+                    <button class="btn btn-outline-success btn-rounded btn-sm"><i class="fa fa-edit"></i>Edit</button>
+                </td>
                 <td>{{object.created_at}}</td>
                 <td>
-                    <a href="" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></a>
-                    <a href="" class="btn btn-outline-success btn-sm"><i class="fa fa-eye"></i></a>
+                    <button class="btn btn-outline-danger btn-sm delete-button" data-target="#DeleteModalForm"
+                            data-toggle="modal"
+                            data-whatever="@getbootstrap"
+                            type="button"><i class="fa fa-trash"></i></button>
+                    <div aria-hidden="true" aria-labelledby="DeleteModalFormLable" class="modal fade"
+                         id="DeleteModalForm" role="dialog"
+                         tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Provider</h5>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are You Sure Do you Want to Delete The Provider</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-outline-danger"
+                                       href="{% url 'admins:guest-group-delete' object.id  %}"
+                                       type="button">Confirm Delete</a>
+                                    <button class="btn btn-outline-secondary" data-dismiss="modal" type="button">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
+            </tr>
             {% endfor %}
+
+
             </tbody>
         </table>
     </div>
 </div>
 <!-- end row -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
+        referrerpolicy="no-referrer"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA=="
+        referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js"></script>
 <script>
   $(document).ready(function() {
     $('#add-guest-name').click(function() {
@@ -140,8 +204,102 @@
   });
 
 
-</script>
 
+
+
+
+</script>
+<script>
+ function updateRowOrder(rowIdList, sequenceList) {
+  const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
+
+  const data = {
+    row_id_list: rowIdList,
+    sequence_list: sequenceList,
+    csrfmiddlewaretoken: csrfToken
+  };
+  console.log(data)
+
+  const url = '/admins/update_row_order/';
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrfToken
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        console.error('Error:', data.error);
+      } else {
+        console.log('Row order updated successfully');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+const table = document.getElementById('sortable-table').getElementsByTagName('tbody')[0];
+
+// Initialize SortableJS
+const sortable = Sortable.create(table, {
+  animation: 300, // Animation speed in milliseconds
+  onEnd: function (event) {
+    const rows = Array.from(table.getElementsByTagName('tr'));
+    const rowIdList = rows.map(row => row.getAttribute('data-id'));
+    const sequenceList = rows.map(row => row.getAttribute('data-requence'));
+    console.log(rowIdList)
+    console.log(sequenceList)
+    updateRowOrder(rowIdList, sequenceList);
+  }
+});
+
+
+
+</script>
+<script>
+  $(document).ready(function() {
+  $('.view-guest').click(function() {
+    var groupId = $(this).data('record-id');
+    var guestList = $('#guest-list');
+
+    // Clear the existing guest list
+    guestList.empty();
+
+    // Send AJAX request to fetch guests of the group
+   $.ajax({
+  url: '/admins/get_guests/',
+  type: 'GET',
+  data: { group_id: groupId },
+  success: function(response) {
+    // Clear the existing guest list
+    guestList.empty();
+
+    // Check if guests are found
+    if (response && response.length > 0) {
+      // Populate the guest list
+      response.forEach(function(guest) {
+        var listItem = $('<li>').addClass('list-group-item text-center').html('<i class="fa fa-user mr-3" aria-hidden="true"></i>' + guest.name);
+        guestList.append(listItem);
+      });
+    } else {
+      // Show "No guests found" message
+      var emptyListItem = $('<li>').addClass('list-group-item list-group-item-danger text-center').text('No guests found');
+      guestList.append(emptyListItem);
+    }
+
+    // Open the modal
+    $('#GuestModal').modal('show');
+  },
+  error: function(error) {
+    console.error('Error:', error);
+  }
+});
+  });
+});
+
+</script>
 
 {% endblock content %}
 <div class="row">

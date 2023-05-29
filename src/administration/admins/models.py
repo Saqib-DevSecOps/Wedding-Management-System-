@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Max
 
 from src.accounts.models import User
 
@@ -7,13 +8,25 @@ from src.accounts.models import User
 
 
 class GuestGroup(models.Model):
+    sequence = models.IntegerField(blank=True)
     group_name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Set the sequence field to the next available value
+            max_sequence = GuestGroup.objects.aggregate(Max('sequence'))['sequence__max']
+            self.sequence = (max_sequence or 0) + 1
+
+        super(GuestGroup, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.group_name
+
+    class Meta:
+        ordering = ['sequence']
 
 
 class Guest(models.Model):
@@ -27,9 +40,8 @@ class Guest(models.Model):
 
 
 class InvitationLetter(models.Model):
-    group = models.ForeignKey(GuestGroup, on_delete=models.CASCADE)
-    invitation_number = models.IntegerField(default=1)
-    invitation_date = models.DateTimeField()
+    group = models.OneToOneField(GuestGroup, on_delete=models.CASCADE,related_name='invitation_set')
+    total_invitation = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -56,6 +68,7 @@ class Provider(models.Model):
     def pending_amount(self):
         pending = float(self.total_cost) - float(self.paid)
         return pending
+
 
 class Table(models.Model):
     TABLE_TYPE = (
