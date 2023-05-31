@@ -56,6 +56,32 @@
 {% endblock %}
 {% block content %}
 
+<div class="card">
+    <div class="card-body border-bottom">
+                    <form method="get">
+
+        <div class="row g-3">
+           <div class="col-xxl-4 col-lg-4">
+                {{filter_form.guest_name}}
+                </div>
+            <div class="col-xxl-4 col-lg-4">
+                {{filter_form.group}}
+                </div>
+                <div class="col-xxl-2 col-lg-2">
+                    <button class="btn btn-outline-success w-100" type="submit"><i
+                            class="mdi mdi-filter-outline align-middle"></i> Filter
+                    </button>
+                </div>
+            <div class="col-xxl-2 col-lg-2">
+                    <a href="{% url 'admins:guest-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
+                            class="mdi mdi-filter-outline align-middle"></i> Clear
+                    </a>
+                </div>
+        </div>
+                                    </form>
+
+    </div>
+</div>
 
 <div class="">
     <div class="table-responsive">

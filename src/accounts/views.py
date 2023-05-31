@@ -19,7 +19,10 @@ class LogoutView(View):
 class CrossAuthView(View):
 
     def get(self, request):
-        return redirect('admins:dashboard')
+        if request.user.is_superuser:
+            return redirect('admin/')
+        if request.user.is_bride or request.user.is_fiance:
+            return redirect('admins:dashboard')
 
 
 @method_decorator(login_required, name='dispatch')

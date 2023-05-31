@@ -68,13 +68,49 @@
 
             </div>
             <div class="modal-body">
-                <ul class="list-group"  id="guest-list">
+                <ul class="list-group" id="guest-list">
                 </ul>
             </div>
 
         </div><!-- /.modal-content -->
     </div>
 </div>
+<div aria-hidden="true" aria-labelledby="UpdateModalFormLabel" class="modal fade" id="UpdateModalForm" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="ml-3">
+                <div class="update_modal_errors">
+
+                </div>
+
+
+            </div>
+            <!-- Add 'id' attribute to the form element -->
+            <form enctype="multipart/form-data" id="update-invitation-form"
+                  method="post">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    {{invitation_from}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-outline-success" id="update-invitation" type="button">Save</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
@@ -93,10 +129,33 @@
 
 {% endblock %}
 {% block content %}
+<div class="card">
+    <div class="card-body border-bottom">
+                    <form method="get" action="{% url 'admins:guest-group-list' %}">
 
+        <div class="row g-3">
+                <div class="col-xxl-8 col-lg-8">
+                    <input class="form-control" id="searchInput" placeholder="Enter Guest Group Name" name="guest_group_search" type="search">
+                </div>
+                <div class="col-xxl-2 col-lg-2">
+                    <button class="btn btn-outline-success w-100" type="submit"><i
+                            class="mdi mdi-filter-outline align-middle"></i> Filter
+                    </button>
+                </div>
+            <div class="col-xxl-2 col-lg-2">
+                    <a href="{% url 'admins:guest-group-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
+                            class="mdi mdi-filter-outline align-middle"></i> Clear
+                    </a>
+                </div>
+        </div>
+                                    </form>
+
+    </div>
+</div>
 
 <div class="">
     <div class="table-responsive">
+
         <table class="table project-list-table table-nowrap align-middle table-borderless" id="sortable-table">
             <thead>
             <tr>
@@ -110,6 +169,7 @@
 
             </tr>
             </thead>
+
             <tbody>
             {% for object in object_list %}
             <tr data-id="{{ object.id }}" data-requence="{{object.sequence}}">
@@ -118,13 +178,16 @@
                     <b>{{object.guest_set.all.count }}</b>
                 </td>
                 <td>
-                    <button class="btn btn-outline-success btn-rounded btn-sm view-guest" data-record-id="{{ object.id }}"><i
+                    <button class="btn btn-outline-success btn-rounded btn-sm view-guest"
+                            data-record-id="{{ object.id }}"><i
                             class="fa fa-eye"></i>&nbsp;&nbsp;View
                     </button>
                 </td>
                 <td>{{object.invitation_set.total_invitation}}</td>
                 <td>
-                    <button class="btn btn-outline-success btn-rounded btn-sm"><i class="fa fa-edit"></i>Edit</button>
+                    <button class="btn btn-outline-success btn-rounded btn-sm update-button"
+                            data-record-id="{{ object.id }}"><i class="fa fa-edit"></i>Edit
+                    </button>
                 </td>
                 <td>{{object.created_at}}</td>
                 <td>
@@ -162,8 +225,11 @@
 
 
             </tbody>
+
         </table>
+
     </div>
+
 </div>
 <!-- end row -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -208,6 +274,8 @@
 
 
 
+
+
 </script>
 <script>
  function updateRowOrder(rowIdList, sequenceList) {
@@ -218,7 +286,6 @@
     sequence_list: sequenceList,
     csrfmiddlewaretoken: csrfToken
   };
-  console.log(data)
 
   const url = '/admins/update_row_order/';
   fetch(url, {
@@ -249,11 +316,11 @@ const sortable = Sortable.create(table, {
     const rows = Array.from(table.getElementsByTagName('tr'));
     const rowIdList = rows.map(row => row.getAttribute('data-id'));
     const sequenceList = rows.map(row => row.getAttribute('data-requence'));
-    console.log(rowIdList)
-    console.log(sequenceList)
     updateRowOrder(rowIdList, sequenceList);
   }
 });
+
+
 
 
 
@@ -299,16 +366,117 @@ const sortable = Sortable.create(table, {
   });
 });
 
+
+
+</script>
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  var invitationId;
+
+  $('.update-button').click(function() {
+    invitationId = $(this).data('record-id');
+    console.log('Clicked invitation ID:', invitationId);
+
+    // Open the Bootstrap modal form
+    $('#UpdateModalForm').modal('show');
+
+    // Fetch invitation details via AJAX
+    $.ajax({
+      url: '/admins/invitation/update/' + invitationId,
+      method: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        // Populate the form fields with invitation details
+        var invitationData = response.invitation;
+        console.log(invitationData);
+
+        // Set values for each form field
+        for (var fieldName in invitationData) {
+          if (invitationData.hasOwnProperty(fieldName)) {
+            var fieldValue = invitationData[fieldName];
+            // Select the form field by name and set its value
+            $('#update-invitation-form [name="' + fieldName + '"]').val(fieldValue);
+          }
+        }
+
+        // Update the data-invitation-id attribute on the submit button to store the invitation ID
+        $('#update-invitation').data('invitation-id', invitationId);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching invitation details:', error);
+      }
+    });
+
+    // Prevent the default button behavior if needed
+    return false;
+  });
+
+  // Handle form submission
+  $('#update-invitation').click(function() {
+    var form = $('#update-invitation-form');
+    var formData = new FormData(form[0]);
+    var url = '/admins/invitation/update/' + invitationId;
+
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        // Reset the form fields
+        form[0].reset();
+        // Close the modal
+        $('#UpdateModalForm').modal('hide');
+        // Reload the page or update the content as desired
+        location.reload();
+      },
+      error: function(error) {
+        console.log(error.responseText);
+        var errors = JSON.parse(error.responseText).errors;
+        console.log(errors);
+        handleFormErrors(errors, '.update_modal_errors');
+      }
+    });
+  });
+
+  // Function to display form errors
+  function handleFormErrors(errors, errorContainer) {
+    // Remove existing error messages and classes
+    $('.form-group').removeClass('is-invalid');
+    $('.invalid-feedback').html('');
+    $(errorContainer).empty();
+
+    $.each(errors, function(field, messages) {
+      var inputField = $('#id_' + field);
+      var errorField = inputField.closest('.form-group').find('.invalid-feedback');
+
+      // Add error message(s) to the error field
+      errorField.html(messages.join('<br>'));
+
+      // Add 'is-invalid' class to the input field's parent element
+      inputField.closest('.form-group').addClass('is-invalid');
+
+      // Add error message(s) with field name to the error alert box
+      var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+        '<strong id="field_name">' + field + ':</strong>' +
+        '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+        '</div>');
+
+      // Append the error alert box to the error container
+      $(errorContainer).append(errorAlertBox);
+    });
+  }
+});
+
+
 </script>
 
+
 {% endblock content %}
-<div class="row">
-    <div class="col-12">
-        <div class="text-center my-3">
-            <a class="text-success" href="javascript:void(0);"><i
-                    class="bx bx-loader bx-spin font-size-18 align-middle me-2"></i> Load more </a>
-        </div>
-    </div> <!-- end col-->
-</div>
-<!-- end row -->
+
 

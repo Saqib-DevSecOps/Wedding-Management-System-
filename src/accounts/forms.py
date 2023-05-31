@@ -3,12 +3,9 @@ from src.accounts.models import User
 
 
 class UserProfileForm(ModelForm):
-
     class Meta:
         model = User
         fields = [
-             'first_name', 'last_name',
+            'profile_image', 'first_name', 'last_name', 'username'
 
         ]
-
-

@@ -16,7 +16,7 @@
                             <i class="bx bx-user-check h2 text-primary mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Registartions</p>
+                            <p class="text-muted mb-2">Total Groups</p>
                             <h5 class="mb-0">
                                 00
                             </h5>
@@ -33,7 +33,7 @@
                             <i class="bx bx-import h2 text-success mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">YEAR</p>
+                            <p class="text-muted mb-2">Total Payments</p>
                             <h5 class="mb-0">
                                 $ 00 <span
                                     class="font-size-14 text-muted">(00)</span>
@@ -51,7 +51,7 @@
                             <i class="bx bx-export h2 text-danger mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Month</p>
+                            <p class="text-muted mb-2">Total Paid</p>
                             <h5 class="mb-0">
                                 $ 00 <span
                                     class="font-size-14 text-muted">(00)</span>
@@ -80,31 +80,13 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">2022 Statistics</h4>
-                    <div id="chart_year_months">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">2022 Registrations</h4>
-                    <div id="chart_year_months_registrations">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Today's Record</h4>
+                    <h4 class="card-title mb-4">Guest Groups</h4>
 
                     <div class="text-center">
                         <div class="mb-4">
@@ -170,7 +152,7 @@
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Yesterday's Record</h4>
+                    <h4 class="card-title mb-4">Guests</h4>
 
                     <div class="text-center">
                         <div class="mb-4">
@@ -236,7 +218,7 @@
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Month Record</h4>
+                    <h4 class="card-title mb-4">Providers</h4>
 
                     <div class="text-center">
                         <div class="mb-4">
@@ -300,169 +282,7 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">Month Statistics</h4>
-                    <div id="chart_month_dates">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">Month Registrations</h4>
-                    <div id="chart_month_days_registrations">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 {% endblock %}
 
-{% block js %}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-{% endblock %}
-
-{% block js_code %}
-    <script>
-        var options_year_months = {
-            series: [{
-                name: 'A',
-                data: [31, 40, 28, 51, 42, 109, 100, 51, 42, 109, 100, 101]
-            }, {
-                name: 'B',
-                data: [11, 32, 45, 32, 34, 52, 32, 45, 32, 34, 52, 41]
-            }, {
-                name: 'C',
-                data: [12, 40, 100, 62, 74, 82, 91, 100, 40, 55, 62, 74]
-            }],
-            chart: {
-                height: 225,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                type: 'number',
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-            }
-        };
-        var options_month_dates = {
-            series: [{
-                name: 'A',
-                data: [31, 40, 28, 51, 42, 109, 100, 51, 42, 109, 31, 40, 28, 51, 42, 109, 100, 51, 42, 109, 31, 40, 28, 51, 42, 109, 100, 51]
-            }, {
-                name: 'B',
-                data: [11, 32, 45, 32, 34, 52, 32, 45, 32, 34, 11, 32, 45, 32, 34, 52, 32, 45, 32, 34, 11, 32, 45, 32, 34, 52, 32, 45]
-            }, {
-                name: 'C',
-                data: [12, 40, 100, 62, 74, 82, 91, 100, 40, 55, 62, 74, 12, 40, 100, 62, 74, 82, 91, 100, 40, 55, 62, 74, 12, 40, 100, 62]
-            }],
-            chart: {
-                height: 225,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                type: 'number',
-                categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
-            }
-        };
-
-        var options_year_months_registrations = {
-            series: [{
-                name: 'A',
-                data: [100, 40, 28, 51, 42, 109, 100, 40, 28, 42, 109, 100]
-            }],
-            chart: {
-                type: 'area',
-                stacked: false,
-                height: 200,
-                zoom: {
-                    type: 'x',
-                    enabled: true,
-                    autoScaleYaxis: true
-                },
-                toolbar: {
-                    autoSelected: 'zoom'
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shadeIntensity: 1,
-                    inverseColors: false,
-                    opacityFrom: 0.5,
-                    opacityTo: 0,
-                    stops: [0, 90, 100]
-                },
-            },
-            xaxis: {
-                type: 'number',
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-            }
-        };
-        var options_month_days_registrations = {
-            series: [{
-                name: 'B',
-                data: [1, 22, 23, 24, 25, 36, 17, 23, 29, 31, 11, 33, 13, 24, 25, 36, 34, 18, 19, 18, 9, 22, 21, 42, 2, 3, 10, 2]
-            }],
-            chart: {
-                type: 'area',
-                stacked: false,
-                height: 200,
-                zoom: {
-                    type: 'x',
-                    enabled: true,
-                    autoScaleYaxis: true
-                },
-                toolbar: {
-                    autoSelected: 'zoom'
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shadeIntensity: 1,
-                    inverseColors: false,
-                    opacityFrom: 0.5,
-                    opacityTo: 0,
-                    stops: [0, 90, 100]
-                },
-            },
-            xaxis: {
-                type: 'number',
-                categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
-            }
-        };
-
-        var chart_year_months = new ApexCharts(document.querySelector("#chart_year_months"), options_year_months);
-        var chart_month_dates = new ApexCharts(document.querySelector("#chart_month_dates"), options_month_dates);
-        var chart_year_months_registrations = new ApexCharts(document.querySelector("#chart_year_months_registrations"), options_year_months_registrations);
-        var chart_month_days_registrations = new ApexCharts(document.querySelector("#chart_month_days_registrations"), options_month_days_registrations);
-
-        chart_year_months.render();
-        chart_month_dates.render();
-        chart_year_months_registrations.render();
-        chart_month_days_registrations.render();
-
-    </script>
-{% endblock %}

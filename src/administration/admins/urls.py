@@ -1,9 +1,10 @@
 from django.urls import path, include
 from .views import (
     DashboardView,
-    UserListView, UserPasswordResetView, UserDetailView, UserUpdateView, GuestGroupListView, GuestGroupUpdateView,
+    GuestGroupListView, GuestGroupUpdateView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
     ProviderDeleteView, GuestListView, GuestDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
+    InvitationUpdateView,
 )
 
 app_name = 'admins'
@@ -19,6 +20,7 @@ urlpatterns += [
     path('guest-group/<int:pk>/update/', GuestGroupUpdateView.as_view(), name='guest-group-update'),
     path('guest-group/<int:pk>/delete/', GuestGroupDeleteView.as_view(), name='guest-group-delete'),
     path('update_row_order/', update_row_order, name='update_row_order'),
+    path('invitation/update/<str:pk>', InvitationUpdateView.as_view(), name='update-invitation'),
 ]
 urlpatterns += [
 
@@ -29,14 +31,7 @@ urlpatterns += [
     path('provider/delete/<str:pk>', ProviderDeleteView.as_view(), name='provider-delete'),
 
 ]
-urlpatterns += [
 
-    path('user/', UserListView.as_view(), name='user-list'),
-    path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
-    path('user/<int:pk>/change/', UserUpdateView.as_view(), name='user-update'),
-    path('user/<int:pk>/password/reset/', UserPasswordResetView.as_view(), name='user-password-reset-view'),
-
-]
 
 urlpatterns += [
 

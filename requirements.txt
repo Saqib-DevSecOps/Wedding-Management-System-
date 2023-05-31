@@ -22,3 +22,4 @@ django-phonenumber_field
 
 djangorestframework~=3.14.0
 DateTime~=5.0
+crispy-bootstrap5

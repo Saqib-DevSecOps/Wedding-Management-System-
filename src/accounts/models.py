@@ -20,10 +20,10 @@ Then do next ...
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=200)
-
-    is_bride = models.BooleanField(default=False)
+    profile_image = models.ImageField(upload_to='profiles/', null=True, blank=True)
+    is_bride = models.BooleanField(default=True)
     is_provider = models.BooleanField(default=False)
-    is_fiance = models.BooleanField(default=False)
+    is_fiance = models.BooleanField(default=True)
     REQUIRED_FIELDS = ["username"]
     USERNAME_FIELD = "email"
 

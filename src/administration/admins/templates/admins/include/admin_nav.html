@@ -9,19 +9,19 @@
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{% static 'admin/images/logos/logo-red.png' %}" alt="" height="35">
+                                    <img src="{% static 'core/images/logos/logo-red.png' %}" alt="" height="35">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{% static 'admin/images/logos/logo-red.png' %}" alt="" height="35">
+                                    <img src="{% static 'core/images/logos/logo-red.png' %}" alt="" height="35">
                                 </span>
                 </a>
 
                 <a href="/" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{% static 'admin/images/logos/logo-red.png' %}" alt="" height="35">
+                                    <img src="{% static 'core/images/logos/logo-red.png' %}" alt="" height="35">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{% static 'admin/images/logos/logo-red.png' %}" alt="" height="35">
+                                    <img src="{% static 'core/images/logos/logo-red.png' %}" alt="" height="35">
                                 </span>
                 </a>
             </div>
@@ -35,12 +35,7 @@
 
         <div class="d-flex">
 
-            {# LANG #}
-            <div class="dropdown d-none d-lg-inline-block ml-1">
-                <button type="button" class="btn header-item waves-effect">
-                    <img class="" src="{% static 'admin/images/flags/us.jpg' %}" alt="Header Language" height="16">
-                </button>
-            </div>
+
 
             {# FULL_SCREEN #}
             <div class="dropdown d-none d-lg-inline-block ml-1">
@@ -100,7 +95,7 @@
                             {% if request.user.profile_image %}
                          src="{{ request.user.profile_image.url }}"
                             {% else %}
-                         src="{% static 'admin/images/base/no-user.png' %}"
+                         src="{% static 'core/images/base/no-user.png' %}"
                             {% endif %}
                          alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ml-1">{{ request.user.username }}</span>
@@ -108,7 +103,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
-                    <a class="dropdown-item" href="{% url 'accounts:cross-auth' %}">
+                    <a class="dropdown-item" href="{% url 'admins:dashboard' %}">
                         <i class="bx bxs-dashboard font-size-16 align-middle mr-1"></i> Dashboard
                     </a>
                     <a class="dropdown-item" href="{% url 'accounts:user-change' %}">
@@ -133,6 +128,4 @@
     </div>
 </header>
 
-{% if request.user.is_superuser %}
     {% include 'admins/include/admin_header.html' %}
-{% endif %}

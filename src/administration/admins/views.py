@@ -1,29 +1,24 @@
 import json
 
-from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.forms import AdminPasswordChangeForm
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 from django.views.generic import (
     TemplateView, ListView, DetailView, UpdateView, CreateView
 )
 from django.views import View
 from django.http import JsonResponse
-from src.accounts.models import User
-from src.administration.admins.filters import UserFilter
-from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm
+from src.administration.admins.filters import GuestFilter, ProviderFilter
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm
 from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
 
-@method_decorator(admin_decorators, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
     """
     Registrations: Today, Month, Year (PAID/UNPAID)
@@ -39,69 +34,7 @@ class DashboardView(TemplateView):
         return context
 
 
-""" USERS """
-
-
-@method_decorator(admin_decorators, name='dispatch')
-class UserListView(ListView):
-    model = User
-    template_name = 'admins/user_list.html'
-    paginate_by = 50
-
-    def get_context_data(self, **kwargs):
-        context = super(UserListView, self).get_context_data(**kwargs)
-        user_filter = UserFilter(self.request.GET, queryset=User.objects.filter())
-        context['user_filter_form'] = user_filter.form
-
-        paginator = Paginator(user_filter.qs, 50)
-        page_number = self.request.GET.get('page')
-        user_page_object = paginator.get_page(page_number)
-
-        context['user_list'] = user_page_object
-        return context
-
-
-@method_decorator(admin_decorators, name='dispatch')
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'admins/user_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = get_object_or_404(User, pk=self.kwargs['pk'])
-        return context
-
-
-@method_decorator(admin_decorators, name='dispatch')
-class UserUpdateView(UpdateView):
-    model = User
-    fields = [
-        'profile_image', 'first_name', 'last_name',
-        'email', 'username', 'phone_number', 'is_active'
-    ]
-    template_name = 'admins/user_update_form.html'
-
-    def get_success_url(self):
-        return reverse('admins:user-detail', kwargs={'pk': self.object.pk})
-
-
-@method_decorator(admin_decorators, name='dispatch')
-class UserPasswordResetView(View):
-
-    def get(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        form = AdminPasswordChangeForm(user=user)
-        return render(request, 'admins/admin_password_reset.html', {'form': form})
-
-    def post(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        form = AdminPasswordChangeForm(data=request.POST, user=user)
-        if form.is_valid():
-            form.save(commit=True)
-            messages.success(request, f"{user.get_full_name()}'s password changed successfully.")
-        return render(request, 'admins/admin_password_reset.html', {'form': form})
-
-
+@method_decorator(login_required, name='dispatch')
 class GuestGroupListView(CreateView, ListView):
     model = GuestGroup
     form_class = GuestGroupMetaForm
@@ -109,6 +42,9 @@ class GuestGroupListView(CreateView, ListView):
     success_url = reverse_lazy("admins:guest-group-list")
 
     def get_queryset(self):
+        search = self.request.GET.get('guest_group_search')
+        if search:
+            return self.model.objects.filter(user=self.request.user, group_name__icontains=search)
         return self.model.objects.filter(user=self.request.user)
 
     def form_valid(self, form):
@@ -124,7 +60,13 @@ class GuestGroupListView(CreateView, ListView):
         messages.success(self.request, 'Guest Group Created Successfully')
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(GuestGroupListView, self).get_context_data(**kwargs)
+        context['invitation_from'] = InvitationForm
+        return context
 
+
+@method_decorator(login_required, name='dispatch')
 class GuestGroupDetailView(DetailView):
     model = GuestGroup
     template_name = 'admins/guest_group_detail.html'
@@ -133,6 +75,7 @@ class GuestGroupDetailView(DetailView):
         return get_object_or_404(GuestGroup, pk=self.kwargs['pk'], user=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
 class GuestGroupUpdateView(UpdateView):
     model = GuestGroup
     form_class = GuestGroupMetaForm
@@ -145,6 +88,33 @@ class GuestGroupUpdateView(UpdateView):
         return JsonResponse({'success': True})
 
 
+class InvitationUpdateView(View):
+
+    def get(self, request, pk):
+        invitation = get_object_or_404(GuestGroup, id=pk)
+        data = {
+            'total_invitation': invitation.invitation_set.total_invitation,
+        }
+        return JsonResponse({'invitation': data})
+
+    def post(self, request, pk):
+        invitation = get_object_or_404(GuestGroup, id=pk)
+        form = InvitationForm(request.POST, request.FILES, instance=invitation.invitation_set)
+        if form.is_valid():
+            invitation = form.save()
+            messages.success(request, "Successfully updated")
+            return JsonResponse({'success': True, 'provider_id': invitation.id})
+
+        errors = {}
+        for field, error_messages in form.errors.items():
+            print("invalid")
+
+            errors[field] = [str(message) for message in error_messages]
+
+        return JsonResponse({'errors': errors}, status=400)
+
+
+@method_decorator(login_required, name='dispatch')
 class GuestGroupDeleteView(View):
     def get(self, request, pk):
         print("hello")
@@ -154,13 +124,26 @@ class GuestGroupDeleteView(View):
         return redirect('admins:guest-group-list')
 
 
+@method_decorator(login_required, name='dispatch')
 class GuestListView(CreateView, ListView):
     model = Guest
     form_class = GuestMetaForm
     template_name = 'admins/guest_list.html'
     success_url = reverse_lazy("admins:guest-list")
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(group__user=self.request.user)
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(GuestListView, self).get_context_data(**kwargs)
+        filter_object = GuestFilter(self.request.GET, queryset=self.get_queryset())
+        context['object_list'] = filter_object.qs
+        context['filter_form'] = filter_object.form
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
 class GuestDeleteView(View):
     def get(self, request, pk):
         print("hello")
@@ -179,20 +162,32 @@ def get_guests(request):
     return JsonResponse(guest_list, safe=False)
 
 
+@method_decorator(login_required, name='dispatch')
 class ProviderListCreateView(ListView):
     model = Provider
     template_name = 'admins/provider_list.html'
     success_url = reverse_lazy("admins:guest-group-list")
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super(ProviderListCreateView, self).get_context_data(**kwargs)
         context['form'] = ProviderMetaForm
+        filter_object = ProviderFilter(self.request.GET, queryset=self.get_queryset())
+        context['object_list'] = filter_object.qs
+        context['filter_form'] = filter_object.form
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class ProviderDetailView(DetailView):
     model = Provider
     template_name = 'admins/provider_detail.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Provider, id=self.kwargs['pk'], user=self.request.user)
 
 
 class ProviderCreateView(View):
@@ -216,7 +211,7 @@ class ProviderCreateView(View):
 class ProviderUpdateView(View):
 
     def get(self, request, pk):
-        provider = get_object_or_404(Provider, id=pk)
+        provider = get_object_or_404(Provider, id=pk, user=self.request.user)
         print()
         provider_data = {
             'provider_name': provider.provider_name,
@@ -231,7 +226,7 @@ class ProviderUpdateView(View):
         return JsonResponse({'provider': provider_data})
 
     def post(self, request, pk):
-        provider = get_object_or_404(Provider, id=pk)
+        provider = get_object_or_404(Provider, id=pk, user=self.request.user)
         form = ProviderMetaForm(request.POST, request.FILES, instance=provider)
         if form.is_valid():
             print("valid")
@@ -248,6 +243,7 @@ class ProviderUpdateView(View):
         return JsonResponse({'errors': errors}, status=400)
 
 
+@method_decorator(login_required, name='dispatch')
 class ProviderDeleteView(View):
     def get(self, request, pk):
         print("hello")
