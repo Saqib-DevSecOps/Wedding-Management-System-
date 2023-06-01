@@ -9,9 +9,9 @@
 
 {% block only-body %}
 <style>
-     .circle-container {
-        width: 150px;
-        height: 150px;
+    .circle-container {
+        width: 200px;
+        height: 200px;
         border: 2px solid #000;
         border-radius: 50%;
         display: flex;
@@ -20,8 +20,8 @@
     }
 
     .rectangle-container {
-        width: 200px;
-        height: 140px;
+        width: 300px;
+        height: 200px;
         border: 2px solid #000;
         display: flex;
         align-items: center;
@@ -108,11 +108,11 @@
         <div class="card-body" style="overflow-y: auto;height: 78vh;">
             <div class="row justify-center">
                 <!-- Empty container for circle -->
-                <div class="draggable-container" id="circle_container">
+                <div class="draggable-container resizable-container" id="circle_container">
                 </div>
 
                 <!-- Empty container for rectangle -->
-                <div class="draggable-container" id="rectangle_container">
+                <div class="draggable-container resizable-container" id="rectangle_container">
                 </div>
             </div>
         </div>
@@ -127,6 +127,13 @@
 <script>
     $(document).ready(function () {
         // Make the entire container draggable
+        $('.col-md-9.card.ml-auto.mr-auto').draggable({
+            containment: 'parent', // Set the containment to the parent container
+            scroll: true, // Enable scrolling while dragging
+            scrollSensitivity: 100, // Adjust the sensitivity of scrolling
+            scrollSpeed: 10 // Adjust the speed of scrolling
+        });
+
         // Make the guest names draggable
         $('.draggable-guest').draggable({
             revert: 'invalid', // Revert back to the original position if not dropped in a container
@@ -153,6 +160,7 @@
                 } else if (containerType === '2') {
                     $(this).find('.rectangle-container').append(guestElement);
                 }
+                ui.draggable.remove();
             }
         });
 
@@ -176,17 +184,24 @@
             var containerHtml = '';
             if (tableType === '1') {
                 containerHtml = `
-                <div class="draggable-container" id="${containerId}">
+                <div class="draggable-container resizable-container" id="${containerId}">
                     <h5>Table Name: <span>${tableName}</span></h5>
                     <h5>Table Size: <span>${tableSize}</span></h5>
-                    <div class="circle-container"></div>
+                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
+                        data-container-id="${containerId}"
+                        type="button"><i class="fa fa-trash"></i></button>
+                    <div class="circle-container">
+                    </div>
                 </div>
             `;
             } else if (tableType === '2') {
                 containerHtml = `
-                <div class="draggable-container" id="${containerId}">
+                <div class="draggable-container resizable-container" id="${containerId}">
                     <h5>Table Name: <span>${tableName}</span></h5>
                     <h5>Table Size: <span>${tableSize}</span></h5>
+                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
+                        data-container-id="${containerId}"
+                        type="button"><i class="fa fa-trash"></i></button>
                     <div class="rectangle-container"></div>
                 </div>
             `;
@@ -201,6 +216,9 @@
 
             // Make the new container draggable
             $('#' + containerId).draggable();
+
+            // Make the new container resizable
+            $('#' + containerId).resizable();
 
             // Make the new container droppable
             $('#' + containerId).droppable({
@@ -220,6 +238,36 @@
         $('.update-button').click(function () {
             $('#GuestGroupModal').modal('show');
         });
+
+        // Handle deleting the container
+        $(document).on('click', '.delete-container', function () {
+    var containerId = $(this).data('container-id');
+    var container = $('#' + containerId);
+    var guests = container.find('.guest');
+
+    // Move the guests back to the guest list
+    guests.each(function () {
+        var guestName = $(this).text();
+        var guestElement = $('<a class="list-group-item list-group-item-action px-3 border-1 m-1 ripple text-center draggable-guest"></a>')
+            .attr('aria-current', 'true')
+            .data('container-type', container.data('tableType'))
+            .attr('href', '#')
+            .text(guestName);
+        $('.list-group.list-group-light').append(guestElement);
+    });
+
+    // Remove the container
+    container.remove();
+
+    // Make the newly listed guests draggable
+
+                  $('.draggable-guest').draggable({
+            revert: 'invalid', // Revert back to the original position if not dropped in a container
+            helper: 'clone', // Create a clone of the dragged element
+            cursor: 'move' // Set the cursor style during dragging
+        });
+
+});
     });
 </script>
 {% endblock %}
