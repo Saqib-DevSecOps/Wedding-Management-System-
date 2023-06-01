@@ -9,9 +9,9 @@
 
 {% block only-body %}
 <style>
-    .circle-container {
-        width: 200px;
-        height: 200px;
+     .circle-container {
+        width: 150px;
+        height: 150px;
         border: 2px solid #000;
         border-radius: 50%;
         display: flex;
@@ -20,8 +20,8 @@
     }
 
     .rectangle-container {
-        width: 300px;
-        height: 200px;
+        width: 200px;
+        height: 140px;
         border: 2px solid #000;
         display: flex;
         align-items: center;
@@ -105,12 +105,14 @@
             </div>
         </div>
         <hr>
-        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">
+        <div class="card-body" style="overflow-y: auto;height: 78vh;">
             <div class="row justify-center">
-                <div class="col-sm-6 mb-3 draggable-container" id="circle_container">
+                <!-- Empty container for circle -->
+                <div class="draggable-container" id="circle_container">
                 </div>
 
-                <div class="col-sm-6 mb-5 draggable-container" id="rectangle_container">
+                <!-- Empty container for rectangle -->
+                <div class="draggable-container" id="rectangle_container">
                 </div>
             </div>
         </div>
@@ -119,13 +121,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        // Make the initial containers draggable
-        $('.draggable-container').draggable();
-
+        // Make the entire container draggable
         // Make the guest names draggable
         $('.draggable-guest').draggable({
             revert: 'invalid', // Revert back to the original position if not dropped in a container
@@ -134,26 +135,26 @@
         });
 
         // Make the containers droppable
-         $('.draggable-container').droppable({
-        accept: '.draggable-guest', // Only accept guest names as droppable elements
-        drop: function(event, ui) {
-            // Get the dropped guest name
-            var guestName = ui.helper.text();
+        $('.draggable-container').droppable({
+            accept: '.draggable-guest', // Only accept guest names as droppable elements
+            drop: function (event, ui) {
+                // Get the dropped guest name
+                var guestName = ui.helper.text();
 
-            // Get the container type where the guest should be dropped
-            var containerType = ui.helper.data('container-type');
+                // Get the container type where the guest should be dropped
+                var containerType = ui.helper.data('container-type');
 
-            // Create a new guest element and append it to the container
-            var guestElement = $('<div class="guest"></div>').text(guestName);
+                // Create a new guest element and append it to the container
+                var guestElement = $('<div class="guest"></div>').text(guestName);
 
-            // Append the guest to the dropped container
-            if (containerType === '1') {
-                $(this).find('.circle-container').append(guestElement);
-            } else if (containerType === '2') {
-                $(this).find('.rectangle-container').append(guestElement);
+                // Append the guest to the dropped container
+                if (containerType === '1') {
+                    $(this).find('.circle-container').append(guestElement);
+                } else if (containerType === '2') {
+                    $(this).find('.rectangle-container').append(guestElement);
+                }
             }
-        }
-    });
+        });
 
         // Handle save button click
         $('#save-provider').click(function () {

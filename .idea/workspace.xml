@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab66b527-a1e2-4cfc-8e0b-d84480d045b1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Weddings-France.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/guest_group_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/guest_group_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/include/admin_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/include/admin_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/provider_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/provider_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/create_seat_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/create_seat_planner.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684581182617</updated>
-      <workItem from="1685613468729" duration="22850000" />
+      <workItem from="1685613468729" duration="31726000" />
     </task>
     <servers />
   </component>
