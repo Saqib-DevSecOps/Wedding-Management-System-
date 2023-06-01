@@ -4,7 +4,7 @@ from .views import (
     GuestGroupListView, GuestGroupUpdateView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
     ProviderDeleteView, GuestListView, GuestDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
-    InvitationUpdateView,
+    InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView
 )
 
 app_name = 'admins'
@@ -17,7 +17,7 @@ urlpatterns += [
 
     path('guest/group/list/', GuestGroupListView.as_view(), name='guest-group-list'),
     path('guest-group/<int:pk>/detail/', GuestGroupDetailView.as_view(), name='guest-group-detail'),
-    path('guest-group/<int:pk>/update/', GuestGroupUpdateView.as_view(), name='guest-group-update'),
+    path('update_guest_group/', update_guest_group, name='update_guest_group'),
     path('guest-group/<int:pk>/delete/', GuestGroupDeleteView.as_view(), name='guest-group-delete'),
     path('update_row_order/', update_row_order, name='update_row_order'),
     path('invitation/update/<str:pk>', InvitationUpdateView.as_view(), name='update-invitation'),
@@ -38,6 +38,14 @@ urlpatterns += [
     path('group/list/', GuestListView.as_view(), name='guest-list'),
     path('guest/<int:pk>/delete/', GuestDeleteView.as_view(), name='guest-delete'),
     path('get_guests/', get_guests, name='get_guests'),
+]
+
+
+urlpatterns += [
+
+    path('seat-planner/list/', SeatPlannerListView.as_view(), name='seat-planner-list'),
+    path('seat-planner/create/', SeatPlannerCreateView.as_view(), name='seat-planner-create'),
+
 ]
 
 urlpatterns += [

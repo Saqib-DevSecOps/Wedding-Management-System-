@@ -5,15 +5,16 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import (
     TemplateView, ListView, DetailView, UpdateView, CreateView
 )
 from django.views import View
 from django.http import JsonResponse
 from src.administration.admins.filters import GuestFilter, ProviderFilter
-from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm
-from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm, \
+    TableForm
+from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, GuestTable
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
@@ -73,6 +74,41 @@ class GuestGroupDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(GuestGroup, pk=self.kwargs['pk'], user=self.request.user)
+
+
+@login_required
+def update_guest_group(request):
+    if request.method == "GET":
+        group_id = request.GET.get('group_id')
+        guest_group = get_object_or_404(GuestGroup, id=group_id, user=request.user)
+
+        # Prepare the data to be sent in the response
+        response_data = {
+            'success': True,
+            'group_name': guest_group.group_name,
+            'guest_names': list(guest_group.guest_set.values_list('guest_name', flat=True)),
+        }
+        print(response_data)
+
+        return JsonResponse(response_data)
+    if request.method == "POST":
+        group_id = request.POST.get('group_id')
+        group_name = request.POST.get('group_name')
+        guest_names = request.POST.getlist('guest_names[]')
+
+        # Fetch the guest group object
+        guest_group = get_object_or_404(GuestGroup, id=group_id, user=request.user)
+
+        # Update the guest group data
+        guest_group.group_name = group_name
+        guest_group.save()
+
+        # Update the guest names
+        guest_group.guest_set.all().delete()  # Remove existing guest names
+        for name in guest_names:
+            guest_group.guest_set.create(guest_name=name)
+        messages.success(request, "Group Updated Successfully")
+        return JsonResponse({'success': True})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -265,3 +301,18 @@ def update_row_order(request):
         return JsonResponse({'success': True})
 
     return JsonResponse({'error': 'Invalid request method'})
+
+
+class SeatPlannerListView(ListView):
+    model = GuestTable
+    template_name = 'admins/seat_planner_list.html'
+
+
+class SeatPlannerCreateView(TemplateView):
+    template_name = 'admins/create_seat_planner.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['guests'] = Guest.objects.filter(group__user = self.request.user)
+        context['form'] = TableForm
+        return context

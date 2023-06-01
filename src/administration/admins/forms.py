@@ -2,7 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Row, Column, Div
 from django import forms
 
-from .models import GuestGroup, Guest, Provider, InvitationLetter
+from .models import GuestGroup, Guest, Provider, InvitationLetter, Table
 
 
 class Row(Div):
@@ -85,3 +85,25 @@ class InvitationForm(forms.ModelForm):
                 }
             )
         }
+
+class TableForm(forms.ModelForm):
+    class Meta:
+        model = Table
+        fields = ('table_name','table_type','seat_count')
+        widgets = {
+            'table_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'seat_count': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+        }
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['table_type'].widget.attrs.update({'class':'form-control'})

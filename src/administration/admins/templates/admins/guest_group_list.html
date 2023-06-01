@@ -59,6 +59,54 @@
         </div>
     </div>
 </div>
+<div aria-hidden="true" aria-labelledby="GuestGroupUpdateModelLabel" class="modal fade" id="GuestUpdateGroupModal"
+     role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="GuestGroupUpdateModelLabel">Update Guest Group</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="updateGuestGroupForm" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input id="group_id" name="group_id" type="hidden" value="">
+                    <div class="form-group">
+                        <label for="group_name">Group Name:</label>
+                        <input class="form-control" id="group_name" name="group_name" placeholder="Enter Group Name"
+                               required type="text">
+                    </div>
+                    <h6 class="mb-2">Guest Names</h6>
+                    <div id="guest-names-update-container">
+                        <div class="form-group">
+                            <div class="row guest-name-row">
+                                <div class="col-10">
+                                    <input class="form-control guest-name-input" name="guest_names[]"
+                                           placeholder="Enter Guest Name" required type="text">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-danger btn-rounded delete-guest" type="button">Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success btn-rounded btn-sm add-guest-name-update" type="button">Add
+                            More
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-outline-success" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div aria-hidden="true" aria-labelledby="GuestModalLabel" class="modal fade" id="GuestModal" role="dialog"
      tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -131,24 +179,25 @@
 {% block content %}
 <div class="card">
     <div class="card-body border-bottom">
-                    <form method="get" action="{% url 'admins:guest-group-list' %}">
+        <form action="{% url 'admins:guest-group-list' %}" method="get">
 
-        <div class="row g-3">
+            <div class="row g-3">
                 <div class="col-xxl-8 col-lg-8">
-                    <input class="form-control" id="searchInput" placeholder="Enter Guest Group Name" name="guest_group_search" type="search">
+                    <input class="form-control" id="searchInput" name="guest_group_search"
+                           placeholder="Enter Guest Group Name" type="search">
                 </div>
                 <div class="col-xxl-2 col-lg-2">
                     <button class="btn btn-outline-success w-100" type="submit"><i
                             class="mdi mdi-filter-outline align-middle"></i> Filter
                     </button>
                 </div>
-            <div class="col-xxl-2 col-lg-2">
-                    <a href="{% url 'admins:guest-group-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
+                <div class="col-xxl-2 col-lg-2">
+                    <a class="btn btn-outline-danger w-100" href="{% url 'admins:guest-group-list' %}" type="submit"><i
                             class="mdi mdi-filter-outline align-middle"></i> Clear
                     </a>
                 </div>
-        </div>
-                                    </form>
+            </div>
+        </form>
 
     </div>
 </div>
@@ -161,7 +210,6 @@
             <tr>
                 <th scope="col">Group Name</th>
                 <th scope="col">Total Guests</th>
-                <th scope="col">View Guests</th>
                 <th scope="col">Invitation Letters</th>
                 <th scope="col">Edit Invitations</th>
                 <th scope="col">Created At</th>
@@ -177,12 +225,6 @@
                 <td>
                     <b>{{object.guest_set.all.count }}</b>
                 </td>
-                <td>
-                    <button class="btn btn-outline-success btn-rounded btn-sm view-guest"
-                            data-record-id="{{ object.id }}"><i
-                            class="fa fa-eye"></i>&nbsp;&nbsp;View
-                    </button>
-                </td>
                 <td>{{object.invitation_set.total_invitation}}</td>
                 <td>
                     <button class="btn btn-outline-success btn-rounded btn-sm update-button"
@@ -191,10 +233,20 @@
                 </td>
                 <td>{{object.created_at}}</td>
                 <td>
-                    <button class="btn btn-outline-danger btn-sm delete-button" data-target="#DeleteModalForm"
+                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded"
+                            data-target="#DeleteModalForm"
                             data-toggle="modal"
                             data-whatever="@getbootstrap"
                             type="button"><i class="fa fa-trash"></i></button>
+                         <button class="btn btn-outline-primary btn-rounded btn-sm update-guest-group"
+                            data-record-id="{{ object.id }}"><i
+                            class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-success btn-rounded btn-sm view-guest"
+                            data-record-id="{{ object.id }}"><i
+                            class="fa fa-eye"></i>
+                    </button>
+
                     <div aria-hidden="true" aria-labelledby="DeleteModalFormLable" class="modal fade"
                          id="DeleteModalForm" role="dialog"
                          tabindex="-1">
@@ -276,6 +328,7 @@
 
 
 
+
 </script>
 <script>
  function updateRowOrder(rowIdList, sequenceList) {
@@ -324,6 +377,7 @@ const sortable = Sortable.create(table, {
 
 
 
+
 </script>
 <script>
   $(document).ready(function() {
@@ -347,7 +401,7 @@ const sortable = Sortable.create(table, {
     if (response && response.length > 0) {
       // Populate the guest list
       response.forEach(function(guest) {
-        var listItem = $('<li>').addClass('list-group-item text-center').html('<i class="fa fa-user mr-3" aria-hidden="true"></i>' + guest.name);
+        var listItem = $('<li>').addClass('list-group-item border shadow').html('<i class="fa fa-user mr-3" aria-hidden="true"></i>' + guest.name);
         guestList.append(listItem);
       });
     } else {
@@ -365,6 +419,7 @@ const sortable = Sortable.create(table, {
 });
   });
 });
+
 
 
 
@@ -474,8 +529,120 @@ $(document).ready(function() {
 });
 
 
-</script>
 
+</script>
+<script>
+$(document).ready(function() {
+  // Handle click event on update button
+  $(document).on('click', '.update-guest-group', function() {
+    var groupId = $(this).data('record-id');
+    var updateForm = $('#updateGuestGroupForm');
+    var updateModal = $('#GuestUpdateGroupModal');
+
+    // Reset the form fields before opening the modal
+    updateForm.trigger('reset');
+    updateForm.find('#guest-names-update-container').empty();
+
+    // Fetch the guest group data using AJAX
+    $.ajax({
+      url: '/admins/update_guest_group/',
+      type: 'GET',
+      data: {group_id: groupId},
+      success: function(response) {
+        // Populate the form fields with the fetched data
+        updateForm.find('#group_id').val(groupId);
+        updateForm.find('#group_name').val(response.group_name);
+
+        // Populate existing guest names
+        var guestNamesContainer = updateForm.find('#guest-names-update-container');
+        response.guest_names.forEach(function(guestName) {
+          var guestNameInput = $('<input>').attr({
+            type: 'text',
+            name: 'guest_names[]',
+            class: 'form-control guest-name-input',
+            required: 'required',
+            placeholder: 'Enter Guest Name',
+            value: guestName
+          });
+
+          var deleteButton = $('<button>').attr({
+            type: 'button',
+            class: 'btn btn-danger btn-rounded delete-guest'
+          }).text('Delete');
+
+          var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+          var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+          var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+          guestNamesContainer.append(formGroup);
+        });
+
+        // Open the update modal
+        updateModal.modal('show');
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        // Handle the error case
+        console.log('Error:', errorThrown);
+      }
+    });
+  });
+
+  // Handle form submission for updating the guest group
+  $('#updateGuestGroupForm').submit(function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var updateForm = $(this);
+    var updateModal = $('#GuestUpdateGroupModal');
+
+    // Perform AJAX request to update the guest group
+    $.ajax({
+      url: '/admins/update_guest_group/',
+      type: 'POST',
+      data: updateForm.serialize(),
+      success: function(response) {
+        // Handle the success case
+        console.log('Guest group updated successfully:', response);
+
+        // Close the update modal
+        updateModal.modal('hide');
+              location.reload();
+
+        // Optionally, you can perform additional actions after successful update
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        // Handle the error case
+        console.log('Error:', errorThrown);
+      }
+    });
+  });
+
+  // Add functionality for adding and deleting guest name fields
+  $('.add-guest-name-update').click(function() {
+    var guestNameInput = $('<input>').attr({
+      type: 'text',
+      name: 'guest_names[]',
+      class: 'form-control guest-name-input',
+      required: 'required',
+      placeholder: 'Enter Guest Name'
+    });
+
+    var deleteButton = $('<button>').attr({
+      type: 'button',
+      class: 'btn btn-danger btn-rounded delete-guest'
+    }).text('Delete');
+
+    var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+    var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+    var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+    $('#guest-names-update-container').append(formGroup);
+  });
+
+  $(document).on('click', '.delete-guest', function() {
+    $(this).closest('.form-group').remove();
+  });
+});
+</script>
 
 {% endblock content %}
 
