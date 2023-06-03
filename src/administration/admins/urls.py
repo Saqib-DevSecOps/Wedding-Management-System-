@@ -4,7 +4,7 @@ from .views import (
     GuestGroupListView, GuestGroupUpdateView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
     ProviderDeleteView, GuestListView, GuestDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
-    InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView
+    InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView , CreateSeatPlannerViewApi
 )
 
 app_name = 'admins'
@@ -45,6 +45,7 @@ urlpatterns += [
 
     path('seat-planner/list/', SeatPlannerListView.as_view(), name='seat-planner-list'),
     path('seat-planner/create/', SeatPlannerCreateView.as_view(), name='seat-planner-create'),
+    path('seat-planner/create/api/', CreateSeatPlannerViewApi.as_view(), name='seat-planner-create-api'),
 
 ]
 

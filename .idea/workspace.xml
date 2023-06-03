@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ab66b527-a1e2-4cfc-8e0b-d84480d045b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/create_seat_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/create_seat_planner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/seat_planner_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/seat_planner_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +42,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/media/saqib/Local Disk/GIT/Weddings-France/src/administration/admins/templates/admins",
+    "last_opened_file_path": "/media/saqib/Local Disk1/GIT/Weddings-France/src/administration/admins/templates/admins",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -49,6 +53,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/administration/admins/templates/admins" />
+      <recent name="$PROJECT_DIR$/static/core" />
       <recent name="$PROJECT_DIR$/src/administration/admins/templates" />
       <recent name="$PROJECT_DIR$/src/website/templates/website" />
       <recent name="$PROJECT_DIR$/static/website" />
@@ -66,7 +71,41 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../comics-store/venv/bin/python" />
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
+      <option name="SDK_NAME" value="Python 3.10" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Weddings-France" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
+      <option name="SDK_NAME" value="Python 3.10" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -100,7 +139,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684581182617</updated>
-      <workItem from="1685613468729" duration="34411000" />
+      <workItem from="1685613468729" duration="35274000" />
+      <workItem from="1685746632131" duration="19738000" />
+      <workItem from="1685771233824" duration="34000" />
+      <workItem from="1685771353195" duration="19888000" />
     </task>
     <servers />
   </component>
@@ -117,5 +159,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/administration/admins/templates/admins/create_seat_planner.html</url>
+          <line>404</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

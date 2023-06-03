@@ -14,7 +14,7 @@ from django.http import JsonResponse
 from src.administration.admins.filters import GuestFilter, ProviderFilter
 from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm, \
     TableForm
-from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, GuestTable
+from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter ,Table , GuestTable
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
@@ -304,9 +304,11 @@ def update_row_order(request):
 
 
 class SeatPlannerListView(ListView):
-    model = GuestTable
+    model = Table
     template_name = 'admins/seat_planner_list.html'
 
+    def get_queryset(self):
+        return super().get_queryset().filter(user = self.request.user)
 
 class SeatPlannerCreateView(TemplateView):
     template_name = 'admins/create_seat_planner.html'
@@ -316,3 +318,38 @@ class SeatPlannerCreateView(TemplateView):
         context['guests'] = Guest.objects.filter(group__user = self.request.user)
         context['form'] = TableForm
         return context
+
+
+from django.http import JsonResponse
+from django.views import View
+from django.views.decorators.csrf import ensure_csrf_cookie
+import json
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import JsonResponse
+
+
+class CreateSeatPlannerViewApi(View):
+    def post(self, request,*args,**kwargs):
+        try:
+            container_records = json.loads(request.body)
+            for i in range(len(container_records)):
+                seat_count = int(container_records[i]['table_size'])
+                table = Table(user=self.request.user, table_name=container_records[i]['table_name'], seat_count=seat_count,
+                          table_type=container_records[i]['table_type'],
+                          )
+                print(seat_count)
+                print(len(container_records[i]['guests']))
+                table.seats_left = int(seat_count - len(container_records[i]['guests']))
+                table.save()
+                for j in range(len(container_records[i]['guests'])):
+                    guest_table = GuestTable(table = table,guest_id = container_records[i]['guests'][j] )
+                    guest_table.save()
+            messages.success(request,"Table Designed Successfully")
+            return JsonResponse({'message': 'Data received and processed successfully.'})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data.'}, status=400)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
+

@@ -87,7 +87,7 @@ class Table(models.Model):
 
 class GuestTable(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE,related_name='guest_table')
 
     def __str__(self):
         return self.guest.group.group_name
