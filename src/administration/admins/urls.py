@@ -3,11 +3,13 @@ from .views import (
     DashboardView,
     GuestGroupListView, GuestGroupUpdateView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
-    ProviderDeleteView, GuestListView, GuestDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
-    InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView , CreateSeatPlannerViewApi
+    ProviderDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
+    InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView, CreateSeatPlannerViewApi,
+    UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete
 )
 
 app_name = 'admins'
+
 urlpatterns = [
 
     path('', DashboardView.as_view(), name='dashboard'),
@@ -20,8 +22,10 @@ urlpatterns += [
     path('update_guest_group/', update_guest_group, name='update_guest_group'),
     path('guest-group/<int:pk>/delete/', GuestGroupDeleteView.as_view(), name='guest-group-delete'),
     path('update_row_order/', update_row_order, name='update_row_order'),
+    path('get_guests/', get_guests, name='get_guests'),
     path('invitation/update/<str:pk>', InvitationUpdateView.as_view(), name='update-invitation'),
 ]
+
 urlpatterns += [
 
     path('provider/list/', ProviderListCreateView.as_view(), name='provider-list'),
@@ -32,20 +36,14 @@ urlpatterns += [
 
 ]
 
-
-urlpatterns += [
-
-    path('group/list/', GuestListView.as_view(), name='guest-list'),
-    path('guest/<int:pk>/delete/', GuestDeleteView.as_view(), name='guest-delete'),
-    path('get_guests/', get_guests, name='get_guests'),
-]
-
-
 urlpatterns += [
 
     path('seat-planner/list/', SeatPlannerListView.as_view(), name='seat-planner-list'),
     path('seat-planner/create/', SeatPlannerCreateView.as_view(), name='seat-planner-create'),
     path('seat-planner/create/api/', CreateSeatPlannerViewApi.as_view(), name='seat-planner-create-api'),
+    path('seat-planner/detail/<str:pk>/', SeatPlannerDetail.as_view(), name='seat-planner-detail'),
+    path('seat-planner/delete/<str:pk>/', SeatPlannerDelete.as_view(), name='seat-planner-delete'),
+    path('seat-planner/<str:pk>/update/', UpdateSeatPlanner.as_view(), name='seat-planner-update'),
 
 ]
 

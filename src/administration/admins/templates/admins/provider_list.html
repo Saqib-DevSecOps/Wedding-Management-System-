@@ -151,7 +151,7 @@
                 <td>{{object.total_cost}}</td>
                 <td>{{object.paid}}</td>
                 <td>
-                    <button class="btn btn-outline-danger btn-sm delete-button" data-target="#DeleteModalForm"
+                    <button class="btn btn-outline-danger btn-rounded btn-sm delete-button" data-target="#DeleteModalForm"
                             data-toggle="modal"
                             data-whatever="@getbootstrap"
                             type="button"><i class="fa fa-trash"></i></button>
@@ -177,9 +177,9 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-outline-primary btn-sm update-button" data-record-id="{{ object.id }}">
+                    <button class="btn btn-outline-primary btn-sm btn-rounded update-button" data-record-id="{{ object.id }}">
                         <i class="fa fa-edit"></i></button>
-                    <a class="btn btn-outline-success btn-sm" href="{% url 'admins:provider-detail' object.id %}"><i
+                    <a class="btn btn-outline-success btn-sm btn-rounded" href="{% url 'admins:provider-detail' object.id %}"><i
                             class="fa fa-eye"></i></a>
                 </td>
                 {% endfor %}

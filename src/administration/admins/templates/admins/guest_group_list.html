@@ -555,19 +555,19 @@ $(document).ready(function() {
 
         // Populate existing guest names
         var guestNamesContainer = updateForm.find('#guest-names-update-container');
-        response.guest_names.forEach(function(guestName) {
+        for (let index = 0;index < response.guest_names.length;index++){
           var guestNameInput = $('<input>').attr({
             type: 'text',
             name: 'guest_names[]',
             class: 'form-control guest-name-input',
             required: 'required',
             placeholder: 'Enter Guest Name',
-            value: guestName
+            value: response.guest_names[index]
           });
 
           var deleteButton = $('<button>').attr({
             type: 'button',
-            class: 'btn btn-danger btn-rounded delete-guest'
+            class: 'btn btn-danger btn-rounded delete-guest',
           }).text('Delete');
 
           var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
@@ -575,7 +575,7 @@ $(document).ready(function() {
           var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
 
           guestNamesContainer.append(formGroup);
-        });
+        }
 
         // Open the update modal
         updateModal.modal('show');
@@ -625,6 +625,8 @@ $(document).ready(function() {
       required: 'required',
       placeholder: 'Enter Guest Name'
     });
+
+
 
     var deleteButton = $('<button>').attr({
       type: 'button',

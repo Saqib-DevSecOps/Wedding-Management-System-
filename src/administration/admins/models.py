@@ -36,11 +36,11 @@ class Guest(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.group.group_name
+        return self.guest_name
 
 
 class InvitationLetter(models.Model):
-    group = models.OneToOneField(GuestGroup, on_delete=models.CASCADE,related_name='invitation_set')
+    group = models.OneToOneField(GuestGroup, on_delete=models.CASCADE, related_name='invitation_set')
     total_invitation = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -54,11 +54,12 @@ class Provider(models.Model):
     provider_name = models.CharField(max_length=100)
     service = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=100)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    paid = models.DecimalField(max_digits=10, decimal_places=2)
-    attachment = models.FileField(upload_to='attachments/', help_text='File Should be less than 5mb')
-    comment = models.TextField()
+    phone_number = models.CharField(max_length=100, null=True, blank=True)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    paid = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    attachment = models.FileField(upload_to='attachments/', help_text='File Should be less than 5mb', null=True,
+                                  blank=True)
+    comment = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -66,8 +67,10 @@ class Provider(models.Model):
         return self.user.username
 
     def pending_amount(self):
-        pending = float(self.total_cost) - float(self.paid)
-        return pending
+        if self.total_cost:
+            pending = float(self.total_cost) - float(self.paid)
+            return pending
+        return None
 
 
 class Table(models.Model):
@@ -80,14 +83,19 @@ class Table(models.Model):
     table_type = models.CharField(max_length=100, choices=TABLE_TYPE)
     seat_count = models.IntegerField()
     seats_left = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return self.table_name
+
+    def guests(self):
+        return GuestTable.objects.filter(table=self)
 
 
 class GuestTable(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    guest = models.ForeignKey(Guest, on_delete=models.CASCADE,related_name='guest_table')
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE, related_name='guest_table')
 
     def __str__(self):
         return self.guest.group.group_name

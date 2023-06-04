@@ -3,7 +3,7 @@ from crispy_forms.layout import Row, Column, Div
 from django.forms import TextInput
 
 from src.accounts.models import User
-from src.administration.admins.models import Guest, Provider
+from src.administration.admins.models import Guest, Provider, Table
 
 
 class Row(Div):
@@ -46,3 +46,15 @@ class ProviderFilter(django_filters.FilterSet):
         self.form.fields['provider_name'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Enter Provider Name'})
         self.form.fields['service'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter Service Name'})
+
+
+class TableFilter(django_filters.FilterSet):
+    class Meta:
+        model = Table
+        fields = ['table_name', 'table_type']
+
+    def __init__(self, *args, **kwargs):
+        super(TableFilter, self).__init__(*args, **kwargs)
+        self.form.fields['table_name'].widget.attrs.update(
+            {'class': 'form-control', 'placeholder': 'Enter Table Name'})
+        self.form.fields['table_type'].widget.attrs.update({'class': 'form-control'})

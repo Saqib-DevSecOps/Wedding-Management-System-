@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block subtitle %} {{ request.user }} {% endblock %}
+{% block page_heading %}
+{% endblock %}
+
+{% block only-body %}
+<style>
+    .circle-container {
+        width: 300px; /* Set the width and height to the same value */
+        height: 300px; /* Set the width and height to the same value */
+        min-width: 100px; /* Set a minimum width */
+        min-height: 100px; /* Set a minimum height */
+        max-width: 300px; /* Set a maximum width */
+        max-height: 300px; /* Set a maximum height */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-image: url("{% static 'core/circle.png' %}");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .rectangle-container {
+        width: 300px;
+        height: 200px;
+        min-width: 100px; /* Set a minimum width */
+        min-height: 100px; /* Set a minimum height */
+        max-width: 300px; /* Set a maximum width */
+        max-height: 200px; /* Set a maximum height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-image: url("{% static 'core/rectangle1.png' %}");
+        background-size: 180% auto; /* Increase the size of the background image */
+        background-position: center;
+
+    }
+
+    .guest {
+        background-color: #837f7f;
+        padding: 5px;
+        margin: 5px;
+        cursor: move;
+        color: #f8f8f8;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .guest::before {
+        content: "\f007";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-right: 5px;
+    }
+
+
+</style>
+<div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="GuestGroupModelLabel">Add Provider</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="ml-3">
+                <div class="create_modal_errors">
+
+                </div>
+
+            </div>
+            <!-- Add 'id' attribute to the form element -->
+            <form id="provider-form">
+                {% csrf_token %}
+                {% crispy form %}
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-outline-success" id="save-provider" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-2 card border-1 ml-auto mr-auto mb-4">
+        <div class="">
+            <div class="card-title text-center">
+                <h3 class="mt-3 text-success"><b>Guests</b></h3>
+            </div>
+        </div>
+        <hr>
+        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">
+            <div class="list-group list-group-light">
+                {% for object in guests %}
+                <a aria-current="true"
+                   class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
+                   data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
+                    <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
+                </a>
+
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 card ml-auto mr-auto">
+        <div class="">
+            <div class="card-title text-center">
+                <div class="row">
+                    <div class="col-9">
+                        <h3 class="mt-3 text-center text-success"><b>Seat Planner</b></h3>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-outline-success mt-3 update-button" data-target="#GuestGroupModal"
+                                data-toggle="modal" data-whatever="@getbootstrap">
+                            <i class="fa fa-plus"></i>Add Table
+                        </button>
+                        <button class="btn btn-outline-danger mt-3 save-button">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="card-body" style="overflow-y: auto;height: 78vh;">
+            <div class="row justify-center">
+                <!-- Empty container for circle -->
+                <div class="draggable-container resizable-container" id="circle_container">
+                </div>
+
+                <!-- Empty container for rectangle -->
+                <div class="draggable-container resizable-container" id="rectangle_container">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Check if the cookie name matches
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Make the entire container draggable
+
+        // Make the guest names draggable
+        $('.draggable-guest').draggable({
+            revert: 'invalid', // Revert back to the original position if not dropped in a container
+            helper: 'clone', // Create a clone of the dragged element
+            cursor: 'move' // Set the cursor style during dragging
+        });
+        var containerType;
+        var tableType = '';
+        var tableName = ''; // Variable to store the table name
+        // Make the containers droppable
+        $('.draggable-container').droppable();
+
+        // Handle save button click
+        $('#save-provider').click(function () {
+            // Get the values from the form
+            tableName = $('#id_table_name').val();
+            tableType = $('#id_table_type').val();
+            var tableSize = $('#id_seat_count').val();
+            // Check if the table name already exists
+
+            // Check if all fields are filled
+            if (tableName.trim() === '' || tableType.trim() === '' || tableSize.trim() === '') {
+                // Show an error message or perform any desired action
+                return;
+            }
+
+            // Create a unique ID for the new container
+            var containerId = 'container_' + Date.now();
+            // Create the HTML for the new container based on the table type
+            var containerHtml = '';
+
+            if (tableType === '1') {
+                containerHtml = `
+                <div class="draggable-container resizable-container" id="${containerId}">
+                    <h5 >Table Name: <span>${tableName}</span></h5>
+                    <h5 >Table Size: <span>${tableSize}</span></h5>
+                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
+                        data-container-id="${containerId}"
+                        type="button"><i class="fa fa-trash"></i></button>
+                    <div class="circle-container">
+                    </div>
+                </div>
+            `;
+            } else if (tableType === '2') {
+                containerHtml = `
+                <div class="draggable-container resizable-container" id="${containerId}">
+                    <h5>Table Name: <span>${tableName}</span></h5>
+                    <h5>Table Size: <span>${tableSize}</span></h5>
+                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
+                        data-container-id="${containerId}"
+                        type="button"><i class="fa fa-trash"></i></button>
+                    <div class="rectangle-container"></div>
+                </div>
+            `;
+            }
+
+            // Append the new container to the respective parent container
+            if (tableType === '1') {
+                $('#circle_container').append(containerHtml);
+            } else if (tableType === '2') {
+                $('#rectangle_container').append(containerHtml);
+            }
+
+            // Make the new container draggable
+            $('#' + containerId).draggable();
+
+            // Make the new container resizable
+            $('#' + containerId).resizable();
+
+            // Make the new container droppable
+            $('#' + containerId).droppable({
+                accept: '.draggable-guest',
+                drop: function (event, ui) {
+                    var guestName = ui.helper.text();
+                    var guestId = ui.helper.data('object-id');
+                    var guestElement = $('<div class="guest"></div>')
+                        .text(guestName)
+                        .attr('data-guest-id', guestId); // Add data-guest-id attribute
+
+                    containerType = $(this).find('.circle-container, .rectangle-container').attr('class');
+                    var totalGuests = $(this).find('.guest').length;
+                    console.log(containerId)
+                    console.log(totalGuests)
+                    console.log(tableSize)
+
+                    if (totalGuests.toString() === tableSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: `${tableName} Table Size is Full`,
+                        })
+                    } else {
+                        $(this).find('.circle-container, .rectangle-container').append(guestElement)
+                        ui.helper.hide();
+                        $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
+
+                    }
+
+                }
+            });
+
+            // Close the modal
+            $('#GuestGroupModal').modal('hide');
+        });
+
+        // Handle opening the modal
+        $('.update-button').click(function () {
+            $('#GuestGroupModal').modal('show');
+        });
+
+        // Handle deleting the container
+// Handle deleting the container
+        $(document).on('click', '.delete-container', function () {
+            var containerId = $(this).data('container-id');
+            var container = $('#' + containerId);
+            var guests = container.find('.guest');
+            console.log(guests);
+
+
+            // Hide the guests inside the container
+            guests.hide();
+
+            // Remove the container
+            container.remove();
+
+            // Show the hidden guests in the guest list
+            guests.each(function () {
+                var guestId = $(this).data('guest-id');
+                console.log(guestId)
+                $('.list-group.list-group-light').find(`[data-object-id="${guestId}"]`).show();
+            });
+        });
+        $('.save-button').click(function () {
+            var containers = $('.draggable-container');
+            var containerRecords = [];
+            var error = false;
+            var inside = false;
+            var tabletype;
+            var tablename;
+
+
+            containers.each(function () {
+                var containerId = $(this).attr('id');
+                var guests = $(this).find('.guest');
+                console.log("guest recod ", guests)
+                tablename = $(this).find('h5 span:first').text().trim();
+                var full = $(this).find('.circle-container, .rectangle-container').attr('class');
+                var tablesize = $(this).find('h5:nth-child(2) span').text().trim();
+                if (full === 'circle-container') {
+                    tabletype = 1;
+                } else if (full === 'rectangle-container') {
+                    tabletype = 2;
+                }
+                if (containerId !== 'circle_container' && containerId !== 'rectangle_container') {
+                    if (tablename && tabletype && tablesize) {
+                        inside = true
+                        var containerRecord = {
+                            'container_name': containerId,
+                            'guests': [],
+                            'table_name': tablename,
+                            'table_size': tablesize,
+                            'table_type': tabletype
+                        };
+                        guests.each(function () {
+                            var guestId = $(this).data('guest-id');
+                            containerRecord['guests'].push(guestId);
+                        });
+
+                        containerRecords.push(containerRecord);
+
+                        if (containerRecord['guests'].length === 0) {
+                            error = true;
+                        }
+                    }
+                }
+            });
+
+            if (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${tablename} Table is Empty`,
+                })
+            }
+            if (!error) {
+                // Get the CSRF token
+                const csrfToken = getCookie('csrftoken');
+
+                // Make the AJAX request
+                $.ajax({
+                    url: '/admins/seat-planner/create/api/',
+                    type: 'POST',
+                    data: JSON.stringify(containerRecords),
+                    contentType: 'application/json',
+                    beforeSend: function (xhr, settings) {
+                        // Include the CSRF token in the request headers
+                        if (csrfToken) {
+                            xhr.setRequestHeader('X-CSRFToken', csrfToken);
+                        }
+                    },
+                    success: function (response) {
+                        // Handle the success response from the backend
+                        console.log('Success:', response);
+                        window.location.href = '/admins/seat-planner/list/'; // Replace with the actual URL of the provider list page
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response from the backend
+                        console.log('Error:', error);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: ` Table is Empty`,
+                })
+            }
+
+        });
+    })
+    ;
+</script>
+{% endblock %}

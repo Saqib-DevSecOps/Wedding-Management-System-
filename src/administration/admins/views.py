@@ -1,20 +1,19 @@
-import json
-
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET
 from django.views.generic import (
     TemplateView, ListView, DetailView, UpdateView, CreateView
 )
-from django.views import View
-from django.http import JsonResponse
-from src.administration.admins.filters import GuestFilter, ProviderFilter
+from src.administration.admins.filters import GuestFilter, ProviderFilter, TableFilter
 from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm, \
     TableForm
-from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter ,Table , GuestTable
+from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, Table, GuestTable
+from django.views import View
+import json
+from django.http import JsonResponse
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
@@ -87,17 +86,23 @@ def update_guest_group(request):
             'success': True,
             'group_name': guest_group.group_name,
             'guest_names': list(guest_group.guest_set.values_list('guest_name', flat=True)),
+            'guest_ids': list(guest_group.guest_set.values_list('id', flat=True)),
         }
-        print(response_data)
 
         return JsonResponse(response_data)
+
     if request.method == "POST":
         group_id = request.POST.get('group_id')
         group_name = request.POST.get('group_name')
         guest_names = request.POST.getlist('guest_names[]')
+        print(request.POST)
 
         # Fetch the guest group object
         guest_group = get_object_or_404(GuestGroup, id=group_id, user=request.user)
+        # guests = Guest.objects.filter(guest_group=guest_group)
+        # if guests:
+        #     print(guests)
+            # Guest.objects.exclude(group_id__in=)
 
         # Update the guest group data
         guest_group.group_name = group_name
@@ -160,35 +165,6 @@ class GuestGroupDeleteView(View):
         return redirect('admins:guest-group-list')
 
 
-@method_decorator(login_required, name='dispatch')
-class GuestListView(CreateView, ListView):
-    model = Guest
-    form_class = GuestMetaForm
-    template_name = 'admins/guest_list.html'
-    success_url = reverse_lazy("admins:guest-list")
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(group__user=self.request.user)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(GuestListView, self).get_context_data(**kwargs)
-        filter_object = GuestFilter(self.request.GET, queryset=self.get_queryset())
-        context['object_list'] = filter_object.qs
-        context['filter_form'] = filter_object.form
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
-class GuestDeleteView(View):
-    def get(self, request, pk):
-        print("hello")
-        guest = get_object_or_404(Guest, id=pk)
-        guest.delete()
-        messages.success(self.request, "Guest Successfully Deleted")
-        return redirect('admins:guest-list')
-
-
 @require_GET
 def get_guests(request):
     group_id = request.GET.get('group_id')
@@ -226,6 +202,7 @@ class ProviderDetailView(DetailView):
         return get_object_or_404(Provider, id=self.kwargs['pk'], user=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
 class ProviderCreateView(View):
     def post(self, request):
         form = ProviderMetaForm(request.POST, request.FILES)
@@ -244,6 +221,7 @@ class ProviderCreateView(View):
         return JsonResponse({'errors': errors}, status=400)
 
 
+@method_decorator(login_required, name='dispatch')
 class ProviderUpdateView(View):
 
     def get(self, request, pk):
@@ -289,6 +267,7 @@ class ProviderDeleteView(View):
         return redirect('admins:provider-list')
 
 
+@login_required
 def update_row_order(request):
     if request.method == 'POST':
         body = json.loads(request.body)
@@ -303,49 +282,52 @@ def update_row_order(request):
     return JsonResponse({'error': 'Invalid request method'})
 
 
+@method_decorator(login_required, name='dispatch')
 class SeatPlannerListView(ListView):
     model = Table
     template_name = 'admins/seat_planner_list.html'
 
     def get_queryset(self):
-        return super().get_queryset().filter(user = self.request.user)
+        return super().get_queryset().filter(user=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super(SeatPlannerListView, self).get_context_data(**kwargs)
+        filter_object = TableFilter(self.request.GET, queryset=self.get_queryset())
+        context['object_list'] = filter_object.qs
+        context['filter_form'] = filter_object.form
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
 class SeatPlannerCreateView(TemplateView):
     template_name = 'admins/create_seat_planner.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['guests'] = Guest.objects.filter(group__user = self.request.user)
+        context['guests'] = Guest.objects.filter(group__user=self.request.user)
         context['form'] = TableForm
         return context
 
 
-from django.http import JsonResponse
-from django.views import View
-from django.views.decorators.csrf import ensure_csrf_cookie
-import json
-
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.http import JsonResponse
-
-
+@method_decorator(login_required, name='dispatch')
 class CreateSeatPlannerViewApi(View):
-    def post(self, request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         try:
             container_records = json.loads(request.body)
             for i in range(len(container_records)):
                 seat_count = int(container_records[i]['table_size'])
-                table = Table(user=self.request.user, table_name=container_records[i]['table_name'], seat_count=seat_count,
-                          table_type=container_records[i]['table_type'],
-                          )
+                table = Table(user=self.request.user, table_name=container_records[i]['table_name'],
+                              seat_count=seat_count,
+                              table_type=container_records[i]['table_type'],
+                              )
                 print(seat_count)
                 print(len(container_records[i]['guests']))
                 table.seats_left = int(seat_count - len(container_records[i]['guests']))
                 table.save()
                 for j in range(len(container_records[i]['guests'])):
-                    guest_table = GuestTable(table = table,guest_id = container_records[i]['guests'][j] )
+                    guest_table = GuestTable(table=table, guest_id=container_records[i]['guests'][j])
                     guest_table.save()
-            messages.success(request,"Table Designed Successfully")
+            messages.success(request, "Table Designed Successfully")
             return JsonResponse({'message': 'Data received and processed successfully.'})
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON data.'}, status=400)
@@ -353,3 +335,31 @@ class CreateSeatPlannerViewApi(View):
     def http_method_not_allowed(self, request, *args, **kwargs):
         return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
+
+@method_decorator(login_required, name='dispatch')
+class SeatPlannerDetail(DetailView):
+    model = Table
+    template_name = 'admins/seat_planner_detail.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class SeatPlannerDelete(View):
+    def get(self, request, pk):
+        table = get_object_or_404(Table, id=pk)
+        table.delete()
+        return redirect('admins:seat-planner-list')
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdateSeatPlanner(DetailView):
+    model = Table
+    template_name = 'admins/update_seat_planner.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Table, id=self.kwargs['pk'], user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = TableForm
+        context['guests'] = Guest.objects.filter(group__user=self.request.user)
+        return context
