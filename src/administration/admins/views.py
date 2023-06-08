@@ -63,6 +63,7 @@ class GuestGroupListView(CreateView, ListView):
     def get_context_data(self, **kwargs):
         context = super(GuestGroupListView, self).get_context_data(**kwargs)
         context['invitation_from'] = InvitationForm
+        context['invitation'] = InvitationLetter.objects.filter(group__user=self.request.user)
         return context
 
 
@@ -102,7 +103,7 @@ def update_guest_group(request):
         # guests = Guest.objects.filter(guest_group=guest_group)
         # if guests:
         #     print(guests)
-            # Guest.objects.exclude(group_id__in=)
+        # Guest.objects.exclude(group_id__in=)
 
         # Update the guest group data
         guest_group.group_name = group_name
@@ -132,15 +133,15 @@ class GuestGroupUpdateView(UpdateView):
 class InvitationUpdateView(View):
 
     def get(self, request, pk):
-        invitation = get_object_or_404(GuestGroup, id=pk)
+        invitation = get_object_or_404(InvitationLetter, id=pk)
         data = {
-            'total_invitation': invitation.invitation_set.total_invitation,
+            'total_invitation': invitation.total_invitation,
         }
         return JsonResponse({'invitation': data})
 
     def post(self, request, pk):
-        invitation = get_object_or_404(GuestGroup, id=pk)
-        form = InvitationForm(request.POST, request.FILES, instance=invitation.invitation_set)
+        invitation = get_object_or_404(InvitationLetter, id=pk)
+        form = InvitationForm(invitation.total_invitation, request.POST)
         if form.is_valid():
             invitation = form.save()
             messages.success(request, "Successfully updated")
@@ -271,12 +272,25 @@ class ProviderDeleteView(View):
 def update_row_order(request):
     if request.method == 'POST':
         body = json.loads(request.body)
-        row_id_list = body.get('row_id_list', [])
-        sequence_list = body.get('sequence_list', [])
-        for index in range(len(row_id_list)):
-            group = GuestGroup.objects.get(pk=int(row_id_list[index]))
+        element_id = body.get('card_id_list', [])
+        for index in range(len(element_id)):
+            group = GuestGroup.objects.get(pk=int(element_id[index]))
             group.sequence = index
             group.save()
+        return JsonResponse({'success': True})
+
+    return JsonResponse({'error': 'Invalid request method'})
+
+
+@login_required
+def update_invitation_order(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        element_id = body.get('row_id_list', [])
+        for index in range(len(element_id)):
+            invitation = InvitationLetter.objects.get(pk=int(element_id[index]))
+            invitation.sequence = index
+            invitation.save()
         return JsonResponse({'success': True})
 
     return JsonResponse({'error': 'Invalid request method'})

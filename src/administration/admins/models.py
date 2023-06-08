@@ -41,12 +41,24 @@ class Guest(models.Model):
 
 class InvitationLetter(models.Model):
     group = models.OneToOneField(GuestGroup, on_delete=models.CASCADE, related_name='invitation_set')
+    sequence = models.IntegerField(blank=True)
     total_invitation = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.group.group_name
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Set the sequence field to the next available value
+            max_sequence = InvitationLetter.objects.aggregate(Max('sequence'))['sequence__max']
+            self.sequence = (max_sequence or 0) + 1
+
+        super(InvitationLetter, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['sequence']
 
 
 class Provider(models.Model):
