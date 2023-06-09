@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db88566e-11b8-4fab-a413-9827df5c56ae" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Weddings-France.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Weddings-France.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/guest_group_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/guest_group_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/seat_planner_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/seat_planner_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/administration/admins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

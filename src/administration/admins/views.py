@@ -132,7 +132,7 @@ class GuestGroupUpdateView(UpdateView):
 
 class InvitationUpdateView(View):
 
-    def get(self, request, pk):
+    def get(self, request,*args, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
         data = {
             'total_invitation': invitation.total_invitation,
@@ -141,8 +141,12 @@ class InvitationUpdateView(View):
 
     def post(self, request, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
-        form = InvitationForm(invitation.total_invitation, request.POST)
+        print(invitation.id)
+        print(request.POST.get('total_invitation'))
+        form = InvitationForm(invitation,request.POST)
+        print(form)
         if form.is_valid():
+            form.instance.group = invitation.group
             invitation = form.save()
             messages.success(request, "Successfully updated")
             return JsonResponse({'success': True, 'provider_id': invitation.id})
