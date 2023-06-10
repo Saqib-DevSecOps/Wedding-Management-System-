@@ -8,7 +8,8 @@ from .models import (
     BlogCategory,
     Blog,
     EventCategory,
-    Event,
+    Event,ServiceContent,Site,SitePartner,SiteTestimonial,ContactRequest
+
 )
 
 
@@ -70,5 +71,9 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category')
     search_fields = ('title', 'host', 'category__name')
 
-
+admin.sites.register(ServiceContent)
+admin.sites.register(Site)
+admin.sites.register(SitePartner)
+admin.sites.register(SiteTestimonial)
+admin.sites.register(ContactRequest)
 # Register your models here.
