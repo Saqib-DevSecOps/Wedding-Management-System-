@@ -98,27 +98,27 @@
 {% block content %}
 <div class="card">
     <div class="card-body border-bottom">
-                    <form method="get" action="{% url 'admins:provider-list' %}">
+        <form method="get" action="{% url 'admins:provider-list' %}">
 
-        <div class="row g-3">
-               <div class="col-xxl-4 col-lg-4">
-                {{filter_form.provider_name}}
+            <div class="row g-3">
+                <div class="col-xxl-4 col-lg-4">
+                    {{filter_form.provider_name}}
                 </div>
-            <div class="col-xxl-4 col-lg-4">
-                {{filter_form.service}}
+                <div class="col-xxl-4 col-lg-4">
+                    {{filter_form.service}}
                 </div>
                 <div class="col-xxl-2 col-lg-2">
                     <button class="btn btn-outline-success w-100" type="submit"><i
                             class="mdi mdi-filter-outline align-middle"></i> Filter
                     </button>
                 </div>
-            <div class="col-xxl-2 col-lg-2">
+                <div class="col-xxl-2 col-lg-2">
                     <a href="{% url 'admins:provider-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
                             class="mdi mdi-filter-outline align-middle"></i> Clear
                     </a>
                 </div>
-        </div>
-                                    </form>
+            </div>
+        </form>
 
     </div>
 </div>
@@ -136,6 +136,7 @@
                 <th scope="col">Phone</th>
                 <th scope="col">Total Cost</th>
                 <th scope="col">Paid</th>
+                <th scope="col">Document</th>
                 <th scope="col">Action</th>
 
             </tr>
@@ -150,36 +151,24 @@
                 <td>{{object.phone_number}}</td>
                 <td>{{object.total_cost}}</td>
                 <td>{{object.paid}}</td>
+                {% if object.attachment %}
+                <td class="text-danger"><a href="{% url 'admins:download-attachment' object.id %}"<i class="fa fa-download" aria-hidden="true"></i>
+                    Download
+                </td>
+                {% else %}
+                <td><i class="fa fa-download" aria-hidden="true"></i>
+                    None
+                </td>
+                {% endif %}
                 <td>
-                    <button class="btn btn-outline-danger btn-rounded btn-sm delete-button" data-target="#DeleteModalForm"
-                            data-toggle="modal"
-                            data-whatever="@getbootstrap"
+                    <button class="btn btn-outline-danger btn-rounded btn-sm delete-button" data-object-id="{{object.id}}"
                             type="button"><i class="fa fa-trash"></i></button>
-                    <div aria-hidden="true" aria-labelledby="DeleteModalFormLable" class="modal fade"
-                         id="DeleteModalForm" role="dialog"
-                         tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Delete Provider</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are You Sure Do you Want to Delete The Provider</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <a class="btn btn-primary" href="{% url 'admins:provider-delete' object.id  %}" type="button">Confirm Delete</a>
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <button class="btn btn-outline-primary btn-sm btn-rounded update-button" data-record-id="{{ object.id }}">
+                    <button class="btn btn-outline-primary btn-sm btn-rounded update-button"
+                            data-record-id="{{ object.id }}">
                         <i class="fa fa-edit"></i></button>
-                    <a class="btn btn-outline-success btn-sm btn-rounded" href="{% url 'admins:provider-detail' object.id %}"><i
+                    <a class="btn btn-outline-success btn-sm btn-rounded"
+                       href="{% url 'admins:provider-detail' object.id %}"><i
                             class="fa fa-eye"></i></a>
                 </td>
                 {% endfor %}
@@ -190,89 +179,117 @@
 
 <!-- end row -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+        $(document).ready(function (){
+    $('body .delete-button').click(function () {
+        id = $(this).data('object-id')
+        console.log(id)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = `/admins/provider/delete/${id}`;
+            }
+        });
+    });
+    });
+</script>
 
 
 {# Create Model Form #}
 
-<script>
-$(document).ready(function() {
-    // Handle form submission
-    $("#save-provider").click(function() {
-        var form = $("#provider-form");
-        var formData = new FormData(form[0]);
 
-        // Check file size before submitting
-        var fileInput = $("#id_attachment");
-        var maxFileSize = 5 * 1024 * 1024; // 5 MB
-        if (fileInput[0].files.length > 0) {
-            var fileSize = fileInput[0].files[0].size;
-            if (fileSize > maxFileSize) {
-                alert("File size exceeds the maximum limit of 5 MB.");
+
+<script>
+    $(document).ready(function () {
+        // Handle form submission
+        $("#save-provider").click(function () {
+            var form = $("#provider-form");
+            var formData = new FormData(form[0]);
+
+            // Check file size before submitting
+            var fileInput = $("#id_attachment");
+            var maxFileSize = 5 * 1024 * 1024; // 5 MB
+            if (fileInput[0].files.length > 0) {
+                var fileSize = fileInput[0].files[0].size;
+                if (fileSize > maxFileSize) {
+                    alert("File size exceeds the maximum limit of 5 MB.");
+                    return;
+                }
+            }
+            // Check if all required fields are filled
+            var requiredFields = form.find("[required]");
+            var isFormValid = true;
+            requiredFields.each(function () {
+                if ($(this).val() === "") {
+                    $(this).addClass("is-invalid");
+                    isFormValid = false;
+                } else {
+                    $(this).removeClass("is-invalid");
+                }
+            });
+
+            if (!isFormValid) {
                 return;
             }
-        }
-  // Check if all required fields are filled
-        var requiredFields = form.find("[required]");
-        var isFormValid = true;
-        requiredFields.each(function() {
-            if ($(this).val() === "") {
-                $(this).addClass("is-invalid");
-                isFormValid = false;
-            } else {
-                $(this).removeClass("is-invalid");
-            }
+            $.ajax({
+                type: form.attr("method"),
+                url: form.attr("action"),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Reset the form fields
+                    form[0].reset();
+                    // Close the modal
+                    $("#GuestGroupModal").modal("hide");
+                    // Reload the page or update the content as desired
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error)
+                    console.log(error.responseText);
+                    var errors = JSON.parse(error.responseText).errors;
+                    console.log(errors);
+                    handleFormErrors(errors);
+                }
+            });
         });
 
-        if (!isFormValid) {
-            return;
+        // Function to display form errors
+        function handleFormErrors(errors) {
+            // Remove existing error messages and classes
+            $(".form-group").removeClass("is-invalid");
+            $(".invalid-feedback").html("");
+            $(".create_modal_errors").html(""); // Clear previous error alerts
+            $.each(errors, function (field, messages) {
+                var inputField = $("#id_" + field);
+                var errorField = inputField.closest(".form-group").find(".invalid-feedback");
+                // Add error message(s) to the error field
+                errorField.html(messages.join("<br>"));
+                // Add 'is-invalid' class to the input field's parent element
+                inputField.closest(".form-group").addClass("is-invalid");
+                // Add error message(s) with field name to the error alert box
+                var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                    '<strong id="field_name">' + field + ':</strong>' +
+                    '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+                    '</div>');
+                // Append the error alert box to the error container
+                $(".create_modal_errors").append(errorAlertBox);
+            });
         }
-        $.ajax({
-            type: form.attr("method"),
-            url: form.attr("action"),
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                // Reset the form fields
-                form[0].reset();
-                // Close the modal
-                $("#GuestGroupModal").modal("hide");
-                // Reload the page or update the content as desired
-                location.reload();
-            },
-            error: function (error) {
-                console.log(error)
-                console.log(error.responseText);
-                var errors = JSON.parse(error.responseText).errors;
-                console.log(errors);
-                handleFormErrors(errors);
-            }
-        });
     });
-    // Function to display form errors
-    function handleFormErrors(errors) {
-        // Remove existing error messages and classes
-        $(".form-group").removeClass("is-invalid");
-        $(".invalid-feedback").html("");
-        $(".create_modal_errors").html(""); // Clear previous error alerts
-        $.each(errors, function(field, messages) {
-            var inputField = $("#id_" + field);
-            var errorField = inputField.closest(".form-group").find(".invalid-feedback");
-            // Add error message(s) to the error field
-            errorField.html(messages.join("<br>"));
-            // Add 'is-invalid' class to the input field's parent element
-            inputField.closest(".form-group").addClass("is-invalid");
-            // Add error message(s) with field name to the error alert box
-            var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
-                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                '<strong id="field_name">' + field + ':</strong>' +
-                '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
-                '</div>');
-            // Append the error alert box to the error container
-            $(".create_modal_errors").append(errorAlertBox);
-        });
-    }
-});
 
 
 </script>
@@ -280,117 +297,117 @@ $(document).ready(function() {
 
 {# Update Modal Form #}
 <script>
-$(document).ready(function() {
-    var recordId;
+    $(document).ready(function () {
+        var recordId;
 
-    $('.update-button').click(function() {
-        recordId = $(this).data('record-id');
-        console.log('Clicked record ID:', recordId);
+        $('.update-button').click(function () {
+            recordId = $(this).data('record-id');
+            console.log('Clicked record ID:', recordId);
 
-        // Open the Bootstrap modal form
-        $('#UpdateModalForm').modal('show');
+            // Open the Bootstrap modal form
+            $('#UpdateModalForm').modal('show');
 
-        // Fetch provider details via AJAX
-        $.ajax({
-            url: '/admins/provider/update/' + recordId,
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                // Populate the form fields with provider details
-                var providerData = response.provider;
-                console.log(providerData);
+            // Fetch provider details via AJAX
+            $.ajax({
+                url: '/admins/provider/update/' + recordId,
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // Populate the form fields with provider details
+                    var providerData = response.provider;
+                    console.log(providerData);
 
-                // Set values for each form field
-                for (var fieldName in providerData) {
-                    if (providerData.hasOwnProperty(fieldName)) {
-                        var fieldValue = providerData[fieldName];
-                        // Select the form field by name and set its value
-                        $('#update-provide-form [name="' + fieldName + '"]').val(fieldValue);
+                    // Set values for each form field
+                    for (var fieldName in providerData) {
+                        if (providerData.hasOwnProperty(fieldName)) {
+                            var fieldValue = providerData[fieldName];
+                            // Select the form field by name and set its value
+                            $('#update-provide-form [name="' + fieldName + '"]').val(fieldValue);
+                        }
                     }
+
+                    // Update the data-record-id attribute on the submit button to store the record ID
+                    $('#update-provider').data('record-id', recordId);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching provider details:', error);
                 }
+            });
 
-                // Update the data-record-id attribute on the submit button to store the record ID
-                $('#update-provider').data('record-id', recordId);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching provider details:', error);
-            }
+            // Prevent the default button behavior if needed
+            return false;
         });
 
-        // Prevent the default button behavior if needed
-        return false;
-    });
+        // Handle form submission
+        $('#update-provider').click(function () {
+            var form = $('#update-provide-form');
+            var formData = new FormData(form[0]);
 
-    // Handle form submission
-    $('#update-provider').click(function() {
-        var form = $('#update-provide-form');
-        var formData = new FormData(form[0]);
-
-        // Check file size before submitting
-        var fileInput = $('#id_attachment');
-        var maxFileSize = 5 * 1024 * 1024; // 5 MB
-        if (fileInput[0].files.length > 0) {
-            var fileSize = fileInput[0].files[0].size;
-            if (fileSize > maxFileSize) {
-                alert('File size exceeds the maximum limit of 5 MB.');
-                return;
+            // Check file size before submitting
+            var fileInput = $('#id_attachment');
+            var maxFileSize = 5 * 1024 * 1024; // 5 MB
+            if (fileInput[0].files.length > 0) {
+                var fileSize = fileInput[0].files[0].size;
+                if (fileSize > maxFileSize) {
+                    alert('File size exceeds the maximum limit of 5 MB.');
+                    return;
+                }
             }
+
+            var url = '/admins/provider/update/' + recordId;
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Reset the form fields
+                    form[0].reset();
+                    // Close the modal
+                    $('#UpdateModalForm').modal('hide');
+                    // Reload the page or update the content as desired
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error.responseText);
+                    var errors = JSON.parse(error.responseText).errors;
+                    console.log(errors);
+                    handleFormErrors(errors, '.update_modal_errors');
+                }
+            });
+        });
+
+        // Function to display form errors
+        function handleFormErrors(errors, errorContainer) {
+            // Remove existing error messages and classes
+            $('.form-group').removeClass('is-invalid');
+            $('.invalid-feedback').html('');
+            $(errorContainer).empty();
+
+            $.each(errors, function (field, messages) {
+                var inputField = $('#id_' + field);
+                var errorField = inputField.closest('.form-group').find('.invalid-feedback');
+
+                // Add error message(s) to the error field
+                errorField.html(messages.join('<br>'));
+
+                // Add 'is-invalid' class to the input field's parent element
+                inputField.closest('.form-group').addClass('is-invalid');
+
+                // Add error message(s) with field name to the error alert box
+                var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                    '<strong id="field_name">' + field + ':</strong>' +
+                    '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+                    '</div>');
+
+                // Append the error alert box to the error container
+                $(errorContainer).append(errorAlertBox);
+            });
         }
-
-        var url = '/admins/provider/update/' + recordId;
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                // Reset the form fields
-                form[0].reset();
-                // Close the modal
-                $('#UpdateModalForm').modal('hide');
-                // Reload the page or update the content as desired
-                location.reload();
-            },
-            error: function(error) {
-                console.log(error.responseText);
-                var errors = JSON.parse(error.responseText).errors;
-                console.log(errors);
-                handleFormErrors(errors, '.update_modal_errors');
-            }
-        });
     });
-
-    // Function to display form errors
-    function handleFormErrors(errors, errorContainer) {
-        // Remove existing error messages and classes
-        $('.form-group').removeClass('is-invalid');
-        $('.invalid-feedback').html('');
-        $(errorContainer).empty();
-
-        $.each(errors, function(field, messages) {
-            var inputField = $('#id_' + field);
-            var errorField = inputField.closest('.form-group').find('.invalid-feedback');
-
-            // Add error message(s) to the error field
-            errorField.html(messages.join('<br>'));
-
-            // Add 'is-invalid' class to the input field's parent element
-            inputField.closest('.form-group').addClass('is-invalid');
-
-            // Add error message(s) with field name to the error alert box
-            var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
-                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                '<strong id="field_name">' + field + ':</strong>' +
-                '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
-                '</div>');
-
-            // Append the error alert box to the error container
-            $(errorContainer).append(errorAlertBox);
-        });
-    }
-});
 
 
 </script>

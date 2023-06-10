@@ -396,97 +396,91 @@
             </div>
             <!-- end .rev_slider_wrapper -->
             <script>
-          $(document).ready(function(e) {
-            var revapi = $(".rev_slider").revolution({
-              sliderType:"standard",
-              sliderLayout: "fullscreen",
-              dottedOverlay: "none",
-              delay: 5000,
-              navigation: {
-                  keyboardNavigation: "off",
-                  keyboard_direction: "horizontal",
-                  mouseScrollNavigation: "off",
-                  onHoverStop: "off",
-                  touch: {
-                      touchenabled: "on",
-                      swipe_threshold: 75,
-                      swipe_min_touches: 1,
-                      swipe_direction: "horizontal",
-                      drag_block_vertical: false
-                  },
-                  arrows: {
-                      style: "gyges",
-                      enable: true,
-                      hide_onmobile: false,
-                      hide_onleave: true,
-                      hide_delay: 200,
-                      hide_delay_mobile: 1200,
-                      tmp: '',
-                      left: {
-                          h_align: "left",
-                          v_align: "center",
-                          h_offset: 0,
-                          v_offset: 0
-                      },
-                      right: {
-                          h_align: "right",
-                          v_align: "center",
-                          h_offset: 0,
-                          v_offset: 0
-                      }
-                  },
-                    bullets: {
-                    enable: true,
-                    hide_onmobile: true,
-                    hide_under: 800,
-                    style: "hebe",
-                    hide_onleave: false,
-                    direction: "horizontal",
-                    h_align: "center",
-                    v_align: "bottom",
-                    h_offset: 0,
-                    v_offset: 30,
-                    space: 5,
-                    tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
-                }
-              },
-              responsiveLevels: [1240, 1024, 778],
-              visibilityLevels: [1240, 1024, 778],
-              gridwidth: [1170, 1024, 778, 480],
-              gridheight: [700, 768, 960, 720],
-              lazyType: "none",
-              parallax:"mouse",
-              parallaxBgFreeze:"off",
-              parallaxLevels:[2,3,4,5,6,7,8,9,10,1],
-              shadow: 0,
-              spinner: "off",
-              stopLoop: "on",
-              stopAfterLoops: 0,
-              stopAtSlide: -1,
-              shuffle: "off",
-              autoHeight: "off",
-              fullScreenAutoWidth: "off",
-              fullScreenAlignForce: "off",
-              fullScreenOffsetContainer: "",
-              fullScreenOffset: "0",
-              hideThumbsOnMobile: "off",
-              hideSliderAtLimit: 0,
-              hideCaptionAtLimit: 0,
-              hideAllCaptionAtLilmit: 0,
-              debugMode: false,
-              fallbacks: {
-                  simplifyAll: "off",
-                  nextSlideOnWindowFocus: "off",
-                  disableFocusListener: false,
-              }
-            });
-          });
-
-
-
-
-
-
+                $(document).ready(function (e) {
+                    var revapi = $(".rev_slider").revolution({
+                        sliderType: "standard",
+                        sliderLayout: "fullscreen",
+                        dottedOverlay: "none",
+                        delay: 5000,
+                        navigation: {
+                            keyboardNavigation: "off",
+                            keyboard_direction: "horizontal",
+                            mouseScrollNavigation: "off",
+                            onHoverStop: "off",
+                            touch: {
+                                touchenabled: "on",
+                                swipe_threshold: 75,
+                                swipe_min_touches: 1,
+                                swipe_direction: "horizontal",
+                                drag_block_vertical: false
+                            },
+                            arrows: {
+                                style: "gyges",
+                                enable: true,
+                                hide_onmobile: false,
+                                hide_onleave: true,
+                                hide_delay: 200,
+                                hide_delay_mobile: 1200,
+                                tmp: '',
+                                left: {
+                                    h_align: "left",
+                                    v_align: "center",
+                                    h_offset: 0,
+                                    v_offset: 0
+                                },
+                                right: {
+                                    h_align: "right",
+                                    v_align: "center",
+                                    h_offset: 0,
+                                    v_offset: 0
+                                }
+                            },
+                            bullets: {
+                                enable: true,
+                                hide_onmobile: true,
+                                hide_under: 800,
+                                style: "hebe",
+                                hide_onleave: false,
+                                direction: "horizontal",
+                                h_align: "center",
+                                v_align: "bottom",
+                                h_offset: 0,
+                                v_offset: 30,
+                                space: 5,
+                                tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
+                            }
+                        },
+                        responsiveLevels: [1240, 1024, 778],
+                        visibilityLevels: [1240, 1024, 778],
+                        gridwidth: [1170, 1024, 778, 480],
+                        gridheight: [700, 768, 960, 720],
+                        lazyType: "none",
+                        parallax: "mouse",
+                        parallaxBgFreeze: "off",
+                        parallaxLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10, 1],
+                        shadow: 0,
+                        spinner: "off",
+                        stopLoop: "on",
+                        stopAfterLoops: 0,
+                        stopAtSlide: -1,
+                        shuffle: "off",
+                        autoHeight: "off",
+                        fullScreenAutoWidth: "off",
+                        fullScreenAlignForce: "off",
+                        fullScreenOffsetContainer: "",
+                        fullScreenOffset: "0",
+                        hideThumbsOnMobile: "off",
+                        hideSliderAtLimit: 0,
+                        hideCaptionAtLimit: 0,
+                        hideAllCaptionAtLilmit: 0,
+                        debugMode: false,
+                        fallbacks: {
+                            simplifyAll: "off",
+                            nextSlideOnWindowFocus: "off",
+                            disableFocusListener: false,
+                        }
+                    });
+                });
 
 
             </script>
@@ -652,7 +646,7 @@
                             </ol>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                <div class="item active"><img alt="..." style= class="img-responsive"
+                                <div class="item active"><img alt="..." style=class="img-responsive"
                                                               src="{{events.thumbnail_image.url}}">
                                     <div class="carousel-caption wedding-area pb-sm-50">
                                         <h2 class="text-white"></h2>
@@ -663,7 +657,7 @@
                                         <a class="btn btn-dark btn-theme-colored text-white" href="#" role="button">Read
                                             More</a></div>
                                 </div>
-`
+                                `
                             </div>
 
                             <!-- Controls -->
@@ -767,26 +761,25 @@
                     <div class="col-md-8 col-md-offset-2 mb-30">
                         <div class="testimonial-carousel">
                             <div class="item xs-text-center">
+                                {% for test in testimonials %}
+
                                 <div class="content pt-10">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas possimus
-                                        aut distinctio autem nisi, eaque, quis reprehenderit perspiciatis molestiae
-                                        iste minus modi sint maiores earum ab quibusdam corporis quaerat rerum.</p>
-                                    <div class="thumb"><img alt="" class="img-circle"
-                                                            src="{% static 'website/images/ourlove/5.jpg' %}"
-                                                            width="75"></div>
-                                    <h5 class="text-theme-colored mt-20 mb-0">Jhone & Marry</h5>
+                                    <p>
+                                        {{ test.description }}
+                                    </p>
+                                    <div class="thumb">
+                                        {% if test.image %}
+                                        <img alt="" class="img-circle"
+                                             src="https://placehold.co/75x75" width="75">
+                                        {% else %}
+                                        <img alt="" class="img-circle"
+                                             src="{{ test.image.url }}" width="75">
+                                        {% endif %}
+                                    </div>
+                                    <h5 class="text-theme-colored mt-20 mb-0">{{ test.name }}</h5>
                                 </div>
-                            </div>
-                            <div class="item xs-text-center">
-                                <div class="content pt-10">
-                                    <p>Voluptas possimus aut distinctio autem nisi, eaque, quis reprehenderit
-                                        perspiciatis molestiae iste minus modi sint maiores earum ab quibusdam
-                                        corporis quaerat rerum.</p>
-                                    <div class="thumb"><img alt="" class="img-circle"
-                                                            src="{% static 'website/images/ourlove/3.jpg' %}"
-                                                            width="75"></div>
-                                    <h5 class="text-theme-colored mt-20 mb-0">Catherine Grace</h5>
-                                </div>
+
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -850,157 +843,26 @@
         <div class="container pb-140 pt-90">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="text-black text-center">Partners</h2>
+                    <h2 class="text-black text-center">Partnersss</h2>
                 </div>
             </div>
             <div class="row mt-60 text-center">
-                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay1">
+
+                {% for test in partners %}
+
+                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
                     <div class="client-img style2">
-                        <a href="#" target="_blank"><img alt="" class="img-responsive"
-                                                         src="{% static 'website/images/gift/logo1.jpg' %}"/></a>
+                        {% if test.logo %}
+                        <img alt="" class="img-responsive"
+                             src="https://placehold.co/75x75">
+                        {% else %}
+                        <img alt="" class="img-responsive"
+                             src="{{ test.logo.url }}">
+                        {% endif %}
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay2">
-                    <div class="client-img style2">
-                        <a href="#" target="_blank"><img alt="" class="img-responsive"
-                                                         src="{% static 'website/images/gift/logo2.jpg' %}"/></a>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay3">
-                    <div class="client-img style2">
-                        <a href="#" target="_blank"><img alt="" class="img-responsive"
-                                                         src="{% static 'website/images/gift/logo3.jpg' %}"/></a>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay4">
-                    <div class="client-img style2">
-                        <a href="#" target="_blank"><img alt="" class="img-responsive"
-                                                         src="{% static 'website/images/gift/logo4.jpg' %}"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- section: Contact -->
-    <section class="divider bg-lighter" id="contact">
-        <div class="container">
-            <div class="row pt-30">
-                <div class="col-md-5">
-
-                    <!-- Google Map HTML Codes -->
-                    <div
-                            class="map-canvas autoload-map"
-                            data-address="121 King Street, Melbourne Victoria 3000 Australia"
-                            data-height="500"
-                            data-latlng="-37.817314,144.955431"
-                            data-mapstyle="style2"
-                            data-marker="{% static 'website/images/map-marker.png' %}"
-                            data-popupstring-id="#popupstring1"
-                            data-title="sample title"
-                            data-zoom="12">
-                    </div>
-                    <div class="map-popupstring hidden" id="popupstring1">
-                        <div class="text-center">
-                            <h3>Perfect Wedding</h3>
-                            <p>121 King Street, Melbourne Victoria 3000 Australia</p>
-                        </div>
-                    </div>
-                    <!-- Google Map Javascript Codes -->
-                    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAYWE4mHmR9GyPsHSOVZrSCOOljk8DU9B4"></script>
-                    <script src="js/google-map-init.js"></script>
-
-                </div>
-
-                <div class="col-md-7">
-                    <h3 class="mt-0 mb-30">Interested in discussing?</h3>
-
-                    <!-- Contact Form -->
-                    <form action="includes/sendmail.php" class="" id="contact_form" method="post"
-                          name="contact_form">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="form_name">Name <small>*</small></label>
-                                    <input class="form-control" id="form_name" name="form_name"
-                                           placeholder="Enter Name"
-                                           required="" type="text">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="form_email">Email <small>*</small></label>
-                                    <input class="form-control required email" id="form_email" name="form_email"
-                                           placeholder="Enter Email" type="email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="form_name">Subject <small>*</small></label>
-                                    <input class="form-control required" id="form_subject" name="form_subject"
-                                           placeholder="Enter Subject" type="text">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="form_phone">Phone</label>
-                                    <input class="form-control" id="form_phone" name="form_phone"
-                                           placeholder="Enter Phone"
-                                           type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="form_name">Message</label>
-                            <textarea class="form-control required" id="form_message" name="form_message"
-                                      placeholder="Enter Message"
-                                      rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="form_botcheck" name="form_botcheck" type="hidden"
-                                   value=""/>
-                            <button class="btn btn-dark btn-theme-colored btn-flat"
-                                    data-loading-text="Please wait..."
-                                    type="submit">Send your message
-                            </button>
-                        </div>
-                    </form>
-                    <!-- Contact Form Validation-->
-                    <script type="text/javascript">
-              $("#contact_form").validate({
-                submitHandler: function(form) {
-                  var form_btn = $(form).find('button[type="submit"]');
-                  var form_result_div = '#form-result';
-                  $(form_result_div).remove();
-                  form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-                  var form_btn_old_msg = form_btn.html();
-                  form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                  $(form).ajaxSubmit({
-                    dataType:  'json',
-                    success: function(data) {
-                      if( data.status == 'true' ) {
-                        $(form).find('.form-control').val('');
-                      }
-                      form_btn.prop('disabled', false).html(form_btn_old_msg);
-                      $(form_result_div).html(data.message).fadeIn('slow');
-                      setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
-                    }
-                  });
-                }
-              });
-
-
-
-
-
-
-
-
-                    </script>
-
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

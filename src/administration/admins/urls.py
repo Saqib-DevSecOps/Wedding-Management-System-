@@ -5,7 +5,7 @@ from .views import (
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
     ProviderDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
     InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView, CreateSeatPlannerViewApi,
-    UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete, update_invitation_order
+    UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete, update_invitation_order , DownloadAttachmentView
 )
 
 app_name = 'admins'
@@ -34,6 +34,7 @@ urlpatterns += [
     path('provider/detail/<str:pk>', ProviderDetailView.as_view(), name='provider-detail'),
     path('provider/update/<str:pk>', ProviderUpdateView.as_view(), name='provider-update'),
     path('provider/delete/<str:pk>', ProviderDeleteView.as_view(), name='provider-delete'),
+    path('download/<str:provider_id>/', DownloadAttachmentView.as_view(), name='download-attachment'),
 
 ]
 

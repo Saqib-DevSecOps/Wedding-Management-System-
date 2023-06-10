@@ -4,11 +4,8 @@
             <div class="row multi-row-clearfix">
                 <div class="col-sm-6 col-md-3 wow fadeInUp animation-delay1">
                     <div class="widget dark">
-                        <a class="text-white font-great-vibes font-32" href="#">Perfect &nbsp;<i
-                                class="fa fa-heart font-25"></i> Wedding</a>
-                        <p class="mt-20 mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas
-                            possimus aut distinctio autem nisi, eaque, quis reprehenderit perspiciatis molestiae iste
-                            minus modi sint maiores earum..</p>
+                        <a class="text-white font-great-vibes font-32" href="/">{{ name }}</a>
+                        <p class="mt-20 mb-10">{{ description }}</p>
                         <ul class="social-icons icon-dark icon-circled">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -20,12 +17,10 @@
                     <div class="widget dark">
                         <h5 class="widget-title line-bottom">Pages</h5>
                         <ul class="list-border list theme-colored angle-double-right">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Donor Privacy Policy</a></li>
-                            <li><a href="#">Disclaimer</a></li>
-                            <li><a href="#">Terms of Use</a></li>
-                            <li><a href="#">Copyright Notice</a></li>
-                            <li><a href="#">Media Center</a></li>
+                            <li><a href="{% url 'website:privacy-policy' %}">Privacy Policy</a></li>
+                            <li><a href="{% url 'website:terms-and-conditions' %}">Terms of Use</a></li>
+                            <li><a href="{% url 'website:about' %}">About Us</a></li>
+                            <li><a href="{% url 'website:contact-us' %}">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,10 +34,9 @@
                     <div class="widget dark">
                         <h5 class="widget-title line-bottom">Quick Contact</h5>
                         <ul class="list list-border">
-                            <li><a href="#">+(012) 345 6789</a></li>
-                            <li><a href="#">hello@yourdomain.com</a></li>
-                            <li><a class="lineheight-20" href="#">121 King Street, Melbourne Victoria 3000,
-                                Australia</a></li>
+                            <li><a href="tel:{{ phone }}">{{ phone }}</a></li>
+                            <li><a href="mailto:{{ email }}">{{ email }}</a></li>
+                            <li><a class="lineheight-20" href="#">{{ address }}</a></li>
                         </ul>
                         <p class="text-white mb-5 mt-15">Subscribe to our newsletter</p>
                         <form class="newsletter-form mt-10" id="footer-mailchimp-subscription-form">

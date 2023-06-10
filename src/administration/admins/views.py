@@ -14,23 +14,39 @@ from src.administration.admins.models import GuestGroup, Guest, Provider, Invita
 from django.views import View
 import json
 from django.http import JsonResponse
+import os
+from django.conf import settings
+from django.http import HttpResponse, Http404
+from django.core.serializers.json import DjangoJSONEncoder
 
 admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
-    """
-    Registrations: Today, Month, Year (PAID/UNPAID)
-    Subscriptions: Today, Month, Year (TYPES)
-    Withdrawals  : Today, Month, Year (CALCULATE)
-    """
     template_name = 'admins/dashboard.html'
+    total_payment = 0
+    paid_payment = 0
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        # context = calculate_statistics(context)
-        # initialization(init=False, mid=False, end=False)
+        total_group = GuestGroup.objects.filter(user=self.request.user).count
+        provider = Provider.objects.filter(user=self.request.user)
+        for objects in provider:
+            if objects.total_cost is not None:
+                self.total_payment += objects.total_cost
+            if objects.paid is not None:
+                self.paid_payment += objects.paid
+        context['total_group'] = total_group
+        context['total_payment'] = self.total_payment
+        context['paid_payment'] = self.paid_payment
+        context['total_provider'] = provider.count
+        context['total_guests'] = Guest.objects.filter(group__user=self.request.user).count
+        table = Table.objects.filter(user=self.request.user)
+        rounded = table.filter(table_type='1').count
+        rectangle = table.filter(table_type='2').count
+        context['rounded'] = rounded
+        context['rectangle'] = rectangle
         return context
 
 
@@ -100,11 +116,6 @@ def update_guest_group(request):
 
         # Fetch the guest group object
         guest_group = get_object_or_404(GuestGroup, id=group_id, user=request.user)
-        # guests = Guest.objects.filter(guest_group=guest_group)
-        # if guests:
-        #     print(guests)
-        # Guest.objects.exclude(group_id__in=)
-
         # Update the guest group data
         guest_group.group_name = group_name
         guest_group.save()
@@ -132,7 +143,7 @@ class GuestGroupUpdateView(UpdateView):
 
 class InvitationUpdateView(View):
 
-    def get(self, request,*args, pk):
+    def get(self, request, *args, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
         data = {
             'total_invitation': invitation.total_invitation,
@@ -142,12 +153,10 @@ class InvitationUpdateView(View):
     def post(self, request, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
         print(invitation.id)
-        print(request.POST.get('total_invitation'))
-        form = InvitationForm(invitation,request.POST)
-        print(form)
-        if form.is_valid():
-            form.instance.group = invitation.group
-            invitation = form.save()
+        total = request.POST.get('total_invitation')
+        if total.isnumeric():
+            invitation.total_invitation = total
+            invitation.save()
             messages.success(request, "Successfully updated")
             return JsonResponse({'success': True, 'provider_id': invitation.id})
 
@@ -163,10 +172,9 @@ class InvitationUpdateView(View):
 @method_decorator(login_required, name='dispatch')
 class GuestGroupDeleteView(View):
     def get(self, request, pk):
-        print("hello")
         guest = get_object_or_404(GuestGroup, pk=pk)
         guest.delete()
-        messages.success(self.request, "Provider Successfully Deleted")
+        messages.success(self.request, "Guest Group Successfully Deleted")
         return redirect('admins:guest-group-list')
 
 
@@ -231,7 +239,7 @@ class ProviderUpdateView(View):
 
     def get(self, request, pk):
         provider = get_object_or_404(Provider, id=pk, user=self.request.user)
-        print()
+
         provider_data = {
             'provider_name': provider.provider_name,
             'service': provider.service,
@@ -240,9 +248,9 @@ class ProviderUpdateView(View):
             'total_cost': provider.total_cost,
             'paid': provider.paid,
             'comment': provider.comment,
-            'attachment': str(provider.attachment.url),
         }
-        return JsonResponse({'provider': provider_data})
+
+        return JsonResponse({'provider': provider_data}, encoder=DjangoJSONEncoder)
 
     def post(self, request, pk):
         provider = get_object_or_404(Provider, id=pk, user=self.request.user)
@@ -365,6 +373,7 @@ class SeatPlannerDelete(View):
     def get(self, request, pk):
         table = get_object_or_404(Table, id=pk)
         table.delete()
+        messages.success(request, 'Table Deleted Successfully')
         return redirect('admins:seat-planner-list')
 
 
@@ -381,3 +390,27 @@ class UpdateSeatPlanner(DetailView):
         context['form'] = TableForm
         context['guests'] = Guest.objects.filter(group__user=self.request.user)
         return context
+
+
+@method_decorator(login_required, name='dispatch')
+class DownloadAttachmentView(View):
+    def get(self, request, provider_id):
+        try:
+            provider = Provider.objects.get(id=provider_id)
+        except Provider.DoesNotExist:
+            raise Http404
+
+        if not provider.attachment:
+            raise Http404
+
+        attachment_path = os.path.join(settings.MEDIA_ROOT, str(provider.attachment))
+        if os.path.exists(attachment_path):
+            with open(attachment_path, 'rb') as attachment_file:
+                response = HttpResponse(
+                    attachment_file.read(),
+                    content_type='application/octet-stream',
+                )
+                response['Content-Disposition'] = 'attachment; filename="{}"'.format(provider.attachment.name)
+                return response
+
+        raise Http404

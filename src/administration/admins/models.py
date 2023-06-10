@@ -65,7 +65,7 @@ class Provider(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     provider_name = models.CharField(max_length=100)
     service = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField( null=True, blank=True)
     phone_number = models.CharField(max_length=100, null=True, blank=True)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paid = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
@@ -83,6 +83,8 @@ class Provider(models.Model):
             pending = float(self.total_cost) - float(self.paid)
             return pending
         return None
+    class Meta:
+        ordering = ['-created_at']
 
 
 class Table(models.Model):

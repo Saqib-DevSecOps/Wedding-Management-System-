@@ -6,7 +6,6 @@ from tinymce.models import HTMLField
 from src.accounts.models import User
 
 
-# Create your models here.
 class GalleryCategory(models.Model):
     name = models.CharField(max_length=255)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
@@ -150,10 +149,11 @@ class Event(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    host = models.CharField(max_length=255,verbose_name="host name")
+    host = models.CharField(max_length=255, verbose_name="host name")
     thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
     slug = models.SlugField(unique=True, null=False)
-    category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True,related_name='event_category')
+    category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True,
+                                 related_name='event_category')
     content = HTMLField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
@@ -179,3 +179,81 @@ class Event(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+class ServiceContent(models.Model):
+    content = HTMLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.content[:20]
+
+
+class Site(models.Model):
+
+    name = models.CharField(default='_ no name _', max_length=255)
+    tagline = models.CharField(default="_ no tagline _", max_length=255)
+    description = models.CharField(default="_ no description _", max_length=255)
+    logo = models.ImageField(upload_to='site/logo', null=True, blank=True)
+    favico = models.ImageField(upload_to='site/favico', null=True, blank=True)
+
+    # CONTACT
+    address = models.CharField(max_length=1000, default='_ no address provided _')
+    phone = models.CharField(max_length=15, default='+000000000000')
+    email = models.EmailField(max_length=255, default='noname@domain.com')
+
+    # PAGES
+    privacy_content = HTMLField(default='*')
+    terms_content = HTMLField(default='*')
+    disclaimer_content = HTMLField(default='*')
+    contact_content = HTMLField(default='*')
+    service_content = HTMLField(default='*')
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Site"
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def my_site(cls):
+        sites = Site.objects.all()
+        if sites:
+            return sites.first()
+        return Site.objects.create()
+
+
+class SitePartner(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    logo = models.ImageField(upload_to='site/partner/logo', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class SiteTestimonial(models.Model):
+    name = models.CharField(max_length=255)
+    comment = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='site/partner/logo')
+
+    def __str__(self):
+        return self.name
+
+
+class ContactRequest(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+

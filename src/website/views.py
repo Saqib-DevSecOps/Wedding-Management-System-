@@ -1,10 +1,14 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, View
 
 from src.website.filters import BlogFilter, EventFilter
-from src.website.models import Slider, Blog, Gallery, BlogCategory, Service, Event
+from src.website.models import (
+    Slider, Blog, Gallery, BlogCategory, Service, Event, Site, ContactRequest,
+    SitePartner, SiteTestimonial
+)
+from django.contrib import messages
 
 
 # Create your views here.
@@ -21,6 +25,8 @@ class Home(TemplateView):
         events = Event.objects.all()
         context['events'] = events.order_by('-created_at').first()
         context['blogs'] = Blog.objects.all()[:3]
+        context['partners'] = SitePartner.objects.all()
+        context['testimonials'] = SiteTestimonial.objects.all()
 
         return context
 
@@ -115,11 +121,67 @@ class AboutUs(TemplateView):
     template_name = 'website/about_us.html'
 
 
-class ContactUs(TemplateView):
+class ContactUs(View):
     template_name = 'website/contact_us.html'
+
+    def get(self, request):
+        context = {}
+        site = Site.my_site()
+        context['email'] = site.email
+        context['phone'] = site.phone
+        context['address'] = site.address
+
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        context = {}
+        site = Site.my_site()
+
+        context['email'] = site.email
+        context['phone'] = site.phone
+        context['address'] = site.address
+
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if not all([message, subject, phone, email, name]):
+            messages.error(request, "Please fill all the fields to contact.")
+        else:
+            ContactRequest.objects.create(
+                name=name, email=email, phone=phone, subject=subject, message=message
+            )
+            messages.success(request, "Your message request processed successfully")
+
+        return render(request, self.template_name, context)
 
 
 class Services(ListView):
     model = Service
     context_object_name = 'objects'
     template_name = 'website/services.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content'] = Site.my_site().service_content
+        return context
+
+
+class TermsView(TemplateView):
+    template_name = 'website/terms-and-conditions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['terms'] = Site.my_site().terms_content
+        return context
+
+
+class PrivacyView(TemplateView):
+    template_name = 'website/privacy-policy.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['privacy'] = Site.my_site().privacy_content
+        return context

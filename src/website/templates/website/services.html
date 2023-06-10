@@ -23,17 +23,16 @@
         <div class="section-content">
           <div class="row">
             <div class="col-md-12">
-              <h3 class="mt-0">Our Services</h3>
+              <h3 class="mt-0">Have a look on our services</h3>
             </div>
           </div>
+
           <div class="row">
-            <div class="col-md-7">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum? Natus asperiores, minima, eius iure totam molestias, magnam eaque atque minus nostrum quia odio. Deserunt laborum sint cupiditate, voluptates, similique quas, ipsam et iusto reprehenderit, eius tempore nisi quidem consequatur nostrum hic.</p>
-            </div>
-            <div class="col-md-5">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum?</p>
+            <div class="col-12">
+              {{ content|safe }}
             </div>
           </div>
+
           <div class="row text-center mt-30">
             {% for object in object_list %}
             <div class="col-md-4 col-sm-6">

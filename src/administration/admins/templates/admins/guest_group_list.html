@@ -7,17 +7,17 @@
 
 {% block page_heading %}
 <style>
-        .badge {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+    .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
 
 </style>
 <div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
@@ -179,7 +179,7 @@
             <h4 class="mb-0 font-size-18">Guest Groups List</h4>
 
             <div class="page-title-right">
-                <button class="btn btn-outline-success" data-target="#GuestGroupModal" data-toggle="modal"
+                <button class="btn btn-success" data-target="#GuestGroupModal" data-toggle="modal"
                         data-whatever="@getbootstrap"
                         type="button">Add Guest Group
                 </button>
@@ -195,23 +195,19 @@
     <div class="card-body border-bottom">
         <form action="{% url 'admins:guest-group-list' %}" method="get">
 
-            <div class="row g-3">
-                <div class="col-xxl-8 col-lg-8">
-                    <input class="form-control" id="searchInput" name="guest_group_search"
-                           placeholder="Enter Guest Group Name" type="search">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="input-group">
+                        <input class="form-control" id="searchInput" name="guest_group_search"
+                           placeholder="Enter Guest Group Name" type="search"><div class="btn-group" role="group" aria-label="Basic example">
+  <button type="submit" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+  <a href="{% url 'admins:guest-group-list' %}" class="btn  btn-danger"><i class="fa fa-paint-brush"></i></a>
+</div>
                 </div>
-                <div class="col-xxl-2 col-lg-2">
-                    <button class="btn btn-outline-success w-100" type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Filter
-                    </button>
-                </div>
-                <div class="col-xxl-2 col-lg-2">
-                    <a class="btn btn-outline-danger w-100" href="{% url 'admins:guest-group-list' %}"
-                       type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Clear
-                    </a>
-                </div>
+
             </div>
+                </div>
         </form>
 
     </div>
@@ -222,7 +218,7 @@
         <div class="row" id="sortable-cards">
 
             {% for object in object_list %}
-            <div class="col-4">
+            <div class="col-sm-8 col-md-4">
                 <div class="card p-0" data-id="{{ object.id }}" data-loop="{{ forloop.counter }}"
                      data-sequence="{{ object.sequence }}">
                     <div class="card-body p-0 border-secondary shadow">
@@ -230,46 +226,59 @@
                             <div class="col-12">
 
                                 <div class="card-body border-bottom">
-                                    <p class="card-title mb-0">
-                                        <b>
+                                    <div class="row">
+                                        <div class="col-8">
                                             <i class="fa fa-group"></i>
-                                            {{ object.group_name }}
+                                            <b>{{ object.group_name }}</b><br>
+                                            <i class="fa fa-clock-o"></i>
+                                            <small>created on: {{ object.created_at.date }}</small>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <a href="#" class="badge bg-light text-dark">{{ object.guest_set.all.count }}</a>
 
-                                        </b>
-                                    </p>
+                                            <b></b>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="card-body">
-                                    <p class="card-text text-center">Guests:
-                                        <b>{{ object.guest_set.all.count }}</b></p>
+                                <div class="card-body py-0">
                                     <p class="card-text">
 
-                                        {% for object in object.guest_set.all %}
-
-                                    <p class="text-secondary shadow">
-                                        <i class="bx bx-male text-primary"
-                                           style="font-size:20px"></i>{{ object }}</p>
-                                    {% endfor % %}
-                                    <p class="card-text">
-                                        <i aria-hidden="true" class="fa fa-clock-o"></i>
-                                        Created at <b>{{ object.created_at.date }}</b></p>
+                                        <ul class="list-unstyled">
+                                         {% for object in object.guest_set.all %}
+                                        <li>
+                                             <i class="bx bx-user-circle text-secondary py-1"></i>
+                                             {{ object }}
+                                         </li>
+                                         {% endfor %}
+                                        </ul>
 
                                 </div>
 
                             </div>
                         </div>
-                        <div class="card-footer border-bottom">
-                            <a class="btn btn-outline-danger btn-rounded btn-sm" data-object-id="{{ object.id }}"
-                               id="delete-button"><i
-                                    class="fa fa-trash"></i>Delete</a>
-                            <button class="btn btn-outline-primary btn-rounded btn-sm update-guest-group"
-                                    data-record-id="{{ object.id }}"><i
-                                    class="fa fa-edit"></i>&nbsp;Update
-                            </button>
-                            <button class="btn btn-outline-success btn-rounded btn-sm view-guest"
-                                    data-record-id="{{ object.id }}"><i
-                                    class="fa fa-eye"></i>&nbsp;View
-                            </button>
+                        <div class="card-body border-top p-0">
+
+                            <div class="row text-center justify-content-center">
+                                <div class="col p-2 border-right">
+                                    <a class="btn btn-transparent text-primary  btn-sm view-guest"
+                                        data-record-id="{{ object.id }}">
+                                        <i class="fa fa-eye"></i>&nbsp;View
+                                    </a>
+                                </div>
+                                <div class="col p-2 border-right">
+                                    <a class="btn btn-transparent text-primary btn-sm update-guest-group"
+                                       data-record-id="{{ object.id }}"><i
+                                       class="fa fa-edit"></i>&nbsp;Edit
+                                    </a>
+                                </div>
+                                <div class="col p-2 border-right">
+                                    <a class="btn btn-transparent text-danger btn-sm delete-button" data-object-id="{{ object.id }}"
+                                    id="{{object.pk}}"><i
+                                    class="fa fa-trash"></i>&nbsp;Delete
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -281,18 +290,19 @@
 
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-sm-4 col-md-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invitations</h4>
-                <hr>
-                <div class="table table-striped mb-0">
-                    <table class="table project-list-table table-responsive table-nowrap align-middle table-borderless"
+            </div>
+            <div class="card-body border-top p-0">
+                <div class="table-responsive">
+                    <table class="table  table-hover   table-borderless"
                            id="sortable-table">
-                        <thead class="table-light">
+                        <thead class="thead-light">
                         <tr>
                             <th>Group</th>
-                            <th>Total Invitations</th>
+                            <th>Total</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -302,8 +312,8 @@
                             <th scope="row">{{ obj.group }}</th>
                             <td>{{ obj.total_invitation }}</td>
                             <td>
-                                <button class="btn btn-outline-success btn-rounded btn-sm update-button"
-                                        data-record-id="{{ obj.id }}"><i class="fa fa-edit"></i>Edit
+                                <button class="btn btn-primary btn-sm update-button"
+                                        data-record-id="{{ obj.id }}"><i class="fa fa-edit"></i>&nbsp;Edit
                                 </button>
                             </td>
                         </tr>
@@ -312,7 +322,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
@@ -327,146 +336,146 @@
         integrity="sha512-d+dtcSjz831KbYcB3pS7cd3cqlaZ/gbbnZWC4KeLM8AToNtm83Rbc5au5k3bFBh6EwlphOGJtj7oDg6k+NGbPA=="
         referrerpolicy="no-referrer"
         src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-        btn = document.getElementById('delete-button')
-        btn.addEventListener('click', ev => {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    id = $(btn).data('object-id')
-                    window.location = `/admins/guest-group/${id}/delete/`;
-                }
-            })
-        })
-</script>
-
-<script>
-        $(document).ready(function () {
-            $('#add-guest-name').click(function () {
-                var guestNameInput = $('<input>').attr({
-                    type: 'text',
-                    name: 'guest_names[]',
-                    class: 'form-control guest-name-input',
-                    required: 'required',
-                    placeholder: 'Enter Guest Name'
-                });
-
-                var deleteButton = $('<button>').attr({
-                    type: 'button',
-                    class: 'btn btn-danger btn-rounded delete-guest'
-                }).text('Delete');
-
-                var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
-                var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
-
-                var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
-
-                $('#guest-names-container').append(formGroup);
-            });
-
-            $(document).on('click', '.delete-guest', function () {
-                $(this).closest('.form-group').remove();
-            });
-        });
-
-
-
-</script>
-
-<script>
-        function updateCardOrder(cardIdList) {
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
-
-            const data = {
-
-                card_id_list: cardIdList,
-                csrfmiddlewaretoken: csrfToken
-            };
-
-            const url = '/admins/update_row_order/';
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.error('Error:', data.error);
-                    } else {
-                        console.log('Card order updated successfully');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-        const cardContainer = document.getElementById('sortable-cards');
-        // Initialize SortableJS
-        const sortable = Sortable.create(cardContainer, {
-            animation: 300, // Animation speed in milliseconds
-            onEnd: function (event) {
-                const cards = Array.from(cardContainer.getElementsByClassName('card'));
-                const cardIdList = cards.map(card => card.getAttribute('data-id'));
-                updateCardOrder(cardIdList);
+    $(document).ready(function (){
+    $('body .delete-button').click(function () {
+        id = $(this).data('object-id')
+        console.log(id)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = `/admins/guest-group/${id}/delete/`;
             }
         });
+    });
+    });
 
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#add-guest-name').click(function () {
+            var guestNameInput = $('<input>').attr({
+                type: 'text',
+                name: 'guest_names[]',
+                class: 'form-control guest-name-input',
+                required: 'required',
+                placeholder: 'Enter Guest Name'
+            });
+
+            var deleteButton = $('<button>').attr({
+                type: 'button',
+                class: 'btn btn-danger btn-rounded delete-guest'
+            }).text('Delete');
+
+            var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+            var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+
+            var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+            $('#guest-names-container').append(formGroup);
+        });
+
+        $(document).on('click', '.delete-guest', function () {
+            $(this).closest('.form-group').remove();
+        });
+    });
+
+
+</script>
+
+<script>
+    function updateCardOrder(cardIdList) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
+
+        const data = {
+
+            card_id_list: cardIdList,
+            csrfmiddlewaretoken: csrfToken
+        };
+
+        const url = '/admins/update_row_order/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error:', data.error);
+                } else {
+                    console.log('Card order updated successfully');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    const cardContainer = document.getElementById('sortable-cards');
+    // Initialize SortableJS
+    const sortable = Sortable.create(cardContainer, {
+        animation: 300, // Animation speed in milliseconds
+        onEnd: function (event) {
+            const cards = Array.from(cardContainer.getElementsByClassName('card'));
+            const cardIdList = cards.map(card => card.getAttribute('data-id'));
+            updateCardOrder(cardIdList);
+        }
+    });
 
 
 </script>
 <script>
-        $(document).ready(function () {
-            $('.view-guest').click(function () {
-                var groupId = $(this).data('record-id');
-                var guestList = $('#guest-list');
+    $(document).ready(function () {
+        $('.view-guest').click(function () {
+            var groupId = $(this).data('record-id');
+            var guestList = $('#guest-list');
 
-                // Clear the existing guest list
-                guestList.empty();
+            // Clear the existing guest list
+            guestList.empty();
 
-                // Send AJAX request to fetch guests of the group
-                $.ajax({
-                    url: '/admins/get_guests/',
-                    type: 'GET',
-                    data: {group_id: groupId},
-                    success: function (response) {
-                        // Clear the existing guest list
-                        guestList.empty();
+            // Send AJAX request to fetch guests of the group
+            $.ajax({
+                url: '/admins/get_guests/',
+                type: 'GET',
+                data: {group_id: groupId},
+                success: function (response) {
+                    // Clear the existing guest list
+                    guestList.empty();
 
-                        // Check if guests are found
-                        if (response && response.length > 0) {
-                            // Populate the guest list
-                            response.forEach(function (guest) {
-                                var listItem = $('<li>').addClass('list-group-item border shadow').html('<i class="fa fa-user mr-3" aria-hidden="true"></i>' + guest.name);
-                                guestList.append(listItem);
-                            });
-                        } else {
-                            // Show "No guests found" message
-                            var emptyListItem = $('<li>').addClass('list-group-item list-group-item-danger text-center').text('No guests found');
-                            guestList.append(emptyListItem);
-                        }
-
-                        // Open the modal
-                        $('#GuestModal').modal('show');
-                    },
-                    error: function (error) {
-                        console.error('Error:', error);
+                    // Check if guests are found
+                    if (response && response.length > 0) {
+                        // Populate the guest list
+                        response.forEach(function (guest) {
+                            var listItem = $('<li>').addClass('list-group-item border shadow').html('<i class="fa fa-user mr-3" aria-hidden="true"></i>' + guest.name);
+                            guestList.append(listItem);
+                        });
+                    } else {
+                        // Show "No guests found" message
+                        var emptyListItem = $('<li>').addClass('list-group-item list-group-item-danger text-center').text('No guests found');
+                        guestList.append(emptyListItem);
                     }
-                });
+
+                    // Open the modal
+                    $('#GuestModal').modal('show');
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
             });
         });
-
+    });
 
 
 </script>
@@ -474,266 +483,263 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-        $(document).ready(function () {
-            var invitationId;
+    $(document).ready(function () {
+        var invitationId;
 
-            $('.update-button').click(function () {
-                invitationId = $(this).data('record-id');
-                console.log('Clicked invitation ID:', invitationId);
+        $('.update-button').click(function () {
+            invitationId = $(this).data('record-id');
+            console.log('Clicked invitation ID:', invitationId);
 
-                // Open the Bootstrap modal form
-                $('#UpdateModalForm').modal('show');
+            // Open the Bootstrap modal form
+            $('#UpdateModalForm').modal('show');
 
-                // Fetch invitation details via AJAX
-                $.ajax({
-                    url: '/admins/invitation/update/' + invitationId,
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function (response) {
-                        // Populate the form fields with invitation details
-                        var invitationData = response.invitation;
-                        console.log(invitationData);
+            // Fetch invitation details via AJAX
+            $.ajax({
+                url: '/admins/invitation/update/' + invitationId,
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // Populate the form fields with invitation details
+                    var invitationData = response.invitation;
+                    console.log(invitationData);
 
-                        // Set values for each form field
-                        for (var fieldName in invitationData) {
-                            if (invitationData.hasOwnProperty(fieldName)) {
-                                var fieldValue = invitationData[fieldName];
-                                // Select the form field by name and set its value
-                                $('#update-invitation-form [name="' + fieldName + '"]').val(fieldValue);
-                            }
+                    // Set values for each form field
+                    for (var fieldName in invitationData) {
+                        if (invitationData.hasOwnProperty(fieldName)) {
+                            var fieldValue = invitationData[fieldName];
+                            // Select the form field by name and set its value
+                            $('#update-invitation-form [name="' + fieldName + '"]').val(fieldValue);
                         }
-
-                        // Update the data-invitation-id attribute on the submit button to store the invitation ID
-                        $('#update-invitation').data('invitation-id', invitationId);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching invitation details:', error);
                     }
-                });
 
-                // Prevent the default button behavior if needed
-                return false;
-            });
-
-            // Handle form submission
-            $('#update-invitation').click(function () {
-                var form = $('#update-invitation-form');
-                var formData = new FormData(form[0]);
-                var url = '/admins/invitation/update/' + invitationId;
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        // Reset the form fields
-                        form[0].reset();
-                        // Close the modal
-                        $('#UpdateModalForm').modal('hide');
-                        // Reload the page or update the content as desired
-                        location.reload();
-                    },
-                    error: function (error) {
-                        console.log(error.responseText);
-                        var errors = JSON.parse(error.responseText).errors;
-                        console.log(errors);
-                        handleFormErrors(errors, '.update_modal_errors');
-                    }
-                });
-            });
-
-            // Function to display form errors
-            function handleFormErrors(errors, errorContainer) {
-                // Remove existing error messages and classes
-                $('.form-group').removeClass('is-invalid');
-                $('.invalid-feedback').html('');
-                $(errorContainer).empty();
-
-                $.each(errors, function (field, messages) {
-                    var inputField = $('#id_' + field);
-                    var errorField = inputField.closest('.form-group').find('.invalid-feedback');
-
-                    // Add error message(s) to the error field
-                    errorField.html(messages.join('<br>'));
-
-                    // Add 'is-invalid' class to the input field's parent element
-                    inputField.closest('.form-group').addClass('is-invalid');
-
-                    // Add error message(s) with field name to the error alert box
-                    var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
-                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                        '<strong id="field_name">' + field + ':</strong>' +
-                        '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
-                        '</div>');
-
-                    // Append the error alert box to the error container
-                    $(errorContainer).append(errorAlertBox);
-                });
-            }
-        });
-
-
-
-</script>
-<script>
-        $(document).ready(function () {
-            // Handle click event on update button
-            $(document).on('click', '.update-guest-group', function () {
-                var groupId = $(this).data('record-id');
-                var updateForm = $('#updateGuestGroupForm');
-                var updateModal = $('#GuestUpdateGroupModal');
-
-                // Reset the form fields before opening the modal
-                updateForm.trigger('reset');
-                updateForm.find('#guest-names-update-container').empty();
-
-                // Fetch the guest group data using AJAX
-                $.ajax({
-                    url: '/admins/update_guest_group/',
-                    type: 'GET',
-                    data: {group_id: groupId},
-                    success: function (response) {
-                        // Populate the form fields with the fetched data
-                        updateForm.find('#group_id').val(groupId);
-                        updateForm.find('#group_name').val(response.group_name);
-
-                        // Populate existing guest names
-                        var guestNamesContainer = updateForm.find('#guest-names-update-container');
-                        for (let index = 0; index < response.guest_names.length; index++) {
-                            var guestNameInput = $('<input>').attr({
-                                type: 'text',
-                                name: 'guest_names[]',
-                                class: 'form-control guest-name-input',
-                                required: 'required',
-                                placeholder: 'Enter Guest Name',
-                                value: response.guest_names[index]
-                            });
-
-                            var deleteButton = $('<button>').attr({
-                                type: 'button',
-                                class: 'btn btn-danger btn-rounded delete-guest',
-                            }).text('Delete');
-
-                            var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
-                            var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
-                            var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
-
-                            guestNamesContainer.append(formGroup);
-                        }
-
-                        // Open the update modal
-                        updateModal.modal('show');
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        // Handle the error case
-                        console.log('Error:', errorThrown);
-                    }
-                });
-            });
-
-            // Handle form submission for updating the guest group
-            $('#updateGuestGroupForm').submit(function (event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                var updateForm = $(this);
-                var updateModal = $('#GuestUpdateGroupModal');
-
-                // Perform AJAX request to update the guest group
-                $.ajax({
-                    url: '/admins/update_guest_group/',
-                    type: 'POST',
-                    data: updateForm.serialize(),
-                    success: function (response) {
-                        // Handle the success case
-                        console.log('Guest group updated successfully:', response);
-
-                        // Close the update modal
-                        updateModal.modal('hide');
-                        location.reload();
-
-                        // Optionally, you can perform additional actions after successful update
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        // Handle the error case
-                        console.log('Error:', errorThrown);
-                    }
-                });
-            });
-
-            // Add functionality for adding and deleting guest name fields
-            $('.add-guest-name-update').click(function () {
-                var guestNameInput = $('<input>').attr({
-                    type: 'text',
-                    name: 'guest_names[]',
-                    class: 'form-control guest-name-input',
-                    required: 'required',
-                    placeholder: 'Enter Guest Name'
-                });
-
-
-                var deleteButton = $('<button>').attr({
-                    type: 'button',
-                    class: 'btn btn-danger btn-rounded delete-guest'
-                }).text('Delete');
-
-                var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
-                var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
-                var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
-
-                $('#guest-names-update-container').append(formGroup);
-            });
-
-            $(document).on('click', '.delete-guest', function () {
-                $(this).closest('.form-group').remove();
-            });
-        });
-
-
-
-</script>
-<script>
-        function InvitationRowOrder(rowIdList) {
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
-
-            const data = {
-                row_id_list: rowIdList,
-                csrfmiddlewaretoken: csrfToken
-            };
-
-            const url = '/admins/update_invitation_order/';
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
+                    // Update the data-invitation-id attribute on the submit button to store the invitation ID
+                    $('#update-invitation').data('invitation-id', invitationId);
                 },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.error('Error:', data.error);
-                    } else {
-                        console.log('Row order updated successfully');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
+                error: function (xhr, status, error) {
+                    console.error('Error fetching invitation details:', error);
+                }
+            });
 
-        const table = document.getElementById('sortable-table').getElementsByTagName('tbody')[0];
-
-        // Initialize SortableJS
-        const sort = Sortable.create(table, {
-            animation: 300, // Animation speed in milliseconds
-            onEnd: function (event) {
-                const rows = Array.from(table.getElementsByTagName('tr'));
-                const rowIdList = rows.map(row => row.getAttribute('data-id'));
-                InvitationRowOrder(rowIdList);
-            }
+            // Prevent the default button behavior if needed
+            return false;
         });
 
+        // Handle form submission
+        $('#update-invitation').click(function () {
+            var form = $('#update-invitation-form');
+            var formData = new FormData(form[0]);
+            var url = '/admins/invitation/update/' + invitationId;
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Reset the form fields
+                    form[0].reset();
+                    // Close the modal
+                    $('#UpdateModalForm').modal('hide');
+                    // Reload the page or update the content as desired
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error.responseText);
+                    var errors = JSON.parse(error.responseText).errors;
+                    console.log(errors);
+                    handleFormErrors(errors, '.update_modal_errors');
+                }
+            });
+        });
+
+        // Function to display form errors
+        function handleFormErrors(errors, errorContainer) {
+            // Remove existing error messages and classes
+            $('.form-group').removeClass('is-invalid');
+            $('.invalid-feedback').html('');
+            $(errorContainer).empty();
+
+            $.each(errors, function (field, messages) {
+                var inputField = $('#id_' + field);
+                var errorField = inputField.closest('.form-group').find('.invalid-feedback');
+
+                // Add error message(s) to the error field
+                errorField.html(messages.join('<br>'));
+
+                // Add 'is-invalid' class to the input field's parent element
+                inputField.closest('.form-group').addClass('is-invalid');
+
+                // Add error message(s) with field name to the error alert box
+                var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                    '<strong id="field_name">' + field + ':</strong>' +
+                    '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+                    '</div>');
+
+                // Append the error alert box to the error container
+                $(errorContainer).append(errorAlertBox);
+            });
+        }
+    });
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        // Handle click event on update button
+        $(document).on('click', '.update-guest-group', function () {
+            var groupId = $(this).data('record-id');
+            var updateForm = $('#updateGuestGroupForm');
+            var updateModal = $('#GuestUpdateGroupModal');
+
+            // Reset the form fields before opening the modal
+            updateForm.trigger('reset');
+            updateForm.find('#guest-names-update-container').empty();
+
+            // Fetch the guest group data using AJAX
+            $.ajax({
+                url: '/admins/update_guest_group/',
+                type: 'GET',
+                data: {group_id: groupId},
+                success: function (response) {
+                    // Populate the form fields with the fetched data
+                    updateForm.find('#group_id').val(groupId);
+                    updateForm.find('#group_name').val(response.group_name);
+
+                    // Populate existing guest names
+                    var guestNamesContainer = updateForm.find('#guest-names-update-container');
+                    for (let index = 0; index < response.guest_names.length; index++) {
+                        var guestNameInput = $('<input>').attr({
+                            type: 'text',
+                            name: 'guest_names[]',
+                            class: 'form-control guest-name-input',
+                            required: 'required',
+                            placeholder: 'Enter Guest Name',
+                            value: response.guest_names[index]
+                        });
+
+                        var deleteButton = $('<button>').attr({
+                            type: 'button',
+                            class: 'btn btn-danger btn-rounded delete-guest',
+                        }).text('Delete');
+
+                        var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+                        var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+                        var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+                        guestNamesContainer.append(formGroup);
+                    }
+
+                    // Open the update modal
+                    updateModal.modal('show');
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Handle the error case
+                    console.log('Error:', errorThrown);
+                }
+            });
+        });
+
+        // Handle form submission for updating the guest group
+        $('#updateGuestGroupForm').submit(function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var updateForm = $(this);
+            var updateModal = $('#GuestUpdateGroupModal');
+
+            // Perform AJAX request to update the guest group
+            $.ajax({
+                url: '/admins/update_guest_group/',
+                type: 'POST',
+                data: updateForm.serialize(),
+                success: function (response) {
+                    // Handle the success case
+                    console.log('Guest group updated successfully:', response);
+
+                    // Close the update modal
+                    updateModal.modal('hide');
+                    location.reload();
+
+                    // Optionally, you can perform additional actions after successful update
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Handle the error case
+                    console.log('Error:', errorThrown);
+                }
+            });
+        });
+
+        // Add functionality for adding and deleting guest name fields
+        $('.add-guest-name-update').click(function () {
+            var guestNameInput = $('<input>').attr({
+                type: 'text',
+                name: 'guest_names[]',
+                class: 'form-control guest-name-input',
+                required: 'required',
+                placeholder: 'Enter Guest Name'
+            });
+
+
+            var deleteButton = $('<button>').attr({
+                type: 'button',
+                class: 'btn btn-danger btn-rounded delete-guest'
+            }).text('Delete');
+
+            var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+            var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+            var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+
+            $('#guest-names-update-container').append(formGroup);
+        });
+
+        $(document).on('click', '.delete-guest', function () {
+            $(this).closest('.form-group').remove();
+        });
+    });
+
+
+</script>
+<script>
+    function InvitationRowOrder(rowIdList) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
+
+        const data = {
+            row_id_list: rowIdList,
+            csrfmiddlewaretoken: csrfToken
+        };
+
+        const url = '/admins/update_invitation_order/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error:', data.error);
+                } else {
+                    console.log('Row order updated successfully');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    const table = document.getElementById('sortable-table').getElementsByTagName('tbody')[0];
+
+    // Initialize SortableJS
+    const sort = Sortable.create(table, {
+        animation: 300, // Animation speed in milliseconds
+        onEnd: function (event) {
+            const rows = Array.from(table.getElementsByTagName('tr'));
+            const rowIdList = rows.map(row => row.getAttribute('data-id'));
+            InvitationRowOrder(rowIdList);
+        }
+    });
 
 
 </script>
