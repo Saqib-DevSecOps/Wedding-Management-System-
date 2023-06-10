@@ -71,9 +71,9 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category')
     search_fields = ('title', 'host', 'category__name')
 
-admin.sites.register(ServiceContent)
-admin.sites.register(Site)
-admin.sites.register(SitePartner)
-admin.sites.register(SiteTestimonial)
-admin.sites.register(ContactRequest)
+admin.site.register(ServiceContent)
+admin.site.register(Site)
+admin.site.register(SitePartner)
+admin.site.register(SiteTestimonial)
+admin.site.register(ContactRequest)
 # Register your models here.
