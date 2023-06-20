@@ -8,7 +8,7 @@ from .models import (
     BlogCategory,
     Blog,
     EventCategory,
-    Event,ServiceContent,Site,SitePartner,SiteTestimonial,ContactRequest,AboutUsSection
+    Event,ServiceContent,Site,SitePartner,SiteTestimonial,ContactRequest,AboutUsSection , BackgroundImage
 
 )
 
@@ -77,5 +77,5 @@ admin.site.register(SitePartner)
 admin.site.register(SiteTestimonial)
 admin.site.register(ContactRequest)
 admin.site.register(AboutUsSection)
-
+admin.site.register(BackgroundImage)
 # Register your models here.

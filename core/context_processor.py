@@ -1,8 +1,9 @@
-from src.website.models import Site
-
+from src.website.models import Site , BackgroundImage
 
 def get_site_information(request):
     site = Site.my_site()
+    background = BackgroundImage.objects.all()
+    background = background.order_by('created_on').first()
     context = {
         'name': site.name,
         'tagline': site.tagline,
@@ -12,5 +13,6 @@ def get_site_information(request):
         'phone': site.phone,
         'email': site.email,
         'address': site.address,
+        'background' : background
     }
     return context
