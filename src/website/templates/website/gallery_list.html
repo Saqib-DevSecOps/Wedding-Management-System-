@@ -6,19 +6,24 @@
 <!-- Start main-content -->
 <div class="main-content">
     <!-- Section: inner-header -->
-    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="{% static 'website/images/bg/bg11.jpg' %}">
-        <div class="container pt-200 pb-50">
-            <!-- Section Content -->
-            <div class="section-content pt-100">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="title text-white">Gallery</h3>
-                    </div>
+    <section class="inner-header divider parallax layer-overlay overlay-dark-5">
+        {% if background.gallery_background %}
+            <img src="{{ background.gallery_background.url }}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Background Image">
+        {% else %}
+            <img src="{% static 'website/images/bg/bg11.jpg' %}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Default Background Image">
+        {% endif %}
+    
+    </section>
+    <div class="container ">
+        <!-- Section Content -->
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title text-dark">Gallery</h3>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
     <!-- Section: Gallery  -->
     <section class="bg-lighter" id="gallery">
         <div class="container-fluid p-0">

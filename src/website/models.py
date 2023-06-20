@@ -200,17 +200,17 @@ class Site(models.Model):
 
     # ABOUT 
     about_title = models.CharField(max_length=200)
-    about_short_discription = HTMLField()
+    about_short_discription = HTMLField(null=True,blank=True)
     about_image_1 = models.ImageField(upload_to  = 'home/',null=True,blank=True)
     about_image_2 = models.ImageField(upload_to ='home/',null=True,blank=True)
     about_image_3 = models.ImageField(upload_to = 'home/',null=True,blank=True)
     
 
     # Titles
-    service_title = models.CharField(max_length=200)
-    event_title = models.CharField(max_length=200)
-    gallery_title = models.CharField(max_length=200)
-    blog_title = models.CharField(max_length=200)
+    service_title = models.CharField(max_length=200,null=True,blank=True)
+    event_title = models.CharField(max_length=200,null=True,blank=True)
+    gallery_title = models.CharField(max_length=200,null=True,blank=True)
+    blog_title = models.CharField(max_length=200,null=True,blank=True)
 
     # CONTACT
     address = models.CharField(max_length=1000, default='_ no address provided _')
@@ -284,3 +284,14 @@ class AboutUsSection(models.Model):
         return f"About Us {self.pk}"
 
 
+class BackgroundImage(models.Model):
+    event_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    service_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    gallery_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    blog_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    about_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    contact_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.pk)
