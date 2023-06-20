@@ -36,7 +36,7 @@
           <div class="row text-center mt-30">
             {% for object in object_list %}
             <div class="col-md-4 col-sm-6">
-              <div class="services-box mb-50"> <img class="" alt="" src="{{ object.image.url }}">
+              <div class="services-box mb-50"> <img class="" alt=""style="height: 300px; width: 400px; object-fit: cover;" src="{{ object.image.url }}">
                 <h4 class="mt-30">{{object.name}}</h4>
                 <p>{{object.description}}</p>
               </div>

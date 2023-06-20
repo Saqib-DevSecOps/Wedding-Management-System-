@@ -150,7 +150,7 @@ class Event(models.Model):
 
     title = models.CharField(max_length=255)
     host = models.CharField(max_length=255, verbose_name="host name")
-    thumbnail_image = models.ImageField(upload_to='books/images/posts', null=True, blank=True)
+    thumbnail_image = models.ImageField(upload_to='books/images/posts')
     slug = models.SlugField(unique=True, null=False)
     category = models.ForeignKey(EventCategory, on_delete=models.SET_NULL, blank=False, null=True,
                                  related_name='event_category')
@@ -197,6 +197,20 @@ class Site(models.Model):
     description = models.CharField(default="_ no description _", max_length=255)
     logo = models.ImageField(upload_to='site/logo', null=True, blank=True)
     favico = models.ImageField(upload_to='site/favico', null=True, blank=True)
+
+    # ABOUT 
+    about_title = models.CharField(max_length=200)
+    about_short_discription = HTMLField()
+    about_image_1 = models.ImageField(upload_to  = 'home/',null=True,blank=True)
+    about_image_2 = models.ImageField(upload_to ='home/',null=True,blank=True)
+    about_image_3 = models.ImageField(upload_to = 'home/',null=True,blank=True)
+    
+
+    # Titles
+    service_title = models.CharField(max_length=200)
+    event_title = models.CharField(max_length=200)
+    gallery_title = models.CharField(max_length=200)
+    blog_title = models.CharField(max_length=200)
 
     # CONTACT
     address = models.CharField(max_length=1000, default='_ no address provided _')
@@ -256,4 +270,17 @@ class ContactRequest(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class AboutUsSection(models.Model):
+    image_1 = models.ImageField(upload_to="about/",null=True,blank=True)
+    image_2 = models.ImageField(upload_to="about/",null=True,blank=True)
+    image_3 = models.ImageField(upload_to="about/",null=True,blank=True)
+    short_description = HTMLField()
+    description = HTMLField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"About Us {self.pk}"
+
 
