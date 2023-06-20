@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, DetailView, View
 from src.website.filters import BlogFilter, EventFilter
 from src.website.models import (
     Slider, Blog, Gallery, BlogCategory, Service, Event, Site, ContactRequest,
-    SitePartner, SiteTestimonial
+    SitePartner, SiteTestimonial , AboutUsSection
 )
 from django.contrib import messages
 
@@ -23,6 +23,10 @@ class Home(TemplateView):
         context['images'] = Gallery.objects.all()[:8]
         context['services'] = Service.objects.all()[:6]
         events = Event.objects.all()
+        site = Site.objects.all()
+        context['site'] = site.order_by('-created_on').first()
+        site = site.order_by('-created_on').first()
+        print(site.about_title) 
         context['events'] = events.order_by('-created_at').first()
         context['blogs'] = Blog.objects.all()[:3]
         context['partners'] = SitePartner.objects.all()
@@ -120,7 +124,13 @@ class GalleryList(ListView):
 class AboutUs(TemplateView):
     template_name = 'website/about_us.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(AboutUs, self).get_context_data(**kwargs)
+        about = AboutUsSection.objects.all()
+        context['about'] = about.order_by("created_on").first()
+        return context
 
+        
 class ContactUs(View):
     template_name = 'website/contact_us.html'
 

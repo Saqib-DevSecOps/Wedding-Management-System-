@@ -24,6 +24,9 @@
         <div class="row">
           <div class="col-sm-12 col-md-5">
             <h3 class="text-theme-colored mt-0">About Us</h3>
+            {% if about.short_description %}
+            {{about.short_description | safe}}
+            {% else %}
             <p>Lorem ipsum dolor sit amet, consectet adipisicing elit. Quas, veniam nobis minima. Delectus, dolorem rerum, eos nemo dolore amet quis, eum debiti modi voluptatibus ducimus molestiae laborum itaque quam maxime dolor amit laboriosam aperiam exercitationem.Cos nemo dolore amet quis, eum debiti modi voluptatibus ducimus molestiae laborum itaque quam maxime dolor amit laboriosam aperiam exercitationem. Amit dolor sit.</p>
             <div class="row mt-30 mb-30 ml-20">
              <div class="col-xs-6">
@@ -42,60 +45,33 @@
              </div>
             </div>
             <p>Lorem ipsum dolor sit amet, consectet adipisicing elit. Quas, veniam nobis minima. Delectus, dolorem rerum, eos nemo dolore amet quis,</p>
+            {% endif %}
           </div>
+          
           <div class="col-sm-12 col-md-7">
-            <div class="image-carousel">
-              <div class="item">
-                <div class="thumb">
-                  <img src="{% static 'website/images/bg/bg4.jpg' %}" alt="">
-                </div>
-              </div>
-              <div class="item">
-                <div class="thumb">
-                  <img src="{% static 'website/images/bg/bg2.jpg' %}" alt="">
-                </div>
-              </div>
-              <div class="item">
-                <div class="thumb">
-                  <img src="{% static 'website/images/bg/bg3.jpg' %}" alt="">
-                </div>
-              </div>
-            </div>
+            <div class="image-carousel owl-carousel">
+              {% if about.image_1 %}
+              <div class="item"><img alt="slide1" style="height: 500px; width: 800px; object-fit: cover;"
+                  src="{{about.image_1.url}}"></div>
+              {% else %}
+              <div class="item"><img alt="slide1"
+                  src="{% static 'website/images/photos/slide1.jpg' %}"></div>
+              {% endif %}
+              {% if about.image_2 %}
+              <div class="item"><img alt="slide1" style="height: 500px; width: 800px; object-fit: cover;"
+                  src="{{about.image_2.url}}"></div>
+              {% else %}
+              <div class="item"><img alt="slide2"
+                  src="{% static 'website/images/photos/slide2.jpg' %}"></div>
+              {% endif %}
+              {% if about.image_3 %}
+              <div class="item"><img alt="slide3" style="height: 500px; width: 800px; object-fit: cover;"
+                  src="{{about.image_3}}"></div>
+              {% else %}
+              <div class="item"><img alt="slide3"
+                                     src="{% static 'website/images/photos/slide3.jpg' %}"></div>
+              {% endif %}
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Divider: Divider -->
-    <section class="divider parallax layer-overlay overlay-dark-5" data-stellar-background-ratio="0.5" data-bg-img="{% static 'website/images/bg/bg8.jpg' %}">
-      <div class="container">
-        <!-- Section Content -->
-        <div class="section-content">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay1">
-              <div class="features text-center mb-md-60 mb-md-60"> <i class="pe-7s-culture font-48 text-white"></i>
-                <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-venues.html">Venues</a></h4>
-                <p class="text-white">Search by location, type &amp; capacity to find your perfect wedding venue</p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay2">
-              <div class="features text-center mb-md-60"> <i class="pe-7s-note2 font-48 text-white"></i>
-                <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-checklist.html">Checklist</a></h4>
-                <p class="text-white">Personalise your wedding checklist so that you don’t miss a thing!</p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay3">
-              <div class="features text-center mb-md-60"> <i class="pe-7s-cash font-48 text-white"></i>
-                <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-budget.html">Budget</a></h4>
-                <p class="text-white">Plan and track your busget with our free wedding budget tracker</p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay4">
-              <div class="features text-center mb-md-60"> <i class="pe-7s-shopbag font-48 text-white"></i>
-                <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="shop-category.html">Shop</a></h4>
-                <p class="text-white">Find everything you need to create the perfect wedding</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -106,11 +82,8 @@
       <div class="container">
         <div class="section-content">
           <div class="row">
-            <div class="col-md-7">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum? Natus asperiores, minima, eius iure totam molestias, magnam eaque atque minus nostrum quia odio. Deserunt laborum sint cupiditate, voluptates, similique quas, ipsam et iusto reprehenderit, eius tempore nisi quidem consequatur nostrum hic. Aliquam dolor reprehenderit, facere amet nihil placeat excepturi veritatis harum tenetur, ipsum quas inventore perspiciatis, non exercitationem saepe optio debitis odio facilis voluptas sed ut minus tempora. Libero quaerat ipsa consequatur, ipsam reprehenderit asperiores, qui natus beatae non dignissimos voluptas enim praesentium dicta quas ut tempore rerum fugit tenetur rem labore. Mollitia vel repudiandae, nihil, illo quaerat dolore placeat nobis voluptatum odit laboriosam, ipsa dolores dignissimos est velit libero illum dolor aspernatur nostrum aperiam quas minima. Quidem possimus aliquid, sint est, alias quia! Magnam possimus sunt et deserunt labore.</p>
-            </div>
-            <div class="col-md-5">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorem, deleniti, itaque quis perspiciatis enim quo illum minima corrupti natus iure tempore magni adipisci officiis! Voluptas illo obcaecati earum? Natus asperiores, minima, eius iure totam molestias, magnam eaque atque minus nostrum quia odio. Deserunt laborum sint cupiditate, voluptates, similique quas, ipsam et iusto reprehenderit, eius tempore nisi quidem consequatur nostrum hic. Aliquam dolor reprehenderit, facere amet nihil placeat excepturi veritatis harum tenetur, ipsum quas inventore perspiciatis, non exercitationem saepe optio debitis odio facilis voluptas sed ut minus tempora. Libero quaerat ipsa consequatur, ipsam reprehenderit asperiores, qui natus beatae non dignissimos volupta.</p>
+            <div class="col-md-12">
+              {{about.description | safe}}
             </div>
           </div>
         </div>

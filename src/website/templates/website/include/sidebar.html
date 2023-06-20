@@ -11,13 +11,12 @@
                     <ul class="nav nav-list">
                         <li><a href="{% url 'website:home' %}">Home</a></li>
                         <li><a href="{% url 'website:services' %}">Services</a></li>
-                        <li><a class="tree-toggler nav-header">Pages <i class="fa fa-angle-down"></i></a>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{% url 'website:gallery' %}">Gallery</a></li>
+                        <li><a href="{% url 'website:blog' %}">Blogs</a></li>
+                        <li><a href="{% url 'website:events' %}">Events</a></li>
+
+                        <li><a href="{% url 'website:about' %}">About</a></li>
+
                         <li><a href="{% url 'website:contact-us' %}">Contact</a></li>
                     </ul>
                 </nav>

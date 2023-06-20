@@ -496,8 +496,12 @@
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>About us</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        {% if  site.about_title %}
+                        <p><em>{{site.about_title}}</em></p>
+                        {% else %}
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
                             dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -505,15 +509,34 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="image-carousel owl-carousel">
+                            {% if site.about_image_1 %}
+                            <div class="item"><img alt="slide1" style="height: 400px;"
+                                src="{{site.about_image_1.url}}"></div>
+                            {% else %}
                             <div class="item"><img alt="slide1"
-                                                   src="{% static 'website/images/photos/slide1.jpg' %}"></div>
+                                src="{% static 'website/images/photos/slide1.jpg' %}"></div>
+                            {% endif %}
+                            {% if site.about_image_2 %}
+                            <div class="item"><img alt="slide1" style="height: 400px;"
+                                src="{{site.about_image_2.url}}"></div>
+                            {% else %}
                             <div class="item"><img alt="slide2"
-                                                   src="{% static 'website/images/photos/slide2.jpg' %}"></div>
+                                src="{% static 'website/images/photos/slide2.jpg' %}"></div>
+                            {% endif %}
+                            {% if site.about_image_3 %}
+                            <div class="item"><img alt="slide3" style="height: 400px;"
+                                src="{{site.about_image_3.url}}"></div>
+                            {% else %}
                             <div class="item"><img alt="slide3"
                                                    src="{% static 'website/images/photos/slide3.jpg' %}"></div>
+                            {% endif %}
                         </div>
+                            
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
+                        {% if site.about_short_discription %}
+                        {{site.about_short_discription|safe}}
+                        {% else %}
                         <h3 class="mt-0">Luxury Wedding Planners</h3>
                         <p>We plan elegant, stylish, glamorous and fun celebrations and are the Luxury Wedding
                             Planners for savvy, sophisticated couples who demand first class service and a
@@ -536,6 +559,7 @@
                                 </ul>
                             </div>
                         </div>
+                        {% endif %}
                         <a class="btn btn-dark btn-theme-colored mt-30" href="{% url 'website:about' %}" role="button">Know
                             more</a>
                     </div>
@@ -552,8 +576,13 @@
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>Services</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                      
+                        {% if  site.service_title %}
+                        <p><em>{{site.service_title}}</em></p>
+                        {% else %}
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
                             dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -561,7 +590,7 @@
                 <div class="row">
                     {% for object in services %}
                     <div class="col-md-4 col-sm-6 wow fadeInUp animation-delay1">
-                        <div class="services-box mb-50"><img alt=""
+                        <div class="services-box mb-50"><img alt="" style="height: 300px; width: 400px; object-fit: cover;"
                                                              src="{{object.image.url}}">
                             <h4 class="mt-30">{{object.name}}</h4>
                             <p>{{object.description}}</p>
@@ -574,51 +603,6 @@
         </div>
     </section>
 
-    <!-- Divider: Divider -->
-    <section class="divider parallax layer-overlay overlay-dark-7"
-             data-bg-img="{% static 'website/images/bg/bg8.jpg' %}"
-             data-stellar-background-ratio="0.5">
-        <div class="container">
-            <!-- Section Content -->
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay1">
-                        <div class="features text-center mb-md-60 mb-md-60"><i
-                                class="pe-7s-culture font-48 text-white"></i>
-                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-venues.html">Venues</a>
-                            </h4>
-                            <p class="text-white">Search by location, type &amp; capacity to find your perfect
-                                wedding venue</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay2">
-                        <div class="features text-center mb-md-60"><i class="pe-7s-note2 font-48 text-white"></i>
-                            <h4 class="mt-20 mb-20"><a class="text-theme-colored"
-                                                       href="page-checklist.html">Checklist</a>
-                            </h4>
-                            <p class="text-white">Personalise your wedding checklist so that you don’t miss a
-                                thing!</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay3">
-                        <div class="features text-center mb-md-60"><i class="pe-7s-cash font-48 text-white"></i>
-                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="page-budget.html">Budget</a>
-                            </h4>
-                            <p class="text-white">Plan and track your busget with our free wedding budget
-                                tracker</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 wow fadeInUp animation-delay4">
-                        <div class="features text-center mb-md-60"><i class="pe-7s-shopbag font-48 text-white"></i>
-                            <h4 class="mt-20 mb-20"><a class="text-theme-colored" href="shop-category.html">Shop</a>
-                            </h4>
-                            <p class="text-white">Find everything you need to create the perfect wedding</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Section: Event  -->
     <section id="event">
@@ -627,9 +611,14 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>Events</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">
+
+                        {% if  site.event_title %}
+                        <p><em>{{site.event_title}}</em></p>
+                        {% else %}
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
                             dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -646,16 +635,14 @@
                             </ol>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                <div class="item active"><img alt="..." style=class="img-responsive"
-                                                              src="{{events.thumbnail_image.url}}">
-                                    <div class="carousel-caption wedding-area pb-sm-50">
+                                <div class="item active">
+                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">
                                         <h2 class="text-white"></h2>
                                         <h4 class="text-theme-colored">{{events.title|upper}}</h4>
                                         <div class="details hidden-xs">
                                             <p class="text-white">{{events.content|safe}} </p>
                                         </div>
-                                        <a class="btn btn-dark btn-theme-colored text-white" href="#" role="button">Read
-                                            More</a></div>
+                                    
                                 </div>
                                 `
                             </div>
@@ -683,110 +670,102 @@
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <h2> Gallery</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.</em></p>
+                        {% if  site.gallery_title %}
+                        <p><em>{{site.gallery_title}}</em></p>
+                        {% else %}
+                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
+                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="section-content">
                 <div class="row">
-                    <div class="col-md-12">
-
-                        <!-- Portfolio Gallery Grid -->
-                        <div class="portfolio-gallery grid-4 clearfix" id="grid">
-
-                            {% for object in images %}
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <div class="flexslider-wrapper" data-controlnav="false" data-slideshow="false">
-                                        <div class="flexslider">
-                                            <ul class="slides">
-                                                {% for images in images %}
-                                                <li><a href="{{images.image.url}}"
-                                                       title="{{images.category}}"><img
-                                                        alt=""
-                                                        src="{{object.image.url}}"></a>
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="overlay-shade"></div>
-                                    <div class="text-holder">
-                                        <div class="title text-center">{{object.category}}</div>
-                                    </div>
-                                    <div class="icons-holder">
-                                        <div class="icons-holder-inner">
-                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                <a href="#"><i class="fa fa-picture-o"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                  <div class="col-md-12"> 
+                    
+                    <!-- Portfolio Gallery Grid -->
+                    <div id="grid" class="portfolio-gallery grid-4 clearfix" data-lightbox="gallery" style="position: relative; height: 532.5px;">
+                      {% for image in images %}
+                      <!-- Portfolio Item Start -->
+                      <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
+                        <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="Title Here 2">
+                          <div class="thumb">
+                            
+                            <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
+                            <div class="overlay-shade"></div>
+                            <div class="text-holder">
+                              <div class="title text-center">Wedding</div>
                             </div>
-                            <!-- Portfolio Item End -->
-                            {% endfor %}
-
-                        </div>
-                        <div class="mb-5 mt-5 text-center">
-                            <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5"
-                               href="{% url 'website:gallery' %}">See More</a>
-
-                        </div>
-                        <!-- End Portfolio Gallery Grid -->
+                            <div class="icons-holder">
+                              <div class="icons-holder-inner">
+                                <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                  <i class="fa fa-plus text-white"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      {% endfor %}
+                      <!-- Portfolio Item End -->
                     </div>
+                    <!-- End Portfolio Gallery Grid --> 
+                  </div>
                 </div>
-            </div>
+              </div>
         </div>
     </section>
 
-    <!-- Divider: Testimonials  -->
-    <section class="divider parallax layer-overlay overlay-dark-7"
-             data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
-             data-stellar-background-ratio="0.5">
-        <div class="container pt-70 pb-30">
-            <!-- Section title -->
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 testimonial text-center">
-                        <h2 class="title text-white">Testimonials</h2>
-                        <div class="quote"><i class="fa fa-quote-left icon text-white"></i></div>
-                    </div>
-                </div>
+    <section class="divider parallax layer-overlay overlay-dark-8"
+     data-stellar-background-ratio="0.5"
+     data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
+ 
+      style="background-image: url(static 'website/images/bg/bg4.jpg'); background-position: 50% 218.892px;">
+  	  <div class="container pt-70 pb-60"> 
+  	    <!-- Section title -->
+  	    <div class="section-title">
+  	      <div class="row">
+  	        <div class="col-md-6 col-md-offset-3 testimonial text-center">
+  	          <h2 class="title text-white">Our Friend Say</h2>
+  	          <div class="quote"> <i class="fa fa-quote-left icon text-white"></i> </div>
+  	        </div>
+  	      </div>
+  	    </div>
+  	    <!-- Section Content -->
+  	    <div class="section-content">
+  	      <div class="row">
+  	        <div class="col-md-8 col-md-offset-2 mb-30">
+  	          <div class="testimonial-carousel owl-carousel owl-theme owl-loaded">
+  	            
+  	            
+  	        {% for test in testimonials %}
+  	    
+            <div class="owl-item" style="width: 750px; margin-right: 15px;"><div class="item xs-text-center">
+  	              <div class="content pt-10">
+  	                <p>{{test.comment}}</p>
+  	                <div class="thumb"><img class="img-circle" style="height: 100px;" alt="" src="{{test.image.url}}" width="75"></div>
+  	                <h5 class="text-theme-colored mt-20 mb-0">{{test.name}}</h5>
+  	              </div>
+  	            </div>
             </div>
-            <!-- Section Content -->
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 mb-30">
-                        <div class="testimonial-carousel">
-                            <div class="item xs-text-center">
-                                {% for test in testimonials %}
-
-                                <div class="content pt-10">
-                                    <p>
-                                        {{ test.description }}
-                                    </p>
-                                    <div class="thumb">
-                                        {% if test.image %}
-                                        <img alt="" class="img-circle"
-                                             src="https://placehold.co/75x75" width="75">
-                                        {% else %}
-                                        <img alt="" class="img-circle"
-                                             src="{{ test.image.url }}" width="75">
-                                        {% endif %}
-                                    </div>
-                                    <h5 class="text-theme-colored mt-20 mb-0">{{ test.name }}</h5>
-                                </div>
-
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  
+            <div class="owl-item cloned active" style="width: 750px; margin-right: 15px;"><div class="item xs-text-center">
+  	              <div class="content pt-10">
+                    <p>{{test.comment}}</p>
+                    <div class="thumb"><img class="img-circle" alt="" src="{{test.image.url}}" width="75"></div>
+  	                <h5 class="text-theme-colored mt-20 mb-0">{{test.name}}</h5>
+  	              </div>
+  	            </div>
             </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+    <div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div style="" class="owl-dots"><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
+  	        </div>
+  	      </div>
+  	    </div>
+  	  </div>
+  	</section>
 
     <!-- Section: Blog  -->
     <section id="blog">
@@ -796,8 +775,12 @@
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>Latest Blogs</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                        {% if  site.event_title %}
+                        <p><em>{{site.event_title}}</em></p>
+                        {% else %}
                         <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
                             dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -807,7 +790,7 @@
                     <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">
                         <article class="post clearfix maxwidth600 mb-30">
                             <div class="entry-header">
-                                <div class="post-thumb thumb"><img alt="" class="img-responsive img-fullwidth"
+                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"
                                                                    src="{{object.thumbnail_image.url}}">
                                 </div>
                             </div>
@@ -838,26 +821,28 @@
 
     <!-- Divider: Clients -->
     <section class="divider parallax layer-overlay overlay-lighter"
-             data-bg-img="{% static 'website/images/bg/bg6.jpg' %}"
+             data-bg-img="{% static 'website/images/bg/bg8.jpg' %}"
              data-stellar-background-ratio="0.5">
         <div class="container pb-140 pt-90">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="text-black text-center">Partnersss</h2>
+                    <h2 class="text-black text-center">Partners</h2>
                 </div>
             </div>
             <div class="row mt-60 text-center">
 
-                {% for test in partners %}
+                {% for partner in partners %}
 
                 <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
-                    <div class="client-img style2">
-                        {% if test.logo %}
-                        <img alt="" class="img-responsive"
-                             src="https://placehold.co/75x75">
+                    <div class="-img style2">
+                        {% if partner.logo %}
+                        <a href="{{partner.website}}"><img alt="" style="height: 120px; width: 800px; object-fit: cover;" 
+                        src="{{ partner.logo.url }}">
+</a>
                         {% else %}
                         <img alt="" class="img-responsive"
-                             src="{{ test.logo.url }}">
+                             src="https://placehold.co/75x75">
+
                         {% endif %}
                     </div>
                 </div>
