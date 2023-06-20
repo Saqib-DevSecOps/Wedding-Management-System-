@@ -2,44 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b9ac000-63bb-4b2c-83a6-39f8882da955" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Weddings-France.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Weddings-France.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0002_alter_user_groups_alter_user_user_permissions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0003_user_profile_image.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0004_alter_user_is_bride_alter_user_is_fiance.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0002_remove_guestgroup_another_auto_field_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0003_rename_invitation_number_invitationletter_total_invitation_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0004_remove_invitationletter_invitation_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0005_alter_invitationletter_group.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0006_alter_invitationletter_group.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0007_alter_guesttable_guest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0008_alter_provider_attachment_alter_provider_comment_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0009_table_created_at_table_updated_at.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0010_alter_invitationletter_options_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0011_alter_provider_email.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0012_alter_provider_options.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0002_alter_event_category.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0003_event_is_completed.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0004_event_host_alter_event_category_alter_event_title.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0005_alter_event_host.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0006_servicecontent_site.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0007_site_service_content.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0008_contactrequest_site_created_on.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0009_site_description_site_logo_site_tagline.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0010_sitepartner_site_favico.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/0011_sitetestimonial_sitepartner_website_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/migrations/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687247377074</updated>
-      <workItem from="1687247382430" duration="316000" />
+      <workItem from="1687247382430" duration="473000" />
     </task>
     <servers />
   </component>
