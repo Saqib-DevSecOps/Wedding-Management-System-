@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="db88566e-11b8-4fab-a413-9827df5c56ae" name="Changes" comment="">
+    <list default="true" id="0b9ac000-63bb-4b2c-83a6-39f8882da955" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Weddings-France.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Weddings-France.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/administration/admins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0002_alter_user_groups_alter_user_user_permissions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0003_user_profile_image.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/0004_alter_user_is_bride_alter_user_is_fiance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0002_remove_guestgroup_another_auto_field_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0003_rename_invitation_number_invitationletter_total_invitation_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0004_remove_invitationletter_invitation_date.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0005_alter_invitationletter_group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0006_alter_invitationletter_group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0007_alter_guesttable_guest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0008_alter_provider_attachment_alter_provider_comment_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0009_table_created_at_table_updated_at.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0010_alter_invitationletter_options_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0011_alter_provider_email.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/0012_alter_provider_options.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0002_alter_event_category.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0003_event_is_completed.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0004_event_host_alter_event_category_alter_event_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0005_alter_event_host.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0006_servicecontent_site.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0007_site_service_content.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0008_contactrequest_site_created_on.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0009_site_description_site_logo_site_tagline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0010_sitepartner_site_favico.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0011_sitetestimonial_sitepartner_website_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,31 +49,10 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
-    <envs>
-      <env key="FLASK_APP" value="app" />
-    </envs>
-    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
-    <option name="myEnvs">
-      <map>
-        <entry key="FLASK_APP" value="app" />
-      </map>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2Qj5IEngnvChL10u3PE3qnQFzOR" />
+  <component name="ProjectId" id="2RSdNE7lMeVX7fCWTXCBwoezRZY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,53 +61,17 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/i_mark_1/SAQIB/GIT/Weddings-France/src/website/templates/website",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/website/templates/website" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Django Server.Weddings-France">
-    <configuration type="Python.DjangoServer" factoryName="Django server">
-      <module name="Weddings-France" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../../centralenv/bin/python3.10" />
-      <option name="SDK_NAME" value="Python 3.10 (centralenv)" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="Weddings-France" type="Python.DjangoServer" factoryName="Django server">
       <module name="Weddings-France" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="core.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -117,54 +93,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="db88566e-11b8-4fab-a413-9827df5c56ae" name="Changes" comment="" />
-      <created>1685854078397</created>
+      <changelist id="0b9ac000-63bb-4b2c-83a6-39f8882da955" name="Changes" comment="" />
+      <created>1687247377074</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1685854078397</updated>
-      <workItem from="1685854079750" duration="1003000" />
-      <workItem from="1685855169664" duration="7739000" />
-      <workItem from="1685973252597" duration="207000" />
-      <workItem from="1686030608298" duration="64000" />
-      <workItem from="1686194753310" duration="3069000" />
-      <workItem from="1686233707646" duration="183000" />
-      <workItem from="1686236315795" duration="4941000" />
-      <workItem from="1686297208438" duration="10809000" />
-      <workItem from="1686381199975" duration="21000" />
-      <workItem from="1686381276443" duration="11842000" />
+      <updated>1687247377074</updated>
+      <workItem from="1687247382430" duration="316000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/administration/admins/models.py</url>
-          <line>96</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-      <default-breakpoints>
-        <breakpoint suspend="NONE" type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
