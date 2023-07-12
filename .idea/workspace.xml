@@ -4,6 +4,16 @@
     <list default="true" id="0b9ac000-63bb-4b2c-83a6-39f8882da955" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0012_auto_20230620_1838.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0013_auto_20230620_1849.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0014_auto_20230620_1905.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0015_auto_20230620_1908.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0016_auto_20230620_2000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0017_auto_20230620_2004.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0018_auto_20230620_2039.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0019_auto_20230620_2045.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0020_backgroundimage_created_on.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/migrations/0021_backgroundimage_about_background.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +22,9 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -26,7 +39,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/mynew/Weddings-France",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -63,6 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687247377074</updated>
       <workItem from="1687247382430" duration="473000" />
+      <workItem from="1689188898741" duration="143000" />
     </task>
     <servers />
   </component>
