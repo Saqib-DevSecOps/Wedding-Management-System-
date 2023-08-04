@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0b9ac000-63bb-4b2c-83a6-39f8882da955" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Weddings-France.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Weddings-France.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/templates/website/include/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/website/templates/website/include/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/website/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/administration/admins/templates/admins/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/administration/admins/templates/admins/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +35,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/Git/Weddings-France",
+    "last_opened_file_path": "E:/Git/excapp-stampp-gov",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
@@ -71,7 +79,7 @@
       <updated>1687247377074</updated>
       <workItem from="1687247382430" duration="473000" />
       <workItem from="1689188898741" duration="143000" />
-      <workItem from="1691162438597" duration="317000" />
+      <workItem from="1691162438597" duration="7386000" />
     </task>
     <servers />
   </component>

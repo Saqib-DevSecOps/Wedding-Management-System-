@@ -83,6 +83,48 @@
     </div>
     <hr>
     <div class="row">
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3"> Providers Statistics</h4>
+                    <div id="chart_provider">
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3"> Groups Statistics</h4>
+                    <div id="chart_year_months">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Table Statistics</h4>
+                    <div id="chart_table">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Over All Statistics</h4>
+                    <div id="chart_overall">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
@@ -103,7 +145,7 @@
                                     <p class="mb-0">Total Groups</p>
                                 </td>
                                 <td style="width: 25%">
-                                    <h5 class="mb-0">{{total_group}}</h5></td>
+                                    <h5 class="mb-0">{{ total_group }}</h5></td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
                                         <div class="progress-bar bg-primary rounded" role="progressbar"
@@ -117,7 +159,7 @@
                                     <p class="mb-0">Total Guests</p>
                                 </td>
                                 <td>
-                                    <h5 class="mb-0">{{total_guests }}</h5>
+                                    <h5 class="mb-0">{{ total_guests }}</h5>
                                 </td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
@@ -152,7 +194,7 @@
                                     <p class="mb-0">Total Providers</p>
                                 </td>
                                 <td style="width: 25%">
-                                    <h5 class="mb-0">{{total_provider}}</h5></td>
+                                    <h5 class="mb-0">{{ total_provider }}</h5></td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
                                         <div class="progress-bar bg-primary rounded" role="progressbar"
@@ -166,7 +208,7 @@
                                     <p class="mb-0">Total Payments</p>
                                 </td>
                                 <td>
-                                    <h5 class="mb-0">{{total_payment}}</h5>
+                                    <h5 class="mb-0">{{ total_payment }}</h5>
                                 </td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
@@ -181,7 +223,7 @@
                                     <p class="mb-0">Pending Payments</p>
                                 </td>
                                 <td>
-                                    <h5 class="mb-0">{{paid_payment}}</h5>
+                                    <h5 class="mb-0">{{ paid_payment }}</h5>
                                 </td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
@@ -216,7 +258,7 @@
                                     <p class="mb-0">Total tables</p>
                                 </td>
                                 <td style="width: 25%">
-                                    <h5 class="mb-0">{{table}}</h5></td>
+                                    <h5 class="mb-0">{{ table }}</h5></td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
                                         <div class="progress-bar bg-primary rounded" role="progressbar"
@@ -230,7 +272,7 @@
                                     <p class="mb-0">Rounded Tables</p>
                                 </td>
                                 <td>
-                                    <h5 class="mb-0">{{rounded}}</h5>
+                                    <h5 class="mb-0">{{ rounded }}</h5>
                                 </td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
@@ -245,7 +287,7 @@
                                     <p class="mb-0">Rectangle Table</p>
                                 </td>
                                 <td>
-                                    <h5 class="mb-0">{{rectangle}}</h5>
+                                    <h5 class="mb-0">{{ rectangle }}</h5>
                                 </td>
                                 <td>
                                     <div class="progress bg-transparent progress-sm">
@@ -264,6 +306,144 @@
 
     </div>
 
+{% endblock %}
+
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        var options_overall = {
+            series: [{
+                data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    horizontal: true
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: ['Total Groups', 'Total guests', 'Total Providers', 'Total Payment ', 'Pending Payment', 'Paid Payment', 'Total tables',
+                    'Rounded Table', 'Circular Table'
+                ],
+            }
+        };
+
+        var options_year_months = {
+            series: [44, 55, 13],
+            chart: {
+                height: 205,
+                type: 'pie',
+            },
+            labels: ["Total Providers", "Total Payment", "Total Pending"],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+
+        var options_provider = {
+            series: [{
+                data: [21, 22, 10, 28]
+            }],
+
+            chart: {
+                height: 193,
+                type: 'bar',
+            },
+            colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
+                '#f48024', '#69d2e7'
+            ],
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: [
+                    ['John Doe'],
+                    ['Joe mith'],
+                    ['Jake Williams'],
+                    ['Lily Roberts'],
+                ],
+                labels: {
+                    style: {
+                        colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
+                            '#f48024', '#69d2e7'
+                        ], fontSize: '12px'
+                    }
+                }
+            }
+        };
+
+          var option_table = {
+          series: [44, 55, 41, 17, 15],
+          chart: {
+          width: 380,
+          type: 'donut',
+        },
+        plotOptions: {
+          pie: {
+            startAngle: -90,
+            endAngle: 270
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+
+        legend: {
+          formatter: function(val, opts) {
+            return val + " - " + opts.w.globals.series[opts.seriesIndex]
+          }
+        },
+
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+
+        var chart_options_provider = new ApexCharts(document.querySelector("#chart_provider"), options_provider);
+        var chart_year_months = new ApexCharts(document.querySelector("#chart_year_months"), options_year_months);
+        var chart_overall = new ApexCharts(document.querySelector("#chart_overall"), options_overall);
+        var chart_table = new ApexCharts(document.querySelector("#chart_table"), option_table);
+
+        chart_year_months.render();
+        chart_overall.render();
+        chart_options_provider.render()
+        chart_table.render()
+
+    </script>
 {% endblock %}
 
 
