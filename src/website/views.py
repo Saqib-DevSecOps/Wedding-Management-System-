@@ -26,7 +26,6 @@ class Home(TemplateView):
         site = Site.objects.all()
         context['site'] = site.order_by('-created_on').first()
         site = site.order_by('-created_on').first()
-        print(site.about_title) 
         context['events'] = events.order_by('-created_at').first()
         context['blogs'] = Blog.objects.all()[:3]
         context['partners'] = SitePartner.objects.all()
