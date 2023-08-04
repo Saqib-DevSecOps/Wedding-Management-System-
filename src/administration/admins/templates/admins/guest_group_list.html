@@ -20,59 +20,6 @@
     }
 
 </style>
-<div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
-     tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GuestGroupModelLabel">Add Guest Group </h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post">
-                {% csrf_token %}
-
-                <div class="modal-body">
-
-                    {{ form.as_p }}
-                    <h6 class="mb-2">Guest Name</h6>
-                    <div id="guest-names-container">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-10">
-                                    <input class="form-control guest-name-input" name="guest_names[]"
-                                           placeholder="Enter Guest Name" required
-                                           type="text">
-                                </div>
-                                <div class="col-2">
-                                    <button class="btn btn-danger btn-rounded  delete-guest" type="button">Delete
-                                    </button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-success btn-rounded btn-sm" id="add-guest-name" type="button">Add
-                            More
-                        </button>
-
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-
-                    <button class="btn btn-danger " data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-outline-success " type="submit">Save</button>
-                </div>
-            </form>
-
-
-        </div>
-    </div>
-</div>
 <div aria-hidden="true" aria-labelledby="GuestGroupUpdateModelLabel" class="modal fade" id="GuestUpdateGroupModal"
      role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
@@ -179,10 +126,8 @@
             <h4 class="mb-0 font-size-18">Guest Groups List</h4>
 
             <div class="page-title-right">
-                <button class="btn btn-success" data-target="#GuestGroupModal" data-toggle="modal"
-                        data-whatever="@getbootstrap"
-                        type="button">Add Guest Group
-                </button>
+               <button class="btn btn-success" id="add-guest-group">Add Guest Group</button>
+
             </div>
 
         </div>
@@ -290,6 +235,7 @@
 
         </div>
     </div>
+
     <div class="col-sm-4 col-md-4">
         <div class="card">
             <div class="card-body">
@@ -362,38 +308,130 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $('#add-guest-name').click(function () {
-            var guestNameInput = $('<input>').attr({
-                type: 'text',
-                name: 'guest_names[]',
-                class: 'form-control guest-name-input',
-                required: 'required',
-                placeholder: 'Enter Guest Name'
-            });
+  $(document).ready(function () {
+    // Function to create the HTML for a new guest input field and delete button
+    function createGuestInputField() {
+      var guestNameInput = $('<input>').attr({
+        type: 'text',
+        name: 'guest_names[]',
+        class: 'form-control guest-name-input',
+        required: 'required',
+        placeholder: 'Enter Guest Name'
+      });
 
-            var deleteButton = $('<button>').attr({
-                type: 'button',
-                class: 'btn btn-danger btn-rounded delete-guest'
-            }).text('Delete');
+      var deleteButton = $('<button>').attr({
+        type: 'button',
+        class: 'btn btn-danger  delete-guest'
+      }).html('<i class="fas fa-trash"></i>');
 
-            var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
-            var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+      var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
+      var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
+      var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
 
-            var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+      return formGroup;
+    }
 
-            $('#guest-names-container').append(formGroup);
-        });
+    // Use SweetAlert for the modal
+   $('#add-guest-group').click(function () {
+      var swalContent =
+        '<form id="guestGroupForm">' +
+        '{% csrf_token %}' +
+        '<div class="modal-body">' +
+        '<input class="form-control" id="group_name" name="group_name" placeholder="Enter Group Name" required type="text">' +
+        '<h6 class="mb-2 mt-2">Guest Names</h6>' +
+        '<div id="guest-names-container">' +
+        '<div class="form-group">' +
+        '<div class="row guest-name-row">' +
+        '<div class="col-10">' +
+        '<input class="form-control guest-name-input" name="guest_names[]" placeholder="Enter Guest Name" required type="text">' +
+        '</div>' +
+        '<div class="col-2">' +
+        '<button class="btn btn-danger  delete-guest"><i class="fa fa-trash"></i></button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="text-center">' +
+        '<button class="btn btn-primary mr-2" id="add-guest-name" type="button">Add More</button>' +
+        '<button type="submit" class="btn btn-success mr-2">Save</button>' +
+        '<button type="button" class="btn btn-secondary" id="close-swal">Close</button>' +
+        '</div>' +
+        '</div>' +
+        '</form>';
 
-        $(document).on('click', '.delete-guest', function () {
+      // Use SweetAlert for the modal
+      var swalConfig = {
+        title: 'Add Guest Group',
+        html: swalContent,
+        showCancelButton: false,
+        showConfirmButton: false,
+
+        didOpen: () => {
+          // Attach 'Add More' button click event inside the SweetAlert modal
+          $('#add-guest-name').click(function () {
+            var newGuestInputField = createGuestInputField();
+            $('#guest-names-container').append(newGuestInputField);
+          });
+
+          // Attach 'Delete' button click event inside the SweetAlert modal
+          $(document).on('click', '.delete-guest', function () {
             $(this).closest('.form-group').remove();
-        });
+          });
+
+          // Handle the click event for the "Close" button
+          $('#close-swal').click(function () {
+            Swal.close();
+          });
+        },
+        preConfirm: () => {
+
+        },
+      };
+
+     Swal.fire(swalConfig)
+       $('#guestGroupForm').on('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      var form = document.getElementById('guestGroupForm');
+      var formData = new FormData(form);
+        console.log(formData)
+      // Perform the AJAX call to save the data
+      $.ajax({
+        url: '/admins/guest/group/create/',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function (xhr) {
+          // Set CSRF token in request header
+          xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        },
+ success: function (response) {
+    // Handle the success case
+    console.log('Guest group saved successfully:', response);
+    Swal.fire({
+        title: 'Success',
+        text: 'Guest group added successfully',
+        icon: 'success',
+        allowOutsideClick: false, // Prevent closing by clicking outside
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = '/admins/guest/group/list/';
+        }
     });
-
-
+},
+        error: function (error) {
+          // Handle the error case
+          console.log('Error:', error);
+          Swal.fire('Error', 'Failed to add guest group', 'error');
+        }
+      });
+    });
+  });
+});
 </script>
-
-<script>
+    <script>
     function updateCardOrder(cardIdList) {
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // CSRF token
 

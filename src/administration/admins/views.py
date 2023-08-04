@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 from django.views.generic import (
     TemplateView, ListView, DetailView, UpdateView, CreateView
@@ -81,6 +82,20 @@ class GuestGroupListView(CreateView, ListView):
         context['invitation_from'] = InvitationForm
         context['invitation'] = InvitationLetter.objects.filter(group__user=self.request.user)
         return context
+
+
+@csrf_exempt
+def save_guest_group(request):
+    if request.method == 'POST':
+        group_name = request.POST.get('group_name')
+        print("apihit",group_name)
+        guest_names = request.POST.getlist('guest_names[]')
+        guest_group = GuestGroup.objects.create(group_name=group_name, user=request.user)
+        for name in guest_names:
+            guest_group.guest_set.create(guest_name=name)
+        return JsonResponse({'message': 'Guest group created successfully', 'group_id': guest_group.id})
+    else:
+        return JsonResponse({'error': 'Invalid request method. Only POST requests are allowed.'}, status=405)
 
 
 @method_decorator(login_required, name='dispatch')
