@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-                <div class="col">
+        <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3"> Groups Statistics</h4>
@@ -397,10 +397,10 @@
             }
         };
 
-          var option_table = {
-          series: [44, 55, 41, 17, 15],
+        var option_table = {
+              series: [44, 55, 41],
           chart: {
-          width: 380,
+          height: 204,
           type: 'donut',
         },
         plotOptions: {
@@ -412,7 +412,11 @@
         dataLabels: {
           enabled: false
         },
+                               labels: ["Monday", "Tuesday", "Wednesday"],
 
+        fill: {
+          type: 'gradient',
+        },
         legend: {
           formatter: function(val, opts) {
             return val + " - " + opts.w.globals.series[opts.seriesIndex]
@@ -431,6 +435,7 @@
           }
         }]
         };
+
 
 
         var chart_options_provider = new ApexCharts(document.querySelector("#chart_provider"), options_provider);
