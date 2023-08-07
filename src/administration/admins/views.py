@@ -93,6 +93,8 @@ def save_guest_group(request):
         guest_group = GuestGroup.objects.create(group_name=group_name, user=request.user)
         for name in guest_names:
             guest_group.guest_set.create(guest_name=name)
+        InvitationLetter.objects.create(group=guest_group)
+
         return JsonResponse({'message': 'Guest group created successfully', 'group_id': guest_group.id})
     else:
         return JsonResponse({'error': 'Invalid request method. Only POST requests are allowed.'}, status=405)
