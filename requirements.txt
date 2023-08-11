@@ -1,12 +1,12 @@
-six~=1.16.0
+six
 Faker
 pillow
 markdown
 python-dateutil
 
-django~=4.0.1
+django
 django-environ
-django-filter~=23.2
+django-filter
 django-allauth
 django-resized
 python-decouple
@@ -20,6 +20,6 @@ django-jazzmin
 django-tinymce
 django-phonenumber_field
 
-djangorestframework~=3.14.0
-DateTime~=5.0
+djangorestframework
+DateTime
 crispy-bootstrap5

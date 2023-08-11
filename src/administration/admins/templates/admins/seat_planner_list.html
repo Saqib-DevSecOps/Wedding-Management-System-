@@ -5,7 +5,7 @@
 
 {% block subtitle %} {{ request.user }} {% endblock %}
 
-{% block page_heading %}
+{% block content %}
 
 
     <div class="row">
@@ -14,7 +14,7 @@
                 <h4 class="mb-0 font-size-18">Seat Planner List</h4>
 
                 <div class="page-title-right">
-                    <a class="btn btn-outline-success" href="{% url 'admins:seat-planner-create' %}"
+                    <a class="btn btn-success" href="{% url 'admins:seat-planner-create' %}"
                        type="button">Add Tables
                     </a>
                 </div>
@@ -22,102 +22,136 @@
             </div>
         </div>
     </div>
-
-{% endblock %}
-{% block content %}
-<div class="card">
-    <div class="card-body border-bottom">
-                    <form method="get" action="{% url 'admins:seat-planner-list' %}">
-
-        <div class="row g-3">
-               <div class="col-xxl-4 col-lg-4">
-                {{filter_form.table_name}}
+    <div class="row">
+        <div class="col-12">
+            <form method="get">
+                <div class="input-group mb-3">
+                    {{ filter_form }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <a class="btn btn-danger" href="{% url 'admins:seat-planner-list' %}">
+                            <i class="fa fa-brush"></i>
+                        </a>
+                    </div>
                 </div>
-            <div class="col-xxl-4 col-lg-4">
-                {{filter_form.table_type}}
-                </div>
-                <div class="col-xxl-2 col-lg-2">
-                    <button class="btn btn-outline-success w-100" type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Filter
-                    </button>
-                </div>
-            <div class="col-xxl-2 col-lg-2">
-                    <a href="{% url 'admins:seat-planner-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Clear
-                    </a>
-                </div>
-        </div>
-                                    </form>
-
-    </div>
-</div>
-    <div class="">
-        <div class="table-responsive">
-            <table class="table project-list-table table-nowrap align-middle table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col" style="width: 100px">#</th>
-                    <th scope="col">Table Name</th>
-                    <th scope="col">Table Type</th>
-                    <th scope="col">Total Guests</th>
-                    <th scope="col">Total Seats</th>
-                    <th scope="col">Seats Left</th>
-                    <th scope="col">Action</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                {% for object in object_list %}
-                    <tr>
-                        <td>{{ object.id }}</td>
-                        <td>{{ object.table_name }}</td>
-                        <td>{{ object.get_table_type_display }}</td>
-                        <td>{{ object.guests.count }}</td>
-                        <td>{{ object.seat_count }}</td>
-                        <td>{{ object.seats_left }}</td>
-                        <td>
-                            <a class="btn btn-outline-danger btn-sm delete-button" data-object-id="{{ object.id }}"><i
-                                    class="fa fa-trash"></i></a>
-                            <a class="btn btn-outline-success btn-sm"
-                               href="{% url 'admins:seat-planner-detail' object.id %}"><i
-                                    class="fa fa-eye"></i></a>
-
-                        </td>
-
-                    </tr>
-
-                {% endfor %}
-                </tbody>
-            </table>
+            </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    {% if object_list %}
+                        <div class="table-responsive">
+                            <table class="table  table-hover table-borderless">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width: 100px">#</th>
+                                    <th scope="col">Table Name</th>
+                                    <th scope="col">Table Type</th>
+                                    <th scope="col">Total Guests</th>
+                                    <th scope="col">Total Seats</th>
+                                    <th scope="col">Seats Left</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for object in object_list %}
+                                    <tr>
+                                        <td>{{ object.id }}</td>
+                                        <td>{{ object.table_name }}</td>
+                                        <td>{{ object.get_table_type_display }}</td>
+                                        <td>{{ object.guests.count }}</td>
+                                        <td>{{ object.seat_count }}</td>
+                                        <td>{{ object.seats_left }}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm btn-rounded"
+                                               href="{% url 'admins:seat-planner-detail' object.id %}"><i
+                                                    class="fa fa-eye"></i>&nbsp;view</a>
+                                            <a class="btn btn-danger btn-sm btn-rounded delete-button"
+                                               data-object-id="{{ object.id }}"><i
+                                                    class="fa fa-trash"></i></a>
+
+
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <span class="text-danger"><b>Tables Are not Found</b> </span>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-0">
+                <ul class="pagination">
+                    {% if object_list.has_previous %}
+                        <li>
+                            <span>
+    <a href="?page=
+            {{ object_list.previous_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|urlencode }}{% endif %}">
+                                    Previous
+                                </a>
+                            </span>
+                        </li>
+                    {% endif %}
+                    <li class="">
+                        <span>Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.</span>
+                    </li>
+                    {% if object_list.has_next %}
+                        <li>
+                            <span>
+    <a href="?page=
+            {{ object_list.next_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|urlencode }}{% endif %}">
+                                    Next
+                                </a>
+                            </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- end row -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     {# Create Model Form #}
-<script>
-        $(document).ready(function (){
-    $('body .delete-button').click(function () {
-        id = $(this).data('object-id')
-        console.log(id)
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                    window.location = `/admins/seat-planner/delete/${id}/`;
-            }
+    <script>
+        $(document).ready(function () {
+            $('body .delete-button').click(function () {
+                id = $(this).data('object-id')
+                console.log(id)
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = `/admins/seat-planner/delete/${id}/`;
+                    }
+                });
+            });
         });
-    });
-    });
-</script>
+    </script>
 
     <script>
         $(document).ready(function () {

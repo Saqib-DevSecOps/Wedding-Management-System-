@@ -42,12 +42,13 @@ class GuestMetaForm(forms.ModelForm):
 class ProviderMetaForm(forms.ModelForm):
     class Meta:
         model = Provider
-        fields = ('provider_name', 'service', 'email', 'phone_number',
+        fields = ('provider_name', 'service', 'email', 'link','phone_number',
                   'total_cost', 'paid', 'attachment', 'comment')
         widgets = {
             'provider_name': forms.TextInput(attrs={'class': 'form-control'}),
             'service': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'link': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
             'total_cost': forms.TextInput(attrs={'class': 'form-control'}),
             'paid': forms.TextInput(attrs={'class': 'form-control'}),
@@ -63,9 +64,10 @@ class ProviderMetaForm(forms.ModelForm):
                 Column('provider_name', css_class='form-group col-sm-4 '),
                 Column('service', css_class=' col-sm-4 '),
                 Column('phone_number', css_class='form-group col-sm-4 '),
-                Column('email', css_class='form-group col-sm-6 '),
-                Column('total_cost', css_class='form-group col-sm-3 '),
-                Column('paid', css_class='form-group col-sm-3 '),
+                Column('email', css_class='form-group col-sm-12 '),
+                Column('link', css_class='form-group col-sm-4 '),
+                Column('total_cost', css_class='form-group col-sm-4 '),
+                Column('paid', css_class='form-group col-sm-4 '),
                 Column('attachment', css_class='form-group col-sm-12 '),
                 Column('comment', css_class='col-sm-12 '),
 

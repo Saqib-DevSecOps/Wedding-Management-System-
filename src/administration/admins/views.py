@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -88,7 +89,7 @@ class GuestGroupListView(CreateView, ListView):
 def save_guest_group(request):
     if request.method == 'POST':
         group_name = request.POST.get('group_name')
-        print("apihit",group_name)
+        print("apihit", group_name)
         guest_names = request.POST.getlist('guest_names[]')
         guest_group = GuestGroup.objects.create(group_name=group_name, user=request.user)
         for name in guest_names:
@@ -218,7 +219,11 @@ class ProviderListCreateView(ListView):
         context = super(ProviderListCreateView, self).get_context_data(**kwargs)
         context['form'] = ProviderMetaForm
         filter_object = ProviderFilter(self.request.GET, queryset=self.get_queryset())
-        context['object_list'] = filter_object.qs
+        object_list = filter_object.qs
+        paginator = Paginator(object_list, 20)
+        page_number = self.request.GET.get('page')
+        page_object = paginator.get_page(page_number)
+        context['object_list'] = page_object
         context['filter_form'] = filter_object.form
         return context
 
@@ -336,7 +341,13 @@ class SeatPlannerListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SeatPlannerListView, self).get_context_data(**kwargs)
         filter_object = TableFilter(self.request.GET, queryset=self.get_queryset())
-        context['object_list'] = filter_object.qs
+
+        object_list = filter_object.qs
+        paginator = Paginator(object_list, 20)
+        page_number = self.request.GET.get('page')
+        page_object = paginator.get_page(page_number)
+        context['object_list'] = page_object
+
         context['filter_form'] = filter_object.form
         return context
 

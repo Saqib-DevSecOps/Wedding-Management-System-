@@ -42,7 +42,13 @@ class ProviderFilter(django_filters.FilterSet):
         fields = ['provider_name', 'service']
 
     def __init__(self, *args, **kwargs):
+
         super(ProviderFilter, self).__init__(*args, **kwargs)
+
+        # Update labels to empty strings to hide them
+        self.form.fields['provider_name'].label = ''
+        self.form.fields['service'].label = ''
+
         self.form.fields['provider_name'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Enter Provider Name'})
         self.form.fields['service'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter Service Name'})
@@ -55,6 +61,8 @@ class TableFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(TableFilter, self).__init__(*args, **kwargs)
+        self.form.fields['table_name'].label = ''
+        self.form.fields['table_type'].label = ''
         self.form.fields['table_name'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Enter Table Name'})
         self.form.fields['table_type'].widget.attrs.update({'class': 'form-control'})

@@ -5,412 +5,476 @@
 
 {% block subtitle %} {{ request.user }} {% endblock %}
 
-{% block page_heading %}
-
-<div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
-     tabindex="-1">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GuestGroupModelLabel">Add Provider </h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="ml-3">
-                <div class="create_modal_errors">
-
-                </div>
-
-
-            </div>
-            <!-- Add 'id' attribute to the form element -->
-            <form action="{% url 'admins:provider-create' %}" enctype="multipart/form-data" id="provider-form"
-                  method="post">
-                {% csrf_token %}
-
-                <div class="modal-body">
-
-                    {% crispy form %}
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-outline-success" id="save-provider" type="button">Save</button>
-                </div>
-            </form>
-
-
-        </div>
-    </div>
-</div>
-<div aria-hidden="true" aria-labelledby="UpdateModalFormLabel" class="modal fade" id="UpdateModalForm" role="dialog"
-     tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="ml-3">
-                <div class="update_modal_errors">
-
-                </div>
-
-
-            </div>
-            <!-- Add 'id' attribute to the form element -->
-            <form enctype="multipart/form-data" id="update-provide-form"
-                  method="post">
-                {% csrf_token %}
-
-                <div class="modal-body">
-                    {% crispy form %}
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-outline-success" id="update-provider" type="button">Save</button>
-                </div>
-            </form>
-
-
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0 font-size-18">Providers List</h4>
-
-            <div class="page-title-right">
-                <button class="btn btn-outline-success" data-target="#GuestGroupModal" data-toggle="modal"
-                        data-whatever="@getbootstrap"
-                        type="button">Add Provider
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-{% endblock %}
 {% block content %}
-<div class="card">
-    <div class="card-body border-bottom">
-        <form method="get" action="{% url 'admins:provider-list' %}">
+    <style>
 
-            <div class="row g-3">
-                <div class="col-xxl-4 col-lg-4">
-                    {{filter_form.provider_name}}
-                </div>
-                <div class="col-xxl-4 col-lg-4">
-                    {{filter_form.service}}
-                </div>
-                <div class="col-xxl-2 col-lg-2">
-                    <button class="btn btn-outline-success w-100" type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Filter
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Apply the animation to the modal dialog */
+        .modal-dialog.zoomIn {
+            animation: zoomIn 0.3s ease-in-out;
+        }
+
+
+    </style>
+    <div aria-hidden="true" aria-labelledby="ProviderModelLabel" class="modal fade" id="ProviderModal" role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered zoomIn" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title " id="ProviderModelLabel">Add Provider </h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="col-xxl-2 col-lg-2">
-                    <a href="{% url 'admins:provider-list' %}" class="btn btn-outline-danger w-100" type="submit"><i
-                            class="mdi mdi-filter-outline align-middle"></i> Clear
-                    </a>
+                <div class="ml-3">
+                    <div class="create_modal_errors">
+
+                    </div>
+
+
+                </div>
+                <!-- Add 'id' attribute to the form element -->
+                <form action="{% url 'admins:provider-create' %}" enctype="multipart/form-data" id="provider-form"
+                      method="post">
+                    {% csrf_token %}
+
+                    <div class="modal-body">
+
+                        {% crispy form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-success" id="save-provider" type="button">Save</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <div aria-hidden="true" aria-labelledby="UpdateModalFormLabel" class="modal fade " id="UpdateModalForm"
+         role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered zoomIn" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="ml-3">
+                    <div class="update_modal_errors">
+
+                    </div>
+
+
+                </div>
+                <!-- Add 'id' attribute to the form element -->
+                <form enctype="multipart/form-data" id="update-provide-form"
+                      method="post">
+                    {% csrf_token %}
+
+                    <div class="modal-body">
+                        {% crispy form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-success" id="update-provider" type="button">Save</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Providers List</h4>
+
+                <div class="page-title-right">
+                    <button class="btn btn-success" data-target="#ProviderModal" data-toggle="modal"
+                            data-whatever="@getbootstrap"
+                            type="button">Add Provider
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="get">
+                <div class="input-group mb-3">
+                    {{ filter_form }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <a class="btn btn-danger" href="{% url 'admins:provider-list' %}">
+                            <i class="fa fa-brush"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    {% if object_list %}
+                        <div class="table-responsive">
+                            <table class="table table-borderless  table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width: 100px">#</th>
+                                    <th class="align-middle"><i class="bx bxs-user"></i> Staff</th>
+                                    <th class="align-middle"><i class="fa fa-wrench"></i> Service</th>
+                                    <th class="align-middle"><i class="fa fa-envelope"></i> Email</th>
+                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Phone</th>
+                                    <th class="align-middle"><i class="fa fa-file text-primary"></i> Document</th>
+                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Total Cost</th>
+                                    <th class="align-middle"><i class="fa fa-arrow-alt-circle-down text-danger"></i>
+                                        Paid
+                                    </th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for object in object_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a {% if object.link %} href="{{ object.link }}" target="_blank"
+                                                                    {% else %}href="#"{% endif %} > {{ object.provider_name }}</a>
+                                        </td>
+                                        <td>{{ object.service }}</td>
+                                        <td>{{ object.email }}</td>
+                                        <td>{{ object.phone_number }}</td>
+                                        <td>
+                                            {% if object.attachment %}
+                                                <a href="{% url 'admins:download-attachment' object.id %}"
+                                                   class="text-danger">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                    Download
+                                                </a>
+                                            {% else %}
+                                                <i class="fa fa-download" aria-hidden="true"></i> None
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ object.total_cost }}</td>
+                                        <td>{{ object.paid }}</td>
+                                        <td>
+                                            <a href="{% url 'admins:provider-detail' object.id %}"
+                                               class="btn btn-primary btn-sm btn-rounded">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+                                            <button class="btn btn-success btn-sm btn-rounded update-button"
+                                                    data-record-id="{{ object.id }}">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm btn-rounded delete-button"
+                                                    data-object-id="{{ object.id }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <span class="text-danger"><b>Providers Not Found</b></span>
+                    {% endif %}
                 </div>
             </div>
-        </form>
-
+        </div>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-0">
+                <ul class="pagination">
+                    {% if object_list.has_previous %}
+                        <li>
+                            <span>
+    <a href="?page=
 
-<div class="">
-    <div class="table-responsive">
-        <table class="table project-list-table table-nowrap align-middle table-borderless">
-            <thead>
-            <tr>
-                <th scope="col" style="width: 100px">#</th>
-                <th scope="col">Provider Name</th>
-                <th scope="col">Service</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Total Cost</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Document</th>
-                <th scope="col">Action</th>
+            {{ object_list.previous_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|urlencode }}{% endif %}">
+                                    Previous
+                                </a>
+                            </span>
+                        </li>
+                    {% endif %}
+                    <li class="">
+                        <span>Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.</span>
+                    </li>
+                    {% if object_list.has_next %}
+                        <li>
+                            <span>
+    <a href="?page=
 
-            </tr>
-            </thead>
-            <tbody>
-            {% for object in object_list %}
-            <tr>
-                <td>{{object.id}}</td>
-                <td>{{object.provider_name}}</td>
-                <td>{{object.service}}</td>
-                <td>{{object.email}}</td>
-                <td>{{object.phone_number}}</td>
-                <td>{{object.total_cost}}</td>
-                <td>{{object.paid}}</td>
-                {% if object.attachment %}
-                <td class="text-danger"><a href="{% url 'admins:download-attachment' object.id %}"<i class="fa fa-download" aria-hidden="true"></i>
-                    Download
-                </td>
-                {% else %}
-                <td><i class="fa fa-download" aria-hidden="true"></i>
-                    None
-                </td>
-                {% endif %}
-                <td>
-                    <button class="btn btn-outline-danger btn-rounded btn-sm delete-button" data-object-id="{{object.id}}"
-                            type="button"><i class="fa fa-trash"></i></button>
-
-                    <button class="btn btn-outline-primary btn-sm btn-rounded update-button"
-                            data-record-id="{{ object.id }}">
-                        <i class="fa fa-edit"></i></button>
-                    <a class="btn btn-outline-success btn-sm btn-rounded"
-                       href="{% url 'admins:provider-detail' object.id %}"><i
-                            class="fa fa-eye"></i></a>
-                </td>
-                {% endfor %}
-            </tbody>
-        </table>
+            {{ object_list.next_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|urlencode }}{% endif %}">
+                                    Next
+                                </a>
+                            </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
-
-<!-- end row -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
-<script>
-        $(document).ready(function (){
-    $('body .delete-button').click(function () {
-        id = $(this).data('object-id')
-        console.log(id)
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location = `/admins/provider/delete/${id}`;
-            }
-        });
-    });
-    });
-</script>
-
-
-{# Create Model Form #}
+    <!-- end row -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
-<script>
-    $(document).ready(function () {
-        // Handle form submission
-        $("#save-provider").click(function () {
-            var form = $("#provider-form");
-            var formData = new FormData(form[0]);
-
-            // Check file size before submitting
-            var fileInput = $("#id_attachment");
-            var maxFileSize = 5 * 1024 * 1024; // 5 MB
-            if (fileInput[0].files.length > 0) {
-                var fileSize = fileInput[0].files[0].size;
-                if (fileSize > maxFileSize) {
-                    alert("File size exceeds the maximum limit of 5 MB.");
-                    return;
-                }
-            }
-            // Check if all required fields are filled
-            var requiredFields = form.find("[required]");
-            var isFormValid = true;
-            requiredFields.each(function () {
-                if ($(this).val() === "") {
-                    $(this).addClass("is-invalid");
-                    isFormValid = false;
-                } else {
-                    $(this).removeClass("is-invalid");
-                }
-            });
-
-            if (!isFormValid) {
-                return;
-            }
-            $.ajax({
-                type: form.attr("method"),
-                url: form.attr("action"),
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    // Reset the form fields
-                    form[0].reset();
-                    // Close the modal
-                    $("#GuestGroupModal").modal("hide");
-                    // Reload the page or update the content as desired
-                    location.reload();
-                },
-                error: function (error) {
-                    console.log(error)
-                    console.log(error.responseText);
-                    var errors = JSON.parse(error.responseText).errors;
-                    console.log(errors);
-                    handleFormErrors(errors);
-                }
-            });
-        });
-
-        // Function to display form errors
-        function handleFormErrors(errors) {
-            // Remove existing error messages and classes
-            $(".form-group").removeClass("is-invalid");
-            $(".invalid-feedback").html("");
-            $(".create_modal_errors").html(""); // Clear previous error alerts
-            $.each(errors, function (field, messages) {
-                var inputField = $("#id_" + field);
-                var errorField = inputField.closest(".form-group").find(".invalid-feedback");
-                // Add error message(s) to the error field
-                errorField.html(messages.join("<br>"));
-                // Add 'is-invalid' class to the input field's parent element
-                inputField.closest(".form-group").addClass("is-invalid");
-                // Add error message(s) with field name to the error alert box
-                var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
-                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                    '<strong id="field_name">' + field + ':</strong>' +
-                    '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
-                    '</div>');
-                // Append the error alert box to the error container
-                $(".create_modal_errors").append(errorAlertBox);
-            });
-        }
-    });
-
-
-</script>
-
-
-{# Update Modal Form #}
-<script>
-    $(document).ready(function () {
-        var recordId;
-
-        $('.update-button').click(function () {
-            recordId = $(this).data('record-id');
-            console.log('Clicked record ID:', recordId);
-
-            // Open the Bootstrap modal form
-            $('#UpdateModalForm').modal('show');
-
-            // Fetch provider details via AJAX
-            $.ajax({
-                url: '/admins/provider/update/' + recordId,
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    // Populate the form fields with provider details
-                    var providerData = response.provider;
-                    console.log(providerData);
-
-                    // Set values for each form field
-                    for (var fieldName in providerData) {
-                        if (providerData.hasOwnProperty(fieldName)) {
-                            var fieldValue = providerData[fieldName];
-                            // Select the form field by name and set its value
-                            $('#update-provide-form [name="' + fieldName + '"]').val(fieldValue);
-                        }
+    <script>
+        $(document).ready(function () {
+            $('body .delete-button').click(function () {
+                id = $(this).data('object-id')
+                console.log(id)
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = `/admins/provider/delete/${id}`;
                     }
-
-                    // Update the data-record-id attribute on the submit button to store the record ID
-                    $('#update-provider').data('record-id', recordId);
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching provider details:', error);
-                }
+                });
             });
-
-            // Prevent the default button behavior if needed
-            return false;
         });
+    </script>
 
-        // Handle form submission
-        $('#update-provider').click(function () {
-            var form = $('#update-provide-form');
-            var formData = new FormData(form[0]);
 
-            // Check file size before submitting
-            var fileInput = $('#id_attachment');
-            var maxFileSize = 5 * 1024 * 1024; // 5 MB
-            if (fileInput[0].files.length > 0) {
-                var fileSize = fileInput[0].files[0].size;
-                if (fileSize > maxFileSize) {
-                    alert('File size exceeds the maximum limit of 5 MB.');
+    {# Create Model Form #}
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Handle form submission
+            $("#save-provider").click(function () {
+                var form = $("#provider-form");
+                var formData = new FormData(form[0]);
+
+                // Check file size before submitting
+                var fileInput = $("#id_attachment");
+                var maxFileSize = 5 * 1024 * 1024; // 5 MB
+                if (fileInput[0].files.length > 0) {
+                    var fileSize = fileInput[0].files[0].size;
+                    if (fileSize > maxFileSize) {
+                        alert("File size exceeds the maximum limit of 5 MB.");
+                        return;
+                    }
+                }
+                // Check if all required fields are filled
+                var requiredFields = form.find("[required]");
+                var isFormValid = true;
+                requiredFields.each(function () {
+                    if ($(this).val() === "") {
+                        $(this).addClass("is-invalid");
+                        isFormValid = false;
+                    } else {
+                        $(this).removeClass("is-invalid");
+                    }
+                });
+
+                if (!isFormValid) {
                     return;
                 }
-            }
-
-            var url = '/admins/provider/update/' + recordId;
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    // Reset the form fields
-                    form[0].reset();
-                    // Close the modal
-                    $('#UpdateModalForm').modal('hide');
-                    // Reload the page or update the content as desired
-                    location.reload();
-                },
-                error: function (error) {
-                    console.log(error.responseText);
-                    var errors = JSON.parse(error.responseText).errors;
-                    console.log(errors);
-                    handleFormErrors(errors, '.update_modal_errors');
-                }
+                $.ajax({
+                    type: form.attr("method"),
+                    url: form.attr("action"),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        // Reset the form fields
+                        form[0].reset();
+                        // Close the modal
+                        $("#ProviderModal").modal("hide");
+                        // Reload the page or update the content as desired
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.log(error)
+                        console.log(error.responseText);
+                        var errors = JSON.parse(error.responseText).errors;
+                        console.log(errors);
+                        handleFormErrors(errors);
+                    }
+                });
             });
+
+            // Function to display form errors
+            function handleFormErrors(errors) {
+                // Remove existing error messages and classes
+                $(".form-group").removeClass("is-invalid");
+                $(".invalid-feedback").html("");
+                $(".create_modal_errors").html(""); // Clear previous error alerts
+                $.each(errors, function (field, messages) {
+                    var inputField = $("#id_" + field);
+                    var errorField = inputField.closest(".form-group").find(".invalid-feedback");
+                    // Add error message(s) to the error field
+                    errorField.html(messages.join("<br>"));
+                    // Add 'is-invalid' class to the input field's parent element
+                    inputField.closest(".form-group").addClass("is-invalid");
+                    // Add error message(s) with field name to the error alert box
+                    var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                        '<strong id="field_name">' + field + ':</strong>' +
+                        '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+                        '</div>');
+                    // Append the error alert box to the error container
+                    $(".create_modal_errors").append(errorAlertBox);
+                });
+            }
         });
 
-        // Function to display form errors
-        function handleFormErrors(errors, errorContainer) {
-            // Remove existing error messages and classes
-            $('.form-group').removeClass('is-invalid');
-            $('.invalid-feedback').html('');
-            $(errorContainer).empty();
 
-            $.each(errors, function (field, messages) {
-                var inputField = $('#id_' + field);
-                var errorField = inputField.closest('.form-group').find('.invalid-feedback');
+    </script>
 
-                // Add error message(s) to the error field
-                errorField.html(messages.join('<br>'));
 
-                // Add 'is-invalid' class to the input field's parent element
-                inputField.closest('.form-group').addClass('is-invalid');
+    {# Update Modal Form #}
+    <script>
+        $(document).ready(function () {
+            var recordId;
 
-                // Add error message(s) with field name to the error alert box
-                var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
-                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                    '<strong id="field_name">' + field + ':</strong>' +
-                    '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
-                    '</div>');
+            $('.update-button').click(function () {
+                recordId = $(this).data('record-id');
+                console.log('Clicked record ID:', recordId);
 
-                // Append the error alert box to the error container
-                $(errorContainer).append(errorAlertBox);
+                // Open the Bootstrap modal form
+                $('#UpdateModalForm').modal('show');
+
+                // Fetch provider details via AJAX
+                $.ajax({
+                    url: '/admins/provider/update/' + recordId,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        // Populate the form fields with provider details
+                        var providerData = response.provider;
+                        console.log(providerData);
+
+                        // Set values for each form field
+                        for (var fieldName in providerData) {
+                            if (providerData.hasOwnProperty(fieldName)) {
+                                var fieldValue = providerData[fieldName];
+                                // Select the form field by name and set its value
+                                $('#update-provide-form [name="' + fieldName + '"]').val(fieldValue);
+                            }
+                        }
+
+                        // Update the data-record-id attribute on the submit button to store the record ID
+                        $('#update-provider').data('record-id', recordId);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching provider details:', error);
+                    }
+                });
+
+                // Prevent the default button behavior if needed
+                return false;
             });
-        }
-    });
+
+            // Handle form submission
+            $('#update-provider').click(function () {
+                var form = $('#update-provide-form');
+                var formData = new FormData(form[0]);
+
+                // Check file size before submitting
+                var fileInput = $('#id_attachment');
+                var maxFileSize = 5 * 1024 * 1024; // 5 MB
+                if (fileInput[0].files.length > 0) {
+                    var fileSize = fileInput[0].files[0].size;
+                    if (fileSize > maxFileSize) {
+                        alert('File size exceeds the maximum limit of 5 MB.');
+                        return;
+                    }
+                }
+
+                var url = '/admins/provider/update/' + recordId;
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        // Reset the form fields
+                        form[0].reset();
+                        // Close the modal
+                        $('#UpdateModalForm').modal('hide');
+                        // Reload the page or update the content as desired
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.log(error.responseText);
+                        var errors = JSON.parse(error.responseText).errors;
+                        console.log(errors);
+                        handleFormErrors(errors, '.update_modal_errors');
+                    }
+                });
+            });
+
+            // Function to display form errors
+            function handleFormErrors(errors, errorContainer) {
+                // Remove existing error messages and classes
+                $('.form-group').removeClass('is-invalid');
+                $('.invalid-feedback').html('');
+                $(errorContainer).empty();
+
+                $.each(errors, function (field, messages) {
+                    var inputField = $('#id_' + field);
+                    var errorField = inputField.closest('.form-group').find('.invalid-feedback');
+
+                    // Add error message(s) to the error field
+                    errorField.html(messages.join('<br>'));
+
+                    // Add 'is-invalid' class to the input field's parent element
+                    inputField.closest('.form-group').addClass('is-invalid');
+
+                    // Add error message(s) with field name to the error alert box
+                    var errorAlertBox = $('<div class="alert alert-danger alert-dismissible">' +
+                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                        '<strong id="field_name">' + field + ':</strong>' +
+                        '<span id="error_name" class="ml-2">' + messages.join('<br>') + '</span>' +
+                        '</div>');
+
+                    // Append the error alert box to the error container
+                    $(errorContainer).append(errorAlertBox);
+                });
+            }
+        });
 
 
-</script>
+    </script>
 
 
 {% endblock content %}
