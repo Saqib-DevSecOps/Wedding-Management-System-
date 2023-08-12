@@ -1,34 +1,43 @@
+{% load static %}
 <div class="topnav">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item text-center">
                         <a class="nav-link dropdown-toggle arrow-none" href="{% url 'admins:dashboard' %}">
-                            <i class="bx bx-home-circle mr-2"></i>Dashboard
+                            <img src="{% static 'core/images/header/mywedding.png' %}" style="height: 30px"><br>My Wedding
                         </a>
                     </li>
 
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {# Apps #}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none"
+                        <a class="nav-link dropdown-toggle arrow-none text-center"
                            href="{% url 'admins:guest-group-list' %}" >
-                            <i class="bx bx-user mr-2"></i>Groups
+                            <img src="{% static 'core/images/header/group.png' %}" style="height: 30px"><br>Guest List
                         </a>
                     </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none"
+                        <a class="nav-link dropdown-toggle arrow-none text-center "
                            href="{% url 'admins:provider-list' %}" >
-                            <i class="bx bx-user mr-2"></i>Provider
+                            <img src="{% static 'core/images/header/provider.png' %}" style="height: 30px"><br>Provider
                         </a>
                     </li>
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none"
+                        <a class="nav-link dropdown-toggle arrow-none text-center "
                            href="{% url 'admins:seat-planner-list' %}" >
-                            <i class="bx bx-user mr-2"></i>Seat Planner
+                            <img src="{% static 'core/images/header/seat.png' %}" style="height: 30px"><br>Seat Planner
+                        </a>
+                    </li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none text-center "
+                           href="{% url 'website:home' %}" >
+                            <img src="{% static 'core/images/header/website.png' %}" style="height: 30px"><br>Website
                         </a>
                     </li>
 
