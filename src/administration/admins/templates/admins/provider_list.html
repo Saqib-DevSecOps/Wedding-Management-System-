@@ -24,15 +24,14 @@
 
 
     </style>
+
     <div aria-hidden="true" aria-labelledby="ProviderModelLabel" class="modal fade" id="ProviderModal" role="dialog"
          tabindex="-1">
         <div class="modal-dialog modal-dialog-centered zoomIn" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title " id="ProviderModelLabel">Add Provider </h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="ml-3">
                     <div class="create_modal_errors">
@@ -67,9 +66,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
                 </div>
                 <div class="ml-3">
                     <div class="update_modal_errors">
@@ -139,8 +137,9 @@
                 <div class="card-body">
                     {% if object_list %}
                         <div class="table-responsive">
-                            <table class="table table-borderless  table-hover">
-                                <thead>
+                            <table class="table table-hover table align-middle table-nowrap mb-0">
+
+                                <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 100px">#</th>
                                     <th class="align-middle"><i class="bx bxs-user"></i> Staff</th>
