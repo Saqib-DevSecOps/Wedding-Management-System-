@@ -447,3 +447,38 @@ class DownloadAttachmentView(View):
 
         raise Http404
 
+
+def export_groups_to_excel(request):
+    user = request.user
+    groups = GuestGroup.objects.filter(user=user)
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="user_groups_export.xlsx"'
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = 'Groups Data'
+
+    # Writing headers
+    columns = ['Group Name', 'Guest Names', 'Total Invitations']
+    for col_num, column_title in enumerate(columns, 1):
+        col_letter = get_column_letter(col_num)
+        ws[f'{col_letter}1'] = column_title
+
+    # Writing data for each group
+    row_num = 2
+    for group in groups:
+        ws[f'A{row_num}'] = group.group_name
+        ws[f'C{row_num}'] = group.invitation_set.total_invitation
+
+        guests = group.guest_set.all()
+        guest_names = ', '.join(guest.guest_name for guest in guests)
+        ws[f'B{row_num}'] = guest_names
+        row_num += 1
+
+    for col_num in range(1, len(columns) + 1):
+        col_letter = get_column_letter(col_num)
+        ws.column_dimensions[col_letter].auto_size = True
+
+    wb.save(response)
+    return response

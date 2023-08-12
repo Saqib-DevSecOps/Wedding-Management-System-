@@ -193,7 +193,9 @@
                 <h4 class="mb-0 font-size-18">Guest Groups List</h4>
 
                 <div class="page-title-right">
-
+                      <a class="btn btn-primary" href="{% url 'admins:export-groups-to-excel' %}"
+                            type="button">Export Record
+                    </a>
                     <button class="btn btn-success" data-target="#GuestGroupModal" data-toggle="modal"
                             data-whatever="@getbootstrap"
                             type="button">Add Guest Group
