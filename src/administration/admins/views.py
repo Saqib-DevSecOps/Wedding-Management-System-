@@ -460,7 +460,7 @@ def export_groups_to_excel(request):
     ws.title = 'Groups Data'
 
     # Writing headers
-    columns = ['Group Name', 'Guest Names', 'Total Invitations']
+    columns = ['Group Name', 'Guest Name', 'Total Invitations']
     for col_num, column_title in enumerate(columns, 1):
         col_letter = get_column_letter(col_num)
         ws[f'{col_letter}1'] = column_title
@@ -472,9 +472,9 @@ def export_groups_to_excel(request):
         ws[f'C{row_num}'] = group.invitation_set.total_invitation
 
         guests = group.guest_set.all()
-        guest_names = ', '.join(guest.guest_name for guest in guests)
-        ws[f'B{row_num}'] = guest_names
-        row_num += 1
+        for guest in guests:
+            ws[f'B{row_num}'] = guest.guest_name
+            row_num += 1
 
     for col_num in range(1, len(columns) + 1):
         col_letter = get_column_letter(col_num)

@@ -1,0 +1,114 @@
+
+.heading-bg {
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+.heading-35 {
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.heading-30 {
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.font-black {
+    color: black;
+}
+
+.container-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.first-section {
+    height: 90%;
+}
+
+.second-section {
+    height: 10%;
+}
+
+.float-nav {
+    display: none;
+}
+
+#loading-button {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 9999;
+}
+
+.swal2-container {
+    z-index: 99999;
+}
+
+@media screen and (max-width: 767px) {
+
+    .container-custom {
+        display: unset;
+        flex-direction: unset;
+        height: unset;
+    }
+
+    /* Reset any additional styles applied to the first div */
+    .first-section {
+        height: 91%;
+    }
+
+
+    .second-section {
+        height: 9%;
+    }
+
+    .float-nav {
+        display: flex;
+        z-index: 9999;
+    }
+
+    .chat-chat-div {
+        padding-top: 20px;
+    }
+
+    #loading-button {
+        position: fixed;
+        bottom: 90px;
+        right: 8px;
+        z-index: 9999;
+    }
+
+    .swal2-container {
+        z-index: 99999;
+    }
+
+}
+
+.body-main {
+    background-image: url(/static/website/images/waves.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+}
+
+.flex-container {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.flex-container > div {
+    width: 100%;
+}
+
+.custom-header-text {
+
+}
+
+.custom-header-logo {
+
+}

@@ -1,29 +1,26 @@
-{% extends 'base.html' %}
+{% load static %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Your digital partner">
+    <meta name="author" content="mark">
+    <meta name="developer" content="exarth.com">
+    <meta name="org-name" content="exarth"/>
 
-{% block subtitle %} {{ request.user }} {% endblock %}
-{% block page_heading %}
-{% endblock %}
+    <link rel="icon" href="{% static 'core/images/logos/favico.ico' %}">
 
-{% block content %}
-<style>
-    .background-boxes {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(10, 1fr);
-    }
 
-    .background-box {
-        width: 100%;
-        height: 100%;
-        border: 1px solid lightgray;
-        box-sizing: border-box;
-    }
+
+    <style>
+        .icon-wrapper .bx {
+    margin-left: 5px;
+    margin-right: 5px;
+}
     .circle-container {
         width: 300px; /* Set the width and height to the same value */
         height: 300px; /* Set the width and height to the same value */
@@ -76,8 +73,42 @@
         margin-right: 5px;
     }
 
+.boxes {
+    background-image: url("{% static 'core/boxes.png' %}");
+    background-repeat: repeat;
+        background-size: 4%; /* You can adjust the percentage as needed */
 
+}
+#h_size{
+max-height: 97%;
+min-height: 97%;
+}
+.custom-drag-helper {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 14px;
+    pointer-events: none; /* Prevent the ghost element from intercepting mouse events */
+}
 </style>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    >
+    <link rel="stylesheet" href="{% static 'core/css/design-web.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/app.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/custom-css.css' %}">
+
+</head>
+<body data-topbar="dark" data-layout-mode="light" class="">
+
+{# OUR CODE START ========================================================================== #}
+
 <div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
      tabindex="-1">
     <div class="modal-dialog " role="document">
@@ -110,72 +141,150 @@
     </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-2 card border-1 ml-auto mr-auto mb-4">
-        <div class="">
-            <div class="card-title text-center">
-                <h3 class="mt-3 text-success"><b>Guests</b></h3>
-            </div>
+<div id="layout-">
+
+    <div class="row float-nav" style="position: fixed; top: 0;width: 100%;background-color: #f8f8fb;">
+        <div class="col-6" style="text-align: left;">
+            <a href="/"><img src="{% static 'website/images/logo.png' %}" height="50"></a>
         </div>
-        <hr>
-        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">
-            <div class="list-group list-group-light">
-                {% for object in guests %}
-                <a aria-current="true"
-                   class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
-                   data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
-                    <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
-                </a>
-
-
-                {% endfor %}
-            </div>
+        <div class="col-6 mt-3" style="text-align: right;">
+            <img id="vertical-menu-btn" src="{% static 'website/images/bars.png' %}" height="20">
         </div>
     </div>
 
-<div class="col-md-9 card ml-auto mr-auto">
-    <div class="">
-        <div class="card-title text-center">
-            <div class="row">
-                <div class="col-9">
-                    <h3 class="mt-3 text-center text-success"><b>Seat Planner</b></h3>
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="vertical-menu" style="top: 0px;width: 300px;z-index: 10000">
+
+        <div data-simplebar="init" class="h-100">
+            <div class="simplebar-wrapper " style="margin: 0px;">
+                <div class="simplebar-height-auto-observer-wrapper">
+                    <div class="simplebar-height-auto-observer"></div>
                 </div>
-                <div class="col-3">
-                    <button class="btn btn-outline-success mt-3 update-button" data-target="#GuestGroupModal"
-                            data-toggle="modal" data-whatever="@getbootstrap">
-                        <i class="fa fa-plus"></i>Add Table
-                    </button>
-                    <button class="btn btn-outline-danger mt-3 save-button">
-                        Save
-                    </button>
+                <div class="simplebar-mask">
+                    <div class="simplebar-offset" style="right: -17px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper flex-container"
+                             style="height: 100%; overflow: hidden scroll;">
+
+                            {# CHAT NAV #}
+                            <div class="simplebar-content" style="padding: 0px;">
+
+                                <div id="sidebar-menu" class="mm-active">
+
+                                    {# NAV: TOP: INTRO #}
+                                    <div class="px-3">
+                                        <div>
+
+                                            <a href="/"><img src="{% static 'website/images/logo.png' %}" height="60"></a>
+                                        </div>
+                                        <div class="mt-4">
+                                            <button style="box-shadow: 1px 5px lightblue;width: 100%;"
+                                                    class="btn btn-lg btn-primary btn-rounded update-button"
+                                                    >+ Add Table
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                    {# NAV: MID: LINKS #}
+                                <div class="mt-4">
+                                <ul class="metismenu list-unstyled" id="side-menu">
+                                    <li>
+                                        <div class="list-group list-group-light" style="overflow-x: hidden; overflow-y: scroll; max-height: 500px;">
+                                            {% for object in guests %}
+                                            <a aria-current="true"
+                                               class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
+                                               data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
+                                                <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
+                                            </a>
+                                            {% endfor %}{% for object in guests %}
+                                            <a aria-current="true"
+                                               class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
+                                               data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
+                                                <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
+                                            </a>
+                                            {% endfor %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                                <div class="p-4">
+
+                                    <button style="box-shadow: 1px 5px lightblue;width: 30%;"
+                                                    class="btn btn-lg btn-danger btn-rounded "
+                                                    >Close
+                                            </button>
+
+                                              <button style="box-shadow: 1px 5px lightblue;width: 50%;"
+                                                    class="btn btn-lg btn-success btn-rounded "
+                                                    >Save
+                                            </button>
+
+                                </div>
+
+                            {# INFO NAV #}
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="simplebar-placeholder" style="width: auto; height: 1237px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+            <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div>
+        </div>
+        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+            <div class="simplebar-scrollbar"
+                 style="height: 621px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
         </div>
     </div>
-    <hr>
-    <div class="card-body" style="overflow-y: auto;height: 78vh;">
-        <div class="row justify-center">
-            <!-- Empty container for circle -->
-            <div class="draggable-container resizable-container" id="circle_container">
-                <div class="background-boxes">
-                    <div class="background-box"></div>
-                    <div class="background-box"></div>
-                </div>
-            </div>
+</div>
+<!-- Left Sidebar End -->
 
-            <!-- Empty container for rectangle -->
-            <div class="draggable-container resizable-container" id="rectangle_container">
-                <div class="background-boxes">
-                    <div class="background-box"></div>
-                    <div class="background-box"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content" style="margin-left: 300px;">
+    <div class="boxes" style="overflow-x: auto; overflow-y: auto;">
+
+        <div class="p-0 m-0 container-fluid first-section" id="h_size">
+                <div class="row table-row justify-center">
+                <div class="col-2">
+                     <div class="draggable-container resizable-container" id="circle_container">
+                    </div>
+
+                    <!-- Empty container for rectangle -->
+                    <div class="draggable-container resizable-container" id="rectangle_container">
+                    </div>
                 </div>
+                    <!-- Empty container for circle -->
+
             </div>
         </div>
     </div>
 </div>
+<!-- end main content-->
 
-</div>
+{# OUR CODE START ========================================================================== #}
 
+
+<script src="{% static 'core/libs/bootstrap/js/bootstrap.min.js' %}"></script>
+{#<script src="{% static 'core/libs/jquery/jquery.min.js' %}"></script>#}
+<script src="{% static 'core/libs/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'core/libs/metismenu/metisMenu.min.js' %}"></script>
+<script src="{% static 'core/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static 'core/libs/node-waves/waves.min.js' %}"></script>
+
+<script src="{% static 'core/libs/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'core/js/pages/ico-landing.init.js' %}"></script>
+<script src="{% static 'core/js/app.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
@@ -425,4 +534,147 @@
     })
     ;
 </script>
+{% include 'messages.html' %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 {% endblock %}
+
+
+{% block js_code %}
+
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+{##}
+{#{% block subtitle %} {{ request.user }} {% endblock %}#}
+{#{% block page_heading %}#}
+{#{% endblock %}#}
+{##}
+{#{% block only-body %}#}
+{#<style>#}
+{#    .circle-container {#}
+{#        width: 300px; /* Set the width and height to the same value */#}
+{#        height: 300px; /* Set the width and height to the same value */#}
+{#        min-width: 100px; /* Set a minimum width */#}
+{#        min-height: 100px; /* Set a minimum height */#}
+{#        max-width: 300px; /* Set a maximum width */#}
+{#        max-height: 300px; /* Set a maximum height */#}
+{#        border-radius: 50%;#}
+{#        display: flex;#}
+{#        align-items: center;#}
+{#        justify-content: center;#}
+{#        flex-wrap: wrap;#}
+{#        background-image: url("{% static 'core/circle.png' %}");#}
+{#        background-size: cover;#}
+{#        background-position: center;#}
+{#    }#}
+{##}
+{#    .rectangle-container {#}
+{#        width: 300px;#}
+{#        height: 200px;#}
+{#        min-width: 100px; /* Set a minimum width */#}
+{#        min-height: 100px; /* Set a minimum height */#}
+{#        max-width: 300px; /* Set a maximum width */#}
+{#        max-height: 200px; /* Set a maximum height */#}
+{#        display: flex;#}
+{#        align-items: center;#}
+{#        justify-content: center;#}
+{#        flex-wrap: wrap;#}
+{#        background-image: url("{% static 'core/rectangle1.png' %}");#}
+{#        background-size: 180% auto; /* Increase the size of the background image */#}
+{#        background-position: center;#}
+{##}
+{#    }#}
+{##}
+{#    .guest {#}
+{#        background-color: #837f7f;#}
+{#        padding: 5px;#}
+{#        margin: 5px;#}
+{#        cursor: move;#}
+{#        color: #f8f8f8;#}
+{#        border-radius: 10px;#}
+{#        display: flex;#}
+{#        align-items: center;#}
+{#    }#}
+{##}
+{#    .guest::before {#}
+{#        content: "\f007";#}
+{#        font-family: "Font Awesome 5 Free";#}
+{#        font-weight: 900;#}
+{#        margin-right: 5px;#}
+{#    }#}
+{##}
+{##}
+{#</style>#}
+{#
+{##}
+{#<div class="row mt-4">#}
+{#    <div class="col-md-2 card border-1 ml-auto mr-auto mb-4">#}
+{#        <div class="">#}
+{#            <div class="card-title text-center">#}
+{#                <h3 class="mt-3 text-success"><b>Guests</b></h3>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">#}
+{#            <div class="list-group list-group-light">#}
+{#                {% for object in guests %}#}
+{#                <a aria-current="true"#}
+{#                   class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"#}
+{#                   data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">#}
+{#                    <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>#}
+{#                </a>#}
+{##}
+{##}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="col-md-9 card ml-auto mr-auto">#}
+{#        <div class="">#}
+{#            <div class="card-title text-center">#}
+{#                <div class="row">#}
+{#                    <div class="col-9">#}
+{#                        <h3 class="mt-3 text-center text-success"><b>Seat Planner</b></h3>#}
+{#                    </div>#}
+{#                    <div class="col-3">#}
+{#                        <button class="btn btn-outline-success mt-3 update-button" data-target="#GuestGroupModal"#}
+{#                                data-toggle="modal" data-whatever="@getbootstrap">#}
+{#                            <i class="fa fa-plus"></i>Add Table#}
+{#                        </button>#}
+{#                        <button class="btn btn-outline-danger mt-3 save-button">#}
+{#                            Save#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="card-body" style="overflow-y: auto;height: 78vh;">#}
+{#            <div class="row justify-center">#}
+{#                <!-- Empty container for circle -->#}
+{#                <div class="draggable-container resizable-container" id="circle_container">#}
+{#                </div>#}
+{##}
+{#                <!-- Empty container for rectangle -->#}
+{#                <div class="draggable-container resizable-container" id="rectangle_container">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+
+{#{% endblock %}#}
