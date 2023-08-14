@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GuestGroup, Guest, InvitationLetter, Provider, Table, GuestTable
+from .models import GuestGroup, Guest, InvitationLetter, Provider, Table, GuestTable, Event
 
 
 class GuestInline(admin.TabularInline):
@@ -48,3 +48,10 @@ class GuestTableAdmin(admin.ModelAdmin):
     list_display = ('table', 'guest')
     list_filter = ('table__table_name',)
     search_fields = ('guest__guest_name', 'table__table_name')
+
+
+@admin.register(Event)
+class GuestTableAdmin(admin.ModelAdmin):
+    list_display = ('name', 'title')
+    list_filter = ('user',)
+    search_fields = ('user', 'name')

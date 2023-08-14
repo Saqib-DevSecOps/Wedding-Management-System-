@@ -175,7 +175,7 @@ min-height: 97%;
                                     <div class="px-3">
                                         <div>
 
-                                            <a href="/"><img src="{% static 'website/images/logo.png' %}" height="60"></a>
+                                            <h3 class="text-success">Bride Tool</h3>
                                         </div>
                                         <div class="mt-4">
                                             <button style="box-shadow: 1px 5px lightblue;width: 100%;"
@@ -217,7 +217,7 @@ min-height: 97%;
                                             </button>
 
                                               <button style="box-shadow: 1px 5px lightblue;width: 50%;"
-                                                    class="btn btn-lg btn-success btn-rounded "
+                                                    class="btn btn-lg btn-success btn-rounded save-button "
                                                     >Save
                                             </button>
 
@@ -246,26 +246,22 @@ min-height: 97%;
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
-<div class="main-content" style="margin-left: 300px;">
+<div class="main-content">
     <div class="boxes" style="overflow-x: auto; overflow-y: auto;">
 
         <div class="p-0 m-0 container-fluid first-section" id="h_size">
-                <div class="row table-row justify-center">
-                <div class="col-2">
-                     <div class="draggable-container resizable-container" id="circle_container">
-                    </div>
-
-                    <!-- Empty container for rectangle -->
-                    <div class="draggable-container resizable-container" id="rectangle_container">
-                    </div>
+            <div class="d-flex justify-content-center">
+                <!-- Empty container for circle -->
+                <div class="draggable-container resizable-container" id="circle_container">
                 </div>
-                    <!-- Empty container for circle -->
 
+                <!-- Empty container for rectangle -->
+                <div class="draggable-container resizable-container" id="rectangle_container">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end main content-->
+</div><!-- end main content-->
 
 {# OUR CODE START ========================================================================== #}
 
@@ -550,131 +546,3 @@ min-height: 97%;
 </html>
 
 
-
-
-
-
-
-
-{##}
-{#{% block subtitle %} {{ request.user }} {% endblock %}#}
-{#{% block page_heading %}#}
-{#{% endblock %}#}
-{##}
-{#{% block only-body %}#}
-{#<style>#}
-{#    .circle-container {#}
-{#        width: 300px; /* Set the width and height to the same value */#}
-{#        height: 300px; /* Set the width and height to the same value */#}
-{#        min-width: 100px; /* Set a minimum width */#}
-{#        min-height: 100px; /* Set a minimum height */#}
-{#        max-width: 300px; /* Set a maximum width */#}
-{#        max-height: 300px; /* Set a maximum height */#}
-{#        border-radius: 50%;#}
-{#        display: flex;#}
-{#        align-items: center;#}
-{#        justify-content: center;#}
-{#        flex-wrap: wrap;#}
-{#        background-image: url("{% static 'core/circle.png' %}");#}
-{#        background-size: cover;#}
-{#        background-position: center;#}
-{#    }#}
-{##}
-{#    .rectangle-container {#}
-{#        width: 300px;#}
-{#        height: 200px;#}
-{#        min-width: 100px; /* Set a minimum width */#}
-{#        min-height: 100px; /* Set a minimum height */#}
-{#        max-width: 300px; /* Set a maximum width */#}
-{#        max-height: 200px; /* Set a maximum height */#}
-{#        display: flex;#}
-{#        align-items: center;#}
-{#        justify-content: center;#}
-{#        flex-wrap: wrap;#}
-{#        background-image: url("{% static 'core/rectangle1.png' %}");#}
-{#        background-size: 180% auto; /* Increase the size of the background image */#}
-{#        background-position: center;#}
-{##}
-{#    }#}
-{##}
-{#    .guest {#}
-{#        background-color: #837f7f;#}
-{#        padding: 5px;#}
-{#        margin: 5px;#}
-{#        cursor: move;#}
-{#        color: #f8f8f8;#}
-{#        border-radius: 10px;#}
-{#        display: flex;#}
-{#        align-items: center;#}
-{#    }#}
-{##}
-{#    .guest::before {#}
-{#        content: "\f007";#}
-{#        font-family: "Font Awesome 5 Free";#}
-{#        font-weight: 900;#}
-{#        margin-right: 5px;#}
-{#    }#}
-{##}
-{##}
-{#</style>#}
-{#
-{##}
-{#<div class="row mt-4">#}
-{#    <div class="col-md-2 card border-1 ml-auto mr-auto mb-4">#}
-{#        <div class="">#}
-{#            <div class="card-title text-center">#}
-{#                <h3 class="mt-3 text-success"><b>Guests</b></h3>#}
-{#            </div>#}
-{#        </div>#}
-{#        <hr>#}
-{#        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">#}
-{#            <div class="list-group list-group-light">#}
-{#                {% for object in guests %}#}
-{#                <a aria-current="true"#}
-{#                   class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"#}
-{#                   data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">#}
-{#                    <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>#}
-{#                </a>#}
-{##}
-{##}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <div class="col-md-9 card ml-auto mr-auto">#}
-{#        <div class="">#}
-{#            <div class="card-title text-center">#}
-{#                <div class="row">#}
-{#                    <div class="col-9">#}
-{#                        <h3 class="mt-3 text-center text-success"><b>Seat Planner</b></h3>#}
-{#                    </div>#}
-{#                    <div class="col-3">#}
-{#                        <button class="btn btn-outline-success mt-3 update-button" data-target="#GuestGroupModal"#}
-{#                                data-toggle="modal" data-whatever="@getbootstrap">#}
-{#                            <i class="fa fa-plus"></i>Add Table#}
-{#                        </button>#}
-{#                        <button class="btn btn-outline-danger mt-3 save-button">#}
-{#                            Save#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <hr>#}
-{#        <div class="card-body" style="overflow-y: auto;height: 78vh;">#}
-{#            <div class="row justify-center">#}
-{#                <!-- Empty container for circle -->#}
-{#                <div class="draggable-container resizable-container" id="circle_container">#}
-{#                </div>#}
-{##}
-{#                <!-- Empty container for rectangle -->#}
-{#                <div class="draggable-container resizable-container" id="rectangle_container">#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{##}
-
-{#{% endblock %}#}
