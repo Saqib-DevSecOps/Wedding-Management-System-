@@ -71,9 +71,9 @@
                     </div>
                     <div class="modal-footer">
 
-                         <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
+                         <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
                          <button class="btn btn-success"type="button" id="add-guest-name">Add More</button>
-                        <button class="btn swal-btn swal-btn--confirm" type="submit" >Save It</button>
+                        <button class="btn btn-primary" type="submit" >Save It</button>
                     </div>
                 </form>
 
@@ -95,35 +95,32 @@
                     {% csrf_token %}
                     <div class="modal-body">
                         <input id="group_id" name="group_id" type="hidden" value="">
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="group_name">Group Name:</label>
                             <input class="form-control" id="group_name" name="group_name" placeholder="Enter Group Name"
                                    required type="text">
                         </div>
-                        <h6 class="mb-2">Guest Names</h6>
+                        <h6 class="mb-2 mt-2">Guest Names</h6>
                         <div id="guest-names-update-container">
                             <div class="form-group">
                                 <div class="row guest-name-row">
                                     <div class="col-10">
-                                        <input class="form-control guest-name-input" name="guest_names[]"
+                                        <input class="form-control guest-name-input mt-1" name="guest_names[]"
                                                placeholder="Enter Guest Name" required type="text">
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-danger btn-rounded delete-guest" type="button">Delete
+                                        <button class="btn btn-danger  delete-guest" type="button"><i class="fa fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button class="btn btn-success btn-rounded btn-sm add-guest-name-update" type="button">Add
-                                More
-                            </button>
-                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-outline-success" type="submit">Save</button>
+
+                         <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                         <button class="btn btn-success add-guest-name-update" type="button">Add More</button>
+                        <button class="btn btn-primary" type="submit" >Update</button>
                     </div>
                 </form>
             </div>
@@ -150,7 +147,7 @@
         <div class="modal-dialog  modal-dialog-centered zoomIn" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
+                    <h5 class="modal-title" id="UpdateModalFormLabel">Update Invitation Letter </h5>
                     <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
 
@@ -171,8 +168,9 @@
                         {{ invitation_from }}
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-outline-success" id="update-invitation" type="button">Save</button>
+                         <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn btn-primary" id="update-invitation" type="button">Save It</button>
+
                     </div>
                 </form>
 
@@ -365,8 +363,8 @@
                     text: "You won't be able to revert this!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                     confirmButtonClass: 'btn btn-success', // Add Bootstrap classes
+                    cancelButtonClass: 'btn btn-secondary',
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -634,12 +632,13 @@
 
                             var deleteButton = $('<button>').attr({
                                 type: 'button',
-                                class: 'btn btn-danger btn-rounded delete-guest',
-                            }).text('Delete');
+                                class: 'btn btn-danger delete-guest'
+                            }).html('<i class="fas fa-trash"></i>');
+
 
                             var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
                             var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
-                            var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+                            var formGroup = $('<div>').addClass('form-group mt-1').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
 
                             guestNamesContainer.append(formGroup);
                         }
@@ -693,13 +692,14 @@
 
 
                 var deleteButton = $('<button>').attr({
-                    type: 'button',
-                    class: 'btn btn-danger btn-rounded delete-guest'
-                }).text('Delete');
+                                type: 'button',
+                                class: 'btn btn-danger delete-guest'
+                            }).html('<i class="fas fa-trash"></i>');
+
 
                 var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
                 var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
-                var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+                var formGroup = $('<div>').addClass('form-group mt-1').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
 
                 $('#guest-names-update-container').append(formGroup);
             });
