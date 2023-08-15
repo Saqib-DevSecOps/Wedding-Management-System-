@@ -30,9 +30,8 @@
 
         /* Apply the animation to the modal dialog */
         .modal-dialog.zoomIn {
-            animation: zoomIn 0.3s ease-in-out;
+            animation: zoomIn 0.2s ease-in-out;
         }
-
 
     </style>
     <div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
@@ -56,31 +55,25 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-10">
-                                        <input class="form-control guest-name-input" name="guest_names[]"
+                                        <input class="form-control mt-1 guest-name-input" name="guest_names[]"
                                                placeholder="Enter Guest Name" required
                                                type="text">
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-danger btn-rounded  delete-guest" type="button">Delete
+                                        <button class="btn btn-danger  delete-guest" type="button"><i class="fa fa-trash"></i>
                                         </button>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button class="btn btn-success btn-rounded btn-sm" id="add-guest-name" type="button">Add
-                                More
-                            </button>
-
-                        </div>
-
 
                     </div>
                     <div class="modal-footer">
 
-                        <button class="btn btn-danger " data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-outline-success " type="submit">Save</button>
+                         <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
+                         <button class="btn btn-success"type="button" id="add-guest-name">Add More</button>
+                        <button class="btn swal-btn swal-btn--confirm" type="submit" >Save It</button>
                     </div>
                 </form>
 
@@ -158,7 +151,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="UpdateModalFormLabel">Update Provider </h5>
-                                                        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
 
                 </div>
                 <div class="ml-3">
@@ -193,8 +187,8 @@
                 <h4 class="mb-0 font-size-18">Guest Groups List</h4>
 
                 <div class="page-title-right">
-                      <a class="btn btn-primary" href="{% url 'admins:export-groups-to-excel' %}"
-                            type="button">Export Record
+                    <a class="btn btn-primary" href="{% url 'admins:export-groups-to-excel' %}"
+                       type="button">Export Record
                     </a>
                     <button class="btn btn-success" data-target="#GuestGroupModal" data-toggle="modal"
                             data-whatever="@getbootstrap"
@@ -366,7 +360,6 @@
         $(document).ready(function () {
             $('body .delete-button').click(function () {
                 id = $(this).data('object-id')
-                console.log(id)
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -396,15 +389,15 @@
                     placeholder: 'Enter Guest Name'
                 });
 
-                var deleteButton = $('<button>').attr({
-                    type: 'button',
-                    class: 'btn btn-danger btn-rounded delete-guest'
-                }).text('Delete');
+                 var deleteButton = $('<button>').attr({
+        type: 'button',
+        class: 'btn btn-danger delete-guest'
+    }).html('<i class="fas fa-trash"></i>');
 
                 var inputColumn = $('<div>').addClass('col-10').append(guestNameInput);
                 var buttonColumn = $('<div>').addClass('col-2').append(deleteButton);
 
-                var formGroup = $('<div>').addClass('form-group').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
+                var formGroup = $('<div>').addClass('form-group mt-1').append($('<div>').addClass('row').append(inputColumn, buttonColumn));
 
                 $('#guest-names-container').append(formGroup);
             });
@@ -512,7 +505,6 @@
 
             $('.update-button').click(function () {
                 invitationId = $(this).data('record-id');
-                console.log('Clicked invitation ID:', invitationId);
 
                 // Open the Bootstrap modal form
                 $('#UpdateModalForm').modal('show');
@@ -525,7 +517,6 @@
                     success: function (response) {
                         // Populate the form fields with invitation details
                         var invitationData = response.invitation;
-                        console.log(invitationData);
 
                         // Set values for each form field
                         for (var fieldName in invitationData) {
@@ -569,9 +560,7 @@
                         location.reload();
                     },
                     error: function (error) {
-                        console.log(error.responseText);
                         var errors = JSON.parse(error.responseText).errors;
-                        console.log(errors);
                         handleFormErrors(errors, '.update_modal_errors');
                     }
                 });
@@ -679,8 +668,6 @@
                     data: updateForm.serialize(),
                     success: function (response) {
                         // Handle the success case
-                        console.log('Guest group updated successfully:', response);
-
                         // Close the update modal
                         updateModal.modal('hide');
                         location.reload();

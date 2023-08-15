@@ -34,7 +34,50 @@
     <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" href="{% static 'core/css/icons.min.css' %}">
+<style>
+    .swal-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 13px;
+    line-height: 1.5;
+}
 
+.swal-btn--cancel {
+    background-color: #6e7881;
+    color: white;
+}
+
+.swal-btn--confirm {
+    background-color: #3085d6;
+    color: white;
+}
+  .swal-btn--success {
+    background-color: #2f9b47;
+    color: white;
+}
+
+/* Hover effect */
+.swal-btn--cancel:hover {
+    background-color: #5b636b; /* Darker shade of red */
+    color: white;
+}
+
+.swal-btn--confirm:hover {
+    background-color: #1a6cbd; /* Darker shade of blue */
+    color: white;
+}
+.swal-btn--success:hover {
+    background-color: #26803a; /* Darker shade of blue */
+    color: white;
+}
+</style>
 
     {# BASE LINKS THAT ARE REQUIRED FOR CERTAIN PAGE #}
     {% block css %}

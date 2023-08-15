@@ -19,7 +19,7 @@
 
         /* Apply the animation to the modal dialog */
         .modal-dialog.zoomIn {
-            animation: zoomIn 0.3s ease-in-out;
+            animation: zoomIn 0.2s ease-in-out;
         }
 
 
@@ -50,8 +50,8 @@
                         {% crispy form %}
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-success" id="save-provider" type="button">Save</button>
+                           <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn swal-btn swal-btn--confirm" id="save-provider" type="button">Save It</button>
                     </div>
                 </form>
 
@@ -85,8 +85,8 @@
                         {% crispy form %}
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-success" id="update-provider" type="button">Save</button>
+                        <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn swal-btn swal-btn--confirm" id="update-provider" type="button">Confirm</button>
                     </div>
                 </form>
 
@@ -250,7 +250,6 @@
         $(document).ready(function () {
             $('body .delete-button').click(function () {
                 id = $(this).data('object-id')
-                console.log(id)
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -320,10 +319,7 @@
                         location.reload();
                     },
                     error: function (error) {
-                        console.log(error)
-                        console.log(error.responseText);
                         var errors = JSON.parse(error.responseText).errors;
-                        console.log(errors);
                         handleFormErrors(errors);
                     }
                 });
@@ -365,7 +361,6 @@
 
             $('.update-button').click(function () {
                 recordId = $(this).data('record-id');
-                console.log('Clicked record ID:', recordId);
 
                 // Open the Bootstrap modal form
                 $('#UpdateModalForm').modal('show');
@@ -378,7 +373,6 @@
                     success: function (response) {
                         // Populate the form fields with provider details
                         var providerData = response.provider;
-                        console.log(providerData);
 
                         // Set values for each form field
                         for (var fieldName in providerData) {
@@ -393,7 +387,6 @@
                         $('#update-provider').data('record-id', recordId);
                     },
                     error: function (xhr, status, error) {
-                        console.error('Error fetching provider details:', error);
                     }
                 });
 
@@ -434,9 +427,7 @@
                         location.reload();
                     },
                     error: function (error) {
-                        console.log(error.responseText);
                         var errors = JSON.parse(error.responseText).errors;
-                        console.log(errors);
                         handleFormErrors(errors, '.update_modal_errors');
                     }
                 });

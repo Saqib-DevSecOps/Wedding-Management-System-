@@ -27,20 +27,14 @@
                         </a>
                     </li>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboard" role="button">
+                                    <a class="nav-link dropdown-toggle arrow-none" href="{% url 'admins:event-timeline' %}" id="topnav-dashboard" role="button">
 
                             <img src="{% static 'core/images/header/event.png' %}" style="height: 30px">
-                                                                                <div class="arrow-down"></div>
 <br>Events
 
 
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
 
-                                        <a href="{% url 'admins:event-timeline' %}" class="dropdown-item" key="t-default">Events Timeline</a>
-                                        <a href="{% url 'admins:event-list' %}" class="dropdown-item" key="t-saas">Manage Events</a>
-
-                                    </div>
                                 </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none text-center "

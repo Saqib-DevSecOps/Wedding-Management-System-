@@ -52,6 +52,6 @@ class GuestTableAdmin(admin.ModelAdmin):
 
 @admin.register(EventTimeLine)
 class GuestTableAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title')
+    list_display = ('title',)
     list_filter = ('user',)
-    search_fields = ('user', 'name')
+    search_fields = ('user', 'title')

@@ -103,7 +103,7 @@
 
                 <div class="page-title-right">
                     <button class="btn btn-success" data-target="#EventModal" data-toggle="modal"
-                            data-whatever="@getbootstrap"
+                            data-whatpy.py runserverr="@getbootstrap"
                             type="button">Add Events
                     </button>
                 </div>
@@ -330,13 +330,17 @@
                         console.log(EventData);
 
                         // Set values for each form field
-                        for (var fieldName in EventData) {
-                            if (EventData.hasOwnProperty(fieldName)) {
-                                var fieldValue = EventData[fieldName];
-                                // Select the form field by name and set its value
-                                $('#update-event-form [name="' + fieldName + '"]').val(fieldValue);
+                      for (var fieldName in EventData) {
+                        if (EventData.hasOwnProperty(fieldName)) {
+                            var fieldValue = EventData[fieldName];
+                            // Handle date field separately and format it correctly
+                            if (fieldName === 'date') {
+                                fieldValue = fieldValue.replace('T', ' ');
                             }
+                            // Select the form field by name and set its value
+                            $('#update-event-form [name="' + fieldName + '"]').val(fieldValue);
                         }
+                    }
 
                         // Update the data-record-id attribute on the submit button to store the record ID
                         $('#update-event').data('record-id', recordId);

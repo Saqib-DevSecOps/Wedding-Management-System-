@@ -119,7 +119,6 @@ class GuestTable(models.Model):
 
 class EventTimeLine(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=1000)
     date = models.DateTimeField()
@@ -127,4 +126,4 @@ class EventTimeLine(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.title

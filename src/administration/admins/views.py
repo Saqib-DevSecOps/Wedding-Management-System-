@@ -94,7 +94,6 @@ class GuestGroupListView(CreateView, ListView):
 def save_guest_group(request):
     if request.method == 'POST':
         group_name = request.POST.get('group_name')
-        print("apihit", group_name)
         guest_names = request.POST.getlist('guest_names[]')
         guest_group = GuestGroup.objects.create(group_name=group_name, user=request.user)
         for name in guest_names:
@@ -135,8 +134,6 @@ def update_guest_group(request):
         group_id = request.POST.get('group_id')
         group_name = request.POST.get('group_name')
         guest_names = request.POST.getlist('guest_names[]')
-        print(request.POST)
-
         # Fetch the guest group object
         guest_group = get_object_or_404(GuestGroup, id=group_id, user=request.user)
         # Update the guest group data
@@ -175,7 +172,6 @@ class InvitationUpdateView(View):
 
     def post(self, request, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
-        print(invitation.id)
         total = request.POST.get('total_invitation')
         if total.isnumeric():
             invitation.total_invitation = total
@@ -185,8 +181,6 @@ class InvitationUpdateView(View):
 
         errors = {}
         for field, error_messages in form.errors.items():
-            print("invalid")
-
             errors[field] = [str(message) for message in error_messages]
 
         return JsonResponse({'errors': errors}, status=400)
@@ -246,7 +240,6 @@ class ProviderDetailView(DetailView):
 class ProviderCreateView(View):
     def post(self, request):
         form = ProviderMetaForm(request.POST, request.FILES)
-        print(request.FILES)
         if form.is_valid():
             provider = form.save(commit=False)
             provider.user = request.user
@@ -271,6 +264,7 @@ class ProviderUpdateView(View):
             'provider_name': provider.provider_name,
             'service': provider.service,
             'email': provider.email,
+            'link': provider.link,
             'phone_number': provider.phone_number,
             'total_cost': provider.total_cost,
             'paid': provider.paid,
@@ -283,14 +277,13 @@ class ProviderUpdateView(View):
         provider = get_object_or_404(Provider, id=pk, user=self.request.user)
         form = ProviderMetaForm(request.POST, request.FILES, instance=provider)
         if form.is_valid():
-            print("valid")
             provider = form.save()
             messages.success(request, "Successfully updated")
             return JsonResponse({'success': True, 'provider_id': provider.id})
 
         errors = {}
         for field, error_messages in form.errors.items():
-            print("invalid")
+            ("invalid")
 
             errors[field] = [str(message) for message in error_messages]
 
@@ -300,7 +293,6 @@ class ProviderUpdateView(View):
 @method_decorator(login_required, name='dispatch')
 class ProviderDeleteView(View):
     def get(self, request, pk):
-        print("hello")
         provider = get_object_or_404(Provider, id=pk)
         provider.delete()
         messages.success(self.request, "Provider Successfully Deleted")
@@ -379,8 +371,6 @@ class CreateSeatPlannerViewApi(View):
                               seat_count=seat_count,
                               table_type=container_records[i]['table_type'],
                               )
-                print(seat_count)
-                print(len(container_records[i]['guests']))
                 table.seats_left = int(seat_count - len(container_records[i]['guests']))
                 table.save()
                 for j in range(len(container_records[i]['guests'])):
@@ -488,26 +478,16 @@ class ExportGroupsToExcel(View):
 
 
 @method_decorator(login_required, name='dispatch')
-class EventTimelineView(TemplateView):
-    template_name = 'admins/event.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object_list'] = EventTimeLine.objects.filter(user=self.request.user)
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
-class EventTimeLineListView(ListView):
+class EventTimelineView(ListView):
     model = EventTimeLine
-    template_name = 'admins/event_list.html'
+    template_name = 'admins/event.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
-        context = super(EventTimeLineListView, self).get_context_data(**kwargs)
+        context = super(EventTimelineView, self).get_context_data(**kwargs)
         context['form'] = EventTimeLineMetaForm
         object_list = self.get_queryset()
         paginator = Paginator(object_list, 20)
@@ -538,11 +518,10 @@ class EventTimeLineCreateView(View):
 @method_decorator(login_required, name='dispatch')
 class EventTimeLineDeleteView(View):
     def get(self, request, pk):
-        print("hello")
         event = get_object_or_404(EventTimeLine, id=pk)
         event.delete()
         messages.success(self.request, "Event Successfully Deleted")
-        return redirect('admins:event-list')
+        return redirect('admins:event-timeline')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -550,10 +529,9 @@ class EventTimeLineUpdateView(View):
 
     def get(self, request, pk):
         event = get_object_or_404(EventTimeLine, id=pk, user=self.request.user)
-
         provider_data = {
-            'name': event.name,
             'title': event.title,
+            'date': event.date.strftime('%Y-%m-%dT%H:%M'),  # Format the date correctly
             'description': event.description,
         }
 
@@ -564,13 +542,11 @@ class EventTimeLineUpdateView(View):
         form = EventTimeLineMetaForm(request.POST, instance=event)
         if form.is_valid():
             provider = form.save()
-            messages.success(request, "Successfully updated")
+            messages.success(request, "Event Successfully updated")
             return JsonResponse({'success': True, 'event_id': event.id})
 
         errors = {}
         for field, error_messages in form.errors.items():
-            print("invalid")
-
             errors[field] = [str(message) for message in error_messages]
 
         return JsonResponse({'errors': errors}, status=400)

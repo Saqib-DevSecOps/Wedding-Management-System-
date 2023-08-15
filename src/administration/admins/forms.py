@@ -79,12 +79,11 @@ class ProviderMetaForm(forms.ModelForm):
 class EventTimeLineMetaForm(forms.ModelForm):
     class Meta:
         model = EventTimeLine
-        fields = ('name', 'title', 'description','date')
+        fields = ( 'title','date' , 'description')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
-            'date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),  # Use Textarea widget for description
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -92,9 +91,8 @@ class EventTimeLineMetaForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Column('name', css_class=' col-sm-6 '),
                 Column('title', css_class='form-group col-sm-6 '),
-                Column('date', css_class='form-group col-sm-12 '),
+                Column('date', css_class='form-group col-sm-6 '),
                 Column('description', css_class='form-group col-sm-12 '),
             ),
 

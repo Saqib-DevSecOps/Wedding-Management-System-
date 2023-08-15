@@ -6,7 +6,7 @@ from .views import (
     ProviderDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
     InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView, CreateSeatPlannerViewApi,
     UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete, update_invitation_order, DownloadAttachmentView,
-    save_guest_group, ExportGroupsToExcel, EventTimeLineListView, EventTimeLineCreateView, EventTimeLineDeleteView, EventTimeLineUpdateView,
+    save_guest_group, ExportGroupsToExcel, EventTimeLineCreateView, EventTimeLineDeleteView, EventTimeLineUpdateView,
     EventTimelineView
 )
 
@@ -56,7 +56,6 @@ urlpatterns += [
 urlpatterns += [
 
     path('event/timeline/', EventTimelineView.as_view(), name='event-timeline'),
-    path('event/list/', EventTimeLineListView.as_view(), name='event-list'),
     path('event/create/', EventTimeLineCreateView.as_view(), name='event-create'),
     path('event/delete/<str:pk>/', EventTimeLineDeleteView.as_view(), name='event-delete'),
     path('event/update/<str:pk>/', EventTimeLineUpdateView.as_view(), name='event-update'),
