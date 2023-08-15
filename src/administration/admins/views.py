@@ -13,10 +13,11 @@ from django.views.generic import (
 )
 from openpyxl.utils import get_column_letter
 
-from src.administration.admins.filters import GuestFilter, ProviderFilter, TableFilter
-from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, GuestMetaForm, InvitationForm, \
-    TableForm
-from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, Table, GuestTable
+from src.administration.admins.filters import ProviderFilter, TableFilter
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, InvitationForm, \
+    TableForm, EventTimeLineMetaForm
+from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, Table, GuestTable, \
+    EventTimeLine
 from django.views import View
 import json
 from django.http import JsonResponse
@@ -448,37 +449,128 @@ class DownloadAttachmentView(View):
         raise Http404
 
 
-def export_groups_to_excel(request):
-    user = request.user
-    groups = GuestGroup.objects.filter(user=user)
+@method_decorator(login_required, name='dispatch')
+class ExportGroupsToExcel(View):
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        groups = GuestGroup.objects.filter(user=user)
 
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = f'attachment; filename="user_groups_export.xlsx"'
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename="user_groups_export.xlsx"'
 
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = 'Groups Data'
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = 'Groups Data'
 
-    # Writing headers
-    columns = ['Group Name', 'Guest Name', 'Total Invitations']
-    for col_num, column_title in enumerate(columns, 1):
-        col_letter = get_column_letter(col_num)
-        ws[f'{col_letter}1'] = column_title
+        # Writing headers
+        columns = ['Group Name', 'Guest Name', 'Total Invitations']
+        for col_num, column_title in enumerate(columns, 1):
+            col_letter = get_column_letter(col_num)
+            ws[f'{col_letter}1'] = column_title
 
-    # Writing data for each group
-    row_num = 2
-    for group in groups:
-        ws[f'A{row_num}'] = group.group_name
-        ws[f'C{row_num}'] = group.invitation_set.total_invitation
+        # Writing data for each group
+        row_num = 2
+        for group in groups:
+            ws[f'A{row_num}'] = group.group_name
+            ws[f'C{row_num}'] = group.invitation_set.total_invitation
 
-        guests = group.guest_set.all()
-        for guest in guests:
-            ws[f'B{row_num}'] = guest.guest_name
-            row_num += 1
+            guests = group.guest_set.all()
+            for guest in guests:
+                ws[f'B{row_num}'] = guest.guest_name
+                row_num += 1
 
-    for col_num in range(1, len(columns) + 1):
-        col_letter = get_column_letter(col_num)
-        ws.column_dimensions[col_letter].auto_size = True
+        for col_num in range(1, len(columns) + 1):
+            col_letter = get_column_letter(col_num)
+            ws.column_dimensions[col_letter].auto_size = True
 
-    wb.save(response)
-    return response
+        wb.save(response)
+        return response
+
+
+@method_decorator(login_required, name='dispatch')
+class EventTimelineView(TemplateView):
+    template_name = 'admins/event.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = EventTimeLine.objects.filter(user=self.request.user)
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class EventTimeLineListView(ListView):
+    model = EventTimeLine
+    template_name = 'admins/event_list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(EventTimeLineListView, self).get_context_data(**kwargs)
+        context['form'] = EventTimeLineMetaForm
+        object_list = self.get_queryset()
+        paginator = Paginator(object_list, 20)
+        page_number = self.request.GET.get('page')
+        page_object = paginator.get_page(page_number)
+        context['object_list'] = page_object
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class EventTimeLineCreateView(View):
+    def post(self, request):
+        form = EventTimeLineMetaForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user = request.user
+            event.save()
+            messages.success(request, "Event Successfully Created")
+            return JsonResponse({'success': True, 'provider_id': event.id})
+
+        errors = {}
+        for field, error_messages in form.errors.items():
+            errors[field] = [str(message) for message in error_messages]
+
+        return JsonResponse({'errors': errors}, status=400)
+
+
+@method_decorator(login_required, name='dispatch')
+class EventTimeLineDeleteView(View):
+    def get(self, request, pk):
+        print("hello")
+        event = get_object_or_404(EventTimeLine, id=pk)
+        event.delete()
+        messages.success(self.request, "Event Successfully Deleted")
+        return redirect('admins:event-list')
+
+
+@method_decorator(login_required, name='dispatch')
+class EventTimeLineUpdateView(View):
+
+    def get(self, request, pk):
+        event = get_object_or_404(EventTimeLine, id=pk, user=self.request.user)
+
+        provider_data = {
+            'name': event.name,
+            'title': event.title,
+            'description': event.description,
+        }
+
+        return JsonResponse({'event': provider_data}, encoder=DjangoJSONEncoder)
+
+    def post(self, request, pk):
+        event = get_object_or_404(EventTimeLine, id=pk, user=self.request.user)
+        form = EventTimeLineMetaForm(request.POST, instance=event)
+        if form.is_valid():
+            provider = form.save()
+            messages.success(request, "Successfully updated")
+            return JsonResponse({'success': True, 'event_id': event.id})
+
+        errors = {}
+        for field, error_messages in form.errors.items():
+            print("invalid")
+
+            errors[field] = [str(message) for message in error_messages]
+
+        return JsonResponse({'errors': errors}, status=400)

@@ -1,12 +1,13 @@
 from django.urls import path, include
 from .views import (
     DashboardView,
-    GuestGroupListView, GuestGroupUpdateView,
+    GuestGroupListView,
     GuestGroupDetailView, ProviderListCreateView, ProviderCreateView, ProviderUpdateView, ProviderDetailView,
     ProviderDeleteView, GuestGroupDeleteView, update_row_order, get_guests,
     InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView, CreateSeatPlannerViewApi,
     UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete, update_invitation_order, DownloadAttachmentView,
-    save_guest_group, export_groups_to_excel
+    save_guest_group, ExportGroupsToExcel, EventTimeLineListView, EventTimeLineCreateView, EventTimeLineDeleteView, EventTimeLineUpdateView,
+    EventTimelineView
 )
 
 app_name = 'admins'
@@ -27,8 +28,7 @@ urlpatterns += [
     path('update_invitation_order/', update_invitation_order, name='update_invitation_order'),
     path('get_guests/', get_guests, name='get_guests'),
     path('invitation/update/<str:pk>', InvitationUpdateView.as_view(), name='update-invitation'),
-    path('export/', export_groups_to_excel, name='export-groups-to-excel'),
-
+    path('export/', ExportGroupsToExcel.as_view(), name='export-groups-to-excel'),
 ]
 
 urlpatterns += [
@@ -50,6 +50,16 @@ urlpatterns += [
     path('seat-planner/detail/<str:pk>/', SeatPlannerDetail.as_view(), name='seat-planner-detail'),
     path('seat-planner/delete/<str:pk>/', SeatPlannerDelete.as_view(), name='seat-planner-delete'),
     path('seat-planner/<str:pk>/update/', UpdateSeatPlanner.as_view(), name='seat-planner-update'),
+
+]
+
+urlpatterns += [
+
+    path('event/timeline/', EventTimelineView.as_view(), name='event-timeline'),
+    path('event/list/', EventTimeLineListView.as_view(), name='event-list'),
+    path('event/create/', EventTimeLineCreateView.as_view(), name='event-create'),
+    path('event/delete/<str:pk>/', EventTimeLineDeleteView.as_view(), name='event-delete'),
+    path('event/update/<str:pk>/', EventTimeLineUpdateView.as_view(), name='event-update'),
 
 ]
 
