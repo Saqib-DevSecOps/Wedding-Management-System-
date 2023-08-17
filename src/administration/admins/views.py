@@ -554,3 +554,9 @@ class EventTimeLineUpdateView(View):
 
 class Test(TemplateView):
     template_name = 'admins/test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['guests'] = Guest.objects.filter(group__user=self.request.user)
+        context['form'] = TableForm
+        return context

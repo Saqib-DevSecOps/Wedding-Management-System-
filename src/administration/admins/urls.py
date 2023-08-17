@@ -9,7 +9,7 @@ from .views import (
     InvitationUpdateView, update_guest_group, SeatPlannerListView, SeatPlannerCreateView, CreateSeatPlannerViewApi,
     UpdateSeatPlanner, SeatPlannerDetail, SeatPlannerDelete, update_invitation_order, DownloadAttachmentView,
     save_guest_group, ExportGroupsToExcel, EventTimeLineCreateView, EventTimeLineDeleteView, EventTimeLineUpdateView,
-    EventTimelineView
+    EventTimelineView, Test
 )
 
 app_name = 'admins'
@@ -65,7 +65,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    path('test',TemplateView.as_view())
+    path('test/',Test.as_view(),name='test')
 ]
 
 urlpatterns += [
