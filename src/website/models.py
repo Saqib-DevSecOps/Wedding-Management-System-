@@ -196,6 +196,7 @@ class Site(models.Model):
     tagline = models.CharField(default="_ no tagline _", max_length=255)
     description = models.CharField(default="_ no description _", max_length=255)
     logo = models.ImageField(upload_to='site/logo', null=True, blank=True)
+    dashboard_logo = models.ImageField(upload_to='site/logo', null=True, blank=True)
     favico = models.ImageField(upload_to='site/favico', null=True, blank=True)
 
     # ABOUT 

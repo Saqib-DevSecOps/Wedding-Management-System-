@@ -79,8 +79,8 @@
 
 }
 #h_size{
-max-height: 97%;
-min-height: 97%;
+max-height: 2000px;
+min-height: 2000px;
 }
 .custom-drag-helper {
     position: absolute;
@@ -144,10 +144,10 @@ min-height: 97%;
 
     <div class="row float-nav" style="position: fixed; top: 0;width: 100%;background-color: #f8f8fb;">
         <div class="col-6" style="text-align: left;">
-            <a href="/"><img src="{% static 'website/images/logo.png' %}" height="50"></a>
+            <a href="/"><img src="{{ logo }}" height="50"></a>
         </div>
         <div class="col-6 mt-3" style="text-align: right;">
-            <img id="vertical-menu-btn" src="{% static 'website/images/bars.png' %}" height="20">
+            <img id="vertical-menu-btn" src="{{ logo }}" height="20">
         </div>
     </div>
 
@@ -174,7 +174,7 @@ min-height: 97%;
                                     <div class="px-3">
                                         <div>
 
-                                            <h3 class="text-success">Bride Tool</h3>
+                                        <img id="vertical-menu-btn" src="{{ logo }}" height="40">
                                         </div>
                                         <div class="mt-4">
                                             <button style="box-shadow: 1px 5px lightblue;width: 100%;"
@@ -246,11 +246,11 @@ min-height: 97%;
 <!-- Start right Content here -->
 <!-- ============================================================== -->
 <div class="main-content">
-    <div class="boxes" style="padding-left: 55px">
+    <div class="boxes" style="padding-left: 55px" id ="h_size">
 
-        <div class="p-0 m-0 container-fluid first-section "  style="border: 20px solid black;" id="h_size">
-
-            <div class="d-flex justify-content-center">
+        <div class="p-0 m-0 container-fluid first-section "  id="h_size">
+<div class="card-body" style="overflow-y: auto;height: 78vh;">
+            <div class="row justify-center">
                 <!-- Empty container for circle -->
                 <div class="draggable-container resizable-container" id="circle_container">
                 </div>
@@ -260,8 +260,9 @@ min-height: 97%;
                 </div>
             </div>
         </div>
+        </div>
     </div>
-
+</div>
 </div><!-- end main content-->
 </div>
 {# OUR CODE START ========================================================================== #}
@@ -378,19 +379,20 @@ function saveRemainingGuestsToLocalStorage() {
     recoverDataFromLocalStorage();
 
         // Make the entire container draggable
-$("#draggable-container").draggable({
-    containment: "#h_size", // Change to a valid CSS selector or element ID
-    drag: function(event, ui) {
-        var position = ui.position;
-
-        var left = position.left;
-        var top = position.top;
-
-        // Do something with the updated position values
-        console.log("Updated Left: " + left);
-        console.log("Updated Top: " + top);
-    }
-});
+        // Make the entire container draggable
+$(document).on('mousedown', '.draggable-container', function() {
+        $(this).draggable({
+            containment: "#h_size", // Change to a valid CSS selector or element ID
+            drag: function(event, ui) {
+                var position = ui.position;
+                var left = position.left;
+                var top = position.top;
+                // Do something with the updated position values
+                console.log("Updated Left: " + left);
+                console.log("Updated Top: " + top);
+            }
+        });
+    });
         // Make the guest names draggable
         $('.draggable-guest').draggable({
             revert: 'invalid', // Revert back to the original position if not dropped in a container
@@ -423,7 +425,7 @@ $("#draggable-container").draggable({
 
             if (tableType === '1') {
                 containerHtml = `
-                <div class="draggable-container resizable-container" id="${containerId}">
+                <div class="draggable-container bg-primary resizable-container" id="${containerId}">
                     <h5 >Table Name: <span>${tableName}</span></h5>
                     <h5 >Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -498,19 +500,6 @@ $("#draggable-container").draggable({
             $('#GuestGroupModal').modal('hide');
 
         });
- $(document).on('mousedown', '.draggable-container', function() {
-        $(this).draggable({
-            containment: "#h_size", // Change to a valid CSS selector or element ID
-            drag: function(event, ui) {
-                var position = ui.position;
-                var left = position.left;
-                var top = position.top;
-                // Do something with the updated position values
-                console.log("Updated Left: " + left);
-                console.log("Updated Top: " + top);
-            }
-        });
-    });
 
         // Handle opening the modal
         $('.update-button').click(function () {
