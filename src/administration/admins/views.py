@@ -550,3 +550,5 @@ class EventTimeLineUpdateView(View):
             errors[field] = [str(message) for message in error_messages]
 
         return JsonResponse({'errors': errors}, status=400)
+
+

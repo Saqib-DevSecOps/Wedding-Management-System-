@@ -1,5 +1,4 @@
 {% load static %}
-{% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
 <html lang="en">
@@ -247,9 +246,18 @@ min-height: 97%;
 <!-- Start right Content here -->
 <!-- ============================================================== -->
 <div class="main-content">
-    <div class="boxes" style="overflow-x: auto; overflow-y: auto;">
+    <div class="boxes" style="padding-left: 55px">
 
-        <div class="p-0 m-0 container-fluid first-section" id="h_size">
+        <div class="p-0 m-0 container-fluid first-section "  style="border: 20px solid black;" id="h_size">
+        <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-9 bg-danger">
+
+        </div>
+        </div>
+
             <div class="d-flex justify-content-center">
                 <!-- Empty container for circle -->
                 <div class="draggable-container resizable-container" id="circle_container">
@@ -261,10 +269,12 @@ min-height: 97%;
             </div>
         </div>
     </div>
-</div><!-- end main content-->
 
+</div><!-- end main content-->
+</div>
 {# OUR CODE START ========================================================================== #}
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="{% static 'core/libs/bootstrap/js/bootstrap.min.js' %}"></script>
 {#<script src="{% static 'core/libs/jquery/jquery.min.js' %}"></script>#}
@@ -281,13 +291,55 @@ min-height: 97%;
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+function saveDataToLocalStorage() {
+    var containerData = [];
+
+    $('.draggable-container[id^="container_"]').each(function () {
+        var containerId = $(this).attr('id');
+        var containerPosition = $(this).position(); // Get the position of the container
+        var guestData = [];
+        var containerType = $(this).find('.circle-container').length > 0 ? 'circle-container' : 'rectangle-container';
+        console.log(containerType);
+
+        $(this).find('.guest').each(function () {
+            var guestId = $(this).data('guest-id');
+            guestData.push(guestId);
+        });
+
+        containerData.push({
+            containerId: containerId,
+            containerType: containerType,
+            containerPosition: containerPosition, // Store the position
+            guests: guestData
+        });
+
+        containerType = '';
+    });
+
+    localStorage.setItem('seatingPlanData', JSON.stringify(containerData));
+}
+function saveRemainingGuestsToLocalStorage() {
+    var remainingGuests = [];
+
+    $('.list-group.list-group-light .draggable-guest').each(function () {
+        var guestId = $(this).data('guest-id');
+
+        // Only add the guest to remainingGuests if it's not in any container
+        if (!$(`.draggable-container .guest[data-guest-id="${guestId}"]`).length) {
+            remainingGuests.push(guestId);
+        }
+    });
+
+    localStorage.setItem('remainingGuests', JSON.stringify(remainingGuests));
+}
+
     $(document).ready(function () {
 
         function getCookie(name) {
@@ -306,8 +358,42 @@ min-height: 97%;
             return cookieValue;
         }
 
-        // Make the entire container draggable
+          // Function to save data to local storage
 
+    // Function to recover data from local storage and restore the state
+    function recoverDataFromLocalStorage() {
+        var seatingPlanData = localStorage.getItem('seatingPlanData');
+        if (seatingPlanData) {
+            seatingPlanData = JSON.parse(seatingPlanData);
+            console.log(seatingPlanData)
+            seatingPlanData.forEach(function (containerInfo) {
+                var container = $('#' + containerInfo.containerId);
+                console.log(container)
+                containerInfo.guests.forEach(function (guestId) {
+                    var guest = $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`);
+                    container.find('.circle-container, .rectangle-container').append(guest);
+                    guest.hide();
+                });
+            });
+        }
+    }
+
+    // Call the function to recover data from local storage and restore the state
+    recoverDataFromLocalStorage();
+
+ // Make the containers draggable
+    $('.draggable-container').draggable({
+        start: function (event, ui) {
+            // Code to execute when dragging starts
+        },
+        drag: function (event, ui) {
+            // Code to execute while dragging
+        },
+        stop: function (event, ui) {
+            // Code to execute when dragging stops
+            console.log('hittt')
+        }
+    });
         // Make the guest names draggable
         $('.draggable-guest').draggable({
             revert: 'invalid', // Revert back to the original position if not dropped in a container
@@ -318,7 +404,6 @@ min-height: 97%;
         var tableType = '';
         var tableName = ''; // Variable to store the table name
         // Make the containers droppable
-        $('.draggable-container').droppable();
 
         // Handle save button click
         $('#save-provider').click(function () {
@@ -403,14 +488,18 @@ min-height: 97%;
                         $(this).find('.circle-container, .rectangle-container').append(guestElement)
                         ui.helper.hide();
                         $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
-
+     console.log('hit')
+            saveDataToLocalStorage()
+            saveRemainingGuestsToLocalStorage()
                     }
 
                 }
             });
-
+     console.log('savede')
+            saveDataToLocalStorage()
             // Close the modal
             $('#GuestGroupModal').modal('hide');
+
         });
 
         // Handle opening the modal
@@ -440,6 +529,7 @@ min-height: 97%;
                 $('.list-group.list-group-light').find(`[data-object-id="${guestId}"]`).show();
             });
         });
+
         $('.save-button').click(function () {
             var containers = $('.draggable-container');
             var containerRecords = [];

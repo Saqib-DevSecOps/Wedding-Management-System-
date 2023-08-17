@@ -62,6 +62,7 @@ urlpatterns += [
 
 ]
 
+
 urlpatterns += [
     path('json/', include('src.administration.admins.admins-json.urls', namespace='admins-json'))
 ]
