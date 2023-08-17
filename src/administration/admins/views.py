@@ -552,3 +552,5 @@ class EventTimeLineUpdateView(View):
         return JsonResponse({'errors': errors}, status=400)
 
 
+class Test(TemplateView):
+    template_name = 'admins/test.html'
