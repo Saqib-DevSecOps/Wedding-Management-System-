@@ -79,8 +79,10 @@
 
 }
 #h_size{
-max-height: 97%;
-min-height: 97%;
+max-height: 2000px;
+min-height: 2000px;
+overflow-x: auto;
+overflow-y: auto;
 }
 .custom-drag-helper {
     position: absolute;
@@ -144,10 +146,10 @@ min-height: 97%;
 
     <div class="row float-nav" style="position: fixed; top: 0;width: 100%;background-color: #f8f8fb;">
         <div class="col-6" style="text-align: left;">
-            <a href="/"><img src="{% static 'website/images/logo.png' %}" height="50"></a>
+            <a href="/"><img src="{{ logo }}" height="50"></a>
         </div>
         <div class="col-6 mt-3" style="text-align: right;">
-            <img id="vertical-menu-btn" src="{% static 'website/images/bars.png' %}" height="20">
+            <img id="vertical-menu-btn" src="{{ logo }}" height="20">
         </div>
     </div>
 
@@ -174,7 +176,7 @@ min-height: 97%;
                                     <div class="px-3">
                                         <div>
 
-                                            <h3 class="text-success">Bride Tool</h3>
+                                        <img id="vertical-menu-btn" src="{{ logo }}" height="40">
                                         </div>
                                         <div class="mt-4">
                                             <button style="box-shadow: 1px 5px lightblue;width: 100%;"
@@ -191,12 +193,6 @@ min-height: 97%;
                                     <li>
                                         <div class="list-group list-group-light" style="overflow-x: hidden; overflow-y: scroll; max-height: 500px;">
                                             {% for object in guests %}
-                                            <a aria-current="true"
-                                               class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
-                                               data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
-                                                <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
-                                            </a>
-                                            {% endfor %}{% for object in guests %}
                                             <a aria-current="true"
                                                class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
                                                data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
@@ -245,120 +241,21 @@ min-height: 97%;
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
+
 <div class="main-content">
     <div class="boxes" style="padding-left: 55px">
 
-        <div class="p-0 m-0 container-fluid first-section "   id="h_size">
+        <div class="p-0 m-0 container-fluid first-section " id="h_size">
 
-            <div class="row">
-
-            <div class="col-3">
-                 <div class="draggable-container bg-danger resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>     <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>     <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>
+            <div class="d-flex justify-content-center ">
                 <!-- Empty container for circle -->
-
-        </div>
-            <div class="row">
-
-            <div class="col-3">
-                 <div class="draggable-container bg-danger resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
+                <div class="draggable-container resizable-container" id="circle_container">
                 </div>
 
-
+                <!-- Empty container for rectangle -->
+                <div class="draggable-container resizable-container" id="rectangle_container">
+                </div>
             </div>
-            <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>     <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>     <div class="col-3">
-                 <div class="draggable-container resizable-container" id="${containerId}">
-                    <h5 >Table Name: <span>${tableName}</span></h5>
-                    <h5 >Table Size: <span>${tableSize}</span></h5>
-                    <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
-                        data-container-id="${containerId}"
-                        type="button"><i class="fa fa-trash"></i></button>
-                    <div class="rectangle-container">
-                    </div>
-                </div>
-
-
-            </div>
-                <!-- Empty container for circle -->
-
         </div>
     </div>
 
@@ -399,44 +296,66 @@ function saveDataToLocalStorage() {
 
     $('.draggable-container[id^="container_"]').each(function () {
         var containerId = $(this).attr('id');
-        var containerPosition = $(this).position(); // Get the position of the container
+        var containerPosition = $(this).position();
         var guestData = [];
         var containerType = $(this).find('.circle-container').length > 0 ? 'circle-container' : 'rectangle-container';
-        console.log(containerType);
+        var tableName = $(this).find('h5 span:first').text();
+        var tableSize = $(this).find('h5 span:last').text();
 
         $(this).find('.guest').each(function () {
             var guestId = $(this).data('guest-id');
-            guestData.push(guestId);
+            var guestName = $(this).text().trim();
+            guestData.push([guestId, guestName]);
         });
 
         containerData.push({
             containerId: containerId,
             containerType: containerType,
-            containerPosition: containerPosition, // Store the position
-            guests: guestData
+            containerPosition: containerPosition,
+            guests: guestData,
+            tableName: tableName,
+            tableSize: tableSize
         });
-
-        containerType = '';
     });
 
     localStorage.setItem('seatingPlanData', JSON.stringify(containerData));
 }
+
+
 function saveRemainingGuestsToLocalStorage() {
     var remainingGuests = [];
 
     $('.list-group.list-group-light .draggable-guest').each(function () {
         var guestId = $(this).data('guest-id');
+        var guestName = $(this).text(); // Get the guest name
 
         // Only add the guest to remainingGuests if it's not in any container
         if (!$(`.draggable-container .guest[data-guest-id="${guestId}"]`).length) {
-            remainingGuests.push(guestId);
+            remainingGuests.push({ id: guestId, name: guestName }); // Save both guest ID and name
         }
     });
 
     localStorage.setItem('remainingGuests', JSON.stringify(remainingGuests));
 }
 
+function getGuestNameById(guestId) {
+    var guestName = ''; // Default guest name
+
+    // Iterate through the seatingPlanData to find the guest
+    seatingPlanData.forEach(function (containerInfo) {
+        containerInfo.guests.forEach(function (guestData) {
+            if (guestData[0] === guestId) {
+                guestName = guestData[1]; // Assign the guest name
+            }
+        });
+    });
+
+    return guestName;
+}
+
     $(document).ready(function () {
+
+
 
         function getCookie(name) {
             var cookieValue = null;
@@ -456,41 +375,109 @@ function saveRemainingGuestsToLocalStorage() {
 
           // Function to save data to local storage
 
-    // Function to recover data from local storage and restore the state
-    function recoverDataFromLocalStorage() {
-        var seatingPlanData = localStorage.getItem('seatingPlanData');
-        if (seatingPlanData) {
-            seatingPlanData = JSON.parse(seatingPlanData);
-            console.log(seatingPlanData)
-            seatingPlanData.forEach(function (containerInfo) {
-                var container = $('#' + containerInfo.containerId);
-                console.log(container)
-                containerInfo.guests.forEach(function (guestId) {
-                    var guest = $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`);
-                    container.find('.circle-container, .rectangle-container').append(guest);
-                    guest.hide();
+        function recoverDataFromLocalStorage() {
+            var seatingPlanData = localStorage.getItem('seatingPlanData');
+            if (seatingPlanData) {
+                seatingPlanData = JSON.parse(seatingPlanData);
+
+                seatingPlanData.forEach(function (containerInfo) {
+                    var containerId = containerInfo.containerId;
+                    var containerType = containerInfo.containerType;
+                    var containerPosition = containerInfo.containerPosition;
+                    var guests = containerInfo.guests;
+
+                    // Recreate the container element
+                    var containerHtml = `
+                        <div class="draggable-container resizable-container" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
+                            <h5>Table Name: <span>${containerInfo.tableName}</span></h5>
+                            <h5>Table Size: <span>${containerInfo.tableSize}</span></h5>
+                            <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
+                                data-container-id="${containerId}"
+                                type="button"><i class="fa fa-trash"></i></button>
+                            <div class="${containerType}"></div>
+                        </div>
+                    `;
+                     if (containerType === "circle-container") {
+                                $('#circle_container').append(containerHtml);
+                            } else if (containerType === "rectangle-container") {
+                                $('#rectangle_container').append(containerHtml);
+                      }
+                               // Make the new container draggable
+                    $('#' + containerId).draggable();
+
+                    // Make the new container resizable
+                    $('#' + containerId).resizable();
+
+                    // Recreate the guests within the container
+               guests.forEach(function (guestData) {
+            var guestId = guestData[0];
+            var guestName = guestData[1]; // Guest name is already included in the guestData array
+
+            var guestElement = $('<div class="guest"></div>')
+                .text(guestName) // Set the guest name
+                .attr('data-guest-id', guestId);
+
+            $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
+            $('#' + containerId).find(`.${containerType}`).append(guestElement);
+        });
+
+
+                      $('#' + containerId).droppable({
+                        accept: '.draggable-guest',
+                        drop: function (event, ui) {
+                            var guestName = ui.helper.text();
+                            var guestId = ui.helper.data('object-id');
+                            var guestElement = $('<div class="guest"></div>')
+                                .text(guestName)
+                                .attr('data-guest-id', guestId); // Add data-guest-id attribute
+
+                            containerType = $(this).find('.circle-container, .rectangle-container').attr('class');
+                            var totalGuests = $(this).find('.guest').length;
+
+                            if (totalGuests.toString() === containerInfo.tableSize) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: `${tableName} Table Size is Full`,
+                                })
+                            } else {
+                                $(this).find('.circle-container, .rectangle-container').append(guestElement)
+                                ui.helper.hide();
+                                $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
+                    saveDataToLocalStorage()
+                    saveRemainingGuestsToLocalStorage()
+                    }
+
+                }
+            });
+
+
+
+                });
+            }
+        }
+
+            // Call the function to recover data from local storage and restore the state
+            recoverDataFromLocalStorage();
+
+
+         // Make the entire container draggable
+        $(document).on('mousedown', '.draggable-container', function() {
+                $(this).draggable({
+                    containment: "#h_size", // Change to a valid CSS selector or element ID
+                    drag: function(event, ui) {
+                        var position = ui.position;
+                        var left = position.left;
+                        var top = position.top;
+                        // Do something with the updated position values
+                        console.log("Updated Left: " + left);
+                        console.log("Updated Top: " + top);
+                             saveDataToLocalStorage()
+                    saveRemainingGuestsToLocalStorage()
+                    }
                 });
             });
-        }
-    }
 
-    // Call the function to recover data from local storage and restore the state
-    recoverDataFromLocalStorage();
-
-        // Make the entire container draggable
-$("#draggable-container").draggable({
-    containment: "#h_size", // Change to a valid CSS selector or element ID
-    drag: function(event, ui) {
-        var position = ui.position;
-
-        var left = position.left;
-        var top = position.top;
-
-        // Do something with the updated position values
-        console.log("Updated Left: " + left);
-        console.log("Updated Top: " + top);
-    }
-});
         // Make the guest names draggable
         $('.draggable-guest').draggable({
             revert: 'invalid', // Revert back to the original position if not dropped in a container
@@ -568,12 +555,8 @@ $("#draggable-container").draggable({
                     var guestElement = $('<div class="guest"></div>')
                         .text(guestName)
                         .attr('data-guest-id', guestId); // Add data-guest-id attribute
-
                     containerType = $(this).find('.circle-container, .rectangle-container').attr('class');
                     var totalGuests = $(this).find('.guest').length;
-                    console.log(containerId)
-                    console.log(totalGuests)
-                    console.log(tableSize)
 
                     if (totalGuests.toString() === tableSize) {
                         Swal.fire({
@@ -585,45 +568,29 @@ $("#draggable-container").draggable({
                         $(this).find('.circle-container, .rectangle-container').append(guestElement)
                         ui.helper.hide();
                         $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
-     console.log('hit')
             saveDataToLocalStorage()
             saveRemainingGuestsToLocalStorage()
                     }
 
                 }
             });
-     console.log('savede')
             saveDataToLocalStorage()
             // Close the modal
             $('#GuestGroupModal').modal('hide');
 
         });
- $(document).on('mousedown', '.draggable-container', function() {
-        $(this).draggable({
-            containment: "#h_size", // Change to a valid CSS selector or element ID
-            drag: function(event, ui) {
-                var position = ui.position;
-                var left = position.left;
-                var top = position.top;
-                // Do something with the updated position values
-                console.log("Updated Left: " + left);
-                console.log("Updated Top: " + top);
-            }
-        });
-    });
 
         // Handle opening the modal
         $('.update-button').click(function () {
             $('#GuestGroupModal').modal('show');
         });
 
+
         // Handle deleting the container
-// Handle deleting the container
         $(document).on('click', '.delete-container', function () {
             var containerId = $(this).data('container-id');
             var container = $('#' + containerId);
             var guests = container.find('.guest');
-            console.log(guests);
 
 
             // Hide the guests inside the container
@@ -631,11 +598,11 @@ $("#draggable-container").draggable({
 
             // Remove the container
             container.remove();
-
+            saveDataToLocalStorage()
+            saveRemainingGuestsToLocalStorage()
             // Show the hidden guests in the guest list
             guests.each(function () {
                 var guestId = $(this).data('guest-id');
-                console.log(guestId)
                 $('.list-group.list-group-light').find(`[data-object-id="${guestId}"]`).show();
             });
         });
@@ -648,7 +615,8 @@ $("#draggable-container").draggable({
             var tabletype;
             var tablename;
 
-
+localStorage.removeItem('seatingPlanData');
+            localStorage.removeItem('remainingGuests');
             containers.each(function () {
                 var containerId = $(this).attr('id');
                 var guests = $(this).find('.guest');
