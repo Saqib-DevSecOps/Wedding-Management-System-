@@ -79,7 +79,7 @@ class ProviderMetaForm(forms.ModelForm):
 class EventTimeLineMetaForm(forms.ModelForm):
     class Meta:
         model = EventTimeLine
-        fields = ( 'title','date' , 'description')
+        fields = ('title', 'date', 'description')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),  # Use Textarea widget for description
@@ -133,3 +133,29 @@ class TableForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['table_type'].widget.attrs.update({'class': 'form-control'})
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=40)
+    email = forms.EmailField(max_length=40)
+    subject = forms.CharField(max_length=150)
+    phone = forms.CharField(max_length=40)
+    message = forms.Textarea()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['subject'].widget.attrs.update({'class': 'form-control'})
+        self.fields['phone'].widget.attrs.update({'class': 'form-control'})
+        self.fields['message'].widget.attrs.update({'class': 'form-control'})
+        self.helper = FormHelper()
+        self.helper.layout(
+            Row(
+                Column('name', css_class='form-group col-sm-6 '),
+                Column('email', css_class='form-group col-sm-6 '),
+                Column('subject', css_class='form-group col-sm-6 '),
+                Column('phone', css_class='form-group col-sm-6 '),
+                Column('description', css_class='form-group col-sm-12 '),
+            )
+        )

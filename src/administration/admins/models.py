@@ -14,6 +14,9 @@ class GuestGroup(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def total_guests(self):
+        return Guest.objects.filter(group=self).count()
+
     def save(self, *args, **kwargs):
         if not self.id:
             # Set the sequence field to the next available value
@@ -108,6 +111,9 @@ class Table(models.Model):
     def guests(self):
         return GuestTable.objects.filter(table=self)
 
+    class Meta:
+        ordering = ('-created_at',)
+
 
 class GuestTable(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
@@ -127,3 +133,6 @@ class EventTimeLine(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('-created_at',)

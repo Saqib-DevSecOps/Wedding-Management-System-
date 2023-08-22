@@ -1,8 +1,10 @@
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, View
 
+from core import settings
 from src.website.filters import BlogFilter, EventFilter
 from src.website.models import (
     Slider, Blog, Gallery, BlogCategory, Service, Event, Site, ContactRequest,
@@ -155,13 +157,16 @@ class ContactUs(View):
         phone = request.POST.get('phone')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-
+        print(name,email,phone,subject,message)
         if not all([message, subject, phone, email, name]):
             messages.error(request, "Please fill all the fields to contact.")
         else:
             ContactRequest.objects.create(
                 name=name, email=email, phone=phone, subject=subject, message=message
             )
+            recipients = [settings.EMAIL_HOST_USER]  # Replace with your recipient's email address
+
+            send_mail(subject, message, email, recipients)
             messages.success(request, "Your message request processed successfully")
 
         return render(request, self.template_name, context)

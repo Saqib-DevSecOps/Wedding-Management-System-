@@ -1,8 +1,9 @@
 import openpyxl
 import xlwt
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -32,28 +33,52 @@ admin_decorators = [login_required, user_passes_test(lambda u: u.is_superuser)]
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
     template_name = 'admins/dashboard.html'
-    total_payment = 0
-    paid_payment = 0
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        total_group = GuestGroup.objects.filter(user=self.request.user).count
+
+        total_group = GuestGroup.objects.filter(user=self.request.user).count()
         provider = Provider.objects.filter(user=self.request.user)
+
+        total_payment = 0
+        paid_payment = 0
+
         for objects in provider:
             if objects.total_cost is not None:
-                self.total_payment += objects.total_cost
+                total_payment += objects.total_cost
+
             if objects.paid is not None:
-                self.paid_payment += objects.paid
+                paid_payment += objects.paid
+
+        remaining_payment = total_payment - paid_payment
+
+        context['recent_events'] = EventTimeLine.objects.filter(user=self.request.user)[:3]
+        context['recent_seats'] = Table.objects.filter(user=self.request.user)[:6]
+        context['recent_groups'] = GuestGroup.objects.filter(user=self.request.user)[:6]
+        context['recent_providers'] = Provider.objects.filter(user=self.request.user)[:6]
+
+        context['total_payment'] = total_payment
+        context['paid_payment'] = paid_payment
+        context['remaining_payment'] = remaining_payment
+        context['total_provider'] = provider.count()
+
+        total_invitation_letters = 0
+        invitation_letters = InvitationLetter.objects.filter(group__user=self.request.user)
+        for invitation in invitation_letters:
+            total_invitation_letters += invitation.total_invitation
+
         context['total_group'] = total_group
-        context['total_payment'] = self.total_payment
-        context['paid_payment'] = self.paid_payment
-        context['total_provider'] = provider.count
-        context['total_guests'] = Guest.objects.filter(group__user=self.request.user).count
+        context['total_invitations'] = total_invitation_letters
+        context['total_guests'] = Guest.objects.filter(group__user=self.request.user).count()
+
         table = Table.objects.filter(user=self.request.user)
-        rounded = table.filter(table_type='1').count
-        rectangle = table.filter(table_type='2').count
+        rounded = table.filter(table_type='1').count()
+        rectangle = table.filter(table_type='2').count()
+
+        context['total_table'] = table.count()
         context['rounded'] = rounded
         context['rectangle'] = rectangle
+
         return context
 
 
@@ -560,3 +585,5 @@ class Test(TemplateView):
         context['guests'] = Guest.objects.filter(group__user=self.request.user)
         context['form'] = TableForm
         return context
+
+

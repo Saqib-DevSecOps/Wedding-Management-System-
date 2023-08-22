@@ -245,23 +245,13 @@ overflow-y: auto;
 <div class="main-content">
     <div class="boxes" style="padding-left: 55px">
 
-        <div class="p-0 m-0 container-fluid first-section " id="h_size">
 
-            <div class="d-flex justify-content-center ">
+
+</div>
                 <!-- Empty container for circle -->
-                <div class="draggable-container resizable-container" id="circle_container">
-                </div>
 
-                <!-- Empty container for rectangle -->
-                <div class="draggable-container resizable-container" id="rectangle_container">
-                </div>
             </div>
         </div>
-    </div>
-
-</div><!-- end main content-->
-</div>
-{# OUR CODE START ========================================================================== #}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -388,7 +378,7 @@ function getGuestNameById(guestId) {
 
                     // Recreate the container element
                     var containerHtml = `
-                        <div class="draggable-container resizable-container" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
+                        <div class="draggable-container resizable-container bg-danger" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
                             <h5>Table Name: <span>${containerInfo.tableName}</span></h5>
                             <h5>Table Size: <span>${containerInfo.tableSize}</span></h5>
                             <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -510,7 +500,7 @@ function getGuestNameById(guestId) {
 
             if (tableType === '1') {
                 containerHtml = `
-                <div class="draggable-container resizable-container" id="${containerId}">
+                <div class="draggable-container resizable-container bg-danger" id="${containerId}">
                     <h5 >Table Name: <span>${tableName}</span></h5>
                     <h5 >Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -522,7 +512,7 @@ function getGuestNameById(guestId) {
             `;
             } else if (tableType === '2') {
                 containerHtml = `
-                <div class="draggable-container resizable-container" id="${containerId}">
+                <div class="draggable-container resizable-container bg-danger" id="${containerId}">
                     <h5>Table Name: <span>${tableName}</span></h5>
                     <h5>Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"

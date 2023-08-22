@@ -8,7 +8,7 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col">
             <div class="card mini-stats-wid">
                 <div class="card-body">
                     <div class="media">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col">
             <div class="card mini-stats-wid">
                 <div class="card-body">
                     <div class="media">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col">
             <div class="card mini-stats-wid">
                 <div class="card-body">
                     <div class="media">
@@ -61,7 +61,25 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="media">
+                        <div class="mr-3 align-self-center">
+                            <i class="bx bx-user-check h2 text-primary mb-0"></i>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-muted mb-2">Events</p>
+                            <h5 class="mb-0">
+                                $ {{ total_provider }} <span
+                                    class="font-size-14 text-muted">(00)</span>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
             <div class="card mini-stats-wid">
                 <div class="card-body">
                     <div class="media">
@@ -84,16 +102,8 @@
     <hr>
     <div class="row">
 
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3"> Providers Statistics</h4>
-                    <div id="chart_provider">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
+
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3"> Groups Statistics</h4>
@@ -102,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Table Statistics</h4>
@@ -111,11 +121,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Over All Statistics</h4>
-                    <div id="chart_overall">
+                    <h4 class="card-title mb-3"> Providers Statistics</h4>
+                    <div id="chart_provider">
                     </div>
                 </div>
             </div>
@@ -125,187 +136,226 @@
     </div>
 
     <div class="row">
-        <div class="col-xl-4">
+            <div class="col-sm-8">
+
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Guest Groups</h4>
-
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <i class="bx bx-chart text-primary display-4"></i>
+<div class="row">
+                        <div class="col-10">
+                            <h4 class="card-title mb-4">Latest Seats Added </h4>
                         </div>
-
-                    </div>
-
-                    <div class="table-responsive mt-4">
-                        <table class="table table-centered table-nowrap">
-                            <tbody>
-                            <tr>
-                                <td style="width: 30%">
-                                    <p class="mb-0">Total Groups</p>
-                                </td>
-                                <td style="width: 25%">
-                                    <h5 class="mb-0">{{ total_group }}</h5></td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-primary rounded" role="progressbar"
-                                             style="width: 94%" aria-valuenow="94" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="mb-0">Total Guests</p>
-                                </td>
-                                <td>
-                                    <h5 class="mb-0">{{ total_guests }}</h5>
-                                </td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-success rounded" role="progressbar"
-                                             style="width: 82%" aria-valuenow="82" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Providers</h4>
-
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <i class="bx bx-chart text-primary display-4"></i>
+                        <div class="col-2">
+                            <a href="{% url 'admins:seat-planner-list' %}"
+                               class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
+                    {% if recent_seats %}
+                        <div class="table-responsive">
+                            <table class="table table-hover table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 100px">#</th>
+                                    <th scope="col">Table Name</th>
+                                    <th scope="col">Table Type</th>
+                                    <th scope="col">Total Guests</th>
+                                    <th scope="col">Total Seats</th>
+                                    <th scope="col">Seats Left</th>
+                                    <th scope="col">-</th>
 
-                    <div class="table-responsive mt-4">
-                        <table class="table table-centered table-nowrap">
-                            <tbody>
-                            <tr>
-                                <td style="width: 30%">
-                                    <p class="mb-0">Total Providers</p>
-                                </td>
-                                <td style="width: 25%">
-                                    <h5 class="mb-0">{{ total_provider }}</h5></td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-primary rounded" role="progressbar"
-                                             style="width: 94%" aria-valuenow="94" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="mb-0">Total Payments</p>
-                                </td>
-                                <td>
-                                    <h5 class="mb-0">{{ total_payment }}</h5>
-                                </td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-success rounded" role="progressbar"
-                                             style="width: 82%" aria-valuenow="82" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="mb-0">Pending Payments</p>
-                                </td>
-                                <td>
-                                    <h5 class="mb-0">{{ paid_payment }}</h5>
-                                </td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-warning rounded" role="progressbar"
-                                             style="width: 70%" aria-valuenow="70" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for object in recent_seats %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ object.table_name }}</td>
+                                        <td>{{ object.get_table_type_display }}</td>
+                                        <td>{{ object.guests.count }}</td>
+                                        <td>{{ object.seat_count }}</td>
+                                        <td>{{ object.seats_left }}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm btn-rounded"
+                                               href="{% url 'admins:seat-planner-detail' object.id %}"><i
+                                                    class="fa fa-eye"></i>&nbsp;view</a>
+
+
+
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <span class="text-danger"><b>Tables Are not Found</b> </span>
+                    {% endif %}
+
                 </div>
+
+
             </div>
         </div>
-        <div class="col-xl-4">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Tables</h4>
-
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <i class="bx bx-chart text-primary display-4"></i>
+                <div class="row">
+                        <div class="col-9">
+                            <h4 class="card-title mb-4">Latest Events </h4>
+                        </div>
+                        <div class="col-3">
+                            <a href="{% url 'admins:seat-planner-list' %}"
+                               class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
 
-                    <div class="table-responsive mt-4">
-                        <table class="table table-centered table-nowrap">
-                            <tbody>
-                            <tr>
-                                <td style="width: 30%">
-                                    <p class="mb-0">Total tables</p>
-                                </td>
-                                <td style="width: 25%">
-                                    <h5 class="mb-0">{{ table }}</h5></td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-primary rounded" role="progressbar"
-                                             style="width: 94%" aria-valuenow="94" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
+                    <ul class="verti-timeline list-unstyled">
+                    <hr>
+                        {% for recent in recent_events %}
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <h5 class="font-size-14">{{ recent.date }} <i
+                                                class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ms-2"></i>
+                                        </h5>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="mb-0">Rounded Tables</p>
-                                </td>
-                                <td>
-                                    <h5 class="mb-0">{{ rounded }}</h5>
-                                </td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-success rounded" role="progressbar"
-                                             style="width: 82%" aria-valuenow="82" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            <h6>{{ recent.title }}</h6>{{ recent.description|truncatechars:50 }}
+
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="mb-0">Rectangle Table</p>
-                                </td>
-                                <td>
-                                    <h5 class="mb-0">{{ rectangle }}</h5>
-                                </td>
-                                <td>
-                                    <div class="progress bg-transparent progress-sm">
-                                        <div class="progress-bar bg-warning rounded" role="progressbar"
-                                             style="width: 70%" aria-valuenow="70" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="text-center mt-4"><a href="{% url 'admins:event-timeline' %}"
+                                                     class="btn btn-primary waves-effect waves-light btn-sm">View More
+                        <i class="mdi mdi-arrow-right ms-1"></i></a></div>
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                {% if recent_groups %}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="card-title mb-4">Latest Groups Added </h4>
+                        </div>
+                        <div class="col-2">
+                            <a href="{% url 'admins:seat-planner-list' %}"
+                               class="text-right btn btn-transparent btn-sm">View all</a>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table align-middle table-nowrap mb-0">
+                            <thead class="table-light">
+                            <tr>
+
+                                <th class="align-middle">#ID</th>
+                                <th class="align-middle">Group Name</th>
+                                <th class="align-middle">Total Guests</th>
+                                <th class="align-middle">Invitation Letters</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for object in recent_groups %}
+                            <tr>
+
+                                <td><a href="javascript: void(0);" class="text-body fw-bold">#{{ forloop.counter }}</a></td>
+                                <td>{{ object.group_name }}</td>
+                                <td>
+                                    {{object.total_guests}}
+                                </td>
+                                <td>
+                                    {{object.invitation_set.total_invitation}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table-responsive -->
+                </div>
+                {% else %}
+                        <span class="danger">Groups Not Created yet</span>
+                {% endif  %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                {% if recent_groups %}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="card-title mb-4">Latest Providers Added </h4>
+                        </div>
+                        <div class="col-2">
+                            <a href="{% url 'admins:provider-list' %}"
+                               class="text-right btn btn-transparent btn-sm">View all</a>
+                        </div>
+
+                    </div>
+   {% if recent_providers %}
+                        <div class="table-responsive">
+                            <table class="table table-hover table align-middle table-nowrap mb-0">
+
+                                <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 100px">#</th>
+                                    <th class="align-middle"><i class="bx bxs-user"></i> Staff</th>
+                                    <th class="align-middle"><i class="fa fa-wrench"></i> Service</th>
+                                    <th class="align-middle"><i class="fa fa-envelope"></i> Email</th>
+                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Phone</th>
+                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Total Cost</th>
+                                    <th class="align-middle"><i class="fa fa-arrow-alt-circle-down text-danger"></i>
+                                        Paid
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for object in recent_providers %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a {% if object.link %} href="{{ object.link }}" target="_blank"
+                                                                    {% else %}href="#"{% endif %} > {{ object.provider_name }}</a>
+                                        </td>
+                                        <td>{{ object.service }}</td>
+                                        <td>{{ object.email }}</td>
+                                        <td>{{ object.phone_number }}</td>
+
+                                        <td>{{ object.total_cost }}</td>
+                                        <td>{{ object.paid }}</td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <span class="text-danger"><b>Providers Not Found</b></span>
+                    {% endif %}
+                </div>
+                {% else %}
+                        <span class="danger">Groups Not Created yet</span>
+                {% endif  %}
+            </div>
+        </div>
+
+
+
 
     </div>
-
 {% endblock %}
 
 
@@ -317,7 +367,7 @@
     <script>
         var options_overall = {
             series: [{
-                data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200]
+                data: [4, 3, 2, 1, 0, 0, 4, 1, 2]
             }],
             chart: {
                 type: 'bar',
@@ -327,25 +377,26 @@
                 bar: {
                     borderRadius: 4,
                     horizontal: true
+
                 }
             },
             dataLabels: {
                 enabled: false
             },
             xaxis: {
-                categories: ['Total Groups', 'Total guests', 'Total Providers', 'Total Payment ', 'Pending Payment', 'Paid Payment', 'Total tables',
+                categories: ['Total Groups', 'Total guests', 'Total Events', 'Total Providers', 'Total Payment ', 'Pending Payment', 'Paid Payment', 'Total tables',
                     'Rounded Table', 'Circular Table'
                 ],
             }
         };
 
         var options_year_months = {
-            series: [44, 55, 13],
+            series: [{{ total_group }}, {{ total_guests }}, {{ total_invitations }}],
             chart: {
                 height: 205,
                 type: 'pie',
             },
-            labels: ["Total Providers", "Total Payment", "Total Pending"],
+            labels: ["Total Groups", "Total Guests", "Total Invitations"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -353,89 +404,95 @@
                         position: 'bottom'
                     }
                 }
-            }]
-        };
-
-        var options_provider = {
-            series: [{
-                data: [21, 22, 10, 28]
             }],
-
-            chart: {
-                height: 193,
-                type: 'bar',
-            },
-            colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
-                '#f48024', '#69d2e7'
-            ],
-            plotOptions: {
-                bar: {
-                    columnWidth: '45%',
-                    distributed: true,
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            legend: {
-                show: false
-            },
-            xaxis: {
-                categories: [
-                    ['John Doe'],
-                    ['Joe mith'],
-                    ['Jake Williams'],
-                    ['Lily Roberts'],
-                ],
-                labels: {
-                    style: {
-                        colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
-                            '#f48024', '#69d2e7'
-                        ], fontSize: '12px'
+            tooltip: {
+                y: {
+                    formatter: function (value) {
+                        return value;
                     }
                 }
             }
         };
 
-        var option_table = {
-              series: [44, 55, 41],
-          chart: {
-          height: 204,
-          type: 'donut',
-        },
-        plotOptions: {
-          pie: {
-            startAngle: -90,
-            endAngle: 270
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-                               labels: ["Monday", "Tuesday", "Wednesday"],
-
-        fill: {
-          type: 'gradient',
-        },
-        legend: {
-          formatter: function(val, opts) {
-            return val + " - " + opts.w.globals.series[opts.seriesIndex]
-          }
-        },
-
-        responsive: [{
-          breakpoint: 480,
-          options: {
+        var options_provider = {
+            series: [{{ total_provider|floatformat:0 }}, {{ total_payment|floatformat:0 }},
+                {{ paid_payment|floatformat:0 }}, {{ remaining_payment|floatformat:0 }}],
             chart: {
-              width: 200
+                height: 228,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    dataLabels: {
+                        name: {
+                            fontSize: '22px',
+                        },
+                        value: {
+                            fontSize: '16px',
+                            formatter: function (val) {
+                                return parseInt(val); // Convert to integer
+                            },
+                        },
+                        total: {
+                            show: true,
+                            label: 'Total',
+                            formatter: function (w) {
+                                var totalValue = {{ total_provider|floatformat:0 }} +
+                                        {{ total_payment|floatformat:0 }} +
+                                        {{ paid_payment|floatformat:0 }} +
+                                    {{ remaining_payment|floatformat:0 }};
+                                return totalValue
+                            }
+                        }
+                    }
+                }
+            },
+
+
+            labels: ['Total Providers', 'Total Payments', 'Paid Payments', 'Remaining Payments'],
+
+
+
+        };
+        var option_table = {
+            series: [{{ total_table|floatformat:0 }}, {{ rounded|floatformat:0 }},
+                {{ rectangle|floatformat:0 }}],
+            chart: {
+                height: 204,
+                type: 'donut',
+            },
+            plotOptions: {
+                pie: {
+                    startAngle: -90,
+                    endAngle: 270
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            labels: ["Total Tables", "Circular Tables", "Rectangle Tables"],
+
+            fill: {
+                type: 'gradient',
             },
             legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-        };
+                formatter: function (val, opts) {
+                    return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                }
+            },
 
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
 
 
         var chart_options_provider = new ApexCharts(document.querySelector("#chart_provider"), options_provider);

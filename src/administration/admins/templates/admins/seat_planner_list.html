@@ -61,7 +61,7 @@
                                 <tbody>
                                 {% for object in object_list %}
                                     <tr>
-                                        <td>{{ object.id }}</td>
+                                        <td>{{forloop.counter}}</td>
                                         <td>{{ object.table_name }}</td>
                                         <td>{{ object.get_table_type_display }}</td>
                                         <td>{{ object.guests.count }}</td>
