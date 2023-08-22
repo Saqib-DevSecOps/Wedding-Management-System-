@@ -186,14 +186,12 @@ class ContactUs(View):
             user = {
                 'user': name
             }
-            print(name)
             html_message_to_user = render_to_string('website/html_mail/company-contact-mail.html', user)
             text_message_to_user = strip_tags(html_message_to_user)
             from_email = email
             recipient_list = [from_email]
             send_mail(subject, text_message_to_user, from_email, recipient_list,
                       html_message=html_message_to_user)
-            print('sended')
 
             messages.success(request, "Your message request processed successfully")
 
