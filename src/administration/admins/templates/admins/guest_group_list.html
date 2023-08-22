@@ -503,13 +503,15 @@
 
             $('.update-button').click(function () {
                 invitationId = $(this).data('record-id');
-
+                console.log(
+                    'hit'
+                )
                 // Open the Bootstrap modal form
                 $('#UpdateModalForm').modal('show');
 
                 // Fetch invitation details via AJAX
                 $.ajax({
-                    url: '/admins/invitation/update/' + invitationId,
+                    url: '/admins/invitation/update/' + invitationId+'/',
                     method: 'GET',
                     dataType: 'json',
                     success: function (response) {
@@ -539,13 +541,13 @@
 
             // Handle form submission
             $('#update-invitation').click(function () {
+
                 var form = $('#update-invitation-form');
                 var formData = new FormData(form[0]);
-                var url = '/admins/invitation/update/' + invitationId;
-
+                console.log('git')
                 $.ajax({
                     type: 'POST',
-                    url: url,
+                    url: '/admins/invitation/update/' + invitationId+'/',
                     data: formData,
                     processData: false,
                     contentType: false,

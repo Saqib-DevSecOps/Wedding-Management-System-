@@ -36,7 +36,7 @@
                             <p class="text-muted mb-2">Total Payments</p>
                             <h5 class="mb-0">
                                 $ {{ total_payment }} <span
-                                    class="font-size-14 text-muted">(00)</span>
+                                    class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <p class="text-muted mb-2">Total Paid</p>
                             <h5 class="mb-0">
                                 $ {{ paid_payment }} <span
-                                    class="font-size-14 text-muted">(00)</span>
+                                    class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
                     </div>
@@ -66,13 +66,13 @@
                 <div class="card-body">
                     <div class="media">
                         <div class="mr-3 align-self-center">
-                            <i class="bx bx-user-check h2 text-primary mb-0"></i>
+                            <i class="fa fa-calendar h2 text-primary mb-0"></i>
                         </div>
                         <div class="media-body">
                             <p class="text-muted mb-2">Events</p>
                             <h5 class="mb-0">
-                                $ {{ total_provider }} <span
-                                    class="font-size-14 text-muted">(00)</span>
+                                 {{ total_events }} <span
+                                    class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
                     </div>
@@ -89,8 +89,8 @@
                         <div class="media-body">
                             <p class="text-muted mb-2">Providers</p>
                             <h5 class="mb-0">
-                                $ {{ total_provider }} <span
-                                    class="font-size-14 text-muted">(00)</span>
+                                 {{ total_provider }} <span
+                                    class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                             </table>
                         </div>
                     {% else %}
-                        <span class="text-danger"><b>Tables Are not Found</b> </span>
+                        <span class="text-danger"><b>Tables not Found</b> </span>
                     {% endif %}
 
                 </div>
@@ -209,6 +209,7 @@
                                class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
+                {% if recent_events %}
 
                     <ul class="verti-timeline list-unstyled">
                     <hr>
@@ -237,13 +238,15 @@
                     <div class="text-center mt-4"><a href="{% url 'admins:event-timeline' %}"
                                                      class="btn btn-primary waves-effect waves-light btn-sm">View More
                         <i class="mdi mdi-arrow-right ms-1"></i></a></div>
+                {% else %}
+                    <span class="text-danger"><b>Events Not Found</b></span>
+                {% endif %}
                 </div>
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="card">
-                {% if recent_groups %}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-10">
@@ -254,6 +257,7 @@
                                class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
+                {% if recent_groups %}
 
                     <div class="table-responsive">
                         <table class="table align-middle table-nowrap mb-0">
@@ -284,16 +288,16 @@
                             </tbody>
                         </table>
                     </div>
+                 {% else %}
+                    <span class="text-danger"><b>Groups Not Found</b></span>
+                {% endif  %}
                     <!-- end table-responsive -->
                 </div>
-                {% else %}
-                        <span class="danger">Groups Not Created yet</span>
-                {% endif  %}
+
             </div>
         </div>
         <div class="col-lg-6">
             <div class="card">
-                {% if recent_groups %}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-10">
@@ -305,7 +309,7 @@
                         </div>
 
                     </div>
-   {% if recent_providers %}
+                    {% if recent_providers %}
                         <div class="table-responsive">
                             <table class="table table-hover table align-middle table-nowrap mb-0">
 
@@ -346,9 +350,7 @@
                         <span class="text-danger"><b>Providers Not Found</b></span>
                     {% endif %}
                 </div>
-                {% else %}
-                        <span class="danger">Groups Not Created yet</span>
-                {% endif  %}
+
             </div>
         </div>
 

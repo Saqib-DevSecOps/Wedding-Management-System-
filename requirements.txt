@@ -19,7 +19,6 @@ drf-yasg
 django-jazzmin
 django-tinymce
 django-phonenumber_field
-
 djangorestframework
 DateTime
 crispy-bootstrap5

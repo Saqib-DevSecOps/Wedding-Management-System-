@@ -57,6 +57,7 @@ class DashboardView(TemplateView):
         context['recent_groups'] = GuestGroup.objects.filter(user=self.request.user)[:6]
         context['recent_providers'] = Provider.objects.filter(user=self.request.user)[:6]
 
+        context['total_events'] = EventTimeLine.objects.filter(user= self.request.user).count()
         context['total_payment'] = total_payment
         context['paid_payment'] = paid_payment
         context['remaining_payment'] = remaining_payment
@@ -95,6 +96,12 @@ class GuestGroupListView(CreateView, ListView):
             return self.model.objects.filter(user=self.request.user, group_name__icontains=search)
         return self.model.objects.filter(user=self.request.user)
 
+    def get_context_data(self,*args, **kwargs):
+        context = super(GuestGroupListView, self).get_context_data(**kwargs)
+        context['invitation_from'] = InvitationForm
+        context['invitation'] = InvitationLetter.objects.filter(group__user=self.request.user)
+        return context
+
     def form_valid(self, form):
         guest_names = self.request.POST.getlist('guest_names[]')
         guest_group = form.save(commit=False)  # Get the saved GuestGroup instance
@@ -108,11 +115,7 @@ class GuestGroupListView(CreateView, ListView):
         messages.success(self.request, 'Guest Group Created Successfully')
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        context = super(GuestGroupListView, self).get_context_data(**kwargs)
-        context['invitation_from'] = InvitationForm
-        context['invitation'] = InvitationLetter.objects.filter(group__user=self.request.user)
-        return context
+
 
 
 @csrf_exempt
@@ -193,14 +196,16 @@ class InvitationUpdateView(View):
         data = {
             'total_invitation': invitation.total_invitation,
         }
+        print('git')
         return JsonResponse({'invitation': data})
 
     def post(self, request, pk):
         invitation = get_object_or_404(InvitationLetter, id=pk)
         total = request.POST.get('total_invitation')
-        if total.isnumeric():
+        if total:
             invitation.total_invitation = total
             invitation.save()
+            print('hihi')
             messages.success(request, "Successfully updated")
             return JsonResponse({'success': True, 'provider_id': invitation.id})
 
