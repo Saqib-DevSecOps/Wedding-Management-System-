@@ -1,14 +1,16 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.views.generic import TemplateView, ListView, DetailView, View
 
 from core import settings
 from src.website.filters import BlogFilter, EventFilter
 from src.website.models import (
     Slider, Blog, Gallery, BlogCategory, Service, Event, Site, ContactRequest,
-    SitePartner, SiteTestimonial , AboutUsSection
+    SitePartner, SiteTestimonial, AboutUsSection
 )
 from django.contrib import messages
 
@@ -131,7 +133,7 @@ class AboutUs(TemplateView):
         context['about'] = about.order_by("created_on").first()
         return context
 
-        
+
 class ContactUs(View):
     template_name = 'website/contact_us.html'
 
@@ -141,7 +143,6 @@ class ContactUs(View):
         context['email'] = site.email
         context['phone'] = site.phone
         context['address'] = site.address
-
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -157,16 +158,43 @@ class ContactUs(View):
         phone = request.POST.get('phone')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        print(name,email,phone,subject,message)
+        print(name, email, phone, subject, message)
         if not all([message, subject, phone, email, name]):
             messages.error(request, "Please fill all the fields to contact.")
         else:
             ContactRequest.objects.create(
                 name=name, email=email, phone=phone, subject=subject, message=message
             )
-            recipients = [settings.EMAIL_HOST_USER]  # Replace with your recipient's email address
 
-            send_mail(subject, message, email, recipients)
+            context = {
+                'email': email,
+                'name': name,
+                "phone": phone,
+                'subject': subject,
+                'message': message
+            }
+
+            # Send Message to Company
+            html_message_to_company = render_to_string('website/html_mail/contact-user-request.html', context)
+            text_message_to_company = strip_tags(html_message_to_company)
+            from_email = email
+            recipient_list = [settings.EMAIL_HOST_USER]
+            send_mail(subject, text_message_to_company, from_email, recipient_list, html_message=html_message_to_company)
+
+            # Send Message to User
+
+            user = {
+                'user': name
+            }
+            print(name)
+            html_message_to_user = render_to_string('website/html_mail/company-contact-mail.html', user)
+            text_message_to_user = strip_tags(html_message_to_user)
+            from_email = email
+            recipient_list = [from_email]
+            send_mail(subject, text_message_to_user, from_email, recipient_list,
+                      html_message=html_message_to_user)
+            print('sended')
+
             messages.success(request, "Your message request processed successfully")
 
         return render(request, self.template_name, context)
