@@ -98,7 +98,6 @@ class GuestGroupListView(CreateView, ListView):
 
     def get_context_data(self,*args, **kwargs):
         context = super(GuestGroupListView, self).get_context_data(**kwargs)
-        context['invitation_from'] = InvitationForm
         context['invitation'] = InvitationLetter.objects.filter(group__user=self.request.user)
         return context
 
@@ -196,7 +195,6 @@ class InvitationUpdateView(View):
         data = {
             'total_invitation': invitation.total_invitation,
         }
-        print('git')
         return JsonResponse({'invitation': data})
 
     def post(self, request, pk):
@@ -205,7 +203,6 @@ class InvitationUpdateView(View):
         if total:
             invitation.total_invitation = total
             invitation.save()
-            print('hihi')
             messages.success(request, "Successfully updated")
             return JsonResponse({'success': True, 'provider_id': invitation.id})
 

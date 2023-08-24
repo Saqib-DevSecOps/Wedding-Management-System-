@@ -84,6 +84,20 @@ min-height: 2000px;
 overflow-x: auto;
 overflow-y: auto;
 }
+ @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Apply the animation to the modal dialog */
+        .modal-dialog.zoomIn {
+            animation: zoomIn 0.2s ease-in-out;
+        }
+
 .custom-drag-helper {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
@@ -112,13 +126,12 @@ overflow-y: auto;
 
 <div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
      tabindex="-1">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-dialog-centered zoomIn" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="GuestGroupModelLabel">Add Provider</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
             </div>
             <div class="ml-3">
                 <div class="create_modal_errors">
@@ -133,8 +146,8 @@ overflow-y: auto;
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-outline-success" id="save-provider" type="submit">Save</button>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" id="save-provider" type="submit">Save</button>
                     </div>
                 </div>
             </form>

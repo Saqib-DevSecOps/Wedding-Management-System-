@@ -165,8 +165,8 @@
                     {% csrf_token %}
 
                     <div class="modal-body">
-                        {{ invitation_from }}
-                    </div>
+                    <input class="form-control guest-name-input mt-1" name="total_invitation"
+                           required type="text">                    </div>
                     <div class="modal-footer">
                          <button class="btn swal-btn swal-btn--cancel" data-dismiss="modal" type="button">Cancel</button>
                         <button class="btn btn-primary" id="update-invitation" type="button">Save It</button>
@@ -503,9 +503,7 @@
 
             $('.update-button').click(function () {
                 invitationId = $(this).data('record-id');
-                console.log(
-                    'hit'
-                )
+
                 // Open the Bootstrap modal form
                 $('#UpdateModalForm').modal('show');
 
@@ -541,7 +539,6 @@
 
             // Handle form submission
             $('#update-invitation').click(function () {
-
                 var form = $('#update-invitation-form');
                 var formData = new FormData(form[0]);
                 console.log('git')
