@@ -525,7 +525,9 @@ function getGuestNameById(guestId) {
 
             if (tableType === '1') {
                 containerHtml = `
-                <div class="  draggable-container resizable-container" id="${containerId}">
+
+
+                <div class="  draggable-container resizable-container" id="${containerId}" style="position: absolute;">
                     <h5 >Table Name: <span>${tableName}</span></h5>
                     <h5 >Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -537,7 +539,7 @@ function getGuestNameById(guestId) {
             `;
             } else if (tableType === '2') {
                 containerHtml = `
-                <div class="draggable-container resizable-container" id="${containerId}">
+                <div class="draggable-container resizable-container" id="${containerId}" style="position: absolute;">
                     <h5>Table Name: <span>${tableName}</span></h5>
                     <h5>Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
