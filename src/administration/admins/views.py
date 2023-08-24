@@ -52,7 +52,7 @@ class DashboardView(TemplateView):
 
         remaining_payment = total_payment - paid_payment
 
-        context['recent_events'] = EventTimeLine.objects.filter(user=self.request.user)[:3]
+        context['recent_events'] = EventTimeLine.objects.filter(user=self.request.user).order_by('-date')[:3]
         context['recent_seats'] = Table.objects.filter(user=self.request.user)[:6]
         context['recent_groups'] = GuestGroup.objects.filter(user=self.request.user)[:6]
         context['recent_providers'] = Provider.objects.filter(user=self.request.user)[:6]
@@ -386,6 +386,7 @@ class SeatPlannerCreateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['guests'] = Guest.objects.filter(group__user=self.request.user)
+        context['user'] = self.request.user.id
         context['form'] = TableForm
         return context
 

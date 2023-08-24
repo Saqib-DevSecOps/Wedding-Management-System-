@@ -1,25 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Your digital partner">
-    <meta name="author" content="mark">
-    <meta name="developer" content="exarth.com">
-    <meta name="org-name" content="exarth"/>
 
-    <link rel="icon" href="{% static 'core/images/logos/favico.ico' %}">
+{% block subtitle %} {{ request.user }} {% endblock %}
+{% block page_heading %}
+{% endblock %}
 
-
-
-    <style>
-        .icon-wrapper .bx {
-    margin-left: 5px;
-    margin-right: 5px;
-}
+{% block only-body %}
+<style>
     .circle-container {
         width: 300px; /* Set the width and height to the same value */
         height: 300px; /* Set the width and height to the same value */
@@ -72,44 +61,8 @@
         margin-right: 5px;
     }
 
-.boxes {
-    background-image: url("{% static 'core/boxes.png' %}");
-    background-repeat: repeat;
-        background-size: 4%; /* You can adjust the percentage as needed */
 
-}
-#h_size{
-max-height: 2000px;
-min-height: 2000px;
-overflow-x: auto;
-overflow-y: auto;
-}
-.custom-drag-helper {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    padding: 5px;
-    border-radius: 5px;
-    z-index: 1000;
-    font-size: 14px;
-    pointer-events: none; /* Prevent the ghost element from intercepting mouse events */
-}
 </style>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    >
-    <link rel="stylesheet" href="{% static 'core/css/design-web.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/app.min.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/custom-css.css' %}">
-
-</head>
-<body data-topbar="dark" data-layout-mode="light" class="">
-
-{# OUR CODE START ========================================================================== #}
-
 <div aria-hidden="true" aria-labelledby="GuestGroupModelLabel" class="modal fade" id="GuestGroupModal" role="dialog"
      tabindex="-1">
     <div class="modal-dialog " role="document">
@@ -142,116 +95,63 @@ overflow-y: auto;
     </div>
 </div>
 
-<div id="layout-">
-
-    <div class="row float-nav" style="position: fixed; top: 0;width: 100%;background-color: #f8f8fb;">
-        <div class="col-6" style="text-align: left;">
-            <a href="/"><img src="{{ logo }}" height="50"></a>
+<div class="row mt-4">
+    <div class="col-md-2 card border-1 ml-auto mr-auto mb-4">
+        <div class="">
+            <div class="card-title text-center">
+                <h3 class="mt-3 text-success"><b>Guests</b></h3>
+            </div>
         </div>
-        <div class="col-6 mt-3" style="text-align: right;">
-            <img id="vertical-menu-btn" src="{{ logo }}" height="20">
+        <hr>
+        <div class="card-body" style="overflow-y: auto;height: 78vh;overflow-x: hidden">
+            <div class="list-group list-group-light">
+                {% for object in guests %}
+                <a aria-current="true"
+                   class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
+                   data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
+                    <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
+                </a>
+
+
+                {% endfor %}
+            </div>
         </div>
     </div>
 
-
-    <!-- ========== Left Sidebar Start ========== -->
-    <div class="vertical-menu" style="top: 0px;width: 300px;z-index: 10000">
-
-        <div data-simplebar="init" class="h-100">
-            <div class="simplebar-wrapper " style="margin: 0px;">
-                <div class="simplebar-height-auto-observer-wrapper">
-                    <div class="simplebar-height-auto-observer"></div>
-                </div>
-                <div class="simplebar-mask">
-                    <div class="simplebar-offset" style="right: -17px; bottom: 0px;">
-                        <div class="simplebar-content-wrapper flex-container"
-                             style="height: 100%; overflow: hidden scroll;">
-
-                            {# CHAT NAV #}
-                            <div class="simplebar-content" style="padding: 0px;">
-
-                                <div id="sidebar-menu" class="mm-active">
-
-                                    {# NAV: TOP: INTRO #}
-                                    <div class="px-3">
-                                        <div>
-
-                                        <img id="vertical-menu-btn" src="{{ logo }}" height="40">
-                                        </div>
-                                        <div class="mt-4">
-                                            <button style="box-shadow: 1px 5px lightblue;width: 100%;"
-                                                    class="btn btn-lg btn-primary btn-rounded update-button"
-                                                    >+ Add Table
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                    {# NAV: MID: LINKS #}
-                                <div class="mt-4">
-                                <ul class="metismenu list-unstyled" id="side-menu">
-                                    <li>
-                                        <div class="list-group list-group-light" style="overflow-x: hidden; overflow-y: scroll; max-height: 500px;">
-                                            {% for object in guests %}
-                                            <a aria-current="true"
-                                               class="list-group-item list-group-item-action px-3 border-1 m-1 ripple  draggable-guest"
-                                               data-guest-id="{{ object.id }}" data-object-id="{{ object.id }}" href="#">
-                                                <b><i class="fa fa-user text-success"></i> &nbsp;{{ object.guest_name }}</b>
-                                            </a>
-                                            {% endfor %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            </div>
-                                <div class="p-4">
-
-                                    <button style="box-shadow: 1px 5px lightblue;width: 30%;"
-                                                    class="btn btn-lg btn-danger btn-rounded "
-                                                    >Close
-                                            </button>
-
-                                              <button style="box-shadow: 1px 5px lightblue;width: 50%;"
-                                                    class="btn btn-lg btn-success btn-rounded save-button "
-                                                    >Save
-                                            </button>
-
-                                </div>
-
-                            {# INFO NAV #}
-
-                        </div>
+    <div class="col-md-9 card ml-auto mr-auto">
+        <div class="">
+            <div class="card-title text-center">
+                <div class="row">
+                    <div class="col-9">
+                        <h3 class="mt-3 text-center text-success"><b>Seat Planner</b></h3>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-outline-success mt-3 update-button" data-target="#GuestGroupModal"
+                                data-toggle="modal" data-whatever="@getbootstrap">
+                            <i class="fa fa-plus"></i>Add Table
+                        </button>
+                        <button class="btn btn-outline-danger mt-3 save-button">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="simplebar-placeholder" style="width: auto; height: 1237px;"></div>
         </div>
-        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-            <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div>
-        </div>
-        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-            <div class="simplebar-scrollbar"
-                 style="height: 621px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+        <hr>
+        <div class="card-body" style="overflow-y: auto;height: 78vh;">
+            <div class="row justify-center">
+                <!-- Empty container for circle -->
+                <div class="draggable-container resizable-container" id="circle_container">
+                </div>
+
+                <!-- Empty container for rectangle -->
+                <div class="draggable-container resizable-container" id="rectangle_container">
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!-- Left Sidebar End -->
 
-
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
-
-<div class="main-content">
-    <div class="boxes" style="padding-left: 55px">
-
-
-
-</div>
-                <!-- Empty container for circle -->
-
-            </div>
-        </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -346,7 +246,6 @@ function getGuestNameById(guestId) {
     $(document).ready(function () {
 
 
-
         function getCookie(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -378,7 +277,7 @@ function getGuestNameById(guestId) {
 
                     // Recreate the container element
                     var containerHtml = `
-                        <div class="draggable-container resizable-container bg-danger" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
+                        <div class="draggable-container resizable-container" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
                             <h5>Table Name: <span>${containerInfo.tableName}</span></h5>
                             <h5>Table Size: <span>${containerInfo.tableSize}</span></h5>
                             <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -500,7 +399,7 @@ function getGuestNameById(guestId) {
 
             if (tableType === '1') {
                 containerHtml = `
-                <div class="draggable-container resizable-container bg-danger" id="${containerId}">
+                <div class="draggable-container resizable-container" id="${containerId}">
                     <h5 >Table Name: <span>${tableName}</span></h5>
                     <h5 >Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -512,7 +411,7 @@ function getGuestNameById(guestId) {
             `;
             } else if (tableType === '2') {
                 containerHtml = `
-                <div class="draggable-container resizable-container bg-danger" id="${containerId}">
+                <div class="draggable-container resizable-container" id="${containerId}">
                     <h5>Table Name: <span>${tableName}</span></h5>
                     <h5>Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -696,11 +595,4 @@ localStorage.removeItem('seatingPlanData');
 {% endblock %}
 
 
-{% block js_code %}
-
 {% endblock %}
-
-</body>
-</html>
-
-

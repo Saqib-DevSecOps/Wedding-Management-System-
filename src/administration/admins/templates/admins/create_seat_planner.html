@@ -247,14 +247,13 @@ overflow-y: auto;
 
         <div class="p-0 m-0 container-fluid first-section " id="h_size">
 
-            <div class="d-flex justify-content-center ">
+            <div class="d-flex justify-content-center  ">
+            <div class="row">
+            <div class="col-6" id="tables">
+            </div>
+            </div>
                 <!-- Empty container for circle -->
-                <div class="draggable-container resizable-container" id="circle_container">
-                </div>
 
-                <!-- Empty container for rectangle -->
-                <div class="draggable-container resizable-container" id="rectangle_container">
-                </div>
             </div>
         </div>
     </div>
@@ -297,6 +296,7 @@ function saveDataToLocalStorage() {
     $('.draggable-container[id^="container_"]').each(function () {
         var containerId = $(this).attr('id');
         var containerPosition = $(this).position();
+        console.log("Container Position",containerPosition)
         var guestData = [];
         var containerType = $(this).find('.circle-container').length > 0 ? 'circle-container' : 'rectangle-container';
         var tableName = $(this).find('h5 span:first').text();
@@ -385,11 +385,12 @@ function getGuestNameById(guestId) {
                     var containerType = containerInfo.containerType;
                     var containerPosition = containerInfo.containerPosition;
                     var guests = containerInfo.guests;
-
+                    console.log(containerPosition.top)
+                    console.log(containerPosition.left)
                     // Recreate the container element
                     var containerHtml = `
-                        <div class="draggable-container resizable-container" id="${containerId}" style="top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
-                            <h5>Table Name: <span>${containerInfo.tableName}</span></h5>
+      <div class="draggable-container resizable-container" id="${containerId}" style="position: absolute; top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
+<h5>Table Name: <span>${containerInfo.tableName}</span></h5>
                             <h5>Table Size: <span>${containerInfo.tableSize}</span></h5>
                             <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
                                 data-container-id="${containerId}"
@@ -398,9 +399,9 @@ function getGuestNameById(guestId) {
                         </div>
                     `;
                      if (containerType === "circle-container") {
-                                $('#circle_container').append(containerHtml);
+                                $('#tables').append(containerHtml);
                             } else if (containerType === "rectangle-container") {
-                                $('#rectangle_container').append(containerHtml);
+                                $('#tables').append(containerHtml);
                       }
                                // Make the new container draggable
                     $('#' + containerId).draggable();
@@ -466,14 +467,15 @@ function getGuestNameById(guestId) {
                 $(this).draggable({
                     containment: "#h_size", // Change to a valid CSS selector or element ID
                     drag: function(event, ui) {
-                        var position = ui.position;
-                        var left = position.left;
-                        var top = position.top;
+                 var position = ui.position;
+            var left = position.left;
+
+
                         // Do something with the updated position values
                         console.log("Updated Left: " + left);
-                        console.log("Updated Top: " + top);
+
                              saveDataToLocalStorage()
-                    saveRemainingGuestsToLocalStorage()
+                            saveRemainingGuestsToLocalStorage()
                     }
                 });
             });
@@ -510,7 +512,7 @@ function getGuestNameById(guestId) {
 
             if (tableType === '1') {
                 containerHtml = `
-                <div class="draggable-container resizable-container" id="${containerId}">
+                <div class="  draggable-container resizable-container" id="${containerId}">
                     <h5 >Table Name: <span>${tableName}</span></h5>
                     <h5 >Table Size: <span>${tableSize}</span></h5>
                     <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
@@ -535,9 +537,9 @@ function getGuestNameById(guestId) {
 
             // Append the new container to the respective parent container
             if (tableType === '1') {
-                $('#circle_container').append(containerHtml);
+                $('#tables').append(containerHtml);
             } else if (tableType === '2') {
-                $('#rectangle_container').append(containerHtml);
+                $('#tables').append(containerHtml);
             }
 
             // Make the new container draggable
@@ -568,8 +570,8 @@ function getGuestNameById(guestId) {
                         $(this).find('.circle-container, .rectangle-container').append(guestElement)
                         ui.helper.hide();
                         $('.list-group.list-group-light').find(`[data-guest-id="${guestId}"]`).hide();
-            saveDataToLocalStorage()
-            saveRemainingGuestsToLocalStorage()
+                        saveDataToLocalStorage()
+                        saveRemainingGuestsToLocalStorage()
                     }
 
                 }
@@ -615,8 +617,8 @@ function getGuestNameById(guestId) {
             var tabletype;
             var tablename;
 
-localStorage.removeItem('seatingPlanData');
-            localStorage.removeItem('remainingGuests');
+            {#localStorage.removeItem('seatingPlanData');#}
+            {#localStorage.removeItem('remainingGuests');#}
             containers.each(function () {
                 var containerId = $(this).attr('id');
                 var guests = $(this).find('.guest');

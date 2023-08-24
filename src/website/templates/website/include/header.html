@@ -20,9 +20,9 @@
 {#                            <li><a href="{% url 'website:services' %}">Services </a>#}
 {##}
 {#                            </li>#}
-                            <li><a href="#">Gallery </a>
+                            <li><a href="{% url 'website:gallery' %}">Gallery </a>
+                            {% if gallery %}
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'website:gallery' %}">All</a></li>
                                     {% for object in gallery %}
                                     <li><a href="?category={{object.id}}">{{object.name}}</a>
                                         {% for subcategory in object.gallerycategory_set.all %}
@@ -35,6 +35,7 @@
                                     </li>
                                     {% endfor %}
                                 </ul>
+                            {% endif %}
                             </li>
 {#                            <li><a href="{% url 'website:blog' %}">Blogs </a>#}
 {#                            </li>#}
