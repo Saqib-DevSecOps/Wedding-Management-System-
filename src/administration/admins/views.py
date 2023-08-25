@@ -1,7 +1,5 @@
 import openpyxl
-import xlwt
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
@@ -15,7 +13,7 @@ from django.views.generic import (
 from openpyxl.utils import get_column_letter
 
 from src.administration.admins.filters import ProviderFilter, TableFilter
-from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, InvitationForm, \
+from src.administration.admins.forms import GuestGroupMetaForm, ProviderMetaForm, \
     TableForm, EventTimeLineMetaForm
 from src.administration.admins.models import GuestGroup, Guest, Provider, InvitationLetter, Table, GuestTable, \
     EventTimeLine
