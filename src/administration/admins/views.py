@@ -203,7 +203,7 @@ class InvitationUpdateView(View):
         if total:
             invitation.total_invitation = total
             invitation.save()
-            messages.success(request, "Successfully updated")
+            messages.success(request, "Invitation Letter Successfully updated")
             return JsonResponse({'success': True, 'provider_id': invitation.id})
 
         errors = {}
