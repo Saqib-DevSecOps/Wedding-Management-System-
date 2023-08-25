@@ -22,3 +22,5 @@ django-phonenumber_field
 djangorestframework
 DateTime
 crispy-bootstrap5
+xlwt
+openpyxl
