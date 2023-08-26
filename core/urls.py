@@ -28,16 +28,7 @@ from core.config import (
 from core.settings import ENVIRONMENT, MEDIA_ROOT, STATIC_ROOT
 
 
-def handler404(request, *args, **kwargs):
-    return render(request, "404.html")
 
-
-def handler500(request, *args, **kwargs):
-    return render(request, "500.html")
-
-
-handler404 = handler404
-handler500 = handler500
 
 
 

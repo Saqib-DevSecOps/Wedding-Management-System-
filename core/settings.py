@@ -8,10 +8,10 @@ import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-DEBUG = True
+DEBUG = False
 ROOT_URLCONF = 'core.urls'
 AUTH_USER_MODEL = 'accounts.User'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
