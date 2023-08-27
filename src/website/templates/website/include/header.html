@@ -35,7 +35,7 @@
                             {% if gallery %}
                                 <ul class="dropdown">
                                     {% for object in gallery %}
-                                    <li><a href="?category={{object.id}}">{{object.name}}</a>
+                                    <li><a href="{% url 'website:gallery' %}?category={{object.id}}">{{object.name}}</a>
                                         {% for subcategory in object.gallerycategory_set.all %}
 
                                         <ul class="dropdown">
