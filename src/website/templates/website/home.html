@@ -605,64 +605,64 @@
 
 
     <!-- Section: Event  -->
-    <section id="event">
-        <div class="container pb-80">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Events</h2>
-                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">
-
-                        {% if  site.event_title %}
-                        <p><em>{{site.event_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        {% if events %}
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="carousel event-carousel slide" data-ride="carousel"
-                             id="carousel-example-generic">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>
-                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>
-                            </ol>
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">
-                                        <h2 class="text-white"></h2>
-                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>
-                                        <div class="details hidden-xs">
-                                            <p class="text-white">{{events.content|safe}} </p>
-                                        </div>
-                                    
-                                </div>
-                                `
-                            </div>
-
-                            <!-- Controls -->
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="text-center mt-5  ">
-                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See
-                    More</a>
-            </div>
-        </div>
-        {% endif %}
-    </section>
+{#    <section id="event">#}
+{#        <div class="container pb-80">#}
+{#            <div class="section-title">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+{#                        <h2>Events</h2>#}
+{#                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">#}
+{##}
+{#                        {% if  site.event_title %}#}
+{#                        <p><em>{{site.event_title}}</em></p>#}
+{#                        {% else %}#}
+{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% if events %}#}
+{#            <div class="section-content">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <div class="carousel event-carousel slide" data-ride="carousel"#}
+{#                             id="carousel-example-generic">#}
+{#                            <!-- Indicators -->#}
+{#                            <ol class="carousel-indicators">#}
+{#                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>#}
+{#                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>#}
+{#                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>#}
+{#                            </ol>#}
+{#                            <!-- Wrapper for slides -->#}
+{#                            <div class="carousel-inner">#}
+{#                                <div class="item active">#}
+{#                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">#}
+{#                                        <h2 class="text-white"></h2>#}
+{#                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>#}
+{#                                        <div class="details hidden-xs">#}
+{#                                            <p class="text-white">{{events.content|safe}} </p>#}
+{#                                        </div>#}
+{#                                    #}
+{#                                </div>#}
+{#                                `#}
+{#                            </div>#}
+{##}
+{#                            <!-- Controls -->#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="text-center mt-5  ">#}
+{#                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See#}
+{#                    More</a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endif %}#}
+{#    </section>#}
 
     <!-- Section: Gallery  -->
     <section class="bg-lighter" id="gallery">
@@ -770,56 +770,56 @@
   	</section>
 
     <!-- Section: Blog  -->
-    <section id="blog">
-        <div class="container pb-80">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Latest Blogs</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                        {% if  site.event_title %}
-                        <p><em>{{site.event_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="section-content">
-                <div class="row">
-                    {% for object in blogs %}
-                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">
-                        <article class="post clearfix maxwidth600 mb-30">
-                            <div class="entry-header">
-                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"
-                                                                   src="{{object.thumbnail_image.url}}">
-                                </div>
-                            </div>
-                            <div class="entry-content border-1px p-20">
-                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>
-                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>
-                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read
-                                    more</a>
-                                <ul class="list-inline entry-date pull-right font-12 mt-5">
-                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>
-                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                        </article>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="mt-5 mb-5 text-center">
-                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See
-                    More</a>
-            </div>
-
-
-        </div>
-    </section>
+{#    <section id="blog">#}
+{#        <div class="container pb-80">#}
+{#            <div class="section-title">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+{#                        <h2>Latest Blogs</h2>#}
+{#                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">#}
+{#                        {% if  site.event_title %}#}
+{#                        <p><em>{{site.event_title}}</em></p>#}
+{#                        {% else %}#}
+{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="section-content">#}
+{#                <div class="row">#}
+{#                    {% for object in blogs %}#}
+{#                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">#}
+{#                        <article class="post clearfix maxwidth600 mb-30">#}
+{#                            <div class="entry-header">#}
+{#                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"#}
+{#                                                                   src="{{object.thumbnail_image.url}}">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="entry-content border-1px p-20">#}
+{#                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>#}
+{#                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>#}
+{#                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read#}
+{#                                    more</a>#}
+{#                                <ul class="list-inline entry-date pull-right font-12 mt-5">#}
+{#                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>#}
+{#                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>#}
+{#                                </ul>#}
+{#                                <div class="clearfix"></div>#}
+{#                            </div>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="mt-5 mb-5 text-center">#}
+{#                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See#}
+{#                    More</a>#}
+{#            </div>#}
+{##}
+{##}
+{#        </div>#}
+{#    </section>#}
 
     <!-- Divider: Clients -->
     <section class="divider parallax layer-overlay overlay-lighter"
