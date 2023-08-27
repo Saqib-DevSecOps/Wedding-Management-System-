@@ -1,3 +1,4 @@
+import requests
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -158,7 +159,17 @@ class ContactUs(View):
         phone = request.POST.get('phone')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        print(name, email, phone, subject, message)
+        recaptcha_token = request.POST.get('g-recaptcha-response')
+        recaptcha_secret_key = '6LfmStsnAAAAAPWI3RviG2FDvIYI4l4cGfAdC1nk'
+
+        recaptcha_verification_url = f'https://www.google.com/recaptcha/api/siteverify?secret={recaptcha_secret_key}&response={recaptcha_token}'
+        response = requests.post(recaptcha_verification_url)
+        result = response.json()
+
+        if not result.get('success', False):
+            messages.error(request, "reCAPTCHA verification failed. Please try again.")
+            return render(request, self.template_name, context)
+
         if not all([message, subject, phone, email, name]):
             messages.error(request, "Please fill all the fields to contact.")
         else:
@@ -182,7 +193,6 @@ class ContactUs(View):
             send_mail(subject, text_message_to_company, from_email, recipient_list, html_message=html_message_to_company)
 
             # Send Message to User
-
             user = {
                 'user': name
             }
