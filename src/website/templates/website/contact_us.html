@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Start main-content -->
 
-<div class="main-content">
+<div class="main-content" style="overflow-x: hidden">
     <!-- Section: inner-header -->
     <section class="inner-header divider parallax layer-overlay overlay-dark-5">
         {% if background.contact_background %}
@@ -121,35 +121,6 @@
     </section>
 
     <!-- Divider: Google Map -->
-    <section>
-        <div class="container-fluid p-0">
-            <div class="row">
-
-                <!-- Google Map HTML Codes -->
-                <div
-                        data-address="121 King Street, Melbourne Victoria 3000 Australia"
-                        data-popupstring-id="#popupstring1"
-                        class="map-canvas autoload-map"
-                        data-mapstyle="style1"
-                        data-height="400"
-                        data-latlng="-37.817314,144.955431"
-                        data-title="sample title"
-                        data-zoom="12"
-                        data-marker="images/map-icon-blue.png">
-                </div>
-                <div class="map-popupstring hidden" id="popupstring1">
-                    <div class="text-center">
-                        <h3>CharityFund Office</h3>
-                        <p>121 King Street, Melbourne Victoria 3000 Australia</p>
-                    </div>
-                </div>
-                <!-- Google Map Javascript Codes -->
-                <script src="http://maps.google.com/maps/api/js?key=AIzaSyAYWE4mHmR9GyPsHSOVZrSCOOljk8DU9B4"></script>
-                <script src="js/google-map-init.js"></script>
-
-            </div>
-        </div>
-    </section>
 </div>
 
                                 {% include 'messages.html' %}
