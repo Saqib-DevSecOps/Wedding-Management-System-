@@ -1,6 +1,53 @@
 {% extends 'website/base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+@media (min-width: 1200px) {
+    .testimonal_width {
+        width: 750px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1199px) {
+    .testimonal_width {
+        width: 620px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 900px) and (max-width: 999px) {
+    .testimonal_width {
+        width: 700px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 700px) and (max-width: 899px) {
+    .testimonal_width {
+        width: 700px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 601px) and (max-width: 700px) {
+    .testimonal_width {
+        width: 550px;
+        margin-right: 15px;
+    }
+}@media (min-width: 550px) and (max-width: 600px) {
+    .testimonal_width {
+        width: 550px;
+        margin-right: 15px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 550px) {
+    .testimonal_width {
+        width: 400px;
+        margin-right: 150px;
+    }
+}
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splide@2.4.12/dist/css/splide.min.css">
+
+
 <div class="main-content" style="overflow-x: hidden">
     <!-- Section: home -->
     <section class="divider" id="home">
@@ -14,21 +61,21 @@
                         {% if slider %}
                         <!-- SLIDE  -->
                         {% for slider in slider %}
-                        <li data-description="" data-easein="default" data-easeout="default"
-                            data-fsmasterspeed="1500"
-                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
-                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-                            data-thumb="{slider.image.url}}" data-title="Intro"
-                            data-transition="random">
+                       <li data-description="" data-easein="default" data-easeout="default"
+    data-fsmasterspeed="1500"
+    data-fsslotamount="7" data-fstransition="fade" data-index="rs-{{forloop.counter0|add:1}}"
+    data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+    data-thumb="{{slider.image.url}}" data-title="Intro"
+    data-transition="random">
                             <!-- MAIN IMAGE -->
-                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
-                                 src="{{slider.image.url}}">
+                           <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+         data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+         src="{{slider.image.url}}">
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
                             <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+         data-fontsize="['48']"
 
                                  data-height="none"
                                  data-hoffset="['0']"
@@ -47,7 +94,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-1"
+         id="rs-{{forloop.counter0|add:1}}-layer-1"
                                  style="z-index: 7; white-space: nowrap;">{{slider.tag_1}}
                             </div>
 
@@ -73,7 +120,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-2"
+         id="rs-{{forloop.counter0|add:1}}-layer-2"
                                  style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
                                 {{slider.tag_2}}
                             </div>
@@ -100,7 +147,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-3"
+         id="rs-{{forloop.counter0|add:1}}-layer-3"
                                  style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
                                 {{slider.tag_3}}
                             </div>
@@ -531,7 +578,7 @@
                                                    src="{% static 'website/images/photos/slide3.jpg' %}"></div>
                             {% endif %}
                         </div>
-                            
+
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         {% if site.about_short_discription %}
@@ -576,7 +623,7 @@
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>Services</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                      
+
                         {% if  site.service_title %}
                         <p><em>{{site.service_title}}</em></p>
                         {% else %}
@@ -664,6 +711,7 @@
 {#        {% endif %}#}
 {#    </section>#}
 
+
     <!-- Section: Gallery  -->
     <section class="bg-lighter" id="gallery">
         <div class="container-fluid pl-0 pr-0 pb-0">
@@ -683,8 +731,8 @@
             </div>
             <div class="section-content">
                 <div class="row">
-                  <div class="col-md-12"> 
-                    
+                  <div class="col-md-12">
+
                     <!-- Portfolio Gallery Grid -->
                     <div id="grid" class="portfolio-gallery grid-4 clearfix" data-lightbox="gallery" style="position: relative; height: 532.5px;">
                       {% for image in images %}
@@ -692,7 +740,7 @@
                       <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
                         <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="Title Here 2">
                           <div class="thumb">
-                            
+
                             <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
                             <div class="overlay-shade"></div>
                             <div class="text-holder">
@@ -711,7 +759,7 @@
                       {% endfor %}
                       <!-- Portfolio Item End -->
                     </div>
-                    <!-- End Portfolio Gallery Grid --> 
+                    <!-- End Portfolio Gallery Grid -->
                   </div>
                 </div>
               </div>
@@ -721,9 +769,9 @@
     <section class="divider parallax layer-overlay overlay-dark-8"
      data-stellar-background-ratio="0.5"
      data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
- 
+
       style="background-image: url(static 'website/images/bg/bg4.jpg'); background-position: 50% 218.892px;">
-  	  <div class="container pt-70 pb-60"> 
+  	  <div class="container pt-70 pb-60">
   	    <!-- Section title -->
   	    <div class="section-title">
   	      <div class="row">
@@ -738,11 +786,11 @@
   	      <div class="row">
   	        <div class="col-md-8 col-md-offset-2 mb-30">
   	          <div class="testimonial-carousel owl-carousel owl-theme owl-loaded">
-  	            
-  	            
+
+
   	        {% for test in testimonials %}
 
-            <div class="owl-item cloned active" style="width: 750px; margin-right: 15px;"><div class="item xs-text-center">
+            <div class="owl-item cloned active testimonal_width"><div class="item xs-text-center">
   	              <div class="content pt-10">
                     <p>{{test.comment}}</p>
                     <div class="thumb"><img class="img-circle" alt="" src="{{test.image.url}}" width="75"></div>
@@ -843,5 +891,10 @@
             </div>
         </div>
     </section>
-</div>
+
+
+
+
+
+
 {% endblock content %}
