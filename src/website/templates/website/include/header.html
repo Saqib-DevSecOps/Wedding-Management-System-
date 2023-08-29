@@ -1,16 +1,6 @@
 {% load static %}
 <style>
-@media (max-width: 900px) {
-    .mobile-hide {
-        display: none !important;
-    }
-}
 
-@media (min-width: 900px) {
-    .mobile-hide-menu {
-        display: none !important;
-    }
-}
 </style>
 <!-- Header -->
 <header class="header" id="header">
@@ -21,8 +11,8 @@
                     <div class="menuzord red " id="menuzord-right"><a
                             class="menuzord-brand pull-left flip font-great-vibes text-theme-colored font-32"
                             href="javascript:void(0)"><img src="{{logo}}" alt=""></a>
-                        <div class="side-panel-trigger mobile-hide" id="side-panel-trigger"><a href="#"><i
-                                class="fa fa-bars font-24 mobile-hide text-gray-silver"></i></a></div>
+                        <div class="side-panel-trigger" id="side-panel-trigger"><a href="#"><i
+                                class="fa fa-bars font-24 text-gray-silver"></i></a></div>
                         <ul class="menuzord-menu ">
                             <li ><a href="{% url 'website:home' %}">Home</a></li>
 {#                            <li><a href="{% url 'website:events' %}">Events </a>#}
@@ -55,14 +45,7 @@
                             <li><a href="{% url 'website:contact-us' %}">Contact Us </a>
 
                             </li>
-                                            {% if request.user.is_authenticated %}
 
-                            <li class="mobile-hide-menu"><a href="{% url 'accounts:cross-auth' %}">Dashboard</a></li>
-                    <li class="mobile-hide-menu"><a href="{% url 'account_logout' %}">Logout</a></li>
-                        {% else %}
-                        <li class="mobile-hide-menu"><a href="{% url 'account_login' %}">Login</a></li>
-                    <li class="mobile-hide-menu"><a href="{% url 'account_signup' %}">Register</a></li>
-                        {% endif %}
                         </ul>
                     </div>
                 </nav>
