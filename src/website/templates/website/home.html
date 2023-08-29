@@ -38,9 +38,21 @@
     }
 }
 
-@media (min-width: 320px) and (max-width: 550px) {
+@media (min-width: 320px) and (max-width: 400px) {
+    .testimonal_width {
+        width: 350px;
+        margin-right: 150px;
+    }
+}
+@media (min-width: 401px) and (max-width: 499px) {
     .testimonal_width {
         width: 400px;
+        margin-right: 150px;
+    }
+}
+@media (min-width: 500px) and (max-width: 549px) {
+    .testimonal_width {
+        width: 450px;
         margin-right: 150px;
     }
 }
@@ -877,7 +889,7 @@
                 <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
                     <div class="-img style2">
                         {% if partner.logo %}
-                        <a href="{% if partner.website %}{{partner.website}}{% else %}#{% endif %}"><img alt="" style="height: 120px; width: 800px; object-fit: cover;"
+                        <a href="{% if partner.website %}{{partner.website}}{% else %}#{% endif %}" target="_blank"><img alt=""  style="height: 120px; width: 800px; "
                         src="{{ partner.logo.url }}"></a>
                         {% else %}
                         <img alt="" class="img-responsive"
