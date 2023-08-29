@@ -277,8 +277,8 @@ class AboutUsSection(models.Model):
     image_1 = models.ImageField(upload_to="about/",null=True,blank=True)
     image_2 = models.ImageField(upload_to="about/",null=True,blank=True)
     image_3 = models.ImageField(upload_to="about/",null=True,blank=True)
-    short_description = HTMLField()
-    description = HTMLField()
+    short_description = HTMLField(null=True,blank=False)
+    description = HTMLField(null=True,blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
