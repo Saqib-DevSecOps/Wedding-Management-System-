@@ -1,19 +1,20 @@
 {% load static %}
+<style>
 
+</style>
 <!-- Header -->
 <header class="header" id="header">
     <div class="header-nav navbar-fixed-top header-dark navbar-white navbar-transparent transparent-dark navbar-sticky-animated animated-active">
         <div class="header-nav-wrapper">
             <div class="container">
                 <nav>
-                    <div class="menuzord red" id="menuzord-right"><a
+                    <div class="menuzord red " id="menuzord-right"><a
                             class="menuzord-brand pull-left flip font-great-vibes text-theme-colored font-32"
                             href="javascript:void(0)"><img src="{{logo}}" alt=""></a>
                         <div class="side-panel-trigger" id="side-panel-trigger"><a href="#"><i
                                 class="fa fa-bars font-24 text-gray-silver"></i></a></div>
-                        <ul class="menuzord-menu">
-                            <li onclick=""><a href="{% url 'website:home' %}">Home</a>
-                            </li>
+                        <ul class="menuzord-menu ">
+                            <li ><a href="{% url 'website:home' %}">Home</a></li>
 {#                            <li><a href="{% url 'website:events' %}">Events </a>#}
 {#                            </li>#}
 
@@ -22,19 +23,19 @@
 {#                            </li>#}
                             <li><a href="{% url 'website:gallery' %}">Gallery </a>
                             {% if gallery %}
-                                <ul class="dropdown">
-                                    {% for object in gallery %}
-                                    <li><a href="?category={{object.id}}">{{object.name}}</a>
-                                        {% for subcategory in object.gallerycategory_set.all %}
-
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'website:gallery' %}?category={{object.id}}&&subcategory={{subcategory.id}}">{{subcategory.name}}</a></li>
-                                        </ul>
-                                        {% endfor %}
-
-                                    </li>
-                                    {% endfor %}
-                                </ul>
+{#                                <ul class="dropdown">#}
+{#                                    {% for object in gallery %}#}
+{#                                    <li><a href="{% url 'website:gallery' %}?category={{object.id}}">{{object.name}}</a>#}
+{#                                        {% for subcategory in object.gallerycategory_set.all %}#}
+{##}
+{#                                        <ul class="dropdown">#}
+{#                                            <li><a href="{% url 'website:gallery' %}?category={{object.id}}&&subcategory={{subcategory.id}}">{{subcategory.name}}</a></li>#}
+{#                                        </ul>#}
+{#                                        {% endfor %}#}
+{##}
+{#                                    </li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
                             {% endif %}
                             </li>
 {#                            <li><a href="{% url 'website:blog' %}">Blogs </a>#}
@@ -42,7 +43,9 @@
                             <li><a href="{% url 'website:about' %}">About </a>
                             </li>
                             <li><a href="{% url 'website:contact-us' %}">Contact Us </a>
+
                             </li>
+
                         </ul>
                     </div>
                 </nav>

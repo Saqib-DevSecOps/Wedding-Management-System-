@@ -1,7 +1,66 @@
 {% extends 'website/base.html' %}
 {% load static %}
 {% block content %}
-<div class="main-content">
+    <style>
+@media (min-width: 1200px) {
+    .testimonal_width {
+        width: 750px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1199px) {
+    .testimonal_width {
+        width: 620px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 900px) and (max-width: 999px) {
+    .testimonal_width {
+        width: 700px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 700px) and (max-width: 899px) {
+    .testimonal_width {
+        width: 700px;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 601px) and (max-width: 700px) {
+    .testimonal_width {
+        width: 550px;
+        margin-right: 15px;
+    }
+}@media (min-width: 550px) and (max-width: 600px) {
+    .testimonal_width {
+        width: 550px;
+        margin-right: 15px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 400px) {
+    .testimonal_width {
+        width: 350px;
+        margin-right: 150px;
+    }
+}
+@media (min-width: 401px) and (max-width: 499px) {
+    .testimonal_width {
+        width: 400px;
+        margin-right: 150px;
+    }
+}
+@media (min-width: 500px) and (max-width: 549px) {
+    .testimonal_width {
+        width: 450px;
+        margin-right: 150px;
+    }
+}
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splide@2.4.12/dist/css/splide.min.css">
+
+
+<div class="main-content" style="overflow-x: hidden">
     <!-- Section: home -->
     <section class="divider" id="home">
         <div class="container-fluid p-0">
@@ -14,21 +73,21 @@
                         {% if slider %}
                         <!-- SLIDE  -->
                         {% for slider in slider %}
-                        <li data-description="" data-easein="default" data-easeout="default"
-                            data-fsmasterspeed="1500"
-                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
-                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-                            data-thumb="{slider.image.url}}" data-title="Intro"
-                            data-transition="random">
+                       <li data-description="" data-easein="default" data-easeout="default"
+    data-fsmasterspeed="1500"
+    data-fsslotamount="7" data-fstransition="fade" data-index="rs-{{forloop.counter0|add:1}}"
+    data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
+    data-thumb="{{slider.image.url}}" data-title="Intro"
+    data-transition="random">
                             <!-- MAIN IMAGE -->
-                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
-                                 src="{{slider.image.url}}">
+                           <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+         data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+         src="{{slider.image.url}}">
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
                             <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+         data-fontsize="['48']"
 
                                  data-height="none"
                                  data-hoffset="['0']"
@@ -47,7 +106,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-1"
+         id="rs-{{forloop.counter0|add:1}}-layer-1"
                                  style="z-index: 7; white-space: nowrap;">{{slider.tag_1}}
                             </div>
 
@@ -73,7 +132,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-2"
+         id="rs-{{forloop.counter0|add:1}}-layer-2"
                                  style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
                                 {{slider.tag_2}}
                             </div>
@@ -100,7 +159,7 @@
                                  data-width="none"
                                  data-x="['center']"
                                  data-y="['middle']"
-                                 id="rs-{{forloop.counter}}-layer-3"
+         id="rs-{{forloop.counter0|add:1}}-layer-3"
                                  style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
                                 {{slider.tag_3}}
                             </div>
@@ -531,7 +590,7 @@
                                                    src="{% static 'website/images/photos/slide3.jpg' %}"></div>
                             {% endif %}
                         </div>
-                            
+
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         {% if site.about_short_discription %}
@@ -576,7 +635,7 @@
                     <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
                         <h2>Services</h2>
                         <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                      
+
                         {% if  site.service_title %}
                         <p><em>{{site.service_title}}</em></p>
                         {% else %}
@@ -593,7 +652,8 @@
                         <div class="services-box mb-50"><img alt="" style="height: 300px; width: 400px; object-fit: cover;"
                                                              src="{{object.image.url}}">
                             <h4 class="mt-30">{{object.name}}</h4>
-<p>{{ object.description|slice:":50" }}</p>
+
+<p>{{ object.description }}</p>
                         </div>
                     </div>
                     {% endfor %}
@@ -605,64 +665,65 @@
 
 
     <!-- Section: Event  -->
-    <section id="event">
-        <div class="container pb-80">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Events</h2>
-                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">
+{#    <section id="event">#}
+{#        <div class="container pb-80">#}
+{#            <div class="section-title">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+{#                        <h2>Events</h2>#}
+{#                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">#}
+{##}
+{#                        {% if  site.event_title %}#}
+{#                        <p><em>{{site.event_title}}</em></p>#}
+{#                        {% else %}#}
+{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% if events %}#}
+{#            <div class="section-content">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <div class="carousel event-carousel slide" data-ride="carousel"#}
+{#                             id="carousel-example-generic">#}
+{#                            <!-- Indicators -->#}
+{#                            <ol class="carousel-indicators">#}
+{#                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>#}
+{#                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>#}
+{#                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>#}
+{#                            </ol>#}
+{#                            <!-- Wrapper for slides -->#}
+{#                            <div class="carousel-inner">#}
+{#                                <div class="item active">#}
+{#                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">#}
+{#                                        <h2 class="text-white"></h2>#}
+{#                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>#}
+{#                                        <div class="details hidden-xs">#}
+{#                                            <p class="text-white">{{events.content|safe}} </p>#}
+{#                                        </div>#}
+{#                                    #}
+{#                                </div>#}
+{#                                `#}
+{#                            </div>#}
+{##}
+{#                            <!-- Controls -->#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="text-center mt-5  ">#}
+{#                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See#}
+{#                    More</a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endif %}#}
+{#    </section>#}
 
-                        {% if  site.event_title %}
-                        <p><em>{{site.event_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        {% if events %}
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="carousel event-carousel slide" data-ride="carousel"
-                             id="carousel-example-generic">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>
-                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>
-                            </ol>
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">
-                                        <h2 class="text-white"></h2>
-                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>
-                                        <div class="details hidden-xs">
-                                            <p class="text-white">{{events.content|safe}} </p>
-                                        </div>
-                                    
-                                </div>
-                                `
-                            </div>
-
-                            <!-- Controls -->
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="text-center mt-5  ">
-                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See
-                    More</a>
-            </div>
-        </div>
-        {% endif %}
-    </section>
 
     <!-- Section: Gallery  -->
     <section class="bg-lighter" id="gallery">
@@ -683,8 +744,8 @@
             </div>
             <div class="section-content">
                 <div class="row">
-                  <div class="col-md-12"> 
-                    
+                  <div class="col-md-12">
+
                     <!-- Portfolio Gallery Grid -->
                     <div id="grid" class="portfolio-gallery grid-4 clearfix" data-lightbox="gallery" style="position: relative; height: 532.5px;">
                       {% for image in images %}
@@ -692,11 +753,11 @@
                       <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
                         <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="Title Here 2">
                           <div class="thumb">
-                            
+
                             <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
                             <div class="overlay-shade"></div>
                             <div class="text-holder">
-                              <div class="title text-center">Wedding</div>
+                              <div class="title text-center">{{ image.category }}</div>
                             </div>
                             <div class="icons-holder">
                               <div class="icons-holder-inner">
@@ -711,7 +772,7 @@
                       {% endfor %}
                       <!-- Portfolio Item End -->
                     </div>
-                    <!-- End Portfolio Gallery Grid --> 
+                    <!-- End Portfolio Gallery Grid -->
                   </div>
                 </div>
               </div>
@@ -721,9 +782,9 @@
     <section class="divider parallax layer-overlay overlay-dark-8"
      data-stellar-background-ratio="0.5"
      data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
- 
+
       style="background-image: url(static 'website/images/bg/bg4.jpg'); background-position: 50% 218.892px;">
-  	  <div class="container pt-70 pb-60"> 
+  	  <div class="container pt-70 pb-60">
   	    <!-- Section title -->
   	    <div class="section-title">
   	      <div class="row">
@@ -738,20 +799,11 @@
   	      <div class="row">
   	        <div class="col-md-8 col-md-offset-2 mb-30">
   	          <div class="testimonial-carousel owl-carousel owl-theme owl-loaded">
-  	            
-  	            
+
+
   	        {% for test in testimonials %}
-  	    
-            <div class="owl-item" style="width: 750px; margin-right: 15px;"><div class="item xs-text-center">
-  	              <div class="content pt-10">
-  	                <p>{{test.comment}}</p>
-  	                <div class="thumb"><img class="img-circle" style="height: 100px;" alt="" src="{{test.image.url}}" width="75"></div>
-  	                <h5 class="text-theme-colored mt-20 mb-0">{{test.name}}</h5>
-  	              </div>
-  	            </div>
-            </div>
-  
-            <div class="owl-item cloned active" style="width: 750px; margin-right: 15px;"><div class="item xs-text-center">
+
+            <div class="owl-item cloned active testimonal_width"><div class="item xs-text-center">
   	              <div class="content pt-10">
                     <p>{{test.comment}}</p>
                     <div class="thumb"><img class="img-circle" alt="" src="{{test.image.url}}" width="75"></div>
@@ -770,56 +822,56 @@
   	</section>
 
     <!-- Section: Blog  -->
-    <section id="blog">
-        <div class="container pb-80">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Latest Blogs</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                        {% if  site.event_title %}
-                        <p><em>{{site.event_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="section-content">
-                <div class="row">
-                    {% for object in blogs %}
-                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">
-                        <article class="post clearfix maxwidth600 mb-30">
-                            <div class="entry-header">
-                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"
-                                                                   src="{{object.thumbnail_image.url}}">
-                                </div>
-                            </div>
-                            <div class="entry-content border-1px p-20">
-                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>
-                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>
-                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read
-                                    more</a>
-                                <ul class="list-inline entry-date pull-right font-12 mt-5">
-                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>
-                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                        </article>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="mt-5 mb-5 text-center">
-                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See
-                    More</a>
-            </div>
-
-
-        </div>
-    </section>
+{#    <section id="blog">#}
+{#        <div class="container pb-80">#}
+{#            <div class="section-title">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+{#                        <h2>Latest Blogs</h2>#}
+{#                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">#}
+{#                        {% if  site.event_title %}#}
+{#                        <p><em>{{site.event_title}}</em></p>#}
+{#                        {% else %}#}
+{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="section-content">#}
+{#                <div class="row">#}
+{#                    {% for object in blogs %}#}
+{#                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">#}
+{#                        <article class="post clearfix maxwidth600 mb-30">#}
+{#                            <div class="entry-header">#}
+{#                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"#}
+{#                                                                   src="{{object.thumbnail_image.url}}">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="entry-content border-1px p-20">#}
+{#                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>#}
+{#                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>#}
+{#                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read#}
+{#                                    more</a>#}
+{#                                <ul class="list-inline entry-date pull-right font-12 mt-5">#}
+{#                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>#}
+{#                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>#}
+{#                                </ul>#}
+{#                                <div class="clearfix"></div>#}
+{#                            </div>#}
+{#                        </article>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="mt-5 mb-5 text-center">#}
+{#                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See#}
+{#                    More</a>#}
+{#            </div>#}
+{##}
+{##}
+{#        </div>#}
+{#    </section>#}
 
     <!-- Divider: Clients -->
     <section class="divider parallax layer-overlay overlay-lighter"
@@ -838,7 +890,7 @@
                 <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
                     <div class="-img style2">
                         {% if partner.logo %}
-                        <a href="{% if partner.website %}{{partner.website}}{% else %}#{% endif %}"><img alt="" style="height: 120px; width: 800px; object-fit: cover;"
+                        <a href="{% if partner.website %}{{partner.website}}{% else %}#{% endif %}" target="_blank"><img alt=""  style="height: 120px; width: 800px; "
                         src="{{ partner.logo.url }}"></a>
                         {% else %}
                         <img alt="" class="img-responsive"
@@ -852,5 +904,10 @@
             </div>
         </div>
     </section>
-</div>
+
+
+
+
+
+
 {% endblock content %}

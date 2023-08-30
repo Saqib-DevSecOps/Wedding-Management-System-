@@ -1,7 +1,8 @@
+import requests
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.generic import TemplateView, ListView, DetailView, View
@@ -134,31 +135,36 @@ class AboutUs(TemplateView):
         return context
 
 
+
+
 class ContactUs(View):
     template_name = 'website/contact_us.html'
+    recaptcha_secret_key = '6LfmStsnAAAAAPWI3RviG2FDvIYI4l4cGfAdC1nk'  # Replace with your actual reCAPTCHA secret key
 
     def get(self, request):
-        context = {}
-        site = Site.my_site()
-        context['email'] = site.email
-        context['phone'] = site.phone
-        context['address'] = site.address
-        return render(request, self.template_name, context)
+        return render(request, self.template_name)
 
     def post(self, request):
-        context = {}
-        site = Site.my_site()
-
-        context['email'] = site.email
-        context['phone'] = site.phone
-        context['address'] = site.address
-
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        print(name, email, phone, subject, message)
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+
+        recaptcha_verification_url = f'https://www.google.com/recaptcha/api/siteverify'
+        recaptcha_data = {
+            'secret': self.recaptcha_secret_key,
+            'response': recaptcha_response
+        }
+
+        response = requests.post(recaptcha_verification_url, data=recaptcha_data)
+        result = response.json()
+
+        if not result.get('success', False):
+            messages.error(request, "reCAPTCHA verification failed. Please try again.")
+            return render(request, self.template_name)
+
         if not all([message, subject, phone, email, name]):
             messages.error(request, "Please fill all the fields to contact.")
         else:
@@ -169,20 +175,19 @@ class ContactUs(View):
             context = {
                 'email': email,
                 'name': name,
-                "phone": phone,
+                'phone': phone,
                 'subject': subject,
                 'message': message
             }
-
             # Send Message to Company
             html_message_to_company = render_to_string('website/html_mail/contact-user-request.html', context)
             text_message_to_company = strip_tags(html_message_to_company)
             from_email = email
             recipient_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject, text_message_to_company, from_email, recipient_list, html_message=html_message_to_company)
+            send_mail(subject, text_message_to_company, from_email, recipient_list,
+                      html_message=html_message_to_company)
 
             # Send Message to User
-
             user = {
                 'user': name
             }
@@ -195,7 +200,7 @@ class ContactUs(View):
 
             messages.success(request, "Your message request processed successfully")
 
-        return render(request, self.template_name, context)
+        return redirect('website:contact-us')  # Redirect to the contact page
 
 
 class Services(ListView):

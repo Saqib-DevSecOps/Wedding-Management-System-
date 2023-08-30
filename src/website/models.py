@@ -191,7 +191,6 @@ class ServiceContent(models.Model):
 
 
 class Site(models.Model):
-
     name = models.CharField(default='_ no name _', max_length=255)
     tagline = models.CharField(default="_ no tagline _", max_length=255)
     description = models.CharField(default="_ no description _", max_length=255)
@@ -201,17 +200,16 @@ class Site(models.Model):
 
     # ABOUT 
     about_title = models.CharField(max_length=200)
-    about_short_discription = HTMLField(null=True,blank=True)
-    about_image_1 = models.ImageField(upload_to  = 'home/',null=True,blank=True)
-    about_image_2 = models.ImageField(upload_to ='home/',null=True,blank=True)
-    about_image_3 = models.ImageField(upload_to = 'home/',null=True,blank=True)
-    
+    about_short_discription = HTMLField(null=True, blank=True)
+    about_image_1 = models.ImageField(upload_to='home/', null=True, blank=True)
+    about_image_2 = models.ImageField(upload_to='home/', null=True, blank=True)
+    about_image_3 = models.ImageField(upload_to='home/', null=True, blank=True)
 
     # Titles
-    service_title = models.CharField(max_length=200,null=True,blank=True)
-    event_title = models.CharField(max_length=200,null=True,blank=True)
-    gallery_title = models.CharField(max_length=200,null=True,blank=True)
-    blog_title = models.CharField(max_length=200,null=True,blank=True)
+    service_title = models.CharField(max_length=200, null=True, blank=True)
+    event_title = models.CharField(max_length=200, null=True, blank=True)
+    gallery_title = models.CharField(max_length=200, null=True, blank=True)
+    blog_title = models.CharField(max_length=200, null=True, blank=True)
 
     # CONTACT
     address = models.CharField(max_length=1000, default='_ no address provided _')
@@ -274,11 +272,11 @@ class ContactRequest(models.Model):
 
 
 class AboutUsSection(models.Model):
-    image_1 = models.ImageField(upload_to="about/",null=True,blank=True)
-    image_2 = models.ImageField(upload_to="about/",null=True,blank=True)
-    image_3 = models.ImageField(upload_to="about/",null=True,blank=True)
-    short_description = HTMLField()
-    description = HTMLField()
+    image_1 = models.ImageField(upload_to="about/", null=True, blank=True)
+    image_2 = models.ImageField(upload_to="about/", null=True, blank=True)
+    image_3 = models.ImageField(upload_to="about/", null=True, blank=True)
+    short_description = HTMLField(null=True, blank=True)
+    description = HTMLField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -286,12 +284,12 @@ class AboutUsSection(models.Model):
 
 
 class BackgroundImage(models.Model):
-    event_background = models.ImageField(upload_to="background/",null=True,blank=True)
-    service_background = models.ImageField(upload_to="background/",null=True,blank=True)
-    gallery_background = models.ImageField(upload_to="background/",null=True,blank=True)
-    blog_background = models.ImageField(upload_to="background/",null=True,blank=True)
-    about_background = models.ImageField(upload_to="background/",null=True,blank=True)
-    contact_background = models.ImageField(upload_to="background/",null=True,blank=True)
+    event_background = models.ImageField(upload_to="background/", null=True, blank=True)
+    service_background = models.ImageField(upload_to="background/", null=True, blank=True)
+    gallery_background = models.ImageField(upload_to="background/", null=True, blank=True)
+    blog_background = models.ImageField(upload_to="background/", null=True, blank=True)
+    about_background = models.ImageField(upload_to="background/", null=True, blank=True)
+    contact_background = models.ImageField(upload_to="background/", null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Your digital partner">
-    <meta name="author" content="mark">
+    <meta name="author" content="Exarth">
     <meta name="developer" content="exarth.com">
     <meta name="org-name" content="exarth"/>
 
-    <link rel="icon" href="{% static 'core/images/logos/favico.ico' %}">
+    <link href="{{ favico }}" rel="shortcut icon" type="image/png">
 
     <title>
 
@@ -84,6 +84,29 @@
 
     {% endblock %}
     {# --------------------------------------------- #}
+
+
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VECHWMQ64Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VECHWMQ64Q');
+</script>
+
+    <!-- Hotjar Tracking Code for https://bridetools.org/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3630088,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 
 </head>
 <body data-topbar="dark" data-layout="horizontal">

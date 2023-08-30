@@ -38,47 +38,47 @@
 
 
             {# FULL_SCREEN #}
-            <div class="dropdown d-none d-lg-inline-block ml-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
-                    <i class="bx bx-fullscreen"></i>
-                </button>
-            </div>
+{#            <div class="dropdown d-none d-lg-inline-block ml-1">#}
+{#                <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">#}
+{#                    <i class="bx bx-fullscreen"></i>#}
+{#                </button>#}
+{#            </div>#}
 
             {# NOTIFICATIONS #}
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon waves-effect"
-                        id="page-header-notifications-dropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bx bx-bell bx-tada"></i>
-                    <span class="badge badge-danger badge-pill">
+{#            <div class="dropdown d-inline-block">#}
+{#                <button type="button" class="btn header-item noti-icon waves-effect"#}
+{#                        id="page-header-notifications-dropdown"#}
+{#                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                    <i class="bx bx-bell bx-tada"></i>#}
+{#                    <span class="badge badge-danger badge-pill">#}
 {#                        {% live_notify_badge %}#}
-                    </span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                     aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-3">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="m-0"> Notifications </h6>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#" class="small"> View All</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-simplebar style="max-height: 420px;">
-                        <div id="notify_me_now">
-
-                        </div>
-                        <div class="p-2 border-top text-center">
-                            <button class="btn text-primary small" onclick="unread_all_notifications()">
-                                <i class="mdi mdi-arrow-right-circle mr-1"></i> Mark All as Read
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+{#                    </span>#}
+{#                </button>#}
+{#                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"#}
+{#                     aria-labelledby="page-header-notifications-dropdown">#}
+{#                    <div class="p-3">#}
+{#                        <div class="row align-items-center">#}
+{#                            <div class="col">#}
+{#                                <h6 class="m-0"> Notifications </h6>#}
+{#                            </div>#}
+{#                            <div class="col-auto">#}
+{#                                <a href="#" class="small"> View All</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div data-simplebar style="max-height: 420px;">#}
+{#                        <div id="notify_me_now">#}
+{##}
+{#                        </div>#}
+{#                        <div class="p-2 border-top text-center">#}
+{#                            <button class="btn text-primary small" onclick="unread_all_notifications()">#}
+{#                                <i class="mdi mdi-arrow-right-circle mr-1"></i> Mark All as Read#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
 
             {#            <div class="dropdown d-inline-block">#}
             {#                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">#}
