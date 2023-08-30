@@ -8,9 +8,9 @@
     <!-- Section: inner-header -->
     <section class="inner-header divider parallax layer-overlay overlay-dark-5">
         {% if background.gallery_background %}
-            <img src="{{ background.gallery_background.url }}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Background Image">
+            <img src="{{ background.gallery_background.url }}" style="height: 400px; width: inherit; object-fit: cover;" alt="Background Image">
         {% else %}
-            <img src="{% static 'website/images/bg/bg11.jpg' %}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Default Background Image">
+            <img src="{% static 'website/images/bg/bg11.jpg' %}" style="height: 400px; width: inherit; object-fit: cover;" alt="Default Background Image">
         {% endif %}
     
     </section>
@@ -32,30 +32,31 @@
                     <div class="col-md-12">
 
                         <!-- Portfolio Gallery Grid -->
-                        <div class="portfolio-gallery masonry grid-4 clearfix" data-lightbox="gallery" id="grid">
-                            {% for object in gallery_images %}
-                            <!-- Portfolio Item Start -->
-                            <div class="portfolio-item">
-                                <a data-lightbox="gallery-item" href="{{object.image.url}}" title="{{object.category}}">
-                                    <div class="thumb">
-                                        <img alt="project" class="img-fullwidth photo" style="height: 400px; width: 400px; object-fit: cover;" src="{{object.image.url}}">
-                                        <div class="overlay-shade"></div>
-                                        <div class="text-holder">
-                                            <div class="title text-center">{{object.category}}</div>
-                                        </div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <i class="fa fa-plus text-white"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                    <div id="grid" class="portfolio-gallery grid-4 clearfix" data-lightbox="gallery" style="position: relative; height: 532.5px;">
+                      {% for image in gallery_images %}
+                      <!-- Portfolio Item Start -->
+                      <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
+                        <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="Title Here 2">
+                          <div class="thumb">
+
+                            <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
+                            <div class="overlay-shade"></div>
+                            <div class="text-holder">
+                              <div class="title text-center">{{ image.category }}</div>
                             </div>
-                            <!-- Portfolio Item End -->
-                            {% endfor %}
-                        </div>
+                            <div class="icons-holder">
+                              <div class="icons-holder-inner">
+                                <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                  <i class="fa fa-plus text-white"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      {% endfor %}
+                      <!-- Portfolio Item End -->
+                    </div>
                         <!-- End Portfolio Gallery Grid -->
                     </div>
                 </div>

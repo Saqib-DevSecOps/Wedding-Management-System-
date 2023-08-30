@@ -7,9 +7,9 @@
   <!-- Section: inner-header -->
   <section class="inner-header divider parallax layer-overlay overlay-dark-5">
       {% if background.about_background %}
-          <img src="{{ background.about_background.url }}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Background Image">
+          <img src="{{ background.about_background.url }}" style="height: 400px; width: inherit; object-fit: cover;" alt="Background Image">
       {% else %}
-          <img src="{% static 'website/images/bg/bg11.jpg' %}" style="height: 400px; width: 1500px; object-fit: cover;" alt="Default Background Image">
+          <img src="{% static 'website/images/bg/bg11.jpg' %}" style="height: 400px; width: inherit; object-fit: cover;" alt="Default Background Image">
       {% endif %}
   
   </section>

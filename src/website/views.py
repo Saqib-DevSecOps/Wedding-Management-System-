@@ -25,8 +25,8 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context['slider'] = Slider.objects.all()
-        context['images'] = Gallery.objects.all()[:8]
-        context['services'] = Service.objects.all()[:6]
+        context['images'] = Gallery.objects.all()[:12]
+        context['services'] = Service.objects.all()[:12]
         events = Event.objects.all()
         site = Site.objects.all()
         context['site'] = site.order_by('-created_on').first()

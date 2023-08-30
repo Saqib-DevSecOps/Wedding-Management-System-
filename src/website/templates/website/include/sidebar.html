@@ -20,31 +20,21 @@
                         <li><a href="{% url 'website:about' %}">About</a></li>
 
                         <li><a href="{% url 'website:contact-us' %}">Contact</a></li>
+
+                          {% if request.user.is_authenticated %}
+                    <li class="mt-4"><a href="{% url 'accounts:cross-auth' %}"><i class="fa fa-login">Dashboard</i></a></li>
+                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-login">Logout</i></a></li>
+
+
+            {% else  %}
+                    <li  style="margin-top: 20px"><a href="{% url 'account_login' %}"><i class="fa fa-login">Login</i></a></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-login">Register</i></a></li>
+            {% endif %}
                     </ul>
                 </nav>
             </div>
         </div>
-        <div class="clearfix"></div>
-                <div class="side-panel-widget mt-30">
-                    {% if request.user.is_authenticated %}
-                                    <div class="widget">
-                <ul class=" sm-text-center">
-                    <li><a href="{% url 'accounts:cross-auth' %}"><i class="fa fa-login">Dashboard</i></a></li>
-                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-login">Logout</i></a></li>
-                </ul>
-            </div>
 
-
-            {% else  %}
-
-                        <div class="widget">
-                <ul class=" sm-text-center">
-                    <li><a href="{% url 'account_login' %}"><i class="fa fa-login">Login</i></a></li>
-                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-login">Register</i></a></li>
-                </ul>
-            </div>
-            {% endif %}
-        </div>
 
     </div>
 </div>
