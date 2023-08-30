@@ -139,7 +139,7 @@ class AboutUs(TemplateView):
 
 class ContactUs(View):
     template_name = 'website/contact_us.html'
-    recaptcha_secret_key = '6LfmStsnAAAAAPWI3RviG2FDvIYI4l4cGfAdC1nk'  # Replace with your actual reCAPTCHA secret key
+    recaptcha_secret_key = '6LfsQtsnAAAAALDnqx0TFzYeg3JyXA1lnNgKt2rj'
 
     def get(self, request):
         return render(request, self.template_name)
