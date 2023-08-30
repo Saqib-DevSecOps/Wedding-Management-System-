@@ -42,7 +42,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="form_name">Name <small>*</small></label>
-                                    <input id="form_name" name="name" class="form-control" type="text"
+                                    <input id="form_name" name="name" class="form-control required" type="text"
                                            placeholder="Enter Name">
                                 </div>
                             </div>
@@ -65,8 +65,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="form_phone">Phone</label>
-                                    <input id="form_phone" name="phone" class="form-control" type="text"
-                                           placeholder="Enter Phone">
+                                           <input id="form_phone" name="phone" class="form-control required" type="text" placeholder="Enter Phone">
+
                                 </div>
                             </div>
                         </div>
@@ -132,9 +132,20 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x"></script>
 <script>
     function onFormSubmit() {
+
+        var phoneInput = document.getElementById('form_phone').value;
+
+        // Regular expression to validate numeric input (phone number)
+        var phoneRegex = /^\d+$/;
+
+        if (!phoneRegex.test(phoneInput)) {
+            alert('Please enter a valid phone number.');
+            return; // Prevent form submission
+        }
+
         grecaptcha.execute('6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x', {action: 'submit'}).then(function(token) {
             document.getElementById('recaptchaToken').value = token;
-            document.getElementById('contactForm').submit();
+            document.getElementById('contact_form').submit();
         });
     }
 </script>
