@@ -23,19 +23,19 @@
 {#                            </li>#}
                             <li><a href="{% url 'website:gallery' %}">Gallery </a>
                             {% if gallery %}
-                                <ul class="dropdown">
-                                    {% for object in gallery %}
-                                    <li><a href="{% url 'website:gallery' %}?category={{object.id}}">{{object.name}}</a>
-                                        {% for subcategory in object.gallerycategory_set.all %}
-
-                                        <ul class="dropdown">
-                                            <li><a href="{% url 'website:gallery' %}?category={{object.id}}&&subcategory={{subcategory.id}}">{{subcategory.name}}</a></li>
-                                        </ul>
-                                        {% endfor %}
-
-                                    </li>
-                                    {% endfor %}
-                                </ul>
+{#                                <ul class="dropdown">#}
+{#                                    {% for object in gallery %}#}
+{#                                    <li><a href="{% url 'website:gallery' %}?category={{object.id}}">{{object.name}}</a>#}
+{#                                        {% for subcategory in object.gallerycategory_set.all %}#}
+{##}
+{#                                        <ul class="dropdown">#}
+{#                                            <li><a href="{% url 'website:gallery' %}?category={{object.id}}&&subcategory={{subcategory.id}}">{{subcategory.name}}</a></li>#}
+{#                                        </ul>#}
+{#                                        {% endfor %}#}
+{##}
+{#                                    </li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
                             {% endif %}
                             </li>
 {#                            <li><a href="{% url 'website:blog' %}">Blogs </a>#}

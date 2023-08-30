@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 <!-- Start main-content -->
-
 <div class="main-content" style="overflow-x: hidden">
     <!-- Section: inner-header -->
     <section class="inner-header divider parallax layer-overlay overlay-dark-5">
@@ -76,14 +75,14 @@
                             <textarea id="form_message" name="message" class="form-control required" rows="5"
                                       placeholder="Enter Message"></textarea>
                         </div>
+
                         <div class="form-group">
-        <div class="g-recaptcha" data-sitekey="6LfmStsnAAAAACI7H1LpTibQV9mXhowqIKKmUyhs"></div>
-    </div>
-                        <div class="form-group">
-                            <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value=""/>
-                            <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
-                                    data-loading-text="Please wait...">Send your message
-                            </button>
+                             <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfmStsnAAAAACI7H1LpTibQV9mXhowqIKKmUyhs" data-size="invisible" data-callback="onRecaptchaSubmit"></div>
+        </div>
+        <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
+                data-loading-text="Please wait..." onclick="grecaptcha.execute();">Send your message</button>
+
                             <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</a>
                         </div>
                     </form>
@@ -129,6 +128,12 @@
                                 {% include 'messages.html' %}
 
 <!-- end main-content -->
+
+    <script>
+        function onRecaptchaSubmit() {
+            document.getElementById('contactForm').submit();
+        }
+    </script>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
