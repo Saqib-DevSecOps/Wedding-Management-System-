@@ -78,10 +78,9 @@
 
                         <div class="form-group">
                              <div class="form-group">
-            <div class="g-recaptcha" data-sitekey="6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x" data-size="invisible" data-callback="onRecaptchaSubmit"></div>
-        </div>
-        <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
-                data-loading-text="Please wait..." onclick="grecaptcha.execute();">Send your message</button>
+         <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+    <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
+            data-loading-text="Please wait..." onclick="onFormSubmit();">Send your message</button>
 
                             <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</a>
                         </div>
@@ -129,11 +128,13 @@
 
 <!-- end main-content -->
 
-    <script>
-        function onRecaptchaSubmit() {
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x"></script>
+<script>
+    function onFormSubmit() {
+        grecaptcha.execute('your_v3_site_key', {action: 'submit'}).then(function(token) {
+            document.getElementById('recaptchaToken').value = token;
             document.getElementById('contactForm').submit();
-        }
-    </script>
-
-
+        });
+    }
+</script>
 {% endblock content %}
