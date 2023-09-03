@@ -36,7 +36,7 @@
                       {% for image in gallery_images %}
                       <!-- Portfolio Item Start -->
                       <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
-                        <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="Title Here 2">
+                        <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="{{ image.category }}">
                           <div class="thumb">
 
                             <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
