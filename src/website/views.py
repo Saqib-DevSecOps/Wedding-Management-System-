@@ -164,7 +164,7 @@ class ContactUs(View):
         recaptcha_response = request.POST.get('g-recaptcha-response')
 
         # Verify reCAPTCHA
-        recaptcha_secret_key = '6LfsQtsnAAAAALDnqx0TFzYeg3JyXA1lnNgKt2rj'
+        recaptcha_secret_key = '6LfmStsnAAAAAPWI3RviG2FDvIYI4l4cGfAdC1nk'
         recaptcha_verification_url = 'https://www.google.com/recaptcha/api/siteverify'
         data = {
             'secret': recaptcha_secret_key,
