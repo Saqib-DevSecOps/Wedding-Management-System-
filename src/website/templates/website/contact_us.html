@@ -76,15 +76,16 @@
                                       placeholder="Enter Message"></textarea>
                         </div>
 
-                        <div class="form-group">
-                             <div class="form-group">
-         <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
-    <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
-            data-loading-text="Please wait..." onclick="onFormSubmit();">Send your message</button>
-                            <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</a>
-
-                             </div>
-                        </div>
+                 <div class="form-group">
+        <div class="g-recaptcha" data-sitekey="6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x"></div>
+    </div>
+    <div class="form-group">
+        <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value=""/>
+        <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
+                data-loading-text="Please wait...">Send your message
+        </button>
+        <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</a>
+    </div>
                     </form>
                 </div>
                 <div class="col-md-4">
@@ -128,25 +129,6 @@
                                 {% include 'messages.html' %}
 
 <!-- end main-content -->
-
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x"></script>
-<script>
-function onFormSubmit() {
-    var phoneInput = document.getElementById('form_phone').value;
-
-    // Regular expression to validate numeric input (phone number)
-    var phoneRegex = /^\d+$/;
-
-    if (!phoneRegex.test(phoneInput)) {
-        alert('Please enter a valid phone number.');
-        return false; // Prevent form submission
-    }
-
-    grecaptcha.execute('6LfsQtsnAAAAAIUth611iWhXmegYRSQ97g3DFf6x', {action: 'submit'}).then(function(token) {
-        document.getElementById('recaptchaToken').value = token;
-        document.getElementById('contact_form').submit();
-    });
-}
 
 </script>
 {% endblock content %}

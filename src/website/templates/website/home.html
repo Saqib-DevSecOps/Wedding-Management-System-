@@ -691,6 +691,14 @@
                     <p>{{ object.description }}</p>
                 </div>
             </div>
+            {% endfor %}           {% for object in services %}
+            <div class="col-4">
+                <div class="service-box">
+                    <img alt="" style="height: 300px; width: 400px; object-fit: cover;" src="{{ object.image.url }}">
+                    <h4 class="mt-30">{{ object.name }}</h4>
+                    <p>{{ object.description }}</p>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -784,11 +792,11 @@
                   <div class="col-md-12 ">
 
                     <!-- Portfolio Gallery Grid -->
-                    <div id="grid" class="portfolio-gallery grid-4 clearfix" data-lightbox="gallery" style="position: relative; height: 532.5px;">
+                    <div id="grid" class=" carousel grid-4 clearfix " data-lightbox="gallery" style="position: relative; height: 532.5px;">
                       {% for image in images %}
-                      <!-- Portfolio Item Start -->
-                      <div class="portfolio-item" style="position: absolute; left: 0px; top: 0px;">
-                        <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="{{ image.category }}">
+                          <div class="col-4">
+                <div class="service-box">
+                                           <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="{{ image.category }}">
                           <div class="thumb">
 
                             <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
@@ -805,7 +813,12 @@
                             </div>
                           </div>
                         </a>
-                      </div>
+
+                </div>
+            </div>
+
+                      <!-- Portfolio Item Start -->
+
                       {% endfor %}
                       <!-- Portfolio Item End -->
 
@@ -926,10 +939,10 @@
         <div class="row mt-60 text-center">
             <div class="carousel">
                 {% for partner in partners %}
-                <div class="col-xs-6 col-sm-6 col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
+                <div class="col-xs-6 col-sm-6 text-center col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
                     <div class="-img style2">
                         {% if partner.logo %}
-                        <a href="{% if partner.website %}{{ partner.website }}{% else %}#{% endif %}" target="_blank"><img alt="" style="height: 120px; width: 250px; " src="{{ partner.logo.url }}"></a>
+                        <a href="{% if partner.website %}{{ partner.website }}{% else %}#{% endif %}" target="_blank"><img alt="" style="height: 120px; width: 250px; margin-left: 50px" src="{{ partner.logo.url }}"></a>
                         {% else %}
                         <img alt="" class="img-responsive" src="https://placehold.co/75x75">
                         {% endif %}
@@ -954,10 +967,22 @@
             arrows: false, // Hide next and previous buttons
             responsive: [
                 {
-                    breakpoint: 768, // Adjust this breakpoint as needed
+                    breakpoint: 1000, // Adjust this breakpoint as needed
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 3
+                    }
+                }, {
+                    breakpoint: 999, // Adjust this breakpoint as needed
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                } , {
+                    breakpoint: 600, // Adjust this breakpoint as needed
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
                     }
                 }
             ]

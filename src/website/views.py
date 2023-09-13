@@ -139,12 +139,23 @@ class AboutUs(TemplateView):
 
 class ContactUs(View):
     template_name = 'website/contact_us.html'
-    recaptcha_secret_key = '6LfsQtsnAAAAALDnqx0TFzYeg3JyXA1lnNgKt2rj'
 
     def get(self, request):
-        return render(request, self.template_name)
+        context = {}
+        site = Site.my_site()
+        context['email'] = site.email
+        context['phone'] = site.phone
+        context['address'] = site.address
+        return render(request, self.template_name, context)
 
     def post(self, request):
+        context = {}
+        site = Site.my_site()
+
+        context['email'] = site.email
+        context['phone'] = site.phone
+        context['address'] = site.address
+
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
@@ -152,18 +163,19 @@ class ContactUs(View):
         message = request.POST.get('message')
         recaptcha_response = request.POST.get('g-recaptcha-response')
 
-        recaptcha_verification_url = f'https://www.google.com/recaptcha/api/siteverify'
-        recaptcha_data = {
-            'secret': self.recaptcha_secret_key,
+        # Verify reCAPTCHA
+        recaptcha_secret_key = '6LfsQtsnAAAAALDnqx0TFzYeg3JyXA1lnNgKt2rj'
+        recaptcha_verification_url = 'https://www.google.com/recaptcha/api/siteverify'
+        data = {
+            'secret': recaptcha_secret_key,
             'response': recaptcha_response
         }
-
-        response = requests.post(recaptcha_verification_url, data=recaptcha_data)
+        response = requests.post(recaptcha_verification_url, data=data)
         result = response.json()
 
         if not result.get('success', False):
             messages.error(request, "reCAPTCHA verification failed. Please try again.")
-            return render(request, self.template_name)
+            return render(request, self.template_name, context)
 
         if not all([message, subject, phone, email, name]):
             messages.error(request, "Please fill all the fields to contact.")
@@ -175,17 +187,17 @@ class ContactUs(View):
             context = {
                 'email': email,
                 'name': name,
-                'phone': phone,
+                "phone": phone,
                 'subject': subject,
                 'message': message
             }
+
             # Send Message to Company
             html_message_to_company = render_to_string('website/html_mail/contact-user-request.html', context)
             text_message_to_company = strip_tags(html_message_to_company)
             from_email = email
             recipient_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject, text_message_to_company, from_email, recipient_list,
-                      html_message=html_message_to_company)
+            send_mail(subject, text_message_to_company, from_email, recipient_list, html_message=html_message_to_company)
 
             # Send Message to User
             user = {
@@ -200,8 +212,7 @@ class ContactUs(View):
 
             messages.success(request, "Your message request processed successfully")
 
-        return redirect('website:contact-us')  # Redirect to the contact page
-
+        return render(request, self.template_name, context)
 
 class Services(ListView):
     model = Service
