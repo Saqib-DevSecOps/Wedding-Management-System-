@@ -111,8 +111,6 @@ class GalleryList(ListView):
         context = super(GalleryList, self).get_context_data(**kwargs)
         category = self.request.GET.get('category')
         sub_category = self.request.GET.get('subcategory')
-        print(category)
-        print(sub_category)
         gallery_images = Gallery.objects.all()
         if category is not None:
             if sub_category is not None:
