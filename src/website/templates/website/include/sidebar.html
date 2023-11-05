@@ -11,24 +11,24 @@
                 <nav>
                     <br class="mt-2">
                     <ul class="nav nav-list">
-                        <li><a href="{% url 'website:home' %}">Home</a></li>
+                        <li><a href="{% url 'website:home' %}">Kezdőlap</a></li>
 {#                        <li><a href="{% url 'website:services' %}">Services</a></li>#}
-                        <li><a href="{% url 'website:gallery' %}">Gallery</a></li>
+                        <li><a href="{% url 'website:gallery' %}">Galéria</a></li>
 {#                        <li><a href="{% url 'website:blog' %}">Blogs</a></li>#}
 {#                        <li><a href="{% url 'website:events' %}">Events</a></li>#}
 
-                        <li><a href="{% url 'website:about' %}">About</a></li>
+                        <li><a href="{% url 'website:about' %}">Rólunk</a></li>
 
-                        <li><a href="{% url 'website:contact-us' %}">Contact</a></li>
+                        <li><a href="{% url 'website:contact-us' %}">Kapcsolat</a></li>
 
                           {% if request.user.is_authenticated %}
-                    <li class="mt-4"><a href="{% url 'accounts:cross-auth' %}"><i class="fa fa-login">Dashboard</i></a></li>
-                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-login">Logout</i></a></li>
+                    <li class="mt-4"><a href="{% url 'accounts:cross-auth' %}"><i class="fa fa-login">Irányítópult</i></a></li>
+                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-login">Kilépés</i></a></li>
 
 
             {% else  %}
-                    <li  style="margin-top: 20px"><a href="{% url 'account_login' %}"><i class="fa fa-login">Login</i></a></li>
-                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-login">Register</i></a></li>
+                    <li  style="margin-top: 20px"><a href="{% url 'account_login' %}"><i class="fa fa-login">Belépés</i></a></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-login">Regisztráció</i></a></li>
             {% endif %}
                     </ul>
                 </nav>

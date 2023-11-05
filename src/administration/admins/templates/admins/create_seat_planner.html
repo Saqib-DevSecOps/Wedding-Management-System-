@@ -146,8 +146,8 @@ overflow-y: auto;
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-primary" id="save-provider" type="submit">Save</button>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Bezárás</button>
+                        <button class="btn btn-primary" id="save-provider" type="submit">Mentés</button>
                     </div>
                 </div>
             </form>
@@ -194,7 +194,7 @@ overflow-y: auto;
                                         <div class="mt-4">
                                             <button style="box-shadow: 1px 5px lightblue;width: 100%;"
                                                     class="btn btn-lg btn-primary btn-rounded update-button"
-                                                    >+ Add Table
+                                                    >+ Tervezés
                                             </button>
                                         </div>
                                     </div>
@@ -219,14 +219,14 @@ overflow-y: auto;
                             </div>
                                 <div class="p-4">
 
-                                    <a href="{% url 'admins:seat-planner-list' %}" style="box-shadow: 1px 5px lightblue;width: 30%;"
+                                    <a href="{% url 'admins:seat-planner-list' %}" style="box-shadow: 1px 5px lightblue;width: 40%;"
                                                     class="btn btn-lg btn-danger btn-rounded "
-                                                    >Close
+                                                    >Bezárás
                                             </a>
 
                                               <button style="box-shadow: 1px 5px lightblue;width: 50%;"
                                                     class="btn btn-lg btn-success btn-rounded save-button "
-                                                    >Save
+                                                    >Mentés
                                             </button>
 
                                 </div>
@@ -403,8 +403,10 @@ function getGuestNameById(guestId) {
                     // Recreate the container element
                     var containerHtml = `
       <div class="draggable-container resizable-container" id="${containerId}" style="position: absolute; top: ${containerPosition.top}px; left: ${containerPosition.left}px;">
-<h5>Table Name: <span>${containerInfo.tableName}</span></h5>
-                            <h5>Table Size: <span>${containerInfo.tableSize}</span></h5>
+<h5>Asztal név
+: <span>${containerInfo.tableName}</span></h5>
+                            <h5>Asztal típus
+: <span>${containerInfo.tableSize}</span></h5>
                             <button class="btn btn-outline-danger btn-sm delete-button btn-rounded delete-container"
                                 data-container-id="${containerId}"
                                 type="button"><i class="fa fa-trash"></i></button>
@@ -452,7 +454,7 @@ function getGuestNameById(guestId) {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Oops...',
-                                    text: `${tableName} Table Size is Full`,
+                                    text: `${tableName} Az asztal megtelt`,
                                 })
                             } else {
                                 $(this).find('.circle-container, .rectangle-container').append(guestElement)

@@ -183,15 +183,15 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Guest Groups List</h4>
+                <h4 class="mb-0 font-size-18">Vendégcsoportok listája</h4>
 
                 <div class="page-title-right">
                     <a class="btn btn-primary" href="{% url 'admins:export-groups-to-excel' %}"
-                       type="button">Export Record
+                       type="button">Export
                     </a>
                     <button class="btn btn-success" data-target="#GuestGroupModal" data-toggle="modal"
                             data-whatever="@getbootstrap"
-                            type="button">Add Guest Group
+                            type="button">Vendégcsoport hozzáadása
                     </button>
 
                 </div>
@@ -210,7 +210,7 @@
                     <div class="col-12">
                         <div class="input-group">
                             <input class="form-control" id="searchInput" name="guest_group_search"
-                                   placeholder="Enter Guest Group Name" type="search">
+                                   placeholder="Adja meg a Vendégcsoport nevét" type="search">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="submit" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                                 <a href="{% url 'admins:guest-group-list' %}" class="btn  btn-danger"><i
@@ -278,20 +278,20 @@
                                         <div class="col p-2 border-right">
                                             <a class="btn btn-transparent text-primary  btn-sm view-guest"
                                                data-record-id="{{ object.id }}">
-                                                <i class="fa fa-eye"></i>&nbsp;View
+                                                <i class="fa fa-eye"></i>&nbsp;Nézet
                                             </a>
                                         </div>
                                         <div class="col p-2 border-right">
                                             <a class="btn btn-transparent text-primary btn-sm update-guest-group"
                                                data-record-id="{{ object.id }}"><i
-                                                    class="fa fa-edit"></i>&nbsp;Edit
+                                                    class="fa fa-edit"></i>&nbsp;Módosítás
                                             </a>
                                         </div>
                                         <div class="col p-2 border-right">
                                             <a class="btn btn-transparent text-danger btn-sm delete-button"
                                                data-object-id="{{ object.id }}"
                                                id="{{ object.pk }}"><i
-                                                    class="fa fa-trash"></i>&nbsp;Delete
+                                                    class="fa fa-trash"></i>&nbsp;Törlés
                                             </a>
                                         </div>
                                     </div>
@@ -310,7 +310,7 @@
         <div class="col-sm-4 col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Invitations</h4>
+                    <h4 class="card-title"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Meghívók</h4>
                 </div>
                 <div class="card-body border-top p-0">
                     <div class="table-responsive">
@@ -330,7 +330,7 @@
                                     <td>{{ obj.total_invitation }}</td>
                                     <td>
                                         <button class="btn btn-primary btn-sm update-button"
-                                                data-record-id="{{ obj.id }}"><i class="fa fa-edit"></i>&nbsp;Edit
+                                                data-record-id="{{ obj.id }}"><i class="fa fa-edit"></i>&nbsp;Módosítás
                                         </button>
                                     </td>
                                 </tr>

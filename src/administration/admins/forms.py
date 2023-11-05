@@ -40,20 +40,44 @@ class GuestMetaForm(forms.ModelForm):
 
 
 class ProviderMetaForm(forms.ModelForm):
+    provider_name = forms.CharField(
+        label='Szolgáltató neve',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    service = forms.CharField(
+        label='Szolgáltatás',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    email = forms.EmailField(
+        label='Email',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    link = forms.URLField(
+        label='Link',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    phone_number = forms.CharField(
+        label='Telefonszám',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    total_cost = forms.DecimalField(
+        label='Össz. költség',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    paid = forms.DecimalField(
+        label='Kifizetve',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    comment = forms.CharField(
+        label='megjegyzés',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    attachment = forms.FileField(label="Melléklet")
     class Meta:
         model = Provider
         fields = ('provider_name', 'service', 'email', 'link', 'phone_number',
                   'total_cost', 'paid', 'attachment', 'comment')
-        widgets = {
-            'provider_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'service': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
-            'link': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'total_cost': forms.TextInput(attrs={'class': 'form-control'}),
-            'paid': forms.TextInput(attrs={'class': 'form-control'}),
-            'comment': forms.TextInput(attrs={'class': 'form-control'}),
-        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -116,6 +140,11 @@ class TableForm(forms.ModelForm):
     class Meta:
         model = Table
         fields = ('table_name', 'table_type', 'seat_count')
+        labels = {
+            'table_name': 'Asztal név',
+            'table_type': 'Asztal típus',
+            'seat_count': 'Helyek száma',
+        }
         widgets = {
             'table_name': forms.TextInput(
                 attrs={

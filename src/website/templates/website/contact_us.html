@@ -17,7 +17,7 @@
         <div class="section-content">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title text-dark">Contact Us</h3>
+                    <h3 class="title text-dark">Kapcsolat</h3>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="row pt-30">
 
                 <div class="col-md-8">
-                    <h3 class="mt-0 mb-30">Interested in discussing?</h3>
+                    <h3 class="mt-0 mb-30">Érdekel a vita?</h3>
 
 
                     <!-- Contact Form -->
@@ -41,39 +41,39 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="form_name">Name <small>*</small></label>
+                                    <label for="form_name">Név <small>*</small></label>
                                     <input id="form_name" name="name" class="form-control required" type="text"
-                                           placeholder="Enter Name">
+                                           placeholder="Név">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="form_email">Email <small>*</small></label>
                                     <input id="form_email" name="email" class="form-control required email"
-                                           type="email" placeholder="Enter Email">
+                                           type="email" placeholder=" Email">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="form_name">Subject <small>*</small></label>
+                                    <label for="form_name">Tárgy <small>*</small></label>
                                     <input id="form_subject" name="subject" class="form-control required"
-                                           type="text" placeholder="Enter Subject">
+                                           type="text" placeholder="Tárgy">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="form_phone">Phone</label>
-                                           <input id="form_phone" name="phone" class="form-control required" type="text" placeholder="Enter Phone">
+                                    <label for="form_phone">Telefonszám</label>
+                                           <input id="form_phone" name="phone" class="form-control required" type="text" placeholder="Telefonszám">
 
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="form_name">Message</label>
+                            <label for="form_name">Üzenet</label>
                             <textarea id="form_message" name="message" class="form-control required" rows="5"
-                                      placeholder="Enter Message"></textarea>
+                                      placeholder="Üzenet"></textarea>
                         </div>
 
                  <div class="form-group">
@@ -82,9 +82,9 @@
     <div class="form-group">
         <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value=""/>
         <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5"
-                data-loading-text="Please wait...">Send your message
+                data-loading-text="Please wait...">Üzenet küldése
         </button>
-        <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</a>
+        <a href="{% url 'website:contact-us' %}" type="reset" class="btn btn-default btn-flat btn-theme-colored">Vvissza</a>
     </div>
                     </form>
                 </div>
@@ -94,7 +94,7 @@
                             <div class="icon-box left media bg-light p-30 mb-20"><a class="media-left pull-left"
                                                                                     href="#"> <i
                                     class="pe-7s-map-2 text-theme-colored"></i></a>
-                                <div class="media-body"><strong class="">OUR OFFICE LOCATION</strong>
+                                <div class="media-body"><strong class="">Irodánk</strong>
                                     <p>{{ address }}</p>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                             <div class="icon-box left media bg-light p-30 mb-20"><a class="media-left pull-left"
                                                                                     href="#"> <i
                                     class="pe-7s-call text-theme-colored"></i></a>
-                                <div class="media-body"><strong class="">OUR CONTACT NUMBER</strong>
+                                <div class="media-body"><strong class="">Telefonszámunk</strong>
                                     <p><a href="tel:{{ phone }}">{{ phone }}</a></p>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                             <div class="icon-box left media bg-light p-30 mb-20"><a class="media-left pull-left"
                                                                                     href="#"> <i
                                     class="pe-7s-mail text-theme-colored"></i></a>
-                                <div class="media-body"><strong class="">OUR CONTACT E-MAIL</strong>
+                                <div class="media-body"><strong class="">Email címünk</strong>
                                     <p><a href="mailto:{{ email }}">{{ email }}</a></p>
                                 </div>
                             </div>

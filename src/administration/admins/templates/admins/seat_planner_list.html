@@ -11,11 +11,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Seat Planner List</h4>
+                <h4 class="mb-0 font-size-18">Ültetés tervező</h4>
 
                 <div class="page-title-right">
                     <a class="btn btn-success" href="{% url 'admins:seat-planner-create' %}"
-                       type="button">Add Tables
+                       type="button">Tervezés
                     </a>
                 </div>
 
@@ -49,8 +49,8 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 100px">#</th>
-                                    <th scope="col">Table Name</th>
-                                    <th scope="col">Table Type</th>
+                                    <th scope="col">- Asztal név</th>
+                                    <th scope="col">Asztal típus</th>
                                     <th scope="col">Total Guests</th>
                                     <th scope="col">Total Seats</th>
                                     <th scope="col">Seats Left</th>
@@ -70,7 +70,7 @@
                                         <td>
                                             <a class="btn btn-primary btn-sm btn-rounded"
                                                href="{% url 'admins:seat-planner-detail' object.id %}"><i
-                                                    class="fa fa-eye"></i>&nbsp;view</a>
+                                                    class="fa fa-eye"></i>&nbsp;Nézet</a>
                                             <a class="btn btn-danger btn-sm btn-rounded delete-button"
                                                data-object-id="{{ object.id }}"><i
                                                     class="fa fa-trash"></i></a>

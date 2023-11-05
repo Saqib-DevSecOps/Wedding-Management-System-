@@ -16,7 +16,7 @@
                             <i class="fa fa-group h2 text-primary mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Total Groups</p>
+                            <p class="text-muted mb-2">Csoportok</p>
                             <h5 class="mb-0">
                                 {{ total_group }}
                             </h5>
@@ -33,7 +33,7 @@
                             <i class="bx bx-import h2 text-success mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Total Payments</p>
+                            <p class="text-muted mb-2">Összes költség</p>
                             <h5 class="mb-0">
                                 $ {{ total_payment }} <span
                                     class="font-size-14 text-muted"></span>
@@ -51,7 +51,7 @@
                             <i class="bx bx-export h2 text-danger mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Total Paid</p>
+                            <p class="text-muted mb-2">Összesen kifizetve</p>
                             <h5 class="mb-0">
                                 $ {{ paid_payment }} <span
                                     class="font-size-14 text-muted"></span>
@@ -69,9 +69,9 @@
                             <i class="fa fa-calendar h2 text-primary mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Events</p>
+                            <p class="text-muted mb-2">Események</p>
                             <h5 class="mb-0">
-                                 {{ total_events }} <span
+                                {{ total_events }} <span
                                     class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
@@ -87,9 +87,9 @@
                             <i class="bx bx-user-check h2 text-primary mb-0"></i>
                         </div>
                         <div class="media-body">
-                            <p class="text-muted mb-2">Providers</p>
+                            <p class="text-muted mb-2">Szolgáltatók</p>
                             <h5 class="mb-0">
-                                 {{ total_provider }} <span
+                                {{ total_provider }} <span
                                     class="font-size-14 text-muted"></span>
                             </h5>
                         </div>
@@ -106,7 +106,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3"> Groups Statistics</h4>
+                    <h4 class="card-title mb-3"> Statisztikák</h4>
                     <div id="chart_year_months">
                     </div>
                 </div>
@@ -115,7 +115,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Table Statistics</h4>
+                    <h4 class="card-title mb-3">Asztal Statisztikák</h4>
                     <div id="chart_table">
                     </div>
                 </div>
@@ -125,7 +125,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3"> Providers Statistics</h4>
+                    <h4 class="card-title mb-3"> Szolgáltatói Statisztikák</h4>
                     <div id="chart_provider">
                     </div>
                 </div>
@@ -136,11 +136,10 @@
     </div>
 
     <div class="row">
-            <div class="col-sm-8">
-
+        <div class="col-sm-8">
             <div class="card">
                 <div class="card-body">
-<div class="row">
+                    <div class="row">
                         <div class="col-10">
                             <h4 class="card-title mb-4">Latest Seats Added </h4>
                         </div>
@@ -155,8 +154,8 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 100px">#</th>
-                                    <th scope="col">Table Name</th>
-                                    <th scope="col">Table Type</th>
+                                    <th scope="col">Asztal név</th>
+                                    <th scope="col">Asztal típus</th>
                                     <th scope="col">Total Guests</th>
                                     <th scope="col">Total Seats</th>
                                     <th scope="col">Seats Left</th>
@@ -176,14 +175,9 @@
                                         <td>
                                             <a class="btn btn-primary btn-sm btn-rounded"
                                                href="{% url 'admins:seat-planner-detail' object.id %}"><i
-                                                    class="fa fa-eye"></i>&nbsp;view</a>
-
-
-
+                                                    class="fa fa-eye"></i>&nbsp;Nézet</a>
                                         </td>
-
                                     </tr>
-
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -191,16 +185,13 @@
                     {% else %}
                         <span class="text-danger"><b>Tables not Found</b> </span>
                     {% endif %}
-
                 </div>
-
-
             </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                <div class="row">
+                    <div class="row">
                         <div class="col-9">
                             <h4 class="card-title mb-4">Upcoming Events </h4>
                         </div>
@@ -209,38 +200,39 @@
                                class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
-                {% if recent_events %}
+                    {% if recent_events %}
 
-                    <ul class="verti-timeline list-unstyled">
-                    <hr>
-                        {% for recent in recent_events %}
-                            <li class="event-list">
-                                <div class="event-timeline-dot">
-                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <h5 class="font-size-14">{{ recent.date }} <i
-                                                class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ms-2"></i>
-                                        </h5>
+                        <ul class="verti-timeline list-unstyled">
+                            <hr>
+                            {% for recent in recent_events %}
+                                <li class="event-list">
+                                    <div class="event-timeline-dot">
+                                        <i class="bx bx-right-arrow-circle font-size-18"></i>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <div>
-                                            <h6>{{ recent.title }}</h6>{{ recent.description|truncatechars:50 }}
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <h5 class="font-size-14">{{ recent.date }} <i
+                                                    class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ms-2"></i>
+                                            </h5>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div>
+                                                <h6>{{ recent.title }}</h6>{{ recent.description|truncatechars:50 }}
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        {% endfor %}
+                                </li>
+                            {% endfor %}
 
-                    </ul>
-                    <div class="text-center mt-4"><a href="{% url 'admins:event-timeline' %}"
-                                                     class="btn btn-primary waves-effect waves-light btn-sm">View More
-                        <i class="mdi mdi-arrow-right ms-1"></i></a></div>
-                {% else %}
-                    <span class="text-danger"><b>Events Not Found</b></span>
-                {% endif %}
+                        </ul>
+                        <div class="text-center mt-4"><a href="{% url 'admins:event-timeline' %}"
+                                                         class="btn btn-primary waves-effect waves-light btn-sm">View
+                            More
+                            <i class="mdi mdi-arrow-right ms-1"></i></a></div>
+                    {% else %}
+                        <span class="text-danger"><b>Events Not Found</b></span>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -257,40 +249,41 @@
                                class="text-right btn btn-transparent btn-sm">View all</a>
                         </div>
                     </div>
-                {% if recent_groups %}
+                    {% if recent_groups %}
 
-                    <div class="table-responsive">
-                        <table class="table align-middle table-nowrap mb-0">
-                            <thead class="table-light">
-                            <tr>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                <tr>
 
-                                <th class="align-middle">#ID</th>
-                                <th class="align-middle">Group Name</th>
-                                <th class="align-middle">Total Guests</th>
-                                <th class="align-middle">Invitation Letters</th>
+                                    <th class="align-middle">#ID</th>
+                                    <th class="align-middle">Group Name</th>
+                                    <th class="align-middle">Total Guests</th>
+                                    <th class="align-middle">Invitation Letters</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for object in recent_groups %}
-                            <tr>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for object in recent_groups %}
+                                    <tr>
 
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#{{ forloop.counter }}</a></td>
-                                <td>{{ object.group_name }}</td>
-                                <td>
-                                    {{object.total_guests}}
-                                </td>
-                                <td>
-                                    {{object.invitation_set.total_invitation}}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                 {% else %}
-                    <span class="text-danger"><b>Groups Not Found</b></span>
-                {% endif  %}
+                                        <td><a href="javascript: void(0);"
+                                               class="text-body fw-bold">#{{ forloop.counter }}</a></td>
+                                        <td>{{ object.group_name }}</td>
+                                        <td>
+                                            {{ object.total_guests }}
+                                        </td>
+                                        <td>
+                                            {{ object.invitation_set.total_invitation }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <span class="text-danger"><b>Groups Not Found</b></span>
+                    {% endif %}
                     <!-- end table-responsive -->
                 </div>
 
@@ -316,11 +309,11 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 100px">#</th>
-                                    <th class="align-middle"><i class="bx bxs-user"></i> Staff</th>
-                                    <th class="align-middle"><i class="fa fa-wrench"></i> Service</th>
+                                    <th class="align-middle"><i class="bx bxs-user"></i> Név</th>
+                                    <th class="align-middle"><i class="fa fa-wrench"></i> Szolgáltatás</th>
                                     <th class="align-middle"><i class="fa fa-envelope"></i> Email</th>
-                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Phone</th>
-                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Total Cost</th>
+                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Telefonszám</th>
+                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Össz. költség</th>
                                     <th class="align-middle"><i class="fa fa-arrow-alt-circle-down text-danger"></i>
                                         Paid
                                     </th>
@@ -355,8 +348,6 @@
         </div>
 
 
-
-
     </div>
 {% endblock %}
 
@@ -386,7 +377,7 @@
                 enabled: false
             },
             xaxis: {
-                categories: ['Total Groups', 'Total guests', 'Total Events', 'Total Providers', 'Total Payment ', 'Pending Payment', 'Paid Payment', 'Total tables',
+                categories: ['Csoportok', 'Total guests', 'Total Events', 'Total Providers', 'Total Payment ', 'Pending Payment', 'Paid Payment', 'Total tables',
                     'Rounded Table', 'Circular Table'
                 ],
             }
@@ -398,7 +389,7 @@
                 height: 205,
                 type: 'pie',
             },
-            labels: ["Total Groups", "Total Guests", "Total Invitations"],
+            labels: ["Csoportok", "Total Guests", "Total Invitations"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -452,7 +443,6 @@
 
 
             labels: ['Total Providers', 'Total Payments', 'Paid Payments', 'Remaining Payments'],
-
 
 
         };

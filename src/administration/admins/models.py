@@ -94,8 +94,8 @@ class Provider(models.Model):
 
 class Table(models.Model):
     TABLE_TYPE = (
-        ('1', 'Rounded Table'),
-        ('2', 'Rectangle Table'),
+        ('1', 'Kör asztal'),
+        ('2', 'Téglalap asztal'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     table_name = models.CharField(max_length=100)

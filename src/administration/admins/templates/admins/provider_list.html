@@ -30,7 +30,7 @@
         <div class="modal-dialog modal-dialog-centered zoomIn" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title " id="ProviderModelLabel">Add Provider </h5>
+                    <h5 class="modal-title " id="ProviderModelLabel">Szolgáltató hozzáadása </h5>
                 <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="ml-3">
@@ -100,12 +100,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Providers List</h4>
+                <h4 class="mb-0 font-size-18">Szolgáltatók listája</h4>
 
                 <div class="page-title-right">
                     <button class="btn btn-success" data-target="#ProviderModal" data-toggle="modal"
                             data-whatever="@getbootstrap"
-                            type="button">Add Provider
+                            type="button">Szolgáltató hozzáadása
                     </button>
                 </div>
 
@@ -142,14 +142,14 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 100px">#</th>
-                                    <th class="align-middle"><i class="bx bxs-user"></i> Staff</th>
-                                    <th class="align-middle"><i class="fa fa-wrench"></i> Service</th>
+                                    <th class="align-middle"><i class="bx bxs-user"></i> Név</th>
+                                    <th class="align-middle"><i class="fa fa-wrench"></i> Szolgáltatás</th>
                                     <th class="align-middle"><i class="fa fa-envelope"></i> Email</th>
-                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Phone</th>
-                                    <th class="align-middle"><i class="fa fa-file text-primary"></i> Document</th>
-                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Total Cost</th>
+                                    <th class="align-middle"><i class="fa fa-phone-alt"></i> Telefonszám</th>
+                                    <th class="align-middle"><i class="fa fa-file text-primary"></i> Dokumentum</th>
+                                    <th class="align-middle"><i class="fa fa-dollar text-success"></i> Össz. költség</th>
                                     <th class="align-middle"><i class="fa fa-arrow-alt-circle-down text-danger"></i>
-                                        Paid
+                                        Kifizetve
                                     </th>
                                     <th class="align-middle">Action</th>
                                 </tr>
@@ -181,7 +181,7 @@
                                         <td>
                                             <a href="{% url 'admins:provider-detail' object.id %}"
                                                class="btn btn-primary btn-sm btn-rounded">
-                                                <i class="fa fa-eye"></i> View
+                                                <i class="fa fa-eye"></i> Kilátás
                                             </a>
                                             <button class="btn btn-success btn-sm btn-rounded update-button"
                                                     data-record-id="{{ object.id }}">

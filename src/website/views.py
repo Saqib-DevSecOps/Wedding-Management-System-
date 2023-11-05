@@ -1,8 +1,8 @@
 import requests
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.generic import TemplateView, ListView, DetailView, View
