@@ -729,13 +729,23 @@
                                         <p>{{ object.description }}</p>
                                     </div>
                                 </div>
-                            {% endfor %}           {% for object in services %}
+                            {% endfor %}
+                            {% for object in services %}
                             <div class="col-4">
                                 <div class="service-box">
-                                    <img alt="" style="height: 300px; width: 400px; object-fit: cover;"
-                                         src="{{ object.image.url }}">
-                                    <h4 class="mt-30">{{ object.name }}</h4>
-                                    <p>{{ object.description }}</p>
+                                     {% if object.link %}
+                                            <a href="{{ object.link }}" target="_blank"><img alt=""
+                                                                                             style="height: 300px; width: 400px; object-fit: cover;"
+                                                                                             src="{{ object.image.url }}"></a>
+                                        {% else %}
+                                            <img alt="" style="height: 300px; width: 400px; object-fit: cover;"
+                                                 src="{{ object.image.url }}">
+                                        {% endif %}
+                                        {% if object.link %}
+                                            <a href="{{object.link}}" target="_blank"> <h4 class="mt-30">{{ object.name }}</h4></a>
+                                        {% else %}
+                                            <h4 class="mt-30">{{ object.name }}</h4>
+                                        {% endif %}
                                 </div>
                             </div>
                         {% endfor %}
