@@ -2,62 +2,71 @@
 {% load static %}
 {% block content %}
     <style>
-@media (min-width: 1200px) {
-    .testimonal_width {
-        width: 750px;
-        margin-right: 15px;
-    }
-}
-@media (min-width: 1000px) and (max-width: 1199px) {
-    .testimonal_width {
-        width: 620px;
-        margin-right: 15px;
-    }
-}
-@media (min-width: 900px) and (max-width: 999px) {
-    .testimonal_width {
-        width: 700px;
-        margin-right: 15px;
-    }
-}
-@media (min-width: 700px) and (max-width: 899px) {
-    .testimonal_width {
-        width: 700px;
-        margin-right: 15px;
-    }
-}
-@media (min-width: 601px) and (max-width: 700px) {
-    .testimonal_width {
-        width: 600px;
-        margin-right: 15px;
-    }
-}@media (min-width: 550px) and (max-width: 600px) {
-    .testimonal_width {
-        width: 550px;
-        margin-right: 15px;
-    }
-}
+        @media (min-width: 1200px) {
+            .testimonal_width {
+                width: 750px;
+                margin-right: 15px;
+            }
+        }
 
-@media (min-width: 320px) and (max-width: 400px) {
-    .testimonal_width {
-        width: 350px;
-        margin-right: 150px;
-    }
-}
-@media (min-width: 401px) and (max-width: 499px) {
-    .testimonal_width {
-        width: 400px;
-        margin-right: 150px;
-    }
-}
-@media (min-width: 500px) and (max-width: 549px) {
-    .testimonal_width {
-        width: 450px;
-        margin-right: 150px;
-    }
-}
+        @media (min-width: 1000px) and (max-width: 1199px) {
+            .testimonal_width {
+                width: 620px;
+                margin-right: 15px;
+            }
+        }
+
+        @media (min-width: 900px) and (max-width: 999px) {
+            .testimonal_width {
+                width: 700px;
+                margin-right: 15px;
+            }
+        }
+
+        @media (min-width: 700px) and (max-width: 899px) {
+            .testimonal_width {
+                width: 700px;
+                margin-right: 15px;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 700px) {
+            .testimonal_width {
+                width: 600px;
+                margin-right: 15px;
+            }
+        }
+
+        @media (min-width: 550px) and (max-width: 600px) {
+            .testimonal_width {
+                width: 550px;
+                margin-right: 15px;
+            }
+        }
+
+        @media (min-width: 320px) and (max-width: 400px) {
+            .testimonal_width {
+                width: 350px;
+                margin-right: 150px;
+            }
+        }
+
+        @media (min-width: 401px) and (max-width: 499px) {
+            .testimonal_width {
+                width: 400px;
+                margin-right: 150px;
+            }
+        }
+
+        @media (min-width: 500px) and (max-width: 549px) {
+            .testimonal_width {
+                width: 450px;
+                margin-right: 150px;
+            }
+        }
     </style>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <style>
         /* Add CSS styles for the card and carousel container as needed */
@@ -65,930 +74,982 @@
             max-width: 1200px; /* Set the maximum width of the carousel */
             margin: 10px auto; /* Center the carousel on the page */
         }
-          /* Add CSS to create space between columns */
-    .carousel .col-4 {
-        padding: 0 15px; /* Adjust the padding as needed for the desired spacing */
-    }
 
-   .slick-dots {
-        text-align: center;
-        white-space: nowrap;
-        display: flex;
-        justify-content: center;
-    }
-    .slick-dots li {
-        display: inline-block;
-        margin: 0 8px; /* Adjust the margin as needed for spacing between dots */
-    }
-    .slick-dots li button {
-        width: 12px; /* Adjust the width of the dots */
-        height: 12px; /* Adjust the height of the dots */
-        background-color: #ff6d6d; /* Set the color of the dots */
-        border: none; /* Remove any borders */
-        font-size: 0; /* Hide any numbers or text */
-        line-height: 0; /* Hide any numbers or text */
-        cursor: pointer;
-        transform: rotate(45deg); /* Rotate the button to create rhombus shapes */
-    }
+        /* Add CSS to create space between columns */
+        .carousel .col-4 {
+            padding: 0 15px; /* Adjust the padding as needed for the desired spacing */
+        }
+
+        .slick-dots {
+            text-align: center;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slick-dots li {
+            display: inline-block;
+            margin: 0 8px; /* Adjust the margin as needed for spacing between dots */
+        }
+
+        .slick-dots li button {
+            width: 12px; /* Adjust the width of the dots */
+            height: 12px; /* Adjust the height of the dots */
+            background-color: #ff6d6d; /* Set the color of the dots */
+            border: none; /* Remove any borders */
+            font-size: 0; /* Hide any numbers or text */
+            line-height: 0; /* Hide any numbers or text */
+            cursor: pointer;
+            transform: rotate(45deg); /* Rotate the button to create rhombus shapes */
+        }
     </style>
 
 
 
 
-<div class="main-content" style="overflow-x: hidden">
-    <!-- Section: home -->
-    <section class="divider" id="home">
-        <div class="container-fluid p-0">
+    <div class="main-content" style="overflow-x: hidden">
+        <!-- Section: home -->
+        <section class="divider" id="home">
+            <div class="container-fluid p-0">
 
-            <!-- Slider Revolution Start -->
-            <div class="rev_slider_wrapper">
-                <div class="rev_slider" data-version="5.0">
+                <!-- Slider Revolution Start -->
+                <div class="rev_slider_wrapper">
+                    <div class="rev_slider" data-version="5.0">
 
-                    <ul>
-                        {% if slider %}
-                        <!-- SLIDE  -->
-                        {% for slider in slider %}
-                       <li data-description="" data-easein="default" data-easeout="default"
-    data-fsmasterspeed="1500"
-    data-fsslotamount="7" data-fstransition="fade" data-index="rs-{{forloop.counter0|add:1}}"
-    data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-    data-thumb="{{slider.image.url}}" data-title="Intro"
-    data-transition="random">
-                            <!-- MAIN IMAGE -->
-                           <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-         data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
-         src="{{slider.image.url}}">
-                            <!-- LAYERS -->
+                        <ul>
+                            {% if slider %}
+                                <!-- SLIDE  -->
+                                {% for slider in slider %}
+                                    <li data-description="" data-easein="default" data-easeout="default"
+                                        data-fsmasterspeed="1500"
+                                        data-fsslotamount="7" data-fstransition="fade"
+                                        data-index="rs-{{ forloop.counter0|add:1 }}"
+                                        data-masterspeed="1000" data-rotate="0" data-saveperformance="off"
+                                        data-slotamount="7"
+                                        data-thumb="{{ slider.image.url }}" data-title="Intro"
+                                        data-transition="random">
+                                        <!-- MAIN IMAGE -->
+                                        <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                             data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                             src="{{ slider.image.url }}">
+                                        <!-- LAYERS -->
 
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
-         data-fontsize="['48']"
+                                        <!-- LAYER NR. 1 -->
+                                        <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
+                                             data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['65']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-120']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-         id="rs-{{forloop.counter0|add:1}}-layer-1"
-                                 style="z-index: 7; white-space: nowrap;">{{slider.tag_1}}
-                            </div>
+                                             data-height="none"
+                                             data-hoffset="['0']"
+                                             data-lineheight="['65']"
+                                             data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                             data-responsive_offset="on"
+                                             data-splitin="none"
+                                             data-splitout="none"
+                                             data-start="1000"
+                                             data-transform_idle="o:1;s:500"
+                                             data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                             data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                             data-voffset="['-120']"
+                                             data-whitespace="nowrap"
+                                             data-width="none"
+                                             data-x="['center']"
+                                             data-y="['middle']"
+                                             id="rs-{{ forloop.counter0|add:1 }}-layer-1"
+                                             style="z-index: 7; white-space: nowrap;">{{ slider.tag_1 }}
+                                        </div>
 
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
-                                 data-fontsize="['64']"
+                                        <!-- LAYER NR. 2 -->
+                                        <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
+                                             data-fontsize="['64']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['90']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                             data-height="none"
+                                             data-hoffset="['0']"
+                                             data-lineheight="['90']"
+                                             data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                             data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-45']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-         id="rs-{{forloop.counter0|add:1}}-layer-2"
-                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
-                                {{slider.tag_2}}
-                            </div>
+                                             data-splitin="none"
+                                             data-splitout="none"
+                                             data-start="1000"
+                                             data-transform_idle="o:1;s:500"
+                                             data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                             data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                             data-voffset="['-45']"
+                                             data-whitespace="nowrap"
+                                             data-width="none"
+                                             data-x="['center']"
+                                             data-y="['middle']"
+                                             id="rs-{{ forloop.counter0|add:1 }}-layer-2"
+                                             style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
+                                            {{ slider.tag_2 }}
+                                        </div>
 
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+                                        <!-- LAYER NR. 3 -->
+                                        <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                             data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['60']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                             data-height="none"
+                                             data-hoffset="['0']"
+                                             data-lineheight="['60']"
+                                             data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                             data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1400"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['50']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-         id="rs-{{forloop.counter0|add:1}}-layer-3"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
-                                {{slider.tag_3}}
-                            </div>
-                        </li>
-                        {% endfor %}
+                                             data-splitin="none"
+                                             data-splitout="none"
+                                             data-start="1400"
+                                             data-transform_idle="o:1;s:500"
+                                             data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                             data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                             data-voffset="['50']"
+                                             data-whitespace="nowrap"
+                                             data-width="none"
+                                             data-x="['center']"
+                                             data-y="['middle']"
+                                             id="rs-{{ forloop.counter0|add:1 }}-layer-3"
+                                             style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                                            {{ slider.tag_3 }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
 
-                        {% else %}
+                            {% else %}
 
-                        <!-- SLIDE 1 -->
-                        <li data-description="" data-easein="default" data-easeout="default"
-                            data-fsmasterspeed="1500"
-                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
-                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-                            data-thumb="{% static 'website/images/bg/bg12.jpg' %}" data-title="Intro"
-                            data-transition="random">
-                            <!-- MAIN IMAGE -->
-                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
-                                 src="{% static 'website/images/bg/bg12.jpg' %}">
-                            <!-- LAYERS -->
+                                <!-- SLIDE 1 -->
+                                <li data-description="" data-easein="default" data-easeout="default"
+                                    data-fsmasterspeed="1500"
+                                    data-fsslotamount="7" data-fstransition="fade" data-index="rs-1"
+                                    data-masterspeed="1000" data-rotate="0" data-saveperformance="off"
+                                    data-slotamount="7"
+                                    data-thumb="{% static 'website/images/bg/bg12.jpg' %}" data-title="Intro"
+                                    data-transition="random">
+                                    <!-- MAIN IMAGE -->
+                                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                         data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                         src="{% static 'website/images/bg/bg12.jpg' %}">
+                                    <!-- LAYERS -->
 
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-2"
+                                         data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['65']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-120']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-1-layer-1"
-                                 style="z-index: 7; white-space: nowrap;">We Are Celebrating
-                            </div>
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['65']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['-120']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-1-layer-1"
+                                         style="z-index: 7; white-space: nowrap;">We Are Celebrating
+                                    </div>
 
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
-                                 data-fontsize="['64']"
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-4"
+                                         data-fontsize="['64']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['90']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['90']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-45']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-1-layer-2"
-                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">Jeeny
-                                & John Doe's
-                            </div>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['-45']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-1-layer-2"
+                                         style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
+                                        Jeeny
+                                        & John Doe's
+                                    </div>
 
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                         data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['60']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['60']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1400"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['50']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-1-layer-3"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
-                                Wedding Party
-                            </div>
-                        </li>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1400"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['50']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-1-layer-3"
+                                         style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                                        Wedding Party
+                                    </div>
+                                </li>
 
-                        <!-- SLIDE 2 -->
-                        <li data-description="" data-easein="default" data-easeout="default"
-                            data-fsmasterspeed="1500"
-                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-2"
-                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-                            data-thumb="{% static 'website/images/bg/bg3.jpg' %}" data-title="Intro"
-                            data-transition="random">
-                            <!-- MAIN IMAGE -->
-                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
-                                 src="{% static 'website/images/bg/bg3.jpg' %}">
-                            <!-- LAYERS -->
+                                <!-- SLIDE 2 -->
+                                <li data-description="" data-easein="default" data-easeout="default"
+                                    data-fsmasterspeed="1500"
+                                    data-fsslotamount="7" data-fstransition="fade" data-index="rs-2"
+                                    data-masterspeed="1000" data-rotate="0" data-saveperformance="off"
+                                    data-slotamount="7"
+                                    data-thumb="{% static 'website/images/bg/bg3.jpg' %}" data-title="Intro"
+                                    data-transition="random">
+                                    <!-- MAIN IMAGE -->
+                                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                         data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina
+                                         src="{% static 'website/images/bg/bg3.jpg' %}">
+                                    <!-- LAYERS -->
 
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-resizeme text-uppercase text-theme-colored font-Playfair pl-40 pr-40 rs-parallaxlevel-8"
-                                 data-fontsize="['64']"
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-resizeme text-uppercase text-theme-colored font-Playfair pl-40 pr-40 rs-parallaxlevel-8"
+                                         data-fontsize="['64']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['70']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['70']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['0']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-2-layer-1"
-                                 style="z-index: 7; white-space: nowrap; font-weight:800;">
-                                <i class="fa fa-heart"></i>
-                            </div>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['0']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-2-layer-1"
+                                         style="z-index: 7; white-space: nowrap; font-weight:800;">
+                                        <i class="fa fa-heart"></i>
+                                    </div>
 
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-2"
-                                 data-fontsize="['54']"
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-2"
+                                         data-fontsize="['54']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['70']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['70']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-80']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-2-layer-2"
-                                 style="z-index: 7; white-space: nowrap; font-weight:600;">Jeeny & John Doe
-                            </div>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['-80']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-2-layer-2"
+                                         style="z-index: 7; white-space: nowrap; font-weight:600;">Jeeny & John Doe
+                                    </div>
 
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-1"
-                                 data-fontsize="['48']"
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-1"
+                                         data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['60']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['60']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1400"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['60']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-2-layer-3"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">Are
-                                Getting Married
-                            </div>
-                        </li>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1400"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['60']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-2-layer-3"
+                                         style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                                        Are
+                                        Getting Married
+                                    </div>
+                                </li>
 
-                        <!-- SLIDE 3 -->
-                        <li data-description="" data-easein="default" data-easeout="default"
-                            data-fsmasterspeed="1500"
-                            data-fsslotamount="7" data-fstransition="fade" data-index="rs-3"
-                            data-masterspeed="1000" data-rotate="0" data-saveperformance="off" data-slotamount="7"
-                            data-thumb="{% static 'website/images/bg/bg13.jpg' %}" data-title="Intro"
-                            data-transition="random">
-                            <!-- MAIN IMAGE -->
-                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
-                                 data-bgposition="center top" data-bgrepeat="no-repeat" data-no-retina
-                                 src="{% static 'website/images/bg/bg13.jpg' %}">
-                            <!-- LAYERS -->
+                                <!-- SLIDE 3 -->
+                                <li data-description="" data-easein="default" data-easeout="default"
+                                    data-fsmasterspeed="1500"
+                                    data-fsslotamount="7" data-fstransition="fade" data-index="rs-3"
+                                    data-masterspeed="1000" data-rotate="0" data-saveperformance="off"
+                                    data-slotamount="7"
+                                    data-thumb="{% static 'website/images/bg/bg13.jpg' %}" data-title="Intro"
+                                    data-transition="random">
+                                    <!-- MAIN IMAGE -->
+                                    <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="6"
+                                         data-bgposition="center top" data-bgrepeat="no-repeat" data-no-retina
+                                         src="{% static 'website/images/bg/bg13.jpg' %}">
+                                    <!-- LAYERS -->
 
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-8"
-                                 data-height="none"
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-resizeme text-white font-great-vibes pl-30 pr-30 rs-parallaxlevel-8"
+                                         data-height="none"
 
-                                 data-hoffset="['0']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-120']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-3-layer-1"
-                                 style="z-index: 7; white-space: nowrap;">
-                                <img alt="" src="{% static 'website/images/icon.png'  %}">
-                            </div>
+                                         data-hoffset="['0']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['-120']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-3-layer-1"
+                                         style="z-index: 7; white-space: nowrap;">
+                                        <img alt="" src="{% static 'website/images/icon.png' %}">
+                                    </div>
 
-                            <!-- LAYER NR. 2 -->
-                            <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-3"
-                                 data-fontsize="['54']"
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption tp-resizeme text-uppercase text-white font-Playfair pl-40 pr-40 rs-parallaxlevel-3"
+                                         data-fontsize="['54']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['70']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['70']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1000"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['-45']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-3-layer-2"
-                                 style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">Jeeny
-                                & John Doe's
-                            </div>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1000"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['-45']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-3-layer-2"
+                                         style="z-index: 7; white-space: nowrap; font-weight:800; border-radius:45px;">
+                                        Jeeny
+                                        & John Doe's
+                                    </div>
 
-                            <!-- LAYER NR. 3 -->
-                            <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
-                                 data-fontsize="['48']"
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption tp-resizeme text-center text-white font-great-vibes rs-parallaxlevel-2"
+                                         data-fontsize="['48']"
 
-                                 data-height="none"
-                                 data-hoffset="['0']"
-                                 data-lineheight="['60']"
-                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-responsive_offset="on"
+                                         data-height="none"
+                                         data-hoffset="['0']"
+                                         data-lineheight="['60']"
+                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                         data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                         data-responsive_offset="on"
 
-                                 data-splitin="none"
-                                 data-splitout="none"
-                                 data-start="1400"
-                                 data-transform_idle="o:1;s:500"
-                                 data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
-                                 data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
-                                 data-voffset="['50']"
-                                 data-whitespace="nowrap"
-                                 data-width="none"
-                                 data-x="['center']"
-                                 data-y="['middle']"
-                                 id="rs-3-layer-3"
-                                 style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">Are
-                                Getting Married
-                            </div>
-                        </li>
+                                         data-splitin="none"
+                                         data-splitout="none"
+                                         data-start="1400"
+                                         data-transform_idle="o:1;s:500"
+                                         data-transform_in="y:100;scaleX:1;scaleY:1;opacity:0;"
+                                         data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                         data-voffset="['50']"
+                                         data-whitespace="nowrap"
+                                         data-width="none"
+                                         data-x="['center']"
+                                         data-y="['middle']"
+                                         id="rs-3-layer-3"
+                                         style="z-index: 5; white-space: nowrap; letter-spacing:0px; font-weight:400;">
+                                        Are
+                                        Getting Married
+                                    </div>
+                                </li>
 
-                        {% endif %}
-                    </ul>
+                            {% endif %}
+                        </ul>
 
 
-                </div><!-- end .rev_slider -->
-            </div>
-            <!-- end .rev_slider_wrapper -->
-            <script>
-                $(document).ready(function (e) {
-                    var revapi = $(".rev_slider").revolution({
-                        sliderType: "standard",
-                        sliderLayout: "fullscreen",
-                        dottedOverlay: "none",
-                        delay: 5000,
-                        navigation: {
-                            keyboardNavigation: "off",
-                            keyboard_direction: "horizontal",
-                            mouseScrollNavigation: "off",
-                            onHoverStop: "off",
-                            touch: {
-                                touchenabled: "on",
-                                swipe_threshold: 75,
-                                swipe_min_touches: 1,
-                                swipe_direction: "horizontal",
-                                drag_block_vertical: false
-                            },
-                            arrows: {
-                                style: "gyges",
-                                enable: true,
-                                hide_onmobile: false,
-                                hide_onleave: true,
-                                hide_delay: 200,
-                                hide_delay_mobile: 1200,
-                                tmp: '',
-                                left: {
-                                    h_align: "left",
-                                    v_align: "center",
-                                    h_offset: 0,
-                                    v_offset: 0
+                    </div><!-- end .rev_slider -->
+                </div>
+                <!-- end .rev_slider_wrapper -->
+                <script>
+                    $(document).ready(function (e) {
+                        var revapi = $(".rev_slider").revolution({
+                            sliderType: "standard",
+                            sliderLayout: "fullscreen",
+                            dottedOverlay: "none",
+                            delay: 5000,
+                            navigation: {
+                                keyboardNavigation: "off",
+                                keyboard_direction: "horizontal",
+                                mouseScrollNavigation: "off",
+                                onHoverStop: "off",
+                                touch: {
+                                    touchenabled: "on",
+                                    swipe_threshold: 75,
+                                    swipe_min_touches: 1,
+                                    swipe_direction: "horizontal",
+                                    drag_block_vertical: false
                                 },
-                                right: {
-                                    h_align: "right",
-                                    v_align: "center",
+                                arrows: {
+                                    style: "gyges",
+                                    enable: true,
+                                    hide_onmobile: false,
+                                    hide_onleave: true,
+                                    hide_delay: 200,
+                                    hide_delay_mobile: 1200,
+                                    tmp: '',
+                                    left: {
+                                        h_align: "left",
+                                        v_align: "center",
+                                        h_offset: 0,
+                                        v_offset: 0
+                                    },
+                                    right: {
+                                        h_align: "right",
+                                        v_align: "center",
+                                        h_offset: 0,
+                                        v_offset: 0
+                                    }
+                                },
+                                bullets: {
+                                    enable: true,
+                                    hide_onmobile: true,
+                                    hide_under: 800,
+                                    style: "hebe",
+                                    hide_onleave: false,
+                                    direction: "horizontal",
+                                    h_align: "center",
+                                    v_align: "bottom",
                                     h_offset: 0,
-                                    v_offset: 0
+                                    v_offset: 30,
+                                    space: 5,
+                                    tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
                                 }
                             },
-                            bullets: {
-                                enable: true,
-                                hide_onmobile: true,
-                                hide_under: 800,
-                                style: "hebe",
-                                hide_onleave: false,
-                                direction: "horizontal",
-                                h_align: "center",
-                                v_align: "bottom",
-                                h_offset: 0,
-                                v_offset: 30,
-                                space: 5,
-                                tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
+                            responsiveLevels: [1240, 1024, 778],
+                            visibilityLevels: [1240, 1024, 778],
+                            gridwidth: [1170, 1024, 778, 480],
+                            gridheight: [700, 768, 960, 720],
+                            lazyType: "none",
+                            parallax: "mouse",
+                            parallaxBgFreeze: "off",
+                            parallaxLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10, 1],
+                            shadow: 0,
+                            spinner: "off",
+                            stopLoop: "on",
+                            stopAfterLoops: 0,
+                            stopAtSlide: -1,
+                            shuffle: "off",
+                            autoHeight: "off",
+                            fullScreenAutoWidth: "off",
+                            fullScreenAlignForce: "off",
+                            fullScreenOffsetContainer: "",
+                            fullScreenOffset: "0",
+                            hideThumbsOnMobile: "off",
+                            hideSliderAtLimit: 0,
+                            hideCaptionAtLimit: 0,
+                            hideAllCaptionAtLilmit: 0,
+                            debugMode: false,
+                            fallbacks: {
+                                simplifyAll: "off",
+                                nextSlideOnWindowFocus: "off",
+                                disableFocusListener: false,
                             }
-                        },
-                        responsiveLevels: [1240, 1024, 778],
-                        visibilityLevels: [1240, 1024, 778],
-                        gridwidth: [1170, 1024, 778, 480],
-                        gridheight: [700, 768, 960, 720],
-                        lazyType: "none",
-                        parallax: "mouse",
-                        parallaxBgFreeze: "off",
-                        parallaxLevels: [2, 3, 4, 5, 6, 7, 8, 9, 10, 1],
-                        shadow: 0,
-                        spinner: "off",
-                        stopLoop: "on",
-                        stopAfterLoops: 0,
-                        stopAtSlide: -1,
-                        shuffle: "off",
-                        autoHeight: "off",
-                        fullScreenAutoWidth: "off",
-                        fullScreenAlignForce: "off",
-                        fullScreenOffsetContainer: "",
-                        fullScreenOffset: "0",
-                        hideThumbsOnMobile: "off",
-                        hideSliderAtLimit: 0,
-                        hideCaptionAtLimit: 0,
-                        hideAllCaptionAtLilmit: 0,
-                        debugMode: false,
-                        fallbacks: {
-                            simplifyAll: "off",
-                            nextSlideOnWindowFocus: "off",
-                            disableFocusListener: false,
-                        }
+                        });
                     });
-                });
 
 
-            </script>
-            <!-- Slider Revolution Ends -->
-        </div>
-    </section>
-
-    <!-- Section: About -->
-    <section id="about">
-        <div class="container pb-70">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Rólunk</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                        {% if  site.about_title %}
-                        <p><em>{{site.about_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
+                </script>
+                <!-- Slider Revolution Ends -->
             </div>
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="image-carousel owl-carousel">
-                            {% if site.about_image_1 %}
-                            <div class="item"><img alt="slide1" style="height: 400px;"
-                                src="{{site.about_image_1.url}}"></div>
+        </section>
+
+        <!-- Section: About -->
+        <section id="about">
+            <div class="container pb-70">
+                <div class="section-title">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                            <h2>Rólunk</h2>
+                            <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                            {% if  site.about_title %}
+                                <p><em>{{ site.about_title }}</em></p>
                             {% else %}
-                            <div class="item"><img alt="slide1"
-                                src="{% static 'website/images/photos/slide1.jpg' %}"></div>
-                            {% endif %}
-                            {% if site.about_image_2 %}
-                            <div class="item"><img alt="slide1" style="height: 400px;"
-                                src="{{site.about_image_2.url}}"></div>
-                            {% else %}
-                            <div class="item"><img alt="slide2"
-                                src="{% static 'website/images/photos/slide2.jpg' %}"></div>
-                            {% endif %}
-                            {% if site.about_image_3 %}
-                            <div class="item"><img alt="slide3" style="height: 400px;"
-                                src="{{site.about_image_3.url}}"></div>
-                            {% else %}
-                            <div class="item"><img alt="slide3"
-                                                   src="{% static 'website/images/photos/slide3.jpg' %}"></div>
+                                <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil
+                                    unde
+                                    dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
                             {% endif %}
                         </div>
-
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        {% if site.about_short_discription %}
-                        {{site.about_short_discription|safe}}
-                        {% else %}
-                        <h3 class="mt-0">Luxury Wedding Planners</h3>
-                        <p>We plan elegant, stylish, glamorous and fun celebrations and are the Luxury Wedding
-                            Planners for savvy, sophisticated couples who demand first class service and a
-                            world-class event. Our discerning, international client base includes aristocrats,
-                            high-spend public figures and couples seeking unique and surprising celebrations.</p>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <ul class="mt-10">
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Family</li>
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Community</li>
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Shopping Local</li>
-                                </ul>
+                </div>
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="image-carousel owl-carousel">
+                                {% if site.about_image_1 %}
+                                    <div class="item"><img alt="slide1" style="height: 400px;"
+                                                           src="{{ site.about_image_1.url }}"></div>
+                                {% else %}
+                                    <div class="item"><img alt="slide1"
+                                                           src="{% static 'website/images/photos/slide1.jpg' %}"></div>
+                                {% endif %}
+                                {% if site.about_image_2 %}
+                                    <div class="item"><img alt="slide1" style="height: 400px;"
+                                                           src="{{ site.about_image_2.url }}"></div>
+                                {% else %}
+                                    <div class="item"><img alt="slide2"
+                                                           src="{% static 'website/images/photos/slide2.jpg' %}"></div>
+                                {% endif %}
+                                {% if site.about_image_3 %}
+                                    <div class="item"><img alt="slide3" style="height: 400px;"
+                                                           src="{{ site.about_image_3.url }}"></div>
+                                {% else %}
+                                    <div class="item"><img alt="slide3"
+                                                           src="{% static 'website/images/photos/slide3.jpg' %}"></div>
+                                {% endif %}
                             </div>
-                            <div class="col-xs-6">
-                                <ul class="mt-10">
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Great customer service
-                                    </li>
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Teamwork</li>
-                                    <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Creativity</li>
-                                </ul>
-                            </div>
+
                         </div>
-                        {% endif %}
-                        <a class="btn btn-dark btn-theme-colored mt-30" href="{% url 'website:about' %}" role="button">Tovább
-                            more</a> <a class="btn  btn-success mt-30" href="{% url 'account_signup' %}" role="button">Regisztráció</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section: Service -->
-    <section class="bg-lighter" id="service">
-        <div class="container pt-50 pb-20">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
-                        <h2>Szolgáltatók</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-
-                        {% if  site.service_title %}
-                        <p><em>{{site.service_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-<div class="section-content text-center">
-    <div class="carousel-container">
-        <div class="carousel">
-            {% for object in services %}
-            <div class="col-4">
-                <div class="service-box">
-                    <img alt="" style="height: 300px; width: 400px; object-fit: cover;" src="{{ object.image.url }}">
-                    <h4 class="mt-30">{{ object.name }}</h4>
-                    <p>{{ object.description }}</p>
-                </div>
-            </div>
-            {% endfor %}           {% for object in services %}
-            <div class="col-4">
-                <div class="service-box">
-                    <img alt="" style="height: 300px; width: 400px; object-fit: cover;" src="{{ object.image.url }}">
-                    <h4 class="mt-30">{{ object.name }}</h4>
-                    <p>{{ object.description }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <a class="btn btn-dark btn-theme-colored text-white mt-4" href="{% url 'website:services' %}">Több</a>
-</div>
-
-        </div>
-    </section>
-
-
-    <!-- Section: Event  -->
-{#    <section id="event">#}
-{#        <div class="container pb-80">#}
-{#            <div class="section-title">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
-{#                        <h2>Events</h2>#}
-{#                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">#}
-{##}
-{#                        {% if  site.event_title %}#}
-{#                        <p><em>{{site.event_title}}</em></p>#}
-{#                        {% else %}#}
-{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
-{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        {% if events %}#}
-{#            <div class="section-content">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-12">#}
-{#                        <div class="carousel event-carousel slide" data-ride="carousel"#}
-{#                             id="carousel-example-generic">#}
-{#                            <!-- Indicators -->#}
-{#                            <ol class="carousel-indicators">#}
-{#                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>#}
-{#                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>#}
-{#                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>#}
-{#                            </ol>#}
-{#                            <!-- Wrapper for slides -->#}
-{#                            <div class="carousel-inner">#}
-{#                                <div class="item active">#}
-{#                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">#}
-{#                                        <h2 class="text-white"></h2>#}
-{#                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>#}
-{#                                        <div class="details hidden-xs">#}
-{#                                            <p class="text-white">{{events.content|safe}} </p>#}
-{#                                        </div>#}
-{#                                    #}
-{#                                </div>#}
-{#                                `#}
-{#                            </div>#}
-{##}
-{#                            <!-- Controls -->#}
-{#                        </div>#}
-{##}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#            <div class="text-center mt-5  ">#}
-{#                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See#}
-{#                    More</a>#}
-{#            </div>#}
-{#        </div>#}
-{#        {% endif %}#}
-{#    </section>#}
-
-
-    <!-- Section: Gallery  -->
-    <section class="bg-lighter" id="gallery">
-        <div class="container-fluid pl-0 pr-0 pb-0">
-            <div class="section-title">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center">
-                        <h2> Galéria</h2>
-                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">
-                        {% if  site.gallery_title %}
-                        <p><em>{{site.gallery_title}}</em></p>
-                        {% else %}
-                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde
-                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="section-content">
-                <div class="row">
-                  <div class="col-md-12 ">
-
-                    <!-- Portfolio Gallery Grid -->
-                    <div id="grid" class=" carousel grid-4 clearfix " data-lightbox="gallery" style="position: relative; height: 532.5px;">
-                      {% for image in images %}
-                          <div class="col-4">
-                <div class="service-box">
-                                           <a href="{{ image.image.url }}" data-lightbox="gallery-item" title="{{ image.category }}">
-                          <div class="thumb">
-
-                            <img class="img-fullwidth photo" style="height: 300px; width: 900px; object-fit: cover;" src="{{ image.image.url }}" alt="project">
-                            <div class="overlay-shade"></div>
-                            <div class="text-holder">
-                              <div class="title text-center">{{ image.category }}</div>
-                            </div>
-                            <div class="icons-holder">
-                              <div class="icons-holder-inner">
-                                <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                  <i class="fa fa-plus text-white"></i>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            {% if site.about_short_discription %}
+                                {{ site.about_short_discription|safe }}
+                            {% else %}
+                                <h3 class="mt-0">Luxury Wedding Planners</h3>
+                                <p>We plan elegant, stylish, glamorous and fun celebrations and are the Luxury Wedding
+                                    Planners for savvy, sophisticated couples who demand first class service and a
+                                    world-class event. Our discerning, international client base includes aristocrats,
+                                    high-spend public figures and couples seeking unique and surprising
+                                    celebrations.</p>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <ul class="mt-10">
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Family</li>
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Community</li>
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Shopping Local
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <ul class="mt-10">
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Great customer
+                                                service
+                                            </li>
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Teamwork</li>
+                                            <li class="mb-10"><i class="fa fa-check-circle"></i>&emsp;Creativity</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-
+                            {% endif %}
+                            <a class="btn btn-dark btn-theme-colored mt-30" href="{% url 'website:about' %}"
+                               role="button">Tovább
+                            </a> <a class="btn  btn-success mt-30" href="{% url 'account_signup' %}" role="button">Regisztráció</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-                      <!-- Portfolio Item Start -->
+        <!-- Section: Service -->
+        <section class="bg-lighter" id="service">
+            <div class="container pt-50 pb-20">
+                <div class="section-title">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">
+                            <h2>Szolgáltatók</h2>
+                            <img alt="" src="{% static 'website/images/section-title-after.png' %}">
 
-                      {% endfor %}
-                      <!-- Portfolio Item End -->
+                            {% if  site.service_title %}
+                                <p><em>{{ site.service_title }}</em></p>
+                            {% else %}
+                                <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil
+                                    unde
+                                    dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content text-center">
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            {% for object in services %}
+                                <div class="col-4">
+                                    <div class="service-box">
+                                        {% if object.link %}
+                                            <a href="{{ object.link }}" target="_blank"><img alt=""
+                                                                                             style="height: 300px; width: 400px; object-fit: cover;"
+                                                                                             src="{{ object.image.url }}"></a>
+                                        {% else %}
+                                            <img alt="" style="height: 300px; width: 400px; object-fit: cover;"
+                                                 src="{{ object.image.url }}">
+                                        {% endif %}
+                                        {% if object.link %}
+                                            <a href="{{object.link}}" target="_blank"> <h4 class="mt-30">{{ object.name }}</h4></a>
+                                        {% else %}
+                                            <h4 class="mt-30">{{ object.name }}</h4>
+                                        {% endif %}
+                                        <p>{{ object.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}           {% for object in services %}
+                            <div class="col-4">
+                                <div class="service-box">
+                                    <img alt="" style="height: 300px; width: 400px; object-fit: cover;"
+                                         src="{{ object.image.url }}">
+                                    <h4 class="mt-30">{{ object.name }}</h4>
+                                    <p>{{ object.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <a class="btn btn-dark btn-theme-colored text-white mt-4"
+                       href="{% url 'website:services' %}">Több</a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Section: Event  -->
+        {#    <section id="event">#}
+        {#        <div class="container pb-80">#}
+        {#            <div class="section-title">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+        {#                        <h2>Events</h2>#}
+        {#                        <img alt=""  src="{% static 'website/images/section-title-after.png' %}">#}
+        {##}
+        {#                        {% if  site.event_title %}#}
+        {#                        <p><em>{{site.event_title}}</em></p>#}
+        {#                        {% else %}#}
+        {#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+        {#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+        {#                        {% endif %}#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        {% if events %}#}
+        {#            <div class="section-content">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-md-12">#}
+        {#                        <div class="carousel event-carousel slide" data-ride="carousel"#}
+        {#                             id="carousel-example-generic">#}
+        {#                            <!-- Indicators -->#}
+        {#                            <ol class="carousel-indicators">#}
+        {#                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>#}
+        {#                                <li data-slide-to="1" data-target="#carousel-example-generic"></li>#}
+        {#                                <li data-slide-to="2" data-target="#carousel-example-generic"></li>#}
+        {#                            </ol>#}
+        {#                            <!-- Wrapper for slides -->#}
+        {#                            <div class="carousel-inner">#}
+        {#                                <div class="item active">#}
+        {#                                    <img alt="..." style="height: 500px; width: 1200px; object-fit: cover;" class="img-responsive" src="{{events.thumbnail_image.url}}">                                    <div class="carousel-caption wedding-area pb-sm-50">#}
+        {#                                        <h2 class="text-white"></h2>#}
+        {#                                        <h4 class="text-theme-colored">{{events.title|upper}}</h4>#}
+        {#                                        <div class="details hidden-xs">#}
+        {#                                            <p class="text-white">{{events.content|safe}} </p>#}
+        {#                                        </div>#}
+        {#                                    #}
+        {#                                </div>#}
+        {#                                `#}
+        {#                            </div>#}
+        {##}
+        {#                            <!-- Controls -->#}
+        {#                        </div>#}
+        {##}
+        {#                    </div>#}
+        {##}
+        {#                </div>#}
+        {##}
+        {#            </div>#}
+        {#            <div class="text-center mt-5  ">#}
+        {#                <a class="btn btn-dark btn-theme-colored text-white mt-5" href="{% url 'website:events' %}">See#}
+        {#                    More</a>#}
+        {#            </div>#}
+        {#        </div>#}
+        {#        {% endif %}#}
+        {#    </section>#}
+
+
+        <!-- Section: Gallery  -->
+        <section class="bg-lighter" id="gallery">
+            <div class="container-fluid pl-0 pr-0 pb-0">
+                <div class="section-title">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <h2> Galéria</h2>
+                            <img alt="" src="{% static 'website/images/section-title-after.png' %}">
+                            {% if  site.gallery_title %}
+                                <p><em>{{ site.gallery_title }}</em></p>
+                            {% else %}
+                                <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil
+                                    unde
+                                    dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 ">
+
+                            <!-- Portfolio Gallery Grid -->
+                            <div id="grid" class=" carousel grid-4 clearfix " data-lightbox="gallery"
+                                 style="position: relative; height: 532.5px;">
+                                {% for image in images %}
+                                    <div class="col-4">
+                                        <div class="service-box">
+                                            <a href="{{ image.image.url }}" data-lightbox="gallery-item"
+                                               title="{{ image.category }}">
+                                                <div class="thumb">
+
+                                                    <img class="img-fullwidth photo"
+                                                         style="height: 300px; width: 900px; object-fit: cover;"
+                                                         src="{{ image.image.url }}" alt="project">
+                                                    <div class="overlay-shade"></div>
+                                                    <div class="text-holder">
+                                                        <div class="title text-center">{{ image.category }}</div>
+                                                    </div>
+                                                    <div class="icons-holder">
+                                                        <div class="icons-holder-inner">
+                                                            <div class="social-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                                <i class="fa fa-plus text-white"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Portfolio Item Start -->
+
+                                {% endfor %}
+                                <!-- Portfolio Item End -->
+
+                            </div>
+                            <!-- End Portfolio Gallery Grid -->
+                        </div>
 
                     </div>
-                    <!-- End Portfolio Gallery Grid -->
-                  </div>
 
                 </div>
-
-              </div>
-        </div>
-    </section>
-
-    <section class="divider parallax layer-overlay overlay-dark-8"
-     data-stellar-background-ratio="0.5"
-     data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
-
-      style="background-image: url(static 'website/images/bg/bg4.jpg'); background-position: 50% 218.892px;">
-  	  <div class="container pt-70 pb-60">
-  	    <!-- Section title -->
-  	    <div class="section-title">
-  	      <div class="row">
-  	        <div class="col-md-6 col-md-offset-3 testimonial text-center">
-  	          <h2 class="title text-white">Rólunk mondták</h2>
-  	          <div class="quote"> <i class="fa fa-quote-left icon text-white"></i> </div>
-  	        </div>
-  	      </div>
-  	    </div>
-  	    <!-- Section Content -->
-  	    <div class="section-content">
-  	      <div class="row">
-  	        <div class="col-md-8 col-md-offset-2 mb-30">
-  	          <div class="testimonial-carousel owl-carousel owl-theme owl-loaded">
-
-
-  	        {% for test in testimonials %}
-
-            <div class="owl-item cloned active testimonal_width"><div class="item xs-text-center">
-  	              <div class="content pt-10">
-                    <p>{{test.comment}}</p>
-                    <div class="thumb"><img class="img-circle" alt="" src="{{test.image.url}}" width="75"></div>
-  	                <h5 class="text-theme-colored mt-20 mb-0">{{test.name}}</h5>
-  	              </div>
-  	            </div>
             </div>
-            {% endfor %}
-        </div>
+        </section>
+
+        <section class="divider parallax layer-overlay overlay-dark-8"
+                 data-stellar-background-ratio="0.5"
+                 data-bg-img="{% static 'website/images/bg/bg4.jpg' %}"
+
+                 style="background-image: url(static 'website/images/bg/bg4.jpg'); background-position: 50% 218.892px;">
+            <div class="container pt-70 pb-60">
+                <!-- Section title -->
+                <div class="section-title">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 testimonial text-center">
+                            <h2 class="title text-white">Rólunk mondták</h2>
+                            <div class="quote"><i class="fa fa-quote-left icon text-white"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 mb-30">
+                            <div class="testimonial-carousel owl-carousel owl-theme owl-loaded">
+
+
+                                {% for test in testimonials %}
+
+                                    <div class="owl-item cloned active testimonal_width">
+                                        <div class="item xs-text-center">
+                                            <div class="content pt-10">
+                                                <p>{{ test.comment }}</p>
+                                                <div class="thumb"><img class="img-circle" alt=""
+                                                                        src="{{ test.image.url }}" width="75"></div>
+                                                <h5 class="text-theme-colored mt-20 mb-0">{{ test.name }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="owl-controls">
+                            <div class="owl-nav">
+                                <div class="owl-prev" style="display: none;">prev</div>
+                                <div class="owl-next" style="display: none;">next</div>
+                            </div>
+                            <div style="" class="owl-dots">
+                                <div class="owl-dot active"><span></span></div>
+                                <div class="owl-dot"><span></span></div>
+                                <div class="owl-dot"><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
-    <div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div style="" class="owl-dots"><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
-  	        </div>
-  	      </div>
-  	    </div>
-  	  </div>
-  	</section>
+    </div>
+    </section>
 
     <!-- Section: Blog  -->
-{#    <section id="blog">#}
-{#        <div class="container pb-80">#}
-{#            <div class="section-title">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
-{#                        <h2>Latest Blogs</h2>#}
-{#                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">#}
-{#                        {% if  site.event_title %}#}
-{#                        <p><em>{{site.event_title}}</em></p>#}
-{#                        {% else %}#}
-{#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
-{#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="section-content">#}
-{#                <div class="row">#}
-{#                    {% for object in blogs %}#}
-{#                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">#}
-{#                        <article class="post clearfix maxwidth600 mb-30">#}
-{#                            <div class="entry-header">#}
-{#                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"#}
-{#                                                                   src="{{object.thumbnail_image.url}}">#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="entry-content border-1px p-20">#}
-{#                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>#}
-{#                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>#}
-{#                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read#}
-{#                                    more</a>#}
-{#                                <ul class="list-inline entry-date pull-right font-12 mt-5">#}
-{#                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>#}
-{#                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>#}
-{#                                </ul>#}
-{#                                <div class="clearfix"></div>#}
-{#                            </div>#}
-{#                        </article>#}
-{#                    </div>#}
-{#                    {% endfor %}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="mt-5 mb-5 text-center">#}
-{#                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See#}
-{#                    More</a>#}
-{#            </div>#}
-{##}
-{##}
-{#        </div>#}
-{#    </section>#}
+    {#    <section id="blog">#}
+    {#        <div class="container pb-80">#}
+    {#            <div class="section-title">#}
+    {#                <div class="row">#}
+    {#                    <div class="col-md-6 col-md-offset-3 text-center pb-30 wow fadeInUp animation-delay1">#}
+    {#                        <h2>Latest Blogs</h2>#}
+    {#                        <img alt="" src="{% static 'website/images/section-title-after.png' %}">#}
+    {#                        {% if  site.event_title %}#}
+    {#                        <p><em>{{site.event_title}}</em></p>#}
+    {#                        {% else %}#}
+    {#                        <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, dignissimos nihil unde#}
+    {#                            dolores qui, adipisci assumenda atque blanditiis omnis nostrum!</em></p>#}
+    {#                        {% endif %}#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="section-content">#}
+    {#                <div class="row">#}
+    {#                    {% for object in blogs %}#}
+    {#                    <div class="col-sm-6 col-md-4 col-lg-4 wow fadeInUp animation-delay1">#}
+    {#                        <article class="post clearfix maxwidth600 mb-30">#}
+    {#                            <div class="entry-header">#}
+    {#                                <div class="post-thumb thumb"><img style="height: 300px; width: 400px; object-fit: cover;" alt="" class="img-responsive img-fullwidth"#}
+    {#                                                                   src="{{object.thumbnail_image.url}}">#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                            <div class="entry-content border-1px p-20">#}
+    {#                                <h5 class="entry-title mt-0 pt-0"><a href="#">{{object.title}}</a></h5>#}
+    {#                                <p class="text-left mb-20 mt-15 font-13">{{object.content|safe}}</p>#}
+    {#                                <a class="btn btn-dark btn-theme-colored btn-xs btn-flat pull-left mt-0" href="#">Read#}
+    {#                                    more</a>#}
+    {#                                <ul class="list-inline entry-date pull-right font-12 mt-5">#}
+    {#                                    <li><a class="text-theme-colored" href="#">Admin |</a></li>#}
+    {#                                    <li><span class="text-theme-colored">{{object.created_at.date}}</span></li>#}
+    {#                                </ul>#}
+    {#                                <div class="clearfix"></div>#}
+    {#                            </div>#}
+    {#                        </article>#}
+    {#                    </div>#}
+    {#                    {% endfor %}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="mt-5 mb-5 text-center">#}
+    {#                <a class="btn btn-dark btn-theme-colored text-white mb-5 mt-5" href="{% url 'website:blog' %}">See#}
+    {#                    More</a>#}
+    {#            </div>#}
+    {##}
+    {##}
+    {#        </div>#}
+    {#    </section>#}
 
     <!-- Divider: Clients -->
-<section class="divider parallax layer-overlay overlay-lighter"
-         data-bg-img="{% static 'website/images/bg/bg8.jpg' %}"
-         data-stellar-background-ratio="0.5">
-    <div class="container pb-140 pt-90">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-black text-center">Partnerek</h2>
-            </div>
-        </div>
-        <div class="row mt-60 text-center">
-            <div class="carousel">
-                {% for partner in partners %}
-                <div class="col-xs-6 col-sm-6 text-center col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
-                    <div class="-img style2">
-                        {% if partner.logo %}
-                        <a href="{% if partner.website %}{{ partner.website }}{% else %}#{% endif %}" target="_blank"><img alt="" style="height: 120px; width: 250px; margin-left: 50px" src="{{ partner.logo.url }}"></a>
-                        {% else %}
-                        <img alt="" class="img-responsive" src="https://placehold.co/75x75">
-                        {% endif %}
-                    </div>
+    <section class="divider parallax layer-overlay overlay-lighter"
+             data-bg-img="{% static 'website/images/bg/bg8.jpg' %}"
+             data-stellar-background-ratio="0.5">
+        <div class="container pb-140 pt-90">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-black text-center">Partnerek</h2>
                 </div>
-                {% endfor %}
+            </div>
+            <div class="row mt-60 text-center">
+                <div class="carousel">
+                    {% for partner in partners %}
+                        <div class="col-xs-6 col-sm-6 text-center col-md-3 pb-md-20 wow fadeInUp animation-delay{{ forloop.counter }}">
+                            <div class="-img style2">
+                                {% if partner.logo %}
+                                    <a href="{% if partner.website %}{{ partner.website }}{% else %}#{% endif %}"
+                                       target="_blank"><img alt=""
+                                                            style="height: 120px; width: 250px; margin-left: 50px"
+                                                            src="{{ partner.logo.url }}"></a>
+                                {% else %}
+                                    <img alt="" class="img-responsive" src="https://placehold.co/75x75">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<script>
-    $(document).ready(function(){
-        $('.carousel').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            autoplay: true,
-            autoplaySpeed: 2000, // Adjust the autoplay speed as needed
-            dots: true, // Show pagination dots
-            arrows: false, // Hide next and previous buttons
-            responsive: [
-                {
-                    breakpoint: 1000, // Adjust this breakpoint as needed
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
+    <script>
+        $(document).ready(function () {
+            $('.carousel').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                autoplay: true,
+                autoplaySpeed: 2000, // Adjust the autoplay speed as needed
+                dots: true, // Show pagination dots
+                arrows: false, // Hide next and previous buttons
+                responsive: [
+                    {
+                        breakpoint: 1000, // Adjust this breakpoint as needed
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3
+                        }
+                    }, {
+                        breakpoint: 999, // Adjust this breakpoint as needed
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    }, {
+                        breakpoint: 600, // Adjust this breakpoint as needed
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
                     }
-                }, {
-                    breakpoint: 999, // Adjust this breakpoint as needed
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                } , {
-                    breakpoint: 600, // Adjust this breakpoint as needed
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
+                ]
+            });
         });
-    });
-</script>
+    </script>
 
 
 

@@ -8,7 +8,7 @@ from .models import (
     BlogCategory,
     Blog,
     EventCategory,
-    Event,ServiceContent,Site,SitePartner,SiteTestimonial,ContactRequest,AboutUsSection , BackgroundImage
+    Event, ServiceContent, Site, SitePartner, SiteTestimonial, ContactRequest, AboutUsSection, BackgroundImage
 
 )
 
@@ -40,7 +40,7 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('category', 'name', 'image')
+    list_display = ('category', 'name', 'link', 'image')
     list_filter = ('category',)
 
 
@@ -70,6 +70,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'host', 'category', 'status', 'start_date', 'end_date', 'created_at', 'updated_at')
     list_filter = ('status', 'category')
     search_fields = ('title', 'host', 'category__name')
+
 
 admin.site.register(ServiceContent)
 admin.site.register(Site)

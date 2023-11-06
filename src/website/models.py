@@ -67,6 +67,7 @@ class ServiceCategory(models.Model):
 class Service(models.Model):
     category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    link = models.URLField(null=True,blank=False)
     image = models.ImageField(upload_to='services/')
     description = models.TextField()
 
